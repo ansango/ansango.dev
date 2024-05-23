@@ -6,7 +6,7 @@ import { site } from "@/consts";
 
 interface Props {
   title?: string;
-  description: string;
+  description?: string | null;
 }
 
 const { title, description } = Astro.props;
@@ -17,7 +17,7 @@ const { title, description } = Astro.props;
   <head>
     <Head
       title={title ? `${title} | ${site.name}` : site.name}
-      description={description}
+      description={description ?? ""}
     />
   </head>
   <body

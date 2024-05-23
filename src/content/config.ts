@@ -6,7 +6,7 @@ export type SchemaCollections = Record<string, z.ZodObject<any, any, any>>;
 
 export const commonSchema = z.object({
   title: z.string(),
-  description: z.string(),
+  description: z.string().nullable().optional(),
   tags: z.array(z.string()),
   date: z.coerce.date(),
   mod: z.coerce.date().nullable().optional(),

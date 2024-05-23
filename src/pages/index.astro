@@ -7,13 +7,13 @@ import { site } from "@/consts";
 import DocLayout from "@/layouts/document.astro";
 import {
   getLastEntriesByAllCollections,
-  getUniqueTags,
   getAllCollectionsByCategory,
+  getTagsLimitedByLetter,
 } from "@/lib/collections";
 
 const collections = await getAllCollectionsByCategory();
 const latests = await getLastEntriesByAllCollections();
-const tags = await getUniqueTags();
+const tags = await getTagsLimitedByLetter();
 const meta = site.pages.home;
 ---
 
@@ -22,9 +22,10 @@ const meta = site.pages.home;
     <div>
       <h1>ansango</h1>
       <p>
-        Hola, soy <strong>Aníbal Sántos</strong>, aquí escribo sobre tecnología.
-        Encontrarás parte de mis wikis, apuntes, y algunos hacks. Espero que
-        encuentres algo útil por aquí.
+        Hola, soy <sapn class="font-semibold">Aníbal Sántos</sapn> 👋, escribo sobre
+        tecnología, trabajo como Senior Tech Engineer en <a
+          href="https://innusual.tech">innusual</a
+        >. Aquí encontrarás parte de mis wikis, insights, y algunos hacks.
       </p>
       <div class="py-5">
         <section class="group">

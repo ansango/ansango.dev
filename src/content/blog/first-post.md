@@ -5,6 +5,28 @@ date: 02/11/2024
 tags:
   [
     Tutorial,
+    JavaScript,
+    React,
+    Gatsby,
+    Markdown,
+    Blog,
+    Post,
+    "Primer Post",
+    Vercel,
+    Netlify,
+    "GitHub Pages",
+    "GitHub Actions",
+    "GitHub",
+    "GitLab",
+    "Bitbucket",
+    "Git",
+    "Markdown",
+    "HTML",
+    "CSS",
+    "Sass",
+    "Less",
+    "Stylus",
+
   ]
 published: true
 ---

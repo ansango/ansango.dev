@@ -92,6 +92,27 @@ export const getUniqueTags = async () => {
   return Array.from(tags).sort()
 };
 
+export const getTagsLimitedByLetter = async (limitAtLetter = 3) => {
+  const tags = await getUniqueTags();
+  const abc = "abcdefghijklmnopqrstuvwxyz".split("");
+  const mappedTags = tags.reduce((acc: Record<string, string[]>, tag) => {
+    const letter = tag[0].toLowerCase();
+    if (!abc.includes(letter)) {
+      acc["#"] = acc["#"] || [];
+      acc["#"].push(tag);
+    } else {
+      acc[letter] = acc[letter] || [];
+      acc[letter].push(tag);
+    }
+    return acc;
+  }, {});
+
+  return Object.values(mappedTags).map((tags) => {
+    return tags.slice(0, limitAtLetter);
+  }).flat();
+
+};
+
 export const getCollectionsByTag = async (tag: string) => {
   const collections = await getAllCollections();
   return collections.filter((collection) => {

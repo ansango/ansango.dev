@@ -1,0 +1,35 @@
+---
+import { site } from "@/consts";
+import Container from "@/components/container.astro";
+import Searcher from "./searcher.astro";
+
+const pathname = Astro.url.pathname;
+const path = pathname.split("/").filter(Boolean)[0] || null;
+---
+
+<header
+  class="fixed top-0 left-0 right-0 z-50 py-5 backdrop-blur-sm saturate-100"
+>
+  <Container>
+    <div class="flex flex-wrap gap-y-2 justify-between">
+      <div>
+        <a href="/">
+          {site.name}
+        </a>
+        {
+          path && (
+            <>
+              <span class="text-muted"> / </span>
+              <a class="text-muted" href={`/${path}`}>
+                {path}
+              </a>
+            </>
+          )
+        }
+      </div>
+      <nav class="flex gap-2 items-center">
+        <Searcher />
+      </nav>
+    </div>
+  </Container>
+</header>

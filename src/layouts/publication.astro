@@ -1,0 +1,57 @@
+---
+import DocLayout from "@/layouts/document.astro";
+import Container from "@/components/container.astro";
+
+import { getFormatDate, getReadingTime } from "@/lib/utils";
+import { baseLongDateOptions } from "@/consts";
+import type { Collection } from "@/lib/collections";
+
+type Props = Collection;
+
+const {
+  data: { date, description, tags, title },
+  render,
+  body,
+} = Astro.props;
+
+const parsedDate = getFormatDate(date, "es-ES", baseLongDateOptions);
+const dateSimple = getFormatDate(date);
+const readingTime = getReadingTime(body);
+const { Content } = await render();
+---
+
+<DocLayout {title} {description}>
+  <Container>
+    <section>
+      <header class="mb-5 space-y-5">
+        <h1>{title}</h1>
+        <p class="text-muted">
+          <time datetime={dateSimple}>{parsedDate}</time>
+          {readingTime > 1 && <span>·</span>}
+          {readingTime > 1 && <span> {readingTime} min de lectura</span>}
+        </p>
+        {
+          tags.length > 0 && (
+            <ul class="flex flex-wrap gap-1">
+              {tags.map((tag, i) => {
+                return (
+                  <li>
+                    <a class="underline flex" href={`/tags/${tag}`}>
+                      {tag}
+                      {i !== tags.length - 1 && (
+                        <span class="text-muted">,</span>
+                      )}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          )
+        }
+      </header>
+      <article class="py-5">
+        <Content />
+      </article>
+    </section>
+  </Container>
+</DocLayout>

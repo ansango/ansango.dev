@@ -1,0 +1,40 @@
+---
+import Link from "./link.astro";
+
+export interface Props {
+  currentPage: number;
+  totalPages: number;
+  prevUrl: string;
+  nextUrl: string;
+}
+
+const { currentPage, totalPages, prevUrl, nextUrl } = Astro.props;
+const prevDisabled = currentPage <= 1;
+const nextDisabled = currentPage >= totalPages;
+---
+
+{
+  totalPages > 1 && (
+    <nav aria-label="Pagination" class="flex justify-between mt-8">
+      <Link
+        disabled={prevDisabled}
+        href={prevUrl}
+        className={`mr-4 select-none ${prevDisabled ? "text-muted opacity-60" : ""}`}
+        ariaLabel="Previous"
+      >
+        ← Ant
+      </Link>
+      <span>
+        {currentPage} / {totalPages}
+      </span>
+      <Link
+        disabled={nextDisabled}
+        href={nextUrl}
+        className={`ml-4 select-none ${nextDisabled ? "text-muted opacity-60" : ""}`}
+        ariaLabel="Next"
+      >
+        Sig →
+      </Link>
+    </nav>
+  )
+}

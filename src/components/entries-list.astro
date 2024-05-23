@@ -1,0 +1,40 @@
+---
+import type { Collections } from "@/lib/collections";
+import { getFormatDate } from "@/lib/utils";
+
+interface Props {
+  entries: Collections;
+  className?: string;
+}
+
+const { entries, className } = Astro.props;
+---
+
+<ul class={className ?? ""}>
+  {
+    entries.map(({ collection, slug, data: { date, title } }) => (
+      <li>
+        <a
+          class="flex items-baseline !no-underline hover:no-underline"
+          href={`/${collection}/${slug}`}
+        >
+          {date && (
+            <time
+              class="text-muted text-sm whitespace-nowrap pr-4"
+              datetime={getFormatDate(date)}
+            >
+              {getFormatDate(date, "es-ES", {
+                year: "numeric",
+                month: "2-digit",
+              })
+                .split("/")
+                .reverse()
+                .join(" · ")}
+            </time>
+          )}
+          <u class="line-clamp-1">{title}</u>
+        </a>
+      </li>
+    ))
+  }
+</ul>

@@ -1,0 +1,28 @@
+---
+import type { Collection } from "@/lib/collections";
+import { getFormatDate, getReadingTime } from "@/lib/utils";
+
+interface Props {
+  entry: Collection;
+}
+
+const {
+  entry: {
+    data: { date, title, description },
+    body,
+  },
+} = Astro.props;
+
+const timeReading = getReadingTime(body);
+---
+
+<h3 class="mt-0 group-hover:text-action line-clamp-1">
+  {title}
+</h3>
+<p class="text-sm [&>*]:text-muted">
+  {date && <time datetime={getFormatDate(date)}>{getFormatDate(date)}</time>}
+  {date && timeReading > 1 && <span>·</span>}
+  {timeReading > 1 && <span>{timeReading} min de lectura</span>}
+</p>
+<p class="text-muted line-clamp-2">{description}</p>
+<span class="text-muted mt-2 block text-sm"> Leer más → </span>

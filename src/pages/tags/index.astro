@@ -1,0 +1,30 @@
+---
+import Container from "@/components/container.astro";
+import DocLayout from "@/layouts/document.astro";
+import { site } from "@/consts";
+import { getUniqueTags } from "@/lib/collections";
+
+const tags = await getUniqueTags();
+const meta = site.pages.tags;
+---
+
+<DocLayout {...meta}>
+  <Container>
+    <h1>Tags</h1>
+
+    <ul class="flex flex-wrap gap-1">
+      {
+        tags.map((tag, i) => {
+          return (
+            <li>
+              <a class="underline flex" href={`/tags/${tag}`}>
+                {tag}
+                {i !== tags.length - 1 && <span class="text-muted">,</span>}
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </Container>
+</DocLayout>

@@ -1,0 +1,59 @@
+---
+import Container from "@/components/container.astro";
+import DocLayout from "@/layouts/document.astro";
+import Pagination from "@/components/pagination.astro";
+import type { Metadata } from "@/types";
+
+import Entry from "@/components/entry.astro";
+import Divider from "@/components/divider.astro";
+import type { Collections } from "@/lib/collections";
+import { getPagination } from "@/lib/utils";
+
+interface Props {
+  collection: string;
+  entries: Collections;
+  page: number;
+  entriesPerPage: number;
+  isIndex: boolean;
+  meta: Metadata;
+}
+
+const { entries, page, entriesPerPage, isIndex, meta, collection } =
+  Astro.props;
+
+const { currentPage, paginatedEntries, totalPages } = getPagination({
+  isIndex,
+  entries,
+  page,
+  entriesPerPage,
+});
+---
+
+<DocLayout {...meta}>
+  <Container className="flex flex-col h-full">
+    <h1 class="capitalize">{collection}</h1>
+    <section class="flex-1">
+      <ul>
+        {
+          paginatedEntries.map((entry, i) => (
+            <li>
+              <a
+                href={`/${entry.collection}/${entry.slug}`}
+                class="group !no-underline hover:no-underline"
+              >
+                <Entry entry={entry} />
+                {i < paginatedEntries.length - 1 && <Divider />}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+    <Pagination
+      {currentPage}
+      {totalPages}
+      prevUrl={`/${collection}${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
+      nextUrl={`/${collection}/${currentPage + 1}/`}
+    />
+  </Container>
+</DocLayout>

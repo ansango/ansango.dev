@@ -1,0 +1,70 @@
+---
+import Container from "@/components/container.astro";
+import Divider from "@/components/divider.astro";
+---
+
+<footer>
+  <Container>
+    <Divider />
+  </Container>
+  <Container className="py-5 flex items-baseline justify-between">
+    <a href="https://anibalsantosgomez.com" target="_blank">me</a>
+
+    <div class="flex flex-wrap gap-1 items-center">
+      <button
+        id="light-theme-button"
+        aria-label="Light theme"
+        class="group size-8 flex items-center justify-center rounded-full"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          ><path
+            fill="currentColor"
+            fill-rule="evenodd"
+            d="M12 16a4 4 0 1 0 0-8a4 4 0 0 0 0 8m0 2a6 6 0 1 0 0-12a6 6 0 0 0 0 12M11 0h2v4.062a8.079 8.079 0 0 0-2 0zM7.094 5.68L4.222 2.808L2.808 4.222L5.68 7.094A8.048 8.048 0 0 1 7.094 5.68M4.062 11H0v2h4.062a8.079 8.079 0 0 1 0-2m1.618 5.906l-2.872 2.872l1.414 1.414l2.872-2.872a8.048 8.048 0 0 1-1.414-1.414M11 19.938V24h2v-4.062a8.069 8.069 0 0 1-2 0m5.906-1.618l2.872 2.872l1.414-1.414l-2.872-2.872a8.048 8.048 0 0 1-1.414 1.414M19.938 13H24v-2h-4.062a8.069 8.069 0 0 1 0 2M18.32 7.094l2.872-2.872l-1.414-1.414l-2.872 2.872c.528.41 1.003.886 1.414 1.414"
+            clip-rule="evenodd"></path></svg
+        >
+      </button>
+      <button
+        id="dark-theme-button"
+        aria-label="Dark theme"
+        class="group size-8 flex items-center justify-center rounded-full"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          ><path
+            fill="currentColor"
+            fill-rule="evenodd"
+            d="M12.226 2.003a9.971 9.971 0 0 0-7.297 2.926c-3.905 3.905-3.905 10.237 0 14.142c3.905 3.905 10.237 3.905 14.142 0a9.972 9.972 0 0 0 2.926-7.297a10.037 10.037 0 0 0-.337-2.368a14.87 14.87 0 0 1-1.744 1.436c-1.351.949-2.733 1.563-3.986 1.842c-1.906.423-3.214.032-3.93-.684c-.716-.716-1.107-2.024-.684-3.93c.279-1.253.893-2.635 1.842-3.986c.414-.592.893-1.177 1.436-1.744a10.017 10.017 0 0 0-2.368-.337m5.43 15.654a7.964 7.964 0 0 0 2.251-4.438c-3.546 2.045-7.269 2.247-9.321.195c-2.052-2.052-1.85-5.775.195-9.321a8 8 0 1 0 6.876 13.564"
+            clip-rule="evenodd"></path></svg
+        >
+      </button>
+      <button
+        id="system-theme-button"
+        aria-label="System theme"
+        class="group size-8 flex items-center justify-center rounded-full"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          ><g fill="currentColor"
+            ><path
+              d="M8 15a1 1 0 1 0 0 2a1 1 0 0 0 0-2m3 1a1 1 0 1 1 2 0a1 1 0 0 1-2 0m5-1a1 1 0 1 0 0 2a1 1 0 0 0 0-2"
+            ></path><path
+              fill-rule="evenodd"
+              d="M4 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h16a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3zm16 2H4a1 1 0 0 0-1 1v1h18V6a1 1 0 0 0-1-1M3 18V9h18v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1"
+              clip-rule="evenodd"></path></g
+          ></svg
+        >
+      </button>
+    </div>
+  </Container>
+</footer>

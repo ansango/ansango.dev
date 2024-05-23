@@ -1,0 +1,26 @@
+---
+import CollectionLayout from "@/layouts/collection.astro";
+import { site } from "@/consts";
+import { collectionNames } from "@/content/config";
+import { getAllCollectionsByCategory } from "@/lib/collections";
+
+export function getStaticPaths() {
+  return collectionNames.map((collection) => ({
+    params: { collection },
+  }));
+}
+
+const { collection } = Astro.params;
+const entries = (await getAllCollectionsByCategory())[collection];
+const meta = site.pages[collection];
+const entriesPerPage = meta.entriesPerPage;
+---
+
+<CollectionLayout
+  {collection}
+  {entries}
+  {meta}
+  {entriesPerPage}
+  page={1}
+  isIndex
+/>

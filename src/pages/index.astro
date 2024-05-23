@@ -1,0 +1,106 @@
+---
+import Container from "@/components/container.astro";
+import Divider from "@/components/divider.astro";
+import EntriesList from "@/components/entries-list.astro";
+import Entry from "@/components/entry.astro";
+import Searcher from "@/components/searcher.astro";
+import { site } from "@/consts";
+import DocLayout from "@/layouts/document.astro";
+import {
+  getLastEntriesByAllCollections,
+  getUniqueTags,
+  getAllCollectionsByCategory,
+} from "@/lib/collections";
+
+const collections = await getAllCollectionsByCategory();
+const latests = await getLastEntriesByAllCollections();
+const tags = await getUniqueTags();
+const meta = site.pages.home;
+---
+
+<DocLayout {...meta}>
+  <Container>
+    <div>
+      <h1>ansango</h1>
+      <p>
+        Hola, soy <strong>Aníbal Sántos</strong>, aquí escribo sobre tecnología.
+        Encontrarás parte de mis wikis, apuntes, y algunos hacks. Espero que
+        encuentres algo útil por aquí.
+      </p>
+      <div class="py-5">
+        <section class="group">
+          <h2>
+            <a class="text-muted hover:text-muted">Última publicación</a>
+          </h2>
+          <div>
+            {
+              latests.map((latest) => {
+                return (
+                  <a
+                    href={`/${latest.collection}/${latest.slug}`}
+                    class="hover:no-underline"
+                  >
+                    <Entry entry={latest} />
+                  </a>
+                );
+              })
+            }
+          </div>
+          <Divider />
+        </section>
+
+        {
+          tags.length > 0 && (
+            <section>
+              <h2>
+                <a class="text-muted" href="/tags">
+                  Tags
+                </a>
+              </h2>
+
+              <ul class="flex flex-wrap gap-1">
+                {tags.map((tag, i) => {
+                  return (
+                    <li>
+                      <a class="underline flex" href={`/tags/${tag}`}>
+                        {tag}
+                        {i !== tags.length - 1 && (
+                          <span class="text-muted">,</span>
+                        )}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+              <Divider />
+            </section>
+          )
+        }
+
+        {
+          Object.entries(collections).map(([collection, entries]) => {
+            const slicedEntries = entries.slice(0, meta.entriesPerPage);
+            const collectionlink = `/${collection}`;
+            return (
+              <section>
+                <h2>
+                  <a class="text-muted capitalize" href={collectionlink}>
+                    {collection}
+                  </a>
+                </h2>
+                <EntriesList entries={slicedEntries} className="space-y-2" />
+                {entries.length > meta.entriesPerPage && (
+                  <span class="block mt-4 text-sm">
+                    <a class="text-muted" href={collectionlink}>
+                      Ver todas las publicaciones →
+                    </a>
+                  </span>
+                )}
+              </section>
+            );
+          })
+        }
+      </div>
+    </div>
+  </Container>
+</DocLayout>

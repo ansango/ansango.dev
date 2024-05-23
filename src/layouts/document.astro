@@ -1,0 +1,32 @@
+---
+import Footer from "@/components/footer.astro";
+import Header from "@/components/header.astro";
+import Head from "@/components/head.astro";
+import { site } from "@/consts";
+
+interface Props {
+  title?: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang={site.lang} class="size-full">
+  <head>
+    <Head
+      title={title ? `${title} | ${site.name}` : site.name}
+      description={description}
+    />
+  </head>
+  <body
+    class="size-full flex flex-col font-sans antialiased bg-background prose max-w-full dark:prose-invert"
+  >
+    <Header />
+    <main class="flex-1 pt-32">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,48 @@
+---
+import Container from "@/components/container.astro";
+import DocLayout from "@/layouts/document.astro";
+import Pagination from "@/components/pagination.astro";
+import type { Metadata } from "@/types";
+import EntriesList from "@/components/entries-list.astro";
+import type { Collections } from "@/lib/collections";
+import { getPagination } from "@/lib/utils";
+
+interface Props {
+  tag: string;
+  entries: Collections;
+  page: number;
+  entriesPerPage: number;
+  isIndex: boolean;
+  meta: Metadata;
+}
+
+const { entries, page, entriesPerPage, isIndex, tag, meta } = Astro.props;
+
+const { currentPage, paginatedEntries, totalPages } = getPagination({
+  isIndex,
+  entries,
+  page,
+  entriesPerPage,
+});
+---
+
+<DocLayout {...meta}>
+  <Container className="flex flex-col h-full">
+    <h1>
+      <span class="text-muted">Tags / </span><span class="capitalize"
+        >{tag.replace(/-/g, " ")}
+      </span>
+    </h1>
+    <p class="text-muted">
+      {entries.length}
+      {entries.length === 1 ? "publicación" : "publicaciones"} de esta etiqueta
+    </p>
+    <EntriesList entries={paginatedEntries} className="flex-1 space-y-2" />
+    <Pagination
+      {currentPage}
+      {totalPages}
+      prevUrl={`/tags/${tag}${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
+      nextUrl={`/tags/${tag}/${currentPage + 1}/`}
+    />
+  </Container>
+</DocLayout>

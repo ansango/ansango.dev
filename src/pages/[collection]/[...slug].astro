@@ -1,0 +1,52 @@
+---
+import CollectionLayout from "@/layouts/collection.astro";
+import PubLayout from "@/layouts/publication.astro";
+import { site } from "@/consts";
+import {
+  getAllCollections,
+  getAllCollectionsByCategory,
+  getAllNumberPaths,
+  type Collection,
+} from "@/lib/collections";
+
+export async function getStaticPaths() {
+  const content = await getAllCollections();
+  const pagesPaths = await getAllNumberPaths();
+
+  const contentResult = content.map((entry) => ({
+    params: { collection: entry.collection, slug: entry.slug },
+    props: { entry },
+  }));
+
+  const pagesResult = pagesPaths.map(({ collection, pageNumber }) => ({
+    params: { collection, slug: pageNumber.toString() },
+    props: { entry: null },
+  }));
+
+  return [...contentResult, ...pagesResult];
+}
+
+const { slug, collection } = Astro.params;
+const { entry } = Astro.props;
+
+const page = parseInt(slug);
+const isIndex = false;
+const entries = (await getAllCollectionsByCategory())[collection];
+const meta = site.pages[collection as keyof typeof site.pages];
+const entriesPerPage = meta.entriesPerPage;
+---
+
+{
+  entry ? (
+    <PubLayout {...entry} />
+  ) : (
+    <CollectionLayout
+      {collection}
+      {entries}
+      {meta}
+      {entriesPerPage}
+      {page}
+      {isIndex}
+    />
+  )
+}

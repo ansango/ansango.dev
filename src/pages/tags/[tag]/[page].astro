@@ -1,0 +1,41 @@
+---
+import { getPageNumbers } from "@/lib/utils";
+import { site } from "@/consts";
+import TagLayout from "@/layouts/tag.astro";
+
+import {
+  getAllCollections,
+  getCollectionsByTag,
+  getUniqueTags,
+} from "@/lib/collections";
+
+export async function getStaticPaths() {
+  const content = await getAllCollections();
+  const tags = await getUniqueTags();
+
+  return tags.flatMap((tag) => {
+    const allCollections = content.filter((collection) =>
+      collection.data.tags?.includes(tag),
+    );
+
+    const totalPages = getPageNumbers(allCollections.length, 10);
+    return totalPages.map((page) => {
+      return {
+        params: {
+          tag,
+          page,
+        },
+      };
+    });
+  });
+}
+
+const { page, tag } = Astro.params;
+
+const entries = await getCollectionsByTag(tag);
+const isIndex = false;
+const meta = site.pages.tags;
+const entriesPerPage = meta.entriesPerPage;
+---
+
+<TagLayout {page} {meta} {tag} {entries} {isIndex} {entriesPerPage} />

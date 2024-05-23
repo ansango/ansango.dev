@@ -1,4 +1,4 @@
-import path from 'path';
+
 import { defineCollection, z } from 'astro:content';
 import type { Metadata } from '@/types';
 
@@ -17,9 +17,10 @@ export type CommonData = z.infer<typeof commonSchema>;
 
 export const schemaCollections = {
   blog: commonSchema,
+  wiki: commonSchema,
 };
 
-export type ContentCollection = "blog";
+export type ContentCollection = "blog" | "wiki";
 export type SeoCollections = Record<ContentCollection, Metadata>;
 export const seoContentCollection: SeoCollections = {
   blog: {
@@ -27,6 +28,11 @@ export const seoContentCollection: SeoCollections = {
     description: "Aquí encontrarás todos los artículos del blog.",
     entriesPerPage: 10
   },
+  wiki: {
+    title: "Wiki",
+    description: "Aquí encontrarás todos los artículos de la wiki.",
+    entriesPerPage: 10
+  }
 };
 
 type AssignParams = { acc: Record<string, unknown>, name: string, schemaCollections: SchemaCollections }

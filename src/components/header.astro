@@ -2,6 +2,7 @@
 import { site } from "@/consts";
 import Container from "@/components/container.astro";
 import Searcher from "./searcher.astro";
+import Theme from "./theme.astro";
 
 const pathname = Astro.url.pathname;
 const path = pathname.split("/").filter(Boolean)[0] || null;
@@ -28,6 +29,7 @@ const path = pathname.split("/").filter(Boolean)[0] || null;
         }
       </div>
       <nav class="flex gap-2 items-center">
+        <Theme />
         <Searcher />
       </nav>
     </div>

@@ -183,6 +183,13 @@ const typography = {
         color: "inherit",
       },
     },
+    details: {
+      "& > summary": {
+        cursor: "pointer",
+        display: "block",
+      },
+
+    },
   },
 
 };

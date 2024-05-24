@@ -92,9 +92,18 @@ export const getUniqueTags = async () => {
   return Array.from(tags).sort()
 };
 
+const abc = "abcdefghijklmnopqrstuvwxyz".split("");
+
+export const getTagsGroupedByLetter = async () => {
+  const tags = await getUniqueTags();
+  return abc.reduce((acc: Record<string, string[]>, letter) => {
+    acc[letter] = tags.filter((tag) => tag.startsWith(letter));
+    return acc;
+  }, {});
+};
+
 export const getTagsLimitedByLetter = async (limitAtLetter = 3) => {
   const tags = await getUniqueTags();
-  const abc = "abcdefghijklmnopqrstuvwxyz".split("");
   const mappedTags = tags.reduce((acc: Record<string, string[]>, tag) => {
     const letter = tag[0].toLowerCase();
     if (!abc.includes(letter)) {
@@ -124,3 +133,53 @@ export const getLastEntriesByAllCollections = async (entriesLength = 1) => {
   const collections = await getAllCollections();
   return collections.slice(0, entriesLength);
 }
+
+type BreadcrumbItem = {
+  breadcrumb: string[];
+  slug: string;
+  name: string;
+  type: "file";
+};
+
+export type Item = {
+  name: string;
+  level: number;
+  type: "folder" | "file";
+  slug?: string;
+  children: Item[];
+};
+
+const buildNestedArray = (items: BreadcrumbItem[]): Item[] => {
+  const root: Item[] = [];
+  items.forEach((item) => {
+    let currentLevel = root;
+    item.breadcrumb.forEach((name, i) => {
+      const existingPath = currentLevel.find((folder) => folder.name === name);
+      if (existingPath) {
+        currentLevel = existingPath.children as Item[];
+      } else {
+        const newFolder: Item = {
+          name,
+          level: i,
+          type: i === item.breadcrumb.length - 1 ? "file" : "folder",
+          slug: i === item.breadcrumb.length - 1 ? item.slug : undefined,
+          children: [],
+        };
+        currentLevel.push(newFolder);
+        currentLevel = newFolder.children as Item[];
+      }
+    });
+  });
+  return root;
+};
+
+export const getDirectoryWikiFolders = (entries: Collection[]) => buildNestedArray(entries.map((entry) => {
+  return {
+    breadcrumb: entry.slug.split("/"),
+    slug: "/wiki/" + entry.slug as string,
+    name: entry.data.title,
+    type: "file" as const,
+  };
+}).sort((a, b) => a.slug.localeCompare(b.slug)));
+
+

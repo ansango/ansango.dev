@@ -28,6 +28,8 @@ export const slugify = (text: string): string => {
     .replace(/[^\w-]+/g, "");
 };
 
+export const unSlugify = (text: string): string => text.charAt(0).toUpperCase() + text.slice(1).replaceAll("-", " ")
+
 export const getPageNumbers = (
   numberOfPosts: number,
   entriesPerPage: number

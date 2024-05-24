@@ -1,16 +1,52 @@
 import { defineConfig } from "astro/config";
 import rehypeAstroRelativeMarkdownLinks from "astro-rehype-relative-markdown-links";
+import rehypeExternalLinks from "rehype-external-links";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import pagefind from "astro-pagefind";
 
+const svg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 32 32'%3E%3Cpath fill='currentColor' d='M5.757 7.172l1.415-1.415l9.07 9.071v-4.585h2v8h-8v-2h4.586z'/%3E%3C/svg%3E"
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://example.com",
   integrations: [sitemap(), tailwind(), pagefind()],
   markdown: {
-    rehypePlugins: [rehypeAstroRelativeMarkdownLinks],
+    rehypePlugins: [rehypeAstroRelativeMarkdownLinks, [
+      rehypeExternalLinks,
+      {
+        target: "_blank",
+        rel: ["noopener", "noreferrer"],
+        properties: {
+          className: ["external-link"],
+        },
+        content: {
+          type: 'element', tagName: 'svg', properties: {
+            xmlns: "http://www.w3.org/2000/svg"
+            , width: "20"
+            , height: "20"
+            , viewBox: "0 0 24 24"
+          }, children: [
+            {
+              type: 'element', tagName: 'g', properties: { fill: "currentColor" }, children: [
+
+                {
+                  type: 'element', tagName: 'path', properties: {
+                    d: "M15.64 7.025h-3.622v-2h7v7h-2v-3.55l-4.914 4.914l-1.414-1.414z"
+                  }
+                },
+                {
+                  type: 'element', tagName: 'path', properties: {
+                    d: "M10.982 6.975h-6v12h12v-6h-2v4h-8v-8h4z"
+                  }
+                }
+              ]
+            }
+          ],
+
+        },
+      },
+    ],],
     shikiConfig: {
       themes: {
         light: "vitesse-light",
@@ -19,3 +55,5 @@ export default defineConfig({
     },
   },
 });
+
+

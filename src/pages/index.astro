@@ -62,13 +62,13 @@ const meta = site.pages.home;
               <ul class="flex flex-wrap gap-1">
                 {tags.map((tag, i) => {
                   return (
-                    <li>
-                      <a class="underline flex" href={`/tags/${tag}`}>
+                    <li class="flex">
+                      <a class="underline" href={`/tags/${tag}`}>
                         {tag}
-                        {i !== tags.length - 1 && (
-                          <span class="text-muted">,</span>
-                        )}
                       </a>
+                      {i !== tags.length - 1 && (
+                        <span class="text-muted">,</span>
+                      )}
                     </li>
                   );
                 })}

@@ -89,6 +89,8 @@ export const base = {
 
 };
 
+
+
 const typography = {
   css: {
     '--tw-prose-body': "var(--color-content)",
@@ -135,33 +137,24 @@ const typography = {
     letterSpacing: "0em",
     fontSize: "1.125rem",
 
+    "h1, h2, h3, h4, h5, h6, strong": {
+      fontWeight: 500,
+    },
     h1: {
       margin: 0,
-      fontWeight: 500,
-    },
-    h2: {
-      fontWeight: 500,
-    },
-    h3: {
-      fontWeight: 500,
-    },
-    h4: {
-      fontWeight: 500,
-    },
-    h5: {
-      fontWeight: 500,
-    },
-    h6: {
-      fontWeight: 500,
     },
     a: {
       fontWeight: 400,
       textDecoration: "none",
+      textUnderlineOffset: "0.25rem",
       "&:hover": {
         color: "var(--color-secondary)"
       },
-
-
+      "&>span": {
+        display: "inline-flex",
+        position: "relative",
+        top: "0.25rem",
+      },
     },
     ul: {
       listStyleType: "none",
@@ -169,7 +162,7 @@ const typography = {
       "& li": {
         paddingLeft: "0.125em",
         margin: 0,
-        "& > a": {
+        "&>a": {
           textDecoration: "underline",
         }
       },
@@ -177,8 +170,18 @@ const typography = {
     p: {
       margin: "0.75rem 0",
     },
-    strong: {
-      fontWeight: 500,
+    article: {
+      "&>h1": {
+        display: "none",
+      },
+      "p>a": {
+        textDecoration: "underline",
+      },
+      "h1>a, h2>a, h3>a, h4>a, h5>a, h6>a": {
+        textDecoration: "underline",
+        textUnderlineOffset: "0.25rem",
+        color: "inherit",
+      },
     },
   },
 

@@ -35,13 +35,11 @@ const { Content } = await render();
             <ul class="flex flex-wrap gap-1">
               {tags.map((tag, i) => {
                 return (
-                  <li>
-                    <a class="underline flex" href={`/tags/${tag}`}>
+                  <li class="flex">
+                    <a class="underline" href={`/tags/${tag}`}>
                       {tag}
-                      {i !== tags.length - 1 && (
-                        <span class="text-muted">,</span>
-                      )}
                     </a>
+                    {i !== tags.length - 1 && <span class="text-muted">,</span>}
                   </li>
                 );
               })}
@@ -49,7 +47,7 @@ const { Content } = await render();
           )
         }
       </header>
-      <article class="py-5 [&>h1]:hidden">
+      <article class="py-5">
         <Content />
       </article>
     </section>

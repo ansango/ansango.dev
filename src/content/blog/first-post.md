@@ -30,12 +30,18 @@ tags:
   ]
 published: true
 ---
-
+# Hola Astro
 Aquí va el contenido del post, está escrito en Markdown.
 
 ## Este es un título de segundo nivel
 
-Puedes escribir texto normal, **negritas**, *cursivas*, [enlaces](https://www.google.com), y mucho más. También puedes agregar imágenes:
+Puedes escribir texto normal, **negritas**, *cursivas*, [enlaces externos](https://www.google.com), [enlaces](/blog/first-post) y mucho más. También puedes agregar imágenes:
+
+## [Texto alternativo](/blog/first-post)
+### [Texto alternativo](/blog/first-post)
+#### [Texto alternativo](/blog/first-post)
+##### [Texto alternativo](/blog/first-post)
+###### [Texto alternativo](/blog/first-post)
 
 ![Texto alternativo](https://via.placeholder.com/250)
 
@@ -49,6 +55,8 @@ Normalmente se usan los títulos de segundo y tercer nivel, pero también puedes
 - Elemento 4
 - Elemento 5
 - Elemento 6
+
+### [enlaces](https://www.google.com)
 
 #### Este es un título de cuarto nivel
 

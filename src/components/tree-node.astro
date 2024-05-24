@@ -1,0 +1,65 @@
+---
+export type Item = {
+  name: string;
+  level: number;
+  type: "folder" | "file";
+  slug?: string;
+  children: Item[];
+};
+
+interface Props extends Item {}
+
+const { children, name: _, type, slug, level } = Astro.props;
+const capitalizeAndNormalizeTitles = (title: string) =>
+  title
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+const name = capitalizeAndNormalizeTitles(_);
+---
+
+<li>
+  {
+    type === "file" && (
+      <>
+        {level === 0 && (
+          <h2>
+            <a class="no-underline" href={`/wiki/${slug}`}>
+              {name}
+            </a>
+          </h2>
+        )}
+        {level === 1 && (
+          <h3>
+            <a class="no-underline" href={`/wiki/${slug}`}>
+              {name}
+            </a>
+          </h3>
+        )}
+        {level > 1 && (
+          <a class="no-underline" href={`/wiki/${slug}`}>
+            {name}
+          </a>
+        )}
+      </>
+    )
+  }
+  {
+    type === "folder" && (
+      <section>
+        {level === 0 && <h2>{name}</h2>}
+        {level === 1 && <h3>{name}</h3>}
+        {level === 2 && <h4>{name}</h4>}
+        {level > 2 && <strong>{name}</strong>}
+
+        {children && children.length > 0 && (
+          <ul>
+            {children.map((child) => (
+              <Astro.self {...child} />
+            ))}
+          </ul>
+        )}
+      </section>
+    )
+  }
+</li>

@@ -1,0 +1,70 @@
+---
+import Container from "@/components/container.astro";
+import DocLayout from "@/layouts/document.astro";
+import type { Metadata } from "@/types";
+import type { Collections } from "@/lib/collections";
+import NestedBreadcrumbList, { type Item } from "@/components/tree-node.astro";
+
+interface Props {
+  collection: string;
+  entries: Collections;
+  meta: Metadata;
+}
+
+const { entries: wiki, meta, collection } = Astro.props;
+const entries = wiki.map((entry) => {
+  return {
+    breadcrumb: entry.slug.split("/"),
+    slug: entry.slug as string,
+    name: entry.data.title,
+    type: "file" as const,
+  };
+});
+
+type BreadcrumbItem = {
+  breadcrumb: string[];
+  slug: string;
+  name: string;
+  type: "file";
+};
+
+const buildNestedArray = (items: BreadcrumbItem[]): Item[] => {
+  const root: Item[] = [];
+  items.forEach((item) => {
+    let currentLevel = root;
+    item.breadcrumb.forEach((name, i) => {
+      const existingPath = currentLevel.find((folder) => folder.name === name);
+      if (existingPath) {
+        currentLevel = existingPath.children as Item[];
+      } else {
+        const newFolder: Item = {
+          name,
+          level: i,
+          type: i === item.breadcrumb.length - 1 ? "file" : "folder",
+          slug: i === item.breadcrumb.length - 1 ? item.slug : undefined,
+          children: [],
+        };
+        currentLevel.push(newFolder);
+        currentLevel = newFolder.children as Item[];
+      }
+    });
+  });
+  console.log(root);
+  return root;
+};
+
+const directory = buildNestedArray(entries);
+---
+
+<DocLayout {...meta}>
+  <Container>
+    <h1 class="capitalize">{collection}</h1>
+  </Container>
+  <Container className="flex flex-col h-full">
+    <article class="flex-1">
+      <ul>
+        {directory.map((item) => <NestedBreadcrumbList {...item} />)}
+      </ul>
+    </article>
+  </Container>
+</DocLayout>

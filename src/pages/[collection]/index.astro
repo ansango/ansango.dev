@@ -3,6 +3,7 @@ import CollectionLayout from "@/layouts/collection.astro";
 import { site } from "@/consts";
 import { collectionNames } from "@/content/config";
 import { getAllCollectionsByCategory } from "@/lib/collections";
+import CollectionWiki from "@/layouts/collection-wiki.astro";
 
 export function getStaticPaths() {
   return collectionNames.map((collection) => ({
@@ -16,11 +17,17 @@ const meta = site.pages[collection];
 const entriesPerPage = meta.entriesPerPage;
 ---
 
-<CollectionLayout
-  {collection}
-  {entries}
-  {meta}
-  {entriesPerPage}
-  page={1}
-  isIndex
-/>
+{
+  collection === "wiki" ? (
+    <CollectionWiki {collection} {entries} {meta} />
+  ) : (
+    <CollectionLayout
+      {collection}
+      {entries}
+      {meta}
+      {entriesPerPage}
+      page={1}
+      isIndex
+    />
+  )
+}

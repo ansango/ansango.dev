@@ -194,6 +194,7 @@ const typography = {
       height: "auto",
       aspectRatio: "3/2",
       objectFit: "cover",
+      objectPosition: "center",
       borderRadius: "0.25rem",
     },
   },

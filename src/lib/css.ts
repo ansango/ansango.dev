@@ -156,6 +156,9 @@ const typography = {
         top: "0.25rem",
       },
     },
+    ol: {
+      paddingLeft: "1.25rem",
+    },
     ul: {
       listStyleType: "none",
       paddingLeft: 0,

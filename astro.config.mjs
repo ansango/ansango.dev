@@ -5,8 +5,6 @@ import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import pagefind from "astro-pagefind";
 
-const svg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 32 32'%3E%3Cpath fill='currentColor' d='M5.757 7.172l1.415-1.415l9.07 9.071v-4.585h2v8h-8v-2h4.586z'/%3E%3C/svg%3E"
-
 // https://astro.build/config
 export default defineConfig({
   site: "https://example.com",
@@ -54,6 +52,7 @@ export default defineConfig({
       }
     },
   },
+
 });
 
 

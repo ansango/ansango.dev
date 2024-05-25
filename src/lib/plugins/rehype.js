@@ -11,11 +11,9 @@ const rehypePlugins = [rehypeAstroRelativeMarkdownLinks, [
     },
     content: {
       type: 'element', tagName: 'svg', properties: {
-        xmlns: "http://www.w3.org/2000/svg"
-        , width: "20"
-        , height: "20"
-        , viewBox: "0 0 24 24"
-      }, children: [
+        xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 24 24"
+      },
+      children: [
         {
           type: 'element', tagName: 'g', properties: { fill: "currentColor" }, children: [
 
@@ -32,13 +30,22 @@ const rehypePlugins = [rehypeAstroRelativeMarkdownLinks, [
           ]
         }
       ],
-
     },
   },
-], "rehype-slug",
+],
+  "rehype-slug",
   [
     "rehype-autolink-headings",
-    { behavior: "append" },
-  ], ['rehype-toc', { headings: ['h2', 'h3'] }]]
+    {
+      behavior: "append"
+    },
+  ],
+  [
+    'rehype-toc',
+    {
+      headings: ['h2']
+    }
+  ]
+]
 
 export default rehypePlugins;

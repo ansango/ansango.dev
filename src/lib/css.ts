@@ -188,7 +188,13 @@ const typography = {
         cursor: "pointer",
         display: "block",
       },
-
+    },
+    "img, video": {
+      maxWidth: "100%",
+      height: "auto",
+      aspectRatio: 3 / 2,
+      objectFit: "cover",
+      borderRadius: "0.25rem",
     },
   },
 

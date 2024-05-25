@@ -13,7 +13,7 @@ import {
 
 const collections = await getAllCollectionsByCategory();
 const latests = await getLastEntriesByAllCollections();
-const tags = await getTagsLimitedByLetter();
+const tags = await getTagsLimitedByLetter(1);
 const meta = site.pages.home;
 ---
 

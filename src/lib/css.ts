@@ -20,8 +20,7 @@ const light = {
   "--color-background-100": "#e5e5e5",
   "--color-background-200": "#d4d4d4",
   "--color-background-300": "#a1a1aa",
-
-}
+};
 
 const dark = {
   ...root,
@@ -37,13 +36,12 @@ const dark = {
   "--color-background-100": "#171717",
   "--color-background-200": "#27272a",
   "--color-background-300": "#3f3f46",
-
-}
+};
 
 const themes = {
   "html.light": light,
-  "html.dark": dark
-}
+  "html.dark": dark,
+};
 
 const defaultRoot = themes["html.light"];
 
@@ -65,80 +63,80 @@ const scrollbar = {
 };
 
 const obsidianMetaLink = {
-"--background-modifier-border": "var(--color-background-200)",
-"--background-primary": "var(--color-background)",
-"--background-secondary": "var(--color-background-100)",
-"--text-normal": "var(--color-content)",
-"--text-muted": "var(--color-muted)",
-"--text-faint": "var(--color-muted)",
-}
+  "--background-modifier-border": "var(--color-background-200)",
+  "--background-primary": "var(--color-background)",
+  "--background-secondary": "var(--color-background-100)",
+  "--text-normal": "var(--color-content)",
+  "--text-muted": "var(--color-muted)",
+  "--text-faint": "var(--color-muted)",
+};
 
 export const base = {
   ":root": defaultRoot,
   ...themes,
   ...scrollbar,
- ...obsidianMetaLink,
-  "html.light .astro-code.astro-code-themes, html.light .astro-code.astro-code-themes span": {
-    "color": "var(--shiki-dark) !important",
-    "background-color": "var(--shiki-dark-bg) !important",
-    /* Optional, if you also want font styles */
-    "font-style": "var(--shiki-dark-font-style) !important",
-    "font-weight": "var(--shiki-dark-font-weight) !important",
-    "text-decoration": "var(--shiki-dark-text-decoration) !important",
+  html: {
+    ...obsidianMetaLink,
   },
-  "html.dark .astro-code.astro-code-themes, html.dark .astro-code.astro-code-themes span": {
-    "color": "var(--shiki-dark) !important",
-    "background-color": "var(--shiki-dark-bg) !important",
-    /* Optional, if you also want font styles */
-    "font-style": "var(--shiki-dark-font-style) !important",
-    "font-weight": "var(--shiki-dark-font-weight) !important",
-    "text-decoration": "var(--shiki-dark-text-decoration) !important",
-
-  }
-
+  "html.light .astro-code.astro-code-themes, html.light .astro-code.astro-code-themes span":
+    {
+      color: "var(--shiki-dark) !important",
+      "background-color": "var(--shiki-dark-bg) !important",
+      /* Optional, if you also want font styles */
+      "font-style": "var(--shiki-dark-font-style) !important",
+      "font-weight": "var(--shiki-dark-font-weight) !important",
+      "text-decoration": "var(--shiki-dark-text-decoration) !important",
+    },
+  "html.dark .astro-code.astro-code-themes, html.dark .astro-code.astro-code-themes span":
+    {
+      color: "var(--shiki-dark) !important",
+      "background-color": "var(--shiki-dark-bg) !important",
+      /* Optional, if you also want font styles */
+      "font-style": "var(--shiki-dark-font-style) !important",
+      "font-weight": "var(--shiki-dark-font-weight) !important",
+      "text-decoration": "var(--shiki-dark-text-decoration) !important",
+    },
 };
-
-
 
 const typography = {
   css: {
-    '--tw-prose-body': "var(--color-content)",
-    '--tw-prose-headings': "var(--color-content-300)",
-    '--tw-prose-lead': "var(--color-content)",
-    '--tw-prose-links': "var(--color-content-100)",
-    '--tw-prose-bold': "var(--color-content)",
-    '--tw-prose-counters': "var(--color-content)",
-    '--tw-prose-bullets': "var(--color-content)",
-    '--tw-prose-hr': "var(--color-content)",
-    '--tw-prose-quotes': "var(--color-content)",
-    '--tw-prose-quote-borders': "var(--color-content)",
-    '--tw-prose-captions': "var(--color-content)",
-    '--tw-prose-kbd': "var(--color-content)",
-    '--tw-prose-kbd-shadows': "var(--color-content)",
-    '--tw-prose-code': "var(--color-content)",
-    '--tw-prose-pre-code': "var(--color-content)",
-    '--tw-prose-pre-bg': "var(--color-content)",
-    '--tw-prose-th-borders': "var(--color-content)",
-    '--tw-prose-td-borders': "var(--color-content)",
+    "--tw-prose-body": "var(--color-content)",
+    "--tw-prose-headings": "var(--color-content-300)",
+    "--tw-prose-lead": "var(--color-content)",
+    "--tw-prose-links": "var(--color-content-100)",
+    "--tw-prose-bold": "var(--color-content)",
+    "--tw-prose-counters": "var(--color-content)",
+    "--tw-prose-bullets": "var(--color-content)",
+    "--tw-prose-hr": "var(--color-content)",
+    "--tw-prose-quotes": "var(--color-content)",
+    "--tw-prose-quote-borders": "var(--color-content)",
+    "--tw-prose-captions": "var(--color-content)",
+    "--tw-prose-kbd": "var(--color-content)",
+    "--tw-prose-kbd-shadows": "var(--color-content)",
+    "--tw-prose-code": "var(--color-content)",
+    "--tw-prose-pre-code": "var(--color-content)",
+    "--tw-prose-pre-bg": "var(--color-content)",
+    "--tw-prose-th-borders": "var(--color-content)",
+    "--tw-prose-td-borders": "var(--color-content)",
 
-    '--tw-prose-invert-body': "var(--color-content)",
-    '--tw-prose-invert-headings': "var(--color-primary)",
-    '--tw-prose-invert-lead': "var(--color-content)",
-    '--tw-prose-invert-links': "var(--color-content)",
-    '--tw-prose-invert-bold': "var(--color-content)",
-    '--tw-prose-invert-counters': "var(--color-content)",
-    '--tw-prose-invert-bullets': "var(--color-content)",
-    '--tw-prose-invert-hr': "var(--color-content)",
-    '--tw-prose-invert-quotes': "var(--color-content)",
-    '--tw-prose-invert-quote-borders': "var(--color-content)",
-    '--tw-prose-invert-captions': "var(--color-content)",
-    '--tw-prose-invert-kbd': "var(--color-content)",
-    '--tw-prose-invert-kbd-shadows': "var(--color-content)",
-    '--tw-prose-invert-code': "var(--color-content)",
-    '--tw-prose-invert-pre-code': "var(--color-content)",
-    '--tw-prose-invert-pre-bg': "var(--color-content)",
-    '--tw-prose-invert-th-borders': "var(--color-content)",
-    '--tw-prose-invert-td-borders': "var(--color-content)",
+    "--tw-prose-invert-body": "var(--color-content)",
+    "--tw-prose-invert-headings": "var(--color-primary)",
+    "--tw-prose-invert-lead": "var(--color-content)",
+    "--tw-prose-invert-links": "var(--color-content)",
+    "--tw-prose-invert-bold": "var(--color-content)",
+    "--tw-prose-invert-counters": "var(--color-content)",
+    "--tw-prose-invert-bullets": "var(--color-content)",
+    "--tw-prose-invert-hr": "var(--color-content)",
+    "--tw-prose-invert-quotes": "var(--color-content)",
+    "--tw-prose-invert-quote-borders": "var(--color-content)",
+    "--tw-prose-invert-captions": "var(--color-content)",
+    "--tw-prose-invert-kbd": "var(--color-content)",
+    "--tw-prose-invert-kbd-shadows": "var(--color-content)",
+    "--tw-prose-invert-code": "var(--color-content)",
+    "--tw-prose-invert-pre-code": "var(--color-content)",
+    "--tw-prose-invert-pre-bg": "var(--color-content)",
+    "--tw-prose-invert-th-borders": "var(--color-content)",
+    "--tw-prose-invert-td-borders": "var(--color-content)",
 
     fontWeight: 400,
     lineHeight: 1.5,
@@ -157,7 +155,7 @@ const typography = {
       textDecoration: "none",
       textUnderlineOffset: "0.25rem",
       "&:hover": {
-        color: "var(--color-secondary)"
+        color: "var(--color-secondary)",
       },
       "&>span": {
         display: "inline-flex",
@@ -176,7 +174,7 @@ const typography = {
         margin: 0,
         "&>a": {
           textDecoration: "underline",
-        }
+        },
       },
     },
     p: {
@@ -210,38 +208,38 @@ const typography = {
       borderRadius: "0.25rem",
     },
   },
-
 };
 
-
-export default () => plugin(({ addBase }) => {
-  addBase(base);
-}, {
-  theme: {
-    extend: {
-      fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
-      },
-      colors: {
-        primary: "var(--color-primary)",
-        secondary: "var(--color-secondary)",
-        content: "var(--color-content)",
-        "content-100": "var(--color-content-100)",
-        "content-200": "var(--color-content-200)",
-        "content-300": "var(--color-content-300)",
-        muted: "var(--color-muted)",
-        background: "var(--color-background)",
-        "background-100": "var(--color-background-100)",
-        "background-200": "var(--color-background-200)",
-        "background-300": "var(--color-background-300)",
-
-      },
-      typography: () => {
-        return {
-          DEFAULT: typography,
-
-        }
-      },
+export default () =>
+  plugin(
+    ({ addBase }) => {
+      addBase(base);
     },
-  }
-});
+    {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ["var(--font-sans)", ...fontFamily.sans],
+          },
+          colors: {
+            primary: "var(--color-primary)",
+            secondary: "var(--color-secondary)",
+            content: "var(--color-content)",
+            "content-100": "var(--color-content-100)",
+            "content-200": "var(--color-content-200)",
+            "content-300": "var(--color-content-300)",
+            muted: "var(--color-muted)",
+            background: "var(--color-background)",
+            "background-100": "var(--color-background-100)",
+            "background-200": "var(--color-background-200)",
+            "background-300": "var(--color-background-300)",
+          },
+          typography: () => {
+            return {
+              DEFAULT: typography,
+            };
+          },
+        },
+      },
+    }
+  );

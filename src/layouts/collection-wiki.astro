@@ -21,7 +21,7 @@ const directory = getDirectoryWikiFolders(entries);
   </Container>
   <Container className="flex flex-col h-full">
     <article class="flex-1">
-      <ul>
+      <ul class="md:columns-2 md:gap-5">
         {directory.map((item) => <TreeNode {...item} />)}
       </ul>
     </article>

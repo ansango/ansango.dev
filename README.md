@@ -1,68 +1,72 @@
-# Astro Starter Kit: Blog
+# dev.ansango.com
 
-```sh
-npm create astro@latest -- --template blog
-```
+Welcome to the source code of my personal website [dev.ansango.com](https://dev.ansango.com). This website is built using Astro, TypeScript, and TailwindCSS. The content is dynamically generated from another repository through a GitHub Action.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/blog)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/blog)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/blog/devcontainer.json)
+## Technologies Used
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- **Astro**: A modern framework for building static websites.
+- **TypeScript**: A strongly typed programming language that builds on JavaScript.
+- **TailwindCSS**: A utility-first CSS framework for rapid UI development.
 
-![blog](https://github.com/withastro/astro/assets/2244813/ff10799f-a816-4703-b967-c78997e8323d)
+## Project Structure
 
-Features:
+The project follows a typical Astro project structure with a few custom configurations to handle dynamic content:
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
+- **src/**: Contains the main source code for the website, including pages, components, and styles.
+- **public/**: Contains static assets like images and fonts.
+- **astro.config.mjs**: Astro configuration file.
+- **tsconfig.json**: TypeScript configuration file.
+- **tailwind.config.js**: TailwindCSS configuration file.
 
-## 🚀 Project Structure
+## Content Generation
 
-Inside of your Astro project, you'll see the following folders and files:
+The content for this website is not stored directly in this repository. Instead, it is generated from a separate repository ([ansango/ansango.dev.vault](https://github.com/ansango/ansango.dev.vault)) using a GitHub Action. This allows for dynamic content updates without modifying the core website structure.
 
-```text
-├── public/
-├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
-```
+### How It Works
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+1. **Content Repository**: The content is managed in the [ansango.dev.vault](https://github.com/ansango/ansango.dev.vault) repository using Obsidian.
+2. **GitHub Action**: A GitHub Action in the content repository is triggered on push events.
+3. **Deployment**: The action builds the content and deploys it to this website, ensuring that the latest content is always displayed.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Deployment
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+The website is automatically deployed using GitHub Actions and Cloudflare Pages. Whenever there are changes to the content or the source code, the following steps are performed:
 
-Any static assets, like images, can be placed in the `public/` directory.
+1. **Build**: The website is built using Astro.
+2. **Deploy**: The built site is deployed to Cloudflare Pages.
 
-## 🧞 Commands
+## Development
 
-All commands are run from the root of the project, from a terminal:
+To set up the project locally for development:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+1. **Clone the repository**:
+   ```sh
+   git clone https://github.com/ansango/ansango.dev
+   cd ansango.dev
+   ```
 
-## 👀 Want to learn more?
+2. **Install dependencies**:
+   ```sh
+   npm install
+   ```
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+3. **Run the development server**:
+   ```sh
+   npm start
+   ```
 
-## Credit
+   This will start the Astro development server and you can view the website at `http://localhost:3000`.
 
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+## Contributing
+
+Contributions are welcome! If you have any improvements or suggestions, please open an issue or submit a pull request.
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/new-feature`).
+3. Make your changes and commit them (`git commit -m 'Add new feature'`).
+4. Push to the branch (`git push origin feature/new-feature`).
+5. Open a Pull Request.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).

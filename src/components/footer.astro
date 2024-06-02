@@ -2,6 +2,8 @@
 import Container from "@/components/container.astro";
 import Divider from "@/components/divider.astro";
 import GithubIcon from "@/components/icons/github-icon.astro";
+import RssIcon from "./icons/rss-icon.astro";
+import { site } from "@/consts";
 ---
 
 <footer>
@@ -14,6 +16,7 @@ import GithubIcon from "@/components/icons/github-icon.astro";
     >
 
     <div class="flex flex-wrap gap-1 items-center">
+      <a href={site.url + "/rss.xml"} target="_blank"> <RssIcon /> </a>
       <a href="https://github.com/ansango" target="_blank">
         <GithubIcon />
       </a>

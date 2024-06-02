@@ -1,7 +1,7 @@
 {
-  "name": "aníbal santos",
-  "short_name": "aníbal santos",
-  "description": "senior tech engineer",
+  "name": "dev.ansango",
+  "short_name": "ansango",
+  "description": "Esta es mi página de notas de tecnología, wikis y hacks.",
   "start_url": ".",
   "icons": [
     {
@@ -24,5 +24,5 @@
   "background_color": "#171717",
   "display": "standalone",
   "dir": "ltr",
-  "lang": "en-US"
+  "lang": "es-ES"
 }

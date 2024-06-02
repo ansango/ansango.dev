@@ -1,6 +1,7 @@
 ---
 import { ViewTransitions } from "astro:transitions";
 import HeadScript from "@/components/head.script.astro";
+import HeadGA from "@/components/head.script.ga.astro";
 import HeadCode from "@/components/head.script.code.astro";
 import "../assets/switzer.css";
 interface Props {
@@ -55,7 +56,9 @@ const { title, description, image = "/avatar.jpeg" } = Astro.props;
   <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
   <!-- Head Scripts -->
+
   <ViewTransitions />
   <HeadScript />
   <HeadCode />
+  <HeadGA />
 </head>

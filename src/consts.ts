@@ -2,6 +2,7 @@ import type { Site } from "@/types";
 import { seoContentCollection } from "./content/config";
 
 export const site: Site = {
+  url: "https://dev.ansango.com",
   name: "dev.ansango",
   email: "anibalsantosgo@gmail.com",
   lang: "es",
@@ -17,7 +18,7 @@ export const site: Site = {
     },
     ...seoContentCollection,
   },
-}
+};
 
 export const baseLongDateOptions: Intl.DateTimeFormatOptions = {
   year: "numeric",

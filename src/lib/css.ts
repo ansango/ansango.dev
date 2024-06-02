@@ -62,22 +62,10 @@ const scrollbar = {
   },
 };
 
-const obsidianMetaLink = {
-  "--background-modifier-border": "var(--color-background-200)",
-  "--background-primary": "var(--color-background)",
-  "--background-secondary": "var(--color-background-100)",
-  "--text-normal": "var(--color-content)",
-  "--text-muted": "var(--color-muted)",
-  "--text-faint": "var(--color-muted)",
-};
-
 export const base = {
   ":root": defaultRoot,
   ...themes,
   ...scrollbar,
-  html: {
-    ...obsidianMetaLink,
-  },
   "html.light .astro-code.astro-code-themes, html.light .astro-code.astro-code-themes span":
     {
       color: "var(--shiki-dark) !important",

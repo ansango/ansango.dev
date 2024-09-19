@@ -2,11 +2,10 @@ import { collectionNames } from "@/content/config";
 import { getCollection } from "astro:content";
 import { getPageNumbers, slugify } from "./utils";
 
-
 interface Render {
-  '.md': Promise<{
-    Content: import('astro').MarkdownInstance<{}>['Content'];
-    headings: import('astro').MarkdownHeading[];
+  ".md": Promise<{
+    Content: import("astro").MarkdownInstance<{}>["Content"];
+    headings: import("astro").MarkdownHeading[];
     remarkPluginFrontmatter: Record<string, any>;
   }>;
 }
@@ -15,55 +14,58 @@ export const getAllPromiseCollections = async () => {
   const collections = await Promise.all(
     // @ts-expect-error - take care of this
     collectionNames.map((name: any) => getCollection(name, (entry) => entry.data.published))
-  )
+  );
   return collections.flat() as Entries;
-}
+};
 
 export const getAllCollections = async () => {
   const collections = await getAllPromiseCollections();
-  return collections.map((entry: any) => {
-    return {
-      ...entry,
-      data: {
-        ...entry.data,
-        tags: entry.data.tags.map((tag: string) => slugify(tag)),
-      },
-    };
-  }).sort((a, b) => {
-    return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
-  });
-}
+  return collections
+    .map((entry: any) => {
+      return {
+        ...entry,
+        data: {
+          ...entry.data,
+          tags: entry.data.tags.map((tag: string) => slugify(tag)),
+        },
+      };
+    })
+    .sort((a, b) => {
+      return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
+    });
+};
 
 export const getAllCollectionsByCategory = async () => {
   const content = await getAllCollections();
-  const contentByCategory = content.reduce(
-    (acc: { [key: string]: any }, entry) => {
-      if (!acc[entry.collection]) {
-        acc[entry.collection] = [];
-      }
-      acc[entry.collection].push(entry);
-      return acc;
-    },
-    {},
-  );
+  const contentByCategory = content.reduce((acc: { [key: string]: any }, entry) => {
+    if (!acc[entry.collection]) {
+      acc[entry.collection] = [];
+    }
+    acc[entry.collection].push(entry);
+    return acc;
+  }, {});
 
   const sortedContentByCategory: { [key: string]: Entries } = {};
 
-  Object.keys(contentByCategory).sort().forEach((key) => {
-    sortedContentByCategory[key] = contentByCategory[key];
-  });
+  Object.keys(contentByCategory)
+    .sort()
+    .forEach((key) => {
+      sortedContentByCategory[key] = contentByCategory[key];
+    });
 
   return sortedContentByCategory;
-}
+};
 
 export const getAllNumberPaths = async (entriesPerPage = 10) => {
   const contentByCategory = await getAllCollectionsByCategory();
-  return Object.keys(contentByCategory).map((collection) => {
-    const collectionContent = contentByCategory[collection];
-    const pathNumbers = getPageNumbers(collectionContent.length, entriesPerPage);
-    return pathNumbers.map((pageNumber) => ({ pageNumber, collection }));
-  }).flat()
-}
+  return Object.keys(contentByCategory)
+    .map((collection) => {
+      const collectionContent = contentByCategory[collection];
+      const pathNumbers = getPageNumbers(collectionContent.length, entriesPerPage);
+      return pathNumbers.map((pageNumber) => ({ pageNumber, collection }));
+    })
+    .flat();
+};
 
 export const getUniqueTags = async () => {
   const collections = await getAllCollections();
@@ -76,7 +78,7 @@ export const getUniqueTags = async () => {
     }
   }
 
-  return Array.from(tags).sort()
+  return Array.from(tags).sort();
 };
 
 const abc = "abcdefghijklmnopqrstuvwxyz".split("");
@@ -103,10 +105,11 @@ export const getTagsLimitedByLetter = async (limitAtLetter = 3) => {
     return acc;
   }, {});
 
-  return Object.values(mappedTags).map((tags) => {
-    return tags.slice(0, limitAtLetter);
-  }).flat();
-
+  return Object.values(mappedTags)
+    .map((tags) => {
+      return tags.slice(0, limitAtLetter);
+    })
+    .flat();
 };
 
 export const getCollectionsByTag = async (tag: string) => {
@@ -119,13 +122,14 @@ export const getCollectionsByTag = async (tag: string) => {
 export const getLastEntriesByAllCollections = async (entriesLength = 1) => {
   const collections = await getAllCollections();
   return collections.slice(0, entriesLength);
-}
+};
 
-export type Entry = { id: string;
+export type Entry = {
+  id: string;
   slug: string;
   body: string;
   collection: string;
-  render(): Render[".md"]
+  render(): Render[".md"];
   data: {
     title: string;
     description: string;
@@ -135,7 +139,8 @@ export type Entry = { id: string;
     published: boolean;
     guide?: boolean;
     step?: number;
-  }}
+  };
+};
 
 export type Entries = Entry[];
 
@@ -147,12 +152,11 @@ interface Item {
   title: string;
 }
 
-const mapperEntriesTree = (entries:Entries) => entries.map(
-  ({ data,slug}) => {
+const mapperEntriesTree = (entries: Entries) =>
+  entries.map(({ data, slug }) => {
     const { guide, step, title } = data;
     return { slug: "/wiki/" + slug, breadcrumb: slug.split("/"), guide, step, title };
-  }
-) as Item[];
+  }) as Item[];
 
 // Interfaces
 export interface TreeNode {
@@ -163,24 +167,24 @@ export interface TreeNode {
   children?: TreeNode[];
   isGuide?: boolean;
   step?: number;
+  slug?: string;
 }
 
 function sortTree(node: TreeNode): void {
   if (node.children) {
-        node.children.forEach(sortTree);
-        node.children.sort((a, b) => {
-            if (a.type !== b.type) {
-                return a.type === 'file' ? -1 : 1;
-            }
-            if (a.type === 'file' && b.type === 'file' && a.step !== undefined && b.step !== undefined) {
-                return a.step - b.step;
-            }
+    node.children.forEach(sortTree);
+    node.children.sort((a, b) => {
+      if (a.type !== b.type) {
+        return a.type === "file" ? -1 : 1;
+      }
+      if (a.type === "file" && b.type === "file" && a.step !== undefined && b.step !== undefined) {
+        return a.step - b.step;
+      }
 
-            return a.name.localeCompare(b.name);
-        });
-    }
+      return a.name.localeCompare(b.name);
+    });
+  }
 }
-
 
 export function createNestedTree(entries: Entries): TreeNode {
   const items = mapperEntriesTree(entries);
@@ -203,6 +207,7 @@ export function createNestedTree(entries: Entries): TreeNode {
           children: isLastPart ? undefined : [],
           title: isLastPart ? item.title : undefined,
           level: index + 1,
+          slug: isLastPart ? item.slug : undefined,
         };
 
         if (isLastPart) {
@@ -215,59 +220,61 @@ export function createNestedTree(entries: Entries): TreeNode {
         currentNode = newNode;
       }
     });
-    
   });
 
-  
   return root;
 }
 
 export const treeNestedSorted = (entries: Entries) => {
-  const tree = createNestedTree(entries)
+  const tree = createNestedTree(entries);
   sortTree(tree);
   return tree;
-}
+};
 
 function getTreeFolders(node: TreeNode): TreeNode[] {
-    let folders: TreeNode[] = [];
-    
-    if (node.type === 'folder') {
-        folders.push(node);
-    }
-    
-    if (node.children) {
-        node.children.forEach(child => {
-            folders = folders.concat(getTreeFolders(child));
-        });
-    }
-    
-    return folders
+  let folders: TreeNode[] = [];
+
+  if (node.type === "folder") {
+    folders.push(node);
+  }
+
+  if (node.children) {
+    node.children.forEach((child) => {
+      folders = folders.concat(getTreeFolders(child));
+    });
+  }
+
+  return folders;
 }
 
-export const getTreeNameFolders = (node: TreeNode) => getTreeFolders(node).map(folder => folder.name).filter(name => name !== "")
+export const getTreeNameFolders = (node: TreeNode) =>
+  getTreeFolders(node)
+    .map((folder) => folder.name)
+    .filter((name) => name !== "");
 
 function getGuideFolders(node: TreeNode): TreeNode[] {
-    let guideFolders: TreeNode[] = [];
-    
-    if (node.type === 'folder' && node.children && node.children.length > 0) {
-        const allImmediateChildrenAreGuides = node.children.every(child => 
-            child.type === 'file' && child.isGuide
-        );
-        
-        if (allImmediateChildrenAreGuides) {
-            guideFolders.push(node);
-        }
+  let guideFolders: TreeNode[] = [];
+
+  if (node.type === "folder" && node.children && node.children.length > 0) {
+    const allImmediateChildrenAreGuides = node.children.every((child) => child.type === "file" && child.isGuide);
+
+    if (allImmediateChildrenAreGuides) {
+      guideFolders.push(node);
     }
-    
-    if (node.children) {
-        node.children.forEach(child => {
-            if (child.type === 'folder') {
-                guideFolders = guideFolders.concat(getGuideFolders(child));
-            }
-        });
-    }
-    
-    return guideFolders;
+  }
+
+  if (node.children) {
+    node.children.forEach((child) => {
+      if (child.type === "folder") {
+        guideFolders = guideFolders.concat(getGuideFolders(child));
+      }
+    });
+  }
+
+  return guideFolders;
 }
 
-export const getGuideNameFolders = (node: TreeNode) => getGuideFolders(node).map(folder => folder.name).filter(name => name !== "")
+export const getGuideNameFolders = (node: TreeNode) =>
+  getGuideFolders(node)
+    .map((folder) => folder.name)
+    .filter((name) => name !== "");

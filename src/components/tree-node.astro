@@ -5,7 +5,7 @@ import Heading from "@/components/heading.astro";
 import ListIcon from "@/components/icons/list-icon.astro";
 interface Props extends TreeNode {}
 
-const { children, name, type, title, level } = Astro.props;
+const { children, name, type, title, level, slug } = Astro.props;
 const childrenAreFilesAndIncludeGuides =
   children && children.length > 0 && children.every((child) => child.type === "file" && child.isGuide);
 ---
@@ -13,7 +13,7 @@ const childrenAreFilesAndIncludeGuides =
 <li class="!p-0">
   {
     type === "file" && (
-      <a class="no-underline block" href={""}>
+      <a class="no-underline block" href={slug}>
         {unSlugify(title || name)}
       </a>
     )

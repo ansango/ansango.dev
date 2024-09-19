@@ -1,4 +1,4 @@
-import { collectionNames, type CommonData } from "@/content/config";
+import { collectionNames, type Data } from "@/content/config";
 import { getCollection, type AnyEntryMap, type CollectionEntry } from "astro:content";
 import { getPageNumbers, slugify } from "./utils";
 
@@ -18,7 +18,7 @@ export type Collection = CollectionEntry<C> & {
   slug: string;
   body: string;
   collection: C,
-  data: CommonData,
+  data: Data,
   render(): Render[".md"]
 };
 
@@ -34,7 +34,7 @@ export const getAllPromiseCollections = async () => {
 
 export const getAllCollections = async () => {
   const collections = await getAllPromiseCollections();
-  return collections.map((entry) => {
+  return collections.map((entry: any) => {
     return {
       ...entry,
       data: {
@@ -134,52 +134,154 @@ export const getLastEntriesByAllCollections = async (entriesLength = 1) => {
   return collections.slice(0, entriesLength);
 }
 
-type BreadcrumbItem = {
-  breadcrumb: string[];
-  slug: string;
-  name: string;
-  type: "file";
-};
 
-export type Item = {
+
+type Entries = {
+  id: string;
+  slug: string;
+  body: string;
+  collection: string;
+  data: {
+    title: string;
+    description: string;
+    tags: string[];
+    date: string;
+    mod: string;
+    published: boolean;
+    guide?: boolean;
+    step?: number;
+  }
+}[];
+
+interface Item {
+  slug: string;
+  breadcrumb: string[];
+  guide: boolean | undefined;
+  step: number | undefined;
+  title: string;
+}
+
+const mapperEntriesTree = (entries:Entries) => entries.map(
+  ({ data,slug}) => {
+    const { guide, step, title } = data;
+    return { slug: "/wiki/" + slug, breadcrumb: slug.split("/"), guide, step, title };
+  }
+) as Item[];
+
+// Interfaces
+export interface TreeNode {
+  title?: string;
   name: string;
   level: number;
-  type: "folder" | "file";
-  slug?: string;
-  children: Item[];
-};
+  type: "file" | "folder";
+  children?: TreeNode[];
+  isGuide?: boolean;
+  step?: number;
+}
 
-const buildNestedArray = (items: BreadcrumbItem[]): Item[] => {
-  const root: Item[] = [];
+function sortTree(node: TreeNode): void {
+  if (node.children) {
+        node.children.forEach(sortTree);
+        node.children.sort((a, b) => {
+            if (a.type !== b.type) {
+                return a.type === 'file' ? -1 : 1;
+            }
+            if (a.type === 'file' && b.type === 'file' && a.step !== undefined && b.step !== undefined) {
+                return a.step - b.step;
+            }
+
+            return a.name.localeCompare(b.name);
+        });
+    }
+}
+
+
+export function createNestedTree(entries: Entries): TreeNode {
+  const items = mapperEntriesTree(entries);
+  const root: TreeNode = { name: "", type: "folder", children: [], level: 0 };
+
   items.forEach((item) => {
-    let currentLevel = root;
-    item.breadcrumb.forEach((name, i) => {
-      const existingPath = currentLevel.find((folder) => folder.name === name);
-      if (existingPath) {
-        currentLevel = existingPath.children as Item[];
+    let currentNode = root;
+    const pathParts = item.breadcrumb;
+
+    pathParts.forEach((part, index) => {
+      const isLastPart = index === pathParts.length - 1;
+      const existingChild = currentNode.children?.find((child) => child.name === part);
+
+      if (existingChild) {
+        currentNode = existingChild;
       } else {
-        const newFolder: Item = {
-          name,
-          level: i,
-          type: i === item.breadcrumb.length - 1 ? "file" : "folder",
-          slug: i === item.breadcrumb.length - 1 ? item.slug : undefined,
-          children: [],
+        const newNode: TreeNode = {
+          name: part,
+          type: isLastPart ? "file" : "folder",
+          children: isLastPart ? undefined : [],
+          title: isLastPart ? item.title : undefined,
+          level: index + 1,
         };
-        currentLevel.push(newFolder);
-        currentLevel = newFolder.children as Item[];
+
+        if (isLastPart) {
+          newNode.isGuide = item.guide;
+          newNode.step = item.step;
+        }
+
+        currentNode.children = currentNode.children || [];
+        currentNode.children.push(newNode);
+        currentNode = newNode;
       }
     });
+    
   });
+
+  
   return root;
-};
+}
 
-export const getDirectoryWikiFolders = (entries: Collection[]) => buildNestedArray(entries.map((entry) => {
-  return {
-    breadcrumb: entry.slug.split("/"),
-    slug: "/wiki/" + entry.slug as string,
-    name: entry.data.title,
-    type: "file" as const,
-  };
-}).sort((a, b) => a.slug.localeCompare(b.slug)));
+export const treeNestedSorted = (entries: Entries) => {
+  const tree = createNestedTree(entries)
+  sortTree(tree);
+  return tree;
+}
 
+function getTreeFolders(node: TreeNode): TreeNode[] {
+    let folders: TreeNode[] = [];
+    
+    if (node.type === 'folder') {
+        folders.push(node);
+    }
+    
+    if (node.children) {
+        node.children.forEach(child => {
+            folders = folders.concat(getTreeFolders(child));
+        });
+    }
+    
+    return folders
+}
 
+export const getTreeNameFolders = (node: TreeNode) => getTreeFolders(node).map(folder => folder.name).filter(name => name !== "")
+
+function getGuideFolders(node: TreeNode): TreeNode[] {
+    let guideFolders: TreeNode[] = [];
+    
+    if (node.type === 'folder' && node.children && node.children.length > 0) {
+        const allImmediateChildrenAreGuides = node.children.every(child => 
+            child.type === 'file' && child.isGuide
+        );
+        
+        if (allImmediateChildrenAreGuides) {
+            guideFolders.push(node);
+        }
+    }
+    
+    if (node.children) {
+        node.children.forEach(child => {
+            if (child.type === 'folder') {
+                guideFolders = guideFolders.concat(getGuideFolders(child));
+            }
+        });
+    }
+    
+    return guideFolders;
+}
+
+export const getGuideNameFolders = (node: TreeNode) => getGuideFolders(node).map(folder => folder.name).filter(name => name !== "")

@@ -1,35 +1,41 @@
 ---
-import type { Item } from "@/lib/collections";
+import type { TreeNode } from "@/lib/collections";
 import { unSlugify } from "@/lib/utils";
-interface Props extends Item {}
+import Heading from "@/components/heading.astro";
+import ListIcon from "@/components/icons/list-icon.astro";
+interface Props extends TreeNode {}
 
-const { children, name, type, slug, level } = Astro.props;
+const { children, name, type, title, level } = Astro.props;
+const childrenAreFilesAndIncludeGuides =
+  children && children.length > 0 && children.every((child) => child.type === "file" && child.isGuide);
 ---
 
 <li class="!p-0">
   {
     type === "file" && (
-      <a class="no-underline" href={slug}>
-        {unSlugify(name)}
+      <a class="no-underline block" href={""}>
+        {unSlugify(title || name)}
       </a>
     )
   }
+
   {
-    type === "folder" && (
-      <details open>
-        <summary
-          class={`text-content-300 dark:text-primary pt-2 ${level < 1 ? "text-3xl" : "text-2xl"}`}
-        >
-          {unSlugify(name)}
-        </summary>
-        {children && children.length > 0 && (
-          <ul>
-            {children.map((child) => (
-              <Astro.self {...child} />
-            ))}
-          </ul>
+    type === "folder" && children && children.length > 0 && (
+      <ul>
+        {name !== "" && (
+          <Heading n={level + 1} className="text-content-300 dark:text-primary flex items-center gap-1" id={name}>
+            {unSlugify(title || name)}
+            {childrenAreFilesAndIncludeGuides && (
+              <span class="text-muted flex items-center gap-1">
+                ({children.length}) <ListIcon />
+              </span>
+            )}
+          </Heading>
         )}
-      </details>
+        {children.map((child) => (
+          <Astro.self {...child} />
+        ))}
+      </ul>
     )
   }
 </li>

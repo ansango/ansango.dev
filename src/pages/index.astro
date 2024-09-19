@@ -5,11 +5,7 @@ import EntriesList from "@/components/entries-list.astro";
 import Entry from "@/components/entry.astro";
 import { site } from "@/consts";
 import DocLayout from "@/layouts/document.astro";
-import {
-  getLastEntriesByAllCollections,
-  getAllCollectionsByCategory,
-  getTagsLimitedByLetter,
-} from "@/lib/collections";
+import { getLastEntriesByAllCollections, getAllCollectionsByCategory, getTagsLimitedByLetter } from "@/lib/collections";
 
 const collections = await getAllCollectionsByCategory();
 const latests = await getLastEntriesByAllCollections();
@@ -22,8 +18,7 @@ const meta = site.pages.home;
     <div>
       <h1>dev·ansango</h1>
       <p>
-        Hola, soy <sapn class="font-medium">Aníbal Santos</sapn> 👋, escribo sobre
-        tecnología, trabajo como Tech Lead en <a
+        Hola, soy <sapn class="font-medium">Aníbal Santos</sapn> 👋, escribo sobre tecnología, trabajo como Tech Lead en <a
           class="font-medium dark:text-primary"
           href="https://innusual.tech">innusual</a
         >. Aquí encontrarás parte de mis wikis, insights, y algunos hacks.
@@ -37,10 +32,7 @@ const meta = site.pages.home;
             {
               latests.map((latest) => {
                 return (
-                  <a
-                    href={`/${latest.collection}/${latest.slug}`}
-                    class="hover:no-underline"
-                  >
+                  <a href={`/${latest.collection}/${latest.slug}`} class="hover:no-underline">
                     <Entry entry={latest} />
                   </a>
                 );
@@ -64,11 +56,9 @@ const meta = site.pages.home;
                   return (
                     <li class="flex">
                       <a class="underline" href={`/tags/${tag}`}>
-                        {tag}
+                        {tag.replace(/-/g, " ")}
                       </a>
-                      {i !== tags.length - 1 && (
-                        <span class="text-muted">,</span>
-                      )}
+                      {i !== tags.length - 1 && <span class="text-muted">,</span>}
                     </li>
                   );
                 })}

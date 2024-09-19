@@ -22,7 +22,7 @@ const meta = site.pages.tags;
                 return (
                   <li class="flex">
                     <a class="underline" href={`/tags/${tag}`}>
-                      {tag}
+                      {tag.replace(/-/g, " ")}
                     </a>
                     {i !== tags.length - 1 && <span class="text-muted">,</span>}
                   </li>

@@ -2,8 +2,10 @@
 import Container from "@/components/container.astro";
 import DocLayout from "@/layouts/document.astro";
 import type { Metadata } from "@/types";
-import { getDirectoryWikiFolders, type Collections } from "@/lib/collections";
+import { type Collections, treeNestedSorted, getTreeNameFolders, getGuideNameFolders } from "@/lib/collections";
 import TreeNode from "@/components/tree-node.astro";
+import { unSlugify } from "@/lib/utils";
+import Divider from "@/components/divider.astro";
 
 interface Props {
   collection: string;
@@ -12,17 +14,62 @@ interface Props {
 }
 
 const { entries, meta, collection } = Astro.props;
-const directory = getDirectoryWikiFolders(entries);
+
+const tree = treeNestedSorted(entries);
+
+const folders = getTreeNameFolders(tree);
+const guides = getGuideNameFolders(tree);
 ---
 
 <DocLayout {...meta}>
   <Container>
     <h1 class="capitalize">{collection}</h1>
+    {
+      folders.length > 0 && (
+        <>
+          <Divider />
+          <h2>Índice</h2>
+          <ul class="flex flex-wrap gap-1">
+            {folders.map((folder, i) => {
+              return (
+                <li class="flex">
+                  <a class="underline" href={`#${folder}`}>
+                    {folder.replace(/-/g, " ")}
+                  </a>
+                  {i !== folders.length - 1 && <span class="text-muted">,</span>}
+                </li>
+              );
+            })}
+          </ul>
+        </>
+      )
+    }
+    {
+      guides.length > 0 && (
+        <>
+          <h2>Guías</h2>
+          <ul class="flex flex-wrap gap-1">
+            {guides.map((folder, i) => {
+              return (
+                <li class="flex">
+                  <a class="underline" href={`#${folder}`}>
+                    {folder.replace(/-/g, " ")}
+                  </a>
+                  {i !== folders.length - 1 && <span class="text-muted">,</span>}
+                </li>
+              );
+            })}
+          </ul>
+        </>
+      )
+    }
+    <Divider />
   </Container>
+
   <Container className="flex flex-col h-full">
     <article class="flex-1">
-      <ul class="md:columns-2 md:gap-5">
-        {directory.map((item) => <TreeNode {...item} />)}
+      <ul>
+        <TreeNode {...tree} />
       </ul>
     </article>
   </Container>

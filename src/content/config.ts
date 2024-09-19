@@ -12,11 +12,23 @@ export const commonSchema = z.object({
   published: z.boolean().nullable().optional(),
 });
 
-export type CommonData = z.infer<typeof commonSchema>;
+export const wikiSchema = commonSchema.merge(
+  z.object({
+    guide: z.boolean().nullable().optional(),
+    step: z.number().nullable().optional(),
+  })
+);
+
+export type Data = z.infer<typeof commonSchema | typeof wikiSchema>;
 
 export const schemaCollections = {
   blog: commonSchema,
-  wiki: commonSchema,
+  wiki: commonSchema.merge(
+    z.object({
+      guide: z.boolean().nullable().optional(),
+      step: z.number().nullable().optional(),
+    })
+  ),
 };
 
 export type ContentCollection = "blog" | "wiki";

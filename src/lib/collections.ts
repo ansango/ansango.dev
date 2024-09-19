@@ -234,8 +234,12 @@ export const treeNestedSorted = (entries: Entries) => {
 function getTreeFolders(node: TreeNode): TreeNode[] {
   let folders: TreeNode[] = [];
 
-  if (node.type === "folder") {
-    folders.push(node);
+  if (node.type === "folder" && node.children && node.children.length > 0) {
+    const allImmediateChildrenAreGuides = !node.children.every((child) => child.type === "file" && child.isGuide);
+
+    if (allImmediateChildrenAreGuides) {
+      folders.push(node);
+    }
   }
 
   if (node.children) {

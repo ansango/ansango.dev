@@ -2,14 +2,14 @@
 import Container from "@/components/container.astro";
 import DocLayout from "@/layouts/document.astro";
 import type { Metadata } from "@/types";
-import { type Collections, treeNestedSorted, getTreeNameFolders, getGuideNameFolders } from "@/lib/collections";
+import { type Entries, treeNestedSorted, getTreeNameFolders, getGuideNameFolders } from "@/lib/collections";
 import TreeNode from "@/components/tree-node.astro";
-import { unSlugify } from "@/lib/utils";
+
 import Divider from "@/components/divider.astro";
 
 interface Props {
   collection: string;
-  entries: Collections;
+  entries: Entries;
   meta: Metadata;
 }
 

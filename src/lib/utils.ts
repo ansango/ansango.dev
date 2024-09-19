@@ -12,7 +12,7 @@ const formatDateOptionsDefault: Intl.DateTimeFormatOptions = {
 };
 
 export const getFormatDate = (
-  date: Date,
+  date: Date | string,
   locale: "en-US" | "es-ES" = "es-ES",
   options = formatDateOptionsDefault
 ): string => Intl.DateTimeFormat(locale, options).format(new Date(date));

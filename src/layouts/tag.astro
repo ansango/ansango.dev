@@ -4,12 +4,12 @@ import DocLayout from "@/layouts/document.astro";
 import Pagination from "@/components/pagination.astro";
 import type { Metadata } from "@/types";
 import EntriesList from "@/components/entries-list.astro";
-import type { Collections } from "@/lib/collections";
+import type { Entries } from "@/lib/collections";
 import { getPagination } from "@/lib/utils";
 
 interface Props {
   tag: string;
-  entries: Collections;
+  entries: Entries;
   page: number;
   entriesPerPage: number;
   isIndex: boolean;
@@ -29,9 +29,7 @@ const { currentPage, paginatedEntries, totalPages } = getPagination({
 <DocLayout {...meta}>
   <Container className="flex flex-col h-full">
     <h1>
-      <span class="text-muted">Tags / </span><span class="capitalize"
-        >{tag.replace(/-/g, " ")}
-      </span>
+      <span class="text-muted">Tags / </span><span class="capitalize">{tag.replace(/-/g, " ")} </span>
     </h1>
     <p class="text-muted">
       {entries.length}

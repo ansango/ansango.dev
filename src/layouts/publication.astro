@@ -4,9 +4,9 @@ import Container from "@/components/container.astro";
 
 import { getFormatDate, getReadingTime } from "@/lib/utils";
 import { baseLongDateOptions } from "@/consts";
-import type { Collection } from "@/lib/collections";
+import type { Entry } from "@/lib/collections";
 
-type Props = Collection;
+type Props = Entry;
 
 const {
   data: { date, description, tags, title },

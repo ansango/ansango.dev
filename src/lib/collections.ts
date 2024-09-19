@@ -1,5 +1,5 @@
-import { collectionNames, type Data } from "@/content/config";
-import { getCollection, type AnyEntryMap, type CollectionEntry } from "astro:content";
+import { collectionNames } from "@/content/config";
+import { getCollection } from "astro:content";
 import { getPageNumbers, slugify } from "./utils";
 
 
@@ -11,25 +11,12 @@ interface Render {
   }>;
 }
 
-export type C = keyof AnyEntryMap;
-
-export type Collection = CollectionEntry<C> & {
-  id: string;
-  slug: string;
-  body: string;
-  collection: C,
-  data: Data,
-  render(): Render[".md"]
-};
-
-export type Collections = Collection[];
-
 export const getAllPromiseCollections = async () => {
   const collections = await Promise.all(
     // @ts-expect-error - take care of this
     collectionNames.map((name: any) => getCollection(name, (entry) => entry.data.published))
   )
-  return collections.flat() as Collections
+  return collections.flat() as Entries;
 }
 
 export const getAllCollections = async () => {
@@ -60,7 +47,7 @@ export const getAllCollectionsByCategory = async () => {
     {},
   );
 
-  const sortedContentByCategory: { [key: string]: Collection[] } = {};
+  const sortedContentByCategory: { [key: string]: Entries } = {};
 
   Object.keys(contentByCategory).sort().forEach((key) => {
     sortedContentByCategory[key] = contentByCategory[key];
@@ -134,13 +121,11 @@ export const getLastEntriesByAllCollections = async (entriesLength = 1) => {
   return collections.slice(0, entriesLength);
 }
 
-
-
-type Entries = {
-  id: string;
+export type Entry = { id: string;
   slug: string;
   body: string;
   collection: string;
+  render(): Render[".md"]
   data: {
     title: string;
     description: string;
@@ -150,8 +135,9 @@ type Entries = {
     published: boolean;
     guide?: boolean;
     step?: number;
-  }
-}[];
+  }}
+
+export type Entries = Entry[];
 
 interface Item {
   slug: string;

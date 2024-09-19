@@ -8,16 +8,7 @@
       const wrapper = document.createElement("div");
       wrapper.classList.add("relative");
       const button = document.createElement("button");
-      button.classList.add(
-        "absolute",
-        "top-0",
-        "right-0",
-        "cursor-pointer",
-        "p-2",
-        "flex",
-        "items-center",
-        "text-muted",
-      );
+      button.classList.add("absolute", "top-0", "right-0", "cursor-pointer", "p-2", "flex", "items-center", "text-muted");
       button.innerHTML = svgCopy;
       code.setAttribute("tabindex", "0");
       code.appendChild(button);
@@ -44,4 +35,58 @@
     };
   };
   document.addEventListener("astro:page-load", () => clipboard());
+  document.addEventListener("astro:page-load", () => {
+    const navbar = document.querySelector("header");
+    const navbarHeight = navbar.offsetHeight;
+
+    function smoothScroll(target, duration, height) {
+      const targetElement = document.querySelector(target);
+      const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - navbarHeight;
+      const startPosition = window.scrollY;
+      const distance = targetPosition - startPosition;
+      let startTime = null;
+
+      function animation(currentTime) {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const run = ease(timeElapsed, startPosition, distance, duration);
+        window.scrollTo(0, run);
+        if (timeElapsed < duration) requestAnimationFrame(animation);
+      }
+
+      // Función de easing
+      function ease(t, b, c, d) {
+        t /= d / 2;
+        if (t < 1) return (c / 2) * t * t + b;
+        t--;
+        return (-c / 2) * (t * (t - 2) - 1) + b;
+      }
+
+      requestAnimationFrame(animation);
+    }
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute("href");
+        smoothScroll(targetId, 300); // 1000ms de duración para la animación
+      });
+    });
+
+    const scrollToTopBtn = document.getElementById("scroll-to-top");
+
+    scrollToTopBtn.addEventListener("click", function () {
+      smoothScroll("html", 300);
+    });
+
+    // // Mostrar/ocultar el botón basado en la posición del scroll
+    window.addEventListener("scroll", function () {
+      if (window.scrollY > 300) {
+        scrollToTopBtn.classList.add("opacity-100", "pointer-events-auto");
+        scrollToTopBtn.classList.remove("opacity-0", "pointer-events-none");
+      } else {
+        scrollToTopBtn.classList.remove("opacity-100", "pointer-events-auto");
+        scrollToTopBtn.classList.add("opacity-0", "pointer-events-none");
+      }
+    });
+  });
 </script>

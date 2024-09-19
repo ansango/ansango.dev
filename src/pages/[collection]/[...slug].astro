@@ -7,7 +7,7 @@ import { getAllCollections, getAllCollectionsByCategory, getAllNumberPaths } fro
 export async function getStaticPaths() {
   const content = await getAllCollections();
   const pagesPaths = await getAllNumberPaths();
-
+  console.log(content);
   const contentResult = content.map((entry) => ({
     params: { collection: entry.collection, slug: entry.slug },
     props: { entry },

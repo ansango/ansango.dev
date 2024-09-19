@@ -5,6 +5,8 @@ import Container from "@/components/container.astro";
 import { getFormatDate, getReadingTime, unSlugify } from "@/lib/utils";
 import { baseLongDateOptions } from "@/consts";
 import { getSiblings, type Entry } from "@/lib/collections";
+import ListIcon from "@/components/icons/list-icon.astro";
+import Tag from "@/components/tag.astro";
 
 type Props = Entry;
 const props = Astro.props as Props;
@@ -20,7 +22,7 @@ const { Content } = await render();
 ---
 
 <DocLayout {title} {description}>
-  <Container>
+  <Container className="relative">
     <section>
       <header class="mb-5 space-y-5">
         <h1>{title}</h1>
@@ -35,9 +37,7 @@ const { Content } = await render();
               {tags.map((tag, i) => {
                 return (
                   <li class="flex">
-                    <a class="underline" href={`/tags/${tag}`}>
-                      {tag}
-                    </a>
+                    <Tag href={`/tags/${tag}`}> {tag.replace(/-/g, " ")}</Tag>
                     {i !== tags.length - 1 && <span class="text-muted">,</span>}
                   </li>
                 );
@@ -53,7 +53,10 @@ const { Content } = await render();
     {
       guide && (
         <section class="">
-          <h2 class="text-muted !m-0 !mb-4 !text-base">Colección - {unSlugify(guide.name)}</h2>
+          <h2 class="text-muted !m-0 !mb-4 !text-base flex items-center gap-1">
+            Colección - {unSlugify(guide.name)} <ListIcon className="mt-[0.1rem] size-4" />
+          </h2>
+
           <ol class="m-0 rounded-md p-4 bg-background-50 dark:bg-background-100">
             {all?.map((step) => (
               <li class="my-0 mx-4 !text-base">

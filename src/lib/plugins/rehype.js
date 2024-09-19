@@ -58,13 +58,40 @@ const rehypePlugins = [rehypeAstroRelativeMarkdownLinks, [
           tagName: 'h2',
           properties: {
             id: 'table-of-contents',
-            className: 'text-muted !m-0 !mb-4 !text-base',
+            className: 'text-muted !m-0 !mb-4 !text-base flex items-center gap-1',
           },
           children: [
             {
               type: 'text',
               value: 'Índice',
             },
+            {
+              type: 'element',
+              tagName: 'svg',
+              properties: {
+                xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 24 24", className: 'inline-block mt-[0.1rem] size-4'
+              },
+              children: [
+                {
+                  type: 'element', tagName: 'g', properties: { fill: "currentColor" }, children: [
+
+                    {
+                      type: 'element', tagName: 'path', properties: {
+                        d: "M17 5H7a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1M7 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z",
+                        fillRule: "evenodd",
+                        clipRule: "evenodd"
+                      }
+                    },
+                    {
+                      type: 'element', tagName: 'path', properties: {
+                        d: "M8 7h8v2H8zm0 4h8v2H8zm0 4h5v2H8z"
+                      }
+                    }
+                  ]
+                }]
+
+
+            }
           ],
         });
         return toc;

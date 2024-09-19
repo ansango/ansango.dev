@@ -3,6 +3,7 @@ import type { TreeNode } from "@/lib/collections";
 import { unSlugify } from "@/lib/utils";
 import Heading from "@/components/heading.astro";
 import ListIcon from "@/components/icons/list-icon.astro";
+import IndexIcon from "./icons/index-icon.astro";
 interface Props extends TreeNode {}
 
 const { children, name, type, title, level, slug } = Astro.props;
@@ -27,9 +28,10 @@ const childrenAreFilesAndIncludeGuides =
             {unSlugify(title || name)}
             {childrenAreFilesAndIncludeGuides && (
               <span class="text-muted flex items-center gap-1">
-                ({children.length}) <ListIcon />
+                ({children.length}) <ListIcon className="mt-[0.1rem] size-5" />
               </span>
             )}
+            {!childrenAreFilesAndIncludeGuides && <IndexIcon className="mt-[0.2rem] size-6" />}
           </Heading>
         )}
         {children.map((child) => (

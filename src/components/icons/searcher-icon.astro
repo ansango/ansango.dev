@@ -1,8 +1,13 @@
 ---
 import Svg from "../svg.astro";
+interface Props {
+  className?: string;
+}
+
+const { className } = Astro.props;
 ---
 
-<Svg id="searcher-icon">
+<Svg id="searcher-icon" className={className}>
   <g fill="currentColor">
     <path
       fill="currentColor"

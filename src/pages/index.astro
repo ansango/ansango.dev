@@ -3,6 +3,7 @@ import Container from "@/components/container.astro";
 import Divider from "@/components/divider.astro";
 import EntriesList from "@/components/entries-list.astro";
 import Entry from "@/components/entry.astro";
+import Tag from "@/components/tag.astro";
 import { site } from "@/consts";
 import DocLayout from "@/layouts/document.astro";
 import { getLastEntriesByAllCollections, getAllCollectionsByCategory, getTagsLimitedByLetter } from "@/lib/collections";
@@ -55,9 +56,7 @@ const meta = site.pages.home;
                 {tags.map((tag, i) => {
                   return (
                     <li class="flex">
-                      <a class="underline" href={`/tags/${tag}`}>
-                        {tag.replace(/-/g, " ")}
-                      </a>
+                      <Tag href={`/tags/${tag}`}>{tag.replace(/-/g, " ")}</Tag>
                       {i !== tags.length - 1 && <span class="text-muted">,</span>}
                     </li>
                   );

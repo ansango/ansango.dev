@@ -1,0 +1,14 @@
+---
+import TagIcon from "./icons/tag-icon.astro";
+
+interface Props {
+  href?: string;
+}
+
+const { href } = Astro.props;
+---
+
+<a class="!no-underline flex items-center" href={href}>
+  <TagIcon />
+  <slot />
+</a>

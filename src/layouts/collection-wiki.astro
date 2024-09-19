@@ -6,6 +6,9 @@ import { type Entries, treeNestedSorted, getTreeNameFolders, getGuideNameFolders
 import TreeNode from "@/components/tree-node.astro";
 
 import Divider from "@/components/divider.astro";
+import ListIcon from "@/components/icons/list-icon.astro";
+import IndexIcon from "@/components/icons/index-icon.astro";
+import Tag from "@/components/tag.astro";
 
 interface Props {
   collection: string;
@@ -28,14 +31,14 @@ const guides = getGuideNameFolders(tree);
       folders.length > 0 && (
         <>
           <Divider />
-          <h2>Índice</h2>
+          <h2 class="flex items-center gap-1">
+            Índice <IndexIcon className="mt-[0.2rem] size-6" />
+          </h2>
           <ul class="flex flex-wrap gap-1">
             {folders.map((folder, i) => {
               return (
                 <li class="flex">
-                  <a class="underline" href={`#${folder}`}>
-                    {folder.replace(/-/g, " ")}
-                  </a>
+                  <Tag href={`#${folder}`}> {folder.replace(/-/g, " ")}</Tag>
                   {i !== folders.length - 1 && <span class="text-muted">,</span>}
                 </li>
               );
@@ -47,14 +50,14 @@ const guides = getGuideNameFolders(tree);
     {
       guides.length > 0 && (
         <>
-          <h2>Guías</h2>
+          <h2 class="flex items-center gap-1">
+            Colecciones <ListIcon className="mt-[0.2rem] size-5 text-muted" />
+          </h2>
           <ul class="flex flex-wrap gap-1">
             {guides.map((folder, i) => {
               return (
                 <li class="flex">
-                  <a class="underline" href={`#${folder}`}>
-                    {folder.replace(/-/g, " ")}
-                  </a>
+                  <Tag href={`#${folder}`}> {folder.replace(/-/g, " ")}</Tag>
                   {i !== folders.length - 1 && <span class="text-muted">,</span>}
                 </li>
               );

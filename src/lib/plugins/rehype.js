@@ -43,7 +43,32 @@ const rehypePlugins = [rehypeAstroRelativeMarkdownLinks, [
   [
     'rehype-toc',
     {
-      headings: ['h2']
+      headings: ['h2'],
+      customizeTOC: function (toc) {
+        toc.properties = {
+          className: 'toc text-md',
+        };
+        toc.children.map((child => {
+          if (child.tagName === 'ol') {
+            child.properties.className = 'rounded-md p-4 bg-background-50 dark:bg-background-100';
+          }
+        }))
+        toc.children.unshift({
+          type: 'element',
+          tagName: 'h2',
+          properties: {
+            id: 'table-of-contents',
+            className: 'text-muted !m-0 !mb-4 !text-base',
+          },
+          children: [
+            {
+              type: 'text',
+              value: 'Índice',
+            },
+          ],
+        });
+        return toc;
+      },
     }
   ]
 ]

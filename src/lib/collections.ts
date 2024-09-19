@@ -153,9 +153,9 @@ interface Item {
 }
 
 const mapperEntriesTree = (entries: Entries) =>
-  entries.map(({ data, slug }) => {
+  entries.map(({ data, slug, collection }) => {
     const { guide, step, title } = data;
-    return { slug: "/wiki/" + slug, breadcrumb: slug.split("/"), guide, step, title };
+    return { slug: `/${collection}/${slug}`, breadcrumb: slug.split("/"), guide, step, title };
   }) as Item[];
 
 // Interfaces
@@ -282,3 +282,60 @@ export const getGuideNameFolders = (node: TreeNode) =>
   getGuideFolders(node)
     .map((folder) => folder.name)
     .filter((name) => name !== "");
+
+function findParentNode(root: TreeNode, target: TreeNode): TreeNode | null {
+  if (root.children) {
+    for (const child of root.children) {
+      if (child === target) {
+        return root;
+      }
+      const found = findParentNode(child, target);
+      if (found) return found;
+    }
+  }
+  return null;
+}
+
+export const getSiblings = async (entry: Entry) => {
+  const entries = (await getAllCollectionsByCategory())[entry.collection];
+  const tree: TreeNode = treeNestedSorted(entries);
+
+  const findNode = (node: TreeNode): TreeNode | null => {
+    if (node.slug === `/${entry.collection}/${entry.slug}`) {
+      return node;
+    }
+    if (node.children) {
+      for (const child of node.children) {
+        const found = findNode(child);
+        if (found) return found;
+      }
+    }
+    return null;
+  };
+
+  const currentNode = findNode(tree);
+
+  if (!currentNode || !currentNode.isGuide) {
+    return { prev: null, next: null };
+  }
+
+  const parent = findParentNode(tree, currentNode);
+
+  if (!parent || !parent.children) {
+    return { prev: null, next: null };
+  }
+
+  const guideFiles = parent.children
+    .filter((child) => child.type === "file" && child.isGuide && child.step !== undefined)
+    .sort((a, b) => a.step! - b.step!);
+
+  const currentIndex = guideFiles.findIndex((file) => file === currentNode);
+  if (currentIndex === -1) {
+    return { prev: null, next: null };
+  }
+
+  const prev = currentIndex > 0 ? guideFiles[currentIndex - 1] : null;
+  const next = currentIndex < guideFiles.length - 1 ? guideFiles[currentIndex + 1] : null;
+
+  return { prev, next, all: guideFiles, guide: parent };
+};

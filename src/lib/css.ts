@@ -17,6 +17,7 @@ const light = {
   "--color-content-300": "#171717",
   "--color-muted": "#737373",
   "--color-background": "#fafafa",
+  "--color-background-50": "#f5f5f5",
   "--color-background-100": "#e5e5e5",
   "--color-background-200": "#d4d4d4",
   "--color-background-300": "#a1a1aa",
@@ -33,6 +34,7 @@ const dark = {
   "--color-content-300": "#fafafa",
   "--color-muted": "#737373",
   "--color-background": "#0a0a0a",
+  "--color-background-50": "#0f0f0f",
   "--color-background-100": "#171717",
   "--color-background-200": "#27272a",
   "--color-background-300": "#3f3f46",
@@ -77,24 +79,22 @@ export const base = {
   html: {
     ...obsidianMetaLink,
   },
-  "html.light .astro-code.astro-code-themes, html.light .astro-code.astro-code-themes span":
-    {
-      color: "var(--shiki-dark) !important",
-      "background-color": "var(--shiki-dark-bg) !important",
-      /* Optional, if you also want font styles */
-      "font-style": "var(--shiki-dark-font-style) !important",
-      "font-weight": "var(--shiki-dark-font-weight) !important",
-      "text-decoration": "var(--shiki-dark-text-decoration) !important",
-    },
-  "html.dark .astro-code.astro-code-themes, html.dark .astro-code.astro-code-themes span":
-    {
-      color: "var(--shiki-dark) !important",
-      "background-color": "var(--shiki-dark-bg) !important",
-      /* Optional, if you also want font styles */
-      "font-style": "var(--shiki-dark-font-style) !important",
-      "font-weight": "var(--shiki-dark-font-weight) !important",
-      "text-decoration": "var(--shiki-dark-text-decoration) !important",
-    },
+  "html .astro-code.astro-code-themes, .astro-code.astro-code-themes span": {
+    color: "var(--shiki-dark) !important",
+    "background-color": "var(--color-background-50) !important",
+    /* Optional, if you also want font styles */
+    "font-style": "var(--shiki-dark-font-style) !important",
+    "font-weight": "var(--shiki-dark-font-weight) !important",
+    "text-decoration": "var(--shiki-dark-text-decoration) !important",
+  },
+  "html.dark .astro-code.astro-code-themes, html.dark .astro-code.astro-code-themes span": {
+    color: "var(--shiki-dark) !important",
+    "background-color": "var(--color-background-100) !important",
+    /* Optional, if you also want font styles */
+    "font-style": "var(--shiki-dark-font-style) !important",
+    "font-weight": "var(--shiki-dark-font-weight) !important",
+    "text-decoration": "var(--shiki-dark-text-decoration) !important",
+  },
 };
 
 const typography = {
@@ -191,6 +191,13 @@ const typography = {
         textUnderlineOffset: "0.25rem",
         color: "inherit",
       },
+      "nav>ol": {
+        margin: 0,
+        "& li": {
+          margin: "0 1rem",
+          fontSize: "1rem",
+        },
+      },
     },
     details: {
       "& > summary": {
@@ -229,6 +236,7 @@ export default () =>
             "content-300": "var(--color-content-300)",
             muted: "var(--color-muted)",
             background: "var(--color-background)",
+            "background-50": "var(--color-background-50)",
             "background-100": "var(--color-background-100)",
             "background-200": "var(--color-background-200)",
             "background-300": "var(--color-background-300)",

@@ -2,11 +2,7 @@
 import CollectionLayout from "@/layouts/collection.astro";
 import PubLayout from "@/layouts/publication.astro";
 import { site } from "@/consts";
-import {
-  getAllCollections,
-  getAllCollectionsByCategory,
-  getAllNumberPaths,
-} from "@/lib/collections";
+import { getAllCollections, getAllCollectionsByCategory, getAllNumberPaths } from "@/lib/collections";
 
 export async function getStaticPaths() {
   const content = await getAllCollections();
@@ -21,7 +17,6 @@ export async function getStaticPaths() {
     params: { collection, slug: pageNumber.toString() },
     props: { entry: null },
   }));
-
   return [...contentResult, ...pagesResult];
 }
 
@@ -35,17 +30,4 @@ const meta = site.pages[collection as keyof typeof site.pages];
 const entriesPerPage = meta.entriesPerPage;
 ---
 
-{
-  entry ? (
-    <PubLayout {...entry} />
-  ) : (
-    <CollectionLayout
-      {collection}
-      {entries}
-      {meta}
-      {entriesPerPage}
-      {page}
-      {isIndex}
-    />
-  )
-}
+{entry ? <PubLayout {...entry} /> : <CollectionLayout {collection} {entries} {meta} {entriesPerPage} {page} {isIndex} />}

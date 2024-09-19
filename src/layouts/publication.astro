@@ -2,17 +2,16 @@
 import DocLayout from "@/layouts/document.astro";
 import Container from "@/components/container.astro";
 
-import { getFormatDate, getReadingTime } from "@/lib/utils";
+import { getFormatDate, getReadingTime, unSlugify } from "@/lib/utils";
 import { baseLongDateOptions } from "@/consts";
-import type { Entry } from "@/lib/collections";
+import { getSiblings, type Entry } from "@/lib/collections";
 
 type Props = Entry;
+const props = Astro.props as Props;
 
-const {
-  data: { date, description, tags, title },
-  render,
-  body,
-} = Astro.props;
+const { data, render, body, slug, collection } = props;
+const { date, description, tags, title } = data;
+const { all, guide } = await getSiblings(props);
 
 const parsedDate = getFormatDate(date, "es-ES", baseLongDateOptions);
 const dateSimple = getFormatDate(date);
@@ -51,5 +50,21 @@ const { Content } = await render();
         <Content />
       </article>
     </section>
+    {
+      guide && (
+        <section class="">
+          <h2 class="text-muted !m-0 !mb-4 !text-base">Colección - {unSlugify(guide.name)}</h2>
+          <ol class="m-0 rounded-md p-4 bg-background-50 dark:bg-background-100">
+            {all?.map((step) => (
+              <li class="my-0 mx-4 !text-base">
+                <a href={step.slug} class={`${step.slug === `/${collection}/${slug}` ? "text-content-300 font-medium" : "text-muted"}`}>
+                  {step.title}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )
+    }
   </Container>
 </DocLayout>

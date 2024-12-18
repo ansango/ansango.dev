@@ -6,18 +6,15 @@ import RssIcon from "./icons/rss-icon.astro";
 import { site } from "@/consts";
 ---
 
-<footer>
+<footer class="pb-10">
   <Container>
     <Divider />
   </Container>
-  <Container className="py-5 flex items-baseline justify-between">
+  <Container className="py-5 flex items-center gap-2 space-y-0">
+    <a href="https://github.com/ansango" target="_blank">
+      <GithubIcon />
+    </a>
+    <a href={site.url + "/rss.xml"} target="_blank"> <RssIcon /> </a>
     <a href="https://anibalsantosgomez.com" target="_blank" class="font-medium">me</a>
-
-    <div class="flex flex-wrap gap-1 items-center">
-      <a href="https://github.com/ansango" target="_blank">
-        <GithubIcon />
-      </a>
-      <a href={site.url + "/rss.xml"} target="_blank"> <RssIcon /> </a>
-    </div>
   </Container>
 </footer>

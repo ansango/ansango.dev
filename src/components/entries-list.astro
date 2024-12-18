@@ -16,7 +16,7 @@ const { entries, className } = Astro.props;
       <li>
         <a class="flex items-baseline !no-underline hover:no-underline" href={`/${collection}/${slug}`}>
           {date && (
-            <time class="text-muted text-sm whitespace-nowrap pr-4" datetime={getFormatDate(date)}>
+            <time class="text-muted text-sm whitespace-nowrap min-w-20" datetime={getFormatDate(date)}>
               {getFormatDate(date, "es-ES", {
                 year: "numeric",
                 month: "2-digit",

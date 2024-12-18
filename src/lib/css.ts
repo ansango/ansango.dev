@@ -167,6 +167,7 @@ const typography = {
     },
     ul: {
       listStyleType: "none",
+
       paddingLeft: 0,
       "& li": {
         paddingLeft: "0.125em",
@@ -198,6 +199,10 @@ const typography = {
           fontSize: "1rem",
         },
       },
+      ul: {
+        listStyleType: "disc",
+        paddingLeft: "1rem",
+      },
     },
     details: {
       "& > summary": {
@@ -212,6 +217,18 @@ const typography = {
       objectFit: "cover",
       objectPosition: "center",
       borderRadius: "0.25rem",
+    },
+    "code::before": {
+      content: "none",
+    },
+    "code::after": {
+      content: "none",
+    },
+    code: {
+      padding: "0.1em 0.25em",
+      borderRadius: "0.25rem",
+      backgroundColor: "var(--color-background-200)",
+      color: "var(--color-content)",
     },
   },
 };

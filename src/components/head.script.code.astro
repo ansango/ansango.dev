@@ -78,7 +78,6 @@
       smoothScroll("html", 300);
     });
 
-    // // Mostrar/ocultar el botón basado en la posición del scroll
     window.addEventListener("scroll", function () {
       if (window.scrollY > 300) {
         scrollToTopBtn.classList.add("opacity-100", "pointer-events-auto");
@@ -86,6 +85,16 @@
       } else {
         scrollToTopBtn.classList.remove("opacity-100", "pointer-events-auto");
         scrollToTopBtn.classList.add("opacity-0", "pointer-events-none");
+      }
+    });
+
+    window.addEventListener("scroll", function () {
+      if (window.innerHeight + window.scrollY >= document.body.scrollHeight && window.innerWidth < 996) {
+        scrollToTopBtn.classList.add("bottom-20");
+      }
+
+      if (window.innerHeight + window.scrollY < document.body.scrollHeight || window.innerWidth > 996) {
+        scrollToTopBtn.classList.remove("bottom-20");
       }
     });
   });

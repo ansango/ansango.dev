@@ -11,11 +11,8 @@ const formatDateOptionsDefault: Intl.DateTimeFormatOptions = {
   year: "numeric",
 };
 
-export const getFormatDate = (
-  date: Date | string,
-  locale: "en-US" | "es-ES" = "es-ES",
-  options = formatDateOptionsDefault
-): string => Intl.DateTimeFormat(locale, options).format(new Date(date));
+export const getFormatDate = (date: Date | string, locale: "en-US" | "es-ES" = "es-ES", options = formatDateOptionsDefault): string =>
+  Intl.DateTimeFormat(locale, options).format(new Date(date));
 
 export const slugify = (text: string): string => {
   return text
@@ -28,12 +25,9 @@ export const slugify = (text: string): string => {
     .replace(/[^\w-]+/g, "");
 };
 
-export const unSlugify = (text: string): string => text.charAt(0).toUpperCase() + text.slice(1).replaceAll("-", " ")
+export const unSlugify = (text: string): string => text.charAt(0).toUpperCase() + text.slice(1).replaceAll("-", " ");
 
-export const getPageNumbers = (
-  numberOfPosts: number,
-  entriesPerPage: number
-) => {
+export const getPageNumbers = (numberOfPosts: number, entriesPerPage: number) => {
   const numberOfPages = numberOfPosts / Number(entriesPerPage);
 
   let pageNumbers: number[] = [];
@@ -51,20 +45,11 @@ type GetPaginationProps<T> = {
   entriesPerPage: number;
 };
 
-export const getPagination = <T>({
-  entries,
-  page,
-  isIndex = false,
-  entriesPerPage,
-}: GetPaginationProps<T[]>) => {
+export const getPagination = <T>({ entries, page, isIndex = false, entriesPerPage }: GetPaginationProps<T[]>) => {
   const totalPagesArray = getPageNumbers(entries.length, entriesPerPage);
   const totalPages = totalPagesArray.length;
 
-  const currentPage = isIndex
-    ? 1
-    : page && !isNaN(Number(page)) && totalPagesArray.includes(Number(page))
-      ? Number(page)
-      : 0;
+  const currentPage = isIndex ? 1 : page && !isNaN(Number(page)) && totalPagesArray.includes(Number(page)) ? Number(page) : 0;
 
   const lastEntry = isIndex ? entriesPerPage : currentPage * entriesPerPage;
   const startEntry = isIndex ? 0 : lastEntry - entriesPerPage;
@@ -76,4 +61,3 @@ export const getPagination = <T>({
     paginatedEntries,
   };
 };
-

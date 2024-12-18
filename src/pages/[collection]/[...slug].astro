@@ -3,11 +3,11 @@ import CollectionLayout from "@/layouts/collection.astro";
 import PubLayout from "@/layouts/publication.astro";
 import { site } from "@/consts";
 import { getAllCollections, getAllCollectionsByCategory, getAllNumberPaths } from "@/lib/collections";
+import { getPagination } from "@/lib/utils";
 
 export async function getStaticPaths() {
   const content = await getAllCollections();
   const pagesPaths = await getAllNumberPaths();
-  console.log(content);
   const contentResult = content.map((entry) => ({
     params: { collection: entry.collection, slug: entry.slug },
     props: { entry },

@@ -213,7 +213,7 @@ const typography = {
     "img, video": {
       maxWidth: "100%",
       height: "auto",
-      aspectRatio: "3/2",
+      aspectRatio: "16/9",
       objectFit: "cover",
       objectPosition: "center",
       borderRadius: "0.25rem",

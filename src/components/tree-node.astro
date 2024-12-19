@@ -22,7 +22,7 @@ const childrenAreFilesAndIncludeGuides =
 
   {
     type === "folder" && children && children.length > 0 && (
-      <ul>
+      <ul class="!list-none !p-0">
         {name !== "" && (
           <Heading n={level + 1} className="text-content-300 dark:text-primary flex items-center gap-1" id={name}>
             {unSlugify(title || name)}

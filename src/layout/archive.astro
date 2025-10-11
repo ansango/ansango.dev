@@ -31,16 +31,16 @@ const parsedEntries = getCollectionsByYear(paginatedEntries);
 <LayoutDefault {...meta} type="main">
     <h1>Archivo</h1>
     <div class="flex flex-col h-full">
-        <ul class="flex-1">
+        <div class="flex-1 space-y-4">
             {
                 parsedEntries.map(([year, publications]) => (
-                    <li class="list-none">
-                        <h2>{year}</h2>
+                    <section class="list-none space-y-2">
+                        <h2 class="font-medium text-muted">{year}</h2>
                         <EntriesList entries={publications} />
-                    </li>
+                    </section>
                 ))
             }
-        </ul>
+        </div>
 
         <Pagination
             {currentPage}

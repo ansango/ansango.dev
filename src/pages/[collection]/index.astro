@@ -1,0 +1,40 @@
+---
+import { getCollection } from "astro:content";
+import { collectionNames, type CollectionName } from "@/content.config";
+import { site } from "@/constants";
+import { getCollectionStaticPaths } from "@/lib/astro";
+import { getAllCollectionsByCategory, type Entries } from "@/lib/collections";
+import { LayoutCollection, LayoutSingle } from "@/layout";
+
+export function getStaticPaths() {
+    return getCollectionStaticPaths();
+}
+
+interface Params {
+    collection: CollectionName;
+}
+
+const { collection } = Astro.params as Params;
+const entries = (await getAllCollectionsByCategory())[collection];
+const meta = site.pages[collection];
+const entriesPerPage = meta.entriesPerPage || 10;
+
+const onlyOnePage =
+    entries.length === 1 &&
+    entries.some(({ data }: { data: any }) => data.index === true);
+---
+
+{
+    onlyOnePage ? (
+        <LayoutSingle {collection} entryId={entries[0].id} />
+    ) : (
+        <LayoutCollection
+            {collection}
+            {entries}
+            {meta}
+            {entriesPerPage}
+            page={1}
+            isIndex
+        />
+    )
+}

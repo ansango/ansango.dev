@@ -1,0 +1,113 @@
+---
+import {
+	getAllCollectionsByCategory,
+	getLastEntriesByAllCollections,
+	getTagsLimitedByLetter,
+} from "@/lib/collections";
+import { site } from "@/constants";
+import { Divider, EntriesList, Entry, ExternalLinkIcon, Link, Tag } from "@/components";
+import { LayoutDefault } from "@/layout";
+const meta = site.pages.home;
+const tags = await getTagsLimitedByLetter(1);
+const latests = await getLastEntriesByAllCollections();
+const collections = await getAllCollectionsByCategory();
+---
+
+<LayoutDefault {...meta} type="main">
+	<div>
+		<h1>ansango</h1>
+		<p>
+			Hola, soy <span class="font-medium">Aníbal Santos</span> 👋, escribo
+			sobre tecnología, trabajo como Tech Lead en <Link
+				className="font-medium underline underline-offset-2 external-link inline-flex items-center"
+				href="https://innusual.tech"
+				blank
+				>innusual <ExternalLinkIcon/>
+			</Link>. Aquí encontrarás parte de mis wikis, insights, y algunos
+			hacks.
+		</p>
+		{latests.length > 0 && (
+			<section class="group">
+				<h2 class="font-medium text-muted">Última publicación</h2>
+				<div>
+					{
+						latests.map((latest) => {
+							const isIndex = Boolean((latest.data as any).index);
+							return (
+								<a
+									href={
+										`/${latest.collection}` +
+										(isIndex ? "" : `/${latest.id}`)
+									}
+									class="space-y-1"
+								>
+									<Entry entry={latest} />
+								</a>
+							);
+						})
+					}
+				</div>
+				<Divider />
+			</section>
+		)}
+
+			{
+				tags.length > 0 && (
+					<section>
+						<h2 class="font-medium text-muted">
+							<a href="/tags">Tags</a>
+						</h2>
+
+						<ul class="flex flex-wrap gap-1">
+							{tags.map((tag, i) => {
+								return (
+									<li class="flex list-none">
+										<Tag href={`/tags/${tag}`}>
+											{tag.replace(/-/g, " ")}
+										</Tag>
+										{i !== tags.length - 1 && (
+											<span class="text-muted">,</span>
+										)}
+									</li>
+								);
+							})}
+						</ul>
+						<Divider />
+					</section>
+				)
+			}
+
+			{
+				Object.entries(collections).map(([collection, entries]) => {
+					const slicedEntries = entries.slice(0, meta.entriesPerPage);
+					const collectionlink = `/${collection}`;
+
+					const isOnlyOnePage =
+						entries.length === 1 && (entries[0].data as any).index === true;
+
+					if (isOnlyOnePage) {
+						return <></>;
+					}
+					
+					return (
+						<section>
+							<h2 class="font-medium text-muted">
+								<a class="capitalize" href={collectionlink}>
+									{collection}
+								</a>
+							</h2>
+							<EntriesList entries={slicedEntries} />
+							{entries.length > (meta.entriesPerPage || 0) && (
+								<span class="block mt-4 text-sm">
+									<a href={collectionlink}>
+										Ver todas las publicaciones →
+									</a>
+								</span>
+							)}
+						</section>
+					);
+				})
+			}
+		</div>
+	</div>
+</LayoutDefault>

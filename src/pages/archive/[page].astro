@@ -1,0 +1,25 @@
+---
+import { site } from "@/constants";
+import { LayoutArchive } from "@/layout";
+import { getArchiveStaticPathsPage } from "@/lib/astro";
+import { getSortedCollectionsByYear } from "@/lib/collections";
+
+
+export async function getStaticPaths() {
+    return getArchiveStaticPathsPage();
+}
+
+const { page } = Astro.params;
+const entries = await getSortedCollectionsByYear();
+const meta = site.pages.archive;
+const entriesPerPage = meta.entriesPerPage || 10;
+const isIndex = false;
+---
+
+<LayoutArchive
+    entries={entries}
+    entriesPerPage={entriesPerPage}
+    meta={meta}
+    {page}
+    {isIndex}
+/>

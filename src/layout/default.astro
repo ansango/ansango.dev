@@ -1,0 +1,30 @@
+---
+import { Head, Header, Container, Footer} from "@/components";
+import { site } from "@/constants";
+
+import type { Meta } from "@/content.config";
+
+interface Props extends Partial<Omit<Meta, "entriesPerPage">> {
+    lang?: string;
+    type?: "main" | "article" | "section" | "div";
+}
+
+const { title, description, lang = "es", type = "div" } = Astro.props;
+
+const headProps = {
+    title: title ? `${title} | ${site.name}` : site.name,
+    description,
+};
+---
+
+<!doctype html>
+<html lang={lang}>
+    <Head {...headProps} />
+    <body class="flex flex-col min-h-dvh">
+        <Header />
+        <Container className="pt-20 flex-1" element={type}>
+            <slot />
+        </Container>
+        <Footer />
+    </body>
+</html>

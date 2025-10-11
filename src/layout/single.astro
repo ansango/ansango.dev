@@ -1,0 +1,28 @@
+---
+import type { CollectionName } from "@/content.config";
+
+import { getEntry, render } from "astro:content";
+import { LayoutDefault } from ".";
+
+interface Props {
+    collection: CollectionName;
+    entryId: string;
+}
+
+const { collection, entryId } = Astro.props;
+
+const entry = await getEntry(collection, entryId);
+if (!entry) {
+    throw new Error(`Entry not found: ${collection}/${entryId}`);
+}
+
+const { title } = entry.data;
+
+
+const { Content, remarkPluginFrontmatter } = await render(entry);
+---
+
+<LayoutDefault {...remarkPluginFrontmatter} type="main">
+    <h1>{title}</h1>
+    <Content />
+</LayoutDefault>

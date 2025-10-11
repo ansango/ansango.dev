@@ -1,0 +1,52 @@
+---
+import { EntriesList, Pagination } from "@/components";
+import type { Meta } from "@/content.config";
+import { LayoutDefault } from "@/layout";
+import {
+    getPagination,
+    type Entries,
+    getCollectionsByYear,
+} from "@/lib/collections";
+
+interface Props {
+    entries: Entries;
+    page: number;
+    entriesPerPage: number;
+    isIndex: boolean;
+    meta: Meta;
+}
+
+const { entries, page, entriesPerPage, isIndex, meta } = Astro.props;
+
+const { currentPage, paginatedEntries, totalPages } = getPagination({
+    isIndex,
+    entries,
+    page,
+    entriesPerPage,
+});
+
+const parsedEntries = getCollectionsByYear(paginatedEntries);
+---
+
+<LayoutDefault {...meta} type="main">
+    <h1>Archivo</h1>
+    <div class="flex flex-col h-full">
+        <ul class="flex-1">
+            {
+                parsedEntries.map(([year, publications]) => (
+                    <li class="list-none">
+                        <h2>{year}</h2>
+                        <EntriesList entries={publications} />
+                    </li>
+                ))
+            }
+        </ul>
+
+        <Pagination
+            {currentPage}
+            {totalPages}
+            prevUrl={`/archive${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
+            nextUrl={`/archive/${currentPage + 1}/`}
+        />
+    </div>
+</LayoutDefault>

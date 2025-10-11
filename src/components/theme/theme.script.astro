@@ -1,0 +1,57 @@
+<script is:inline>
+  function init() {
+    preloadTheme();
+    const toggleThemeButton = document.getElementById("toggle-theme-button");
+
+    toggleThemeButton?.addEventListener("click", () => {
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+        .matches
+        ? "dark"
+        : "light";
+
+      const userTheme = localStorage.theme ?? systemTheme;
+
+      if (userTheme === "light") {
+        localStorage.setItem("theme", "dark");
+        toggleTheme(true);
+      } else if (userTheme === "dark") {
+        localStorage.setItem("theme", "light");
+        toggleTheme(false);
+      } else {
+        toggleTheme(systemTheme === "dark");
+        localStorage.setItem("theme", systemTheme);
+      }
+    });
+
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (event) => {
+        if (localStorage.theme === "system") {
+          toggleTheme(event.matches);
+        }
+      });
+  }
+
+  function toggleTheme(dark) {
+    if (dark) {
+      document.documentElement.classList.remove("light");
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.add("light");
+    }
+  }
+
+  function preloadTheme() {
+    const userTheme = localStorage.theme;
+    if (userTheme === "light" || userTheme === "dark") {
+      toggleTheme(userTheme === "dark");
+    } else {
+      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => init());
+  document.addEventListener("astro:after-swap", () => init());
+  preloadTheme();
+</script>

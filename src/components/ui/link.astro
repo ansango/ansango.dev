@@ -1,0 +1,29 @@
+---
+interface Props {
+  href: string;
+  className?: string;
+  ariaLabel?: string;
+  title?: string;
+  disabled?: boolean;
+  blank?: boolean;
+}
+
+const { href, className, ariaLabel, title, disabled = false, blank = false } = Astro.props;
+---
+
+{
+  disabled ? (
+    <span
+      class={className ?? ""}
+      aria-label={ariaLabel}
+      title={title}
+      aria-disabled={disabled}
+    >
+      <slot />
+    </span>
+  ) : (
+    <a {href} class={`${className ?? ""}`} aria-label={ariaLabel} title={title} target={blank ? "_blank" : undefined} rel={blank ? "noopener noreferrer" : undefined}>
+      <slot />
+    </a>
+  )
+}

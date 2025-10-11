@@ -1,0 +1,39 @@
+---
+import { getAllCollectionsByCategory } from "@/lib/collections";
+import { LayoutCollection, LayoutCollectionEntry } from "@/layout";
+import { site } from "@/constants";
+import type { CollectionName } from "@/content.config";
+import { getCollectionStaticPathsSlug } from "@/lib/astro";
+
+export async function getStaticPaths() {
+    return getCollectionStaticPathsSlug();
+}
+
+const { slug, collection } = Astro.params as {
+    slug: string;
+    collection: CollectionName;
+};
+
+const { entry } = Astro.props;
+
+const page = parseInt(slug);
+const entries = (await getAllCollectionsByCategory())[collection];
+const meta = site.pages[collection as CollectionName];
+const entriesPerPage = meta.entriesPerPage;
+const isIndex = false;
+---
+
+{
+    entry ? (
+        <LayoutCollectionEntry {...entry} />
+    ) : (
+        <LayoutCollection
+            {collection}
+            {entries}
+            {meta}
+            {entriesPerPage}
+            {page}
+            {isIndex}
+        />
+    )
+}

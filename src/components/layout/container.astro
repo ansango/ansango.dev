@@ -1,0 +1,11 @@
+---
+interface Props {
+    className?: string;
+    element?: "div" | "article" | "main" | "section";
+}
+const cn = `px-4 max-w-[60ch] mx-auto w-full ${Astro.props.className}`;
+const Element = Astro.props.element || "div";
+---
+<Element class={cn}>
+  <slot />
+</Element>

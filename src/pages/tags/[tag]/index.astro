@@ -1,0 +1,24 @@
+---
+import { site } from "@/constants";
+import { LayoutTag } from "@/layout";
+import { getTagStaticPaths } from "@/lib/astro";
+import { getCollectionsByTag, getUniqueTags } from "@/lib/collections";
+
+export async function getStaticPaths() {
+  return getTagStaticPaths();
+}
+
+const { tag } = Astro.props;
+const entries = await getCollectionsByTag(tag);
+const meta = site.pages.tags;
+const entriesPerPage = meta.entriesPerPage || 10;
+---
+
+<LayoutTag
+  entries={entries}
+  entriesPerPage={entriesPerPage}
+  tag={tag}
+  meta={meta}
+  page={1}
+  isIndex
+/>

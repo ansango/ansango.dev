@@ -1,0 +1,23 @@
+---
+import type { Entry } from "@/lib/collections";
+import { getEntry, render } from "astro:content";
+import { LayoutDefault } from "@/layout";
+import { Divider, EntryHeading } from "@/components";
+
+const { collection, id } = Astro.props as Entry;
+
+const entry = await getEntry(collection, id);
+
+if (!entry) {
+    throw new Error(`Entry not found: ${collection}/${id}`);
+}
+
+const { Content, remarkPluginFrontmatter } = await render(entry);
+const { title, date, mod, description, tags } = entry.data;
+---
+
+<LayoutDefault {...remarkPluginFrontmatter} type="article">
+    <EntryHeading {title} {date} {mod} {description} {tags} />
+    <Divider />
+    <Content />
+</LayoutDefault>

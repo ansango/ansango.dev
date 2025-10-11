@@ -1,0 +1,42 @@
+---
+import { unSlugify } from "@/lib/utils";
+import { Heading, Link } from "@/components";
+import type { TreeNode } from "@/lib/wikis";
+interface Props extends TreeNode {}
+
+const { children, name, type, title, level, slug } = Astro.props;
+
+const isName = name !== undefined && name !== null && name !== "";
+const isMainCategory = isName && level + 1 === 2;
+const isCategory = isName && level + 1 === 3;
+const isSubCategory = isName && level + 1 === 4;
+---
+
+{
+  type === "file" && (
+    <li class={isSubCategory || isCategory ? "list-inside" : "list-none"}>
+      <Link href={slug as string}>{unSlugify(title || name)}</Link>
+    </li>
+  )
+}
+
+{
+  type === "folder" && children && children.length > 0 && (
+    <ul
+      id={name}
+      class={
+        "my-4 py-4 " +
+        (isMainCategory ? "border-b border-muted" : isSubCategory ? "pl-4" : "")
+      }
+    >
+      {isName && (
+        <Heading n={level + 1} className="flex items-center" id={name}>
+          {unSlugify(title || name)}
+        </Heading>
+      )}
+      {children.map((child) => (
+        <Astro.self {...child} />
+      ))}
+    </ul>
+  )
+}

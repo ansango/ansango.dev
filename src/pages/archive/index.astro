@@ -1,0 +1,19 @@
+---
+
+import { site } from "@/constants";
+import { LayoutArchive } from "@/layout";
+import { getSortedCollectionsByYear } from "@/lib/collections";
+
+const entries = await getSortedCollectionsByYear();
+const meta = site.pages.archive;
+const entriesPerPage = meta.entriesPerPage || 10;
+
+---
+
+<LayoutArchive
+  entries={entries}
+  entriesPerPage={entriesPerPage}
+  meta={meta}
+  page={1}
+  isIndex
+/>

@@ -1,0 +1,33 @@
+---
+import { site } from "@/constants";
+import { getTagsGroupedByLetter } from "@/lib/collections";
+import { Tag } from "@/components";
+import { LayoutDefault } from "@/layout";
+
+const tags = await getTagsGroupedByLetter();
+const meta = site.pages.tags;
+---
+
+<LayoutDefault {...meta} type="main">
+  <h1>Tags</h1>
+  {
+    Object.entries(tags).map(([letter, tags]) => {
+      if (tags.length === 0) return;
+      return (
+        <div>
+          <h2 class="my-2">{letter}</h2>
+          <ul class="flex flex-wrap gap-1">
+            {tags.map((tag, i) => {
+              return (
+                <li class="flex">
+                  <Tag href={`/tags/${tag}`}>{tag.replace(/-/g, " ")}</Tag>
+                  {i !== tags.length - 1 && <span class="text-muted">,</span>}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      );
+    })
+  }
+</LayoutDefault>

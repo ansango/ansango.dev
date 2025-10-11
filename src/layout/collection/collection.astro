@@ -1,0 +1,32 @@
+---
+import type { CollectionName, Meta } from "@/content.config";
+import { LayoutCollectionWiki, LayoutCollectionDefault } from "@/layout";
+import { type Entries } from "@/lib/collections";
+
+interface Props {
+    collection: CollectionName;
+    entries: Entries;
+    page: number;
+    entriesPerPage: number;
+    isIndex: boolean;
+    meta: Meta;
+}
+
+const { entries, page, isIndex, meta, collection, entriesPerPage } =
+    Astro.props;
+---
+
+{
+    collection === "wiki" ? (
+        <LayoutCollectionWiki {entries} {meta} />
+    ) : (
+        <LayoutCollectionDefault
+            {collection}
+            {entries}
+            {meta}
+            {page}
+            {isIndex}
+            {entriesPerPage}
+        />
+    )
+}

@@ -1,0 +1,52 @@
+---
+import { Divider, Entry, Pagination } from "@/components";
+import type { CollectionName, Meta } from "@/content.config";
+import { LayoutDefault } from "@/layout";
+import { getPagination, type Entries } from "@/lib/collections";
+
+interface Props {
+    collection: CollectionName;
+    entries: Entries;
+    page: number;
+    entriesPerPage: number;
+    isIndex: boolean;
+    meta: Meta;
+}
+
+const { entries, page, isIndex, meta, collection } = Astro.props;
+
+const { currentPage, paginatedEntries, totalPages } = getPagination({
+    isIndex,
+    entries,
+    page,
+    entriesPerPage: meta.entriesPerPage,
+});
+
+---
+
+<LayoutDefault {...meta} type="main">
+    <h1 class="capitalize">{collection}</h1>
+    <div class="flex flex-col h-full">
+        <ul class="flex-1">
+            {
+                paginatedEntries.map((entry, i) => (
+                    <li class="list-none">
+                        <a
+                            href={`/${entry.collection}/${entry.id}`}
+                            class="space-y-1"
+                        >
+                            <Entry entry={entry} />
+                            {i < paginatedEntries.length - 1 && <Divider />}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+        <Pagination
+            {currentPage}
+            {totalPages}
+            prevUrl={`/${collection}${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
+            nextUrl={`/${collection}/${currentPage + 1}/`}
+        />
+    </div>
+</LayoutDefault>

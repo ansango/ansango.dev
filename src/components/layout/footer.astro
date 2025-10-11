@@ -1,0 +1,102 @@
+---
+import { Container, ExternalLinkIcon, Link, Theme } from "@/components";
+import { site } from "@/constants";
+import { getPublishedEntries } from "@/lib/utils";
+---
+
+<Container className="py-8 ">
+    <footer class="grid grid-cols-12 gap-4 border-t border-divider pt-8">
+        <div class="col-span-12 sm:col-span-3">
+            <ul class="text-muted">
+                {
+                    getPublishedEntries(site.tree.personal).map(
+                        ([_, { title, url, blank }]) => (
+                            <li class="list-none">
+                                <Link
+                                    className="block"
+                                    href={String(url)}
+                                    {blank}
+                                >
+                                    {title}
+                                </Link>
+                            </li>
+                        ),
+                    )
+                }
+            </ul>
+        </div>
+        <div class="col-span-12 sm:col-span-3">
+            <ul class="text-muted">
+                {
+                    getPublishedEntries(site.tree.content).map(
+                        ([_, { title, url, blank }]) => (
+                            <li class="list-none">
+                                <Link
+                                    className="block"
+                                    href={String(url)}
+                                    {blank}
+                                >
+                                    {title}
+                                </Link>
+                            </li>
+                        ),
+                    )
+                }
+            </ul>
+        </div>
+        <div class="col-span-12 sm:col-span-3">
+            <ul class="text-muted">
+                {
+                    getPublishedEntries(site.tree.explore).map(
+                        ([_, { title, url, blank }]) => {
+                            return (
+                                <li class="list-none">
+                                    <Link
+                                        className="block"
+                                        href={String(url)}
+                                        {blank}
+                                    >
+                                        {title}
+                                    </Link>
+                                </li>
+                            );
+                        },
+                    )
+                }
+            </ul>
+        </div>
+        <div class="col-span-12 sm:col-span-3">
+            <ul class="text-muted">
+                {
+                    getPublishedEntries(site.tree.social).map(
+                        ([_, { title, url, blank }]) => {
+                            return (
+                                <li class="list-none">
+                                    <Link
+                                        className="inline-flex items-center"
+                                        href={String(url)}
+                                        {blank}
+                                    >
+                                        {title}
+
+                                        <ExternalLinkIcon/>
+                                    </Link>
+                                </li>
+                            );
+                        },
+                    )
+                }
+            </ul>
+        </div>
+
+        <div
+            class="col-span-12 flex items-center justify-between pt-4 border-t border-divider"
+        >
+            <p class="text-muted text-sm mb-0">
+                &copy; {new Date().getFullYear()}
+                {site.author}. Todos los derechos reservados.
+            </p>
+            <Theme />
+        </div>
+    </footer>
+</Container>

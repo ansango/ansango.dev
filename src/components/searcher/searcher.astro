@@ -5,18 +5,15 @@ import Script from "./searcher.script.astro";
 ---
 
 <Script />
-
-<!-- styles button as input style -->
-<div id="searcher-shortcut" class="f">
+<button id="searcher-button" aria-label="(Press Ctrl+/ to open search)">
+  <SearcherIcon />
   <kbd>
     <span> ctrl </span>
     <span> + </span>
     <span> / </span>
   </kbd>
-  <button id="searcher-button" aria-label="(Press Ctrl+/ to open search)">
-    <SearcherIcon />
-  </button>
-</div>
+</button>
+
 <dialog id="searcher-dialog">
   <div id="searcher-dialog-frame">
     <Search
@@ -57,8 +54,12 @@ import Script from "./searcher.script.astro";
   }
 
   #searcher-shortcut {
-    @apply flex items-center gap-1;
+    @apply flex items-center;
+  }
 
+  #searcher-button {
+    @apply cursor-pointer focus:outline-none px-1 py-0.5;
+    @apply sm:inline-flex sm:items-center sm:gap-1 sm:rounded-full sm:bg-muted/10 sm:inset-ring sm:inset-ring-muted/10 sm:hover:bg-muted/15;
     kbd {
       @apply leading-none hidden sm:inline-flex gap-0.5 text-xs text-muted rounded-full px-1 py-0.5;
 
@@ -66,10 +67,6 @@ import Script from "./searcher.script.astro";
         @apply mt-0.5;
       }
     }
-  }
-
-  #searcher-button {
-    @apply cursor-pointer focus:outline-none p-0.5;
   }
 
   #searcher-dialog {

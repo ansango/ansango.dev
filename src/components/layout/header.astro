@@ -5,8 +5,6 @@ import Searcher from "../searcher/searcher.astro";
 
 const pathname = Astro.url.pathname;
 const path = pathname.split("/").filter(Boolean)[0] || null;
-
-
 ---
 
 <header
@@ -29,10 +27,7 @@ const path = pathname.split("/").filter(Boolean)[0] || null;
           )
         }
       </div>
-      <nav class="flex gap-2 items-center">
-        <Searcher />
-        
-      </nav>
+      <Searcher />
     </div>
   </Container>
 </header>

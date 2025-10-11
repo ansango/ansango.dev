@@ -6,18 +6,14 @@ interface Props {
   entry: Entry;
 }
 
-const {
-  entry: {
-    data: { date, title, description },
-    body,
-  },
-} = Astro.props;
-
+const { entry } = Astro.props;
+const { data, body} = entry;
+const { title, date, description } = data;
 const timeReading = getReadingTime(body);
 const time = date && getFormatDate(date);
 ---
 
-<h3 class="line-clamp-1 font-medium group-hover:text-link" >
+<h3 class="line-clamp-1 font-medium group-hover:text-link">
   {title}
 </h3>
 <p class="text-sm text-muted">

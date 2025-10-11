@@ -3,6 +3,7 @@ import type { Entry } from "@/lib/collections";
 import { getEntry, render } from "astro:content";
 import { LayoutDefault } from "@/layout";
 import { Divider, EntryHeading } from "@/components";
+import { getReadingTime } from "@/lib/utils";
 
 const { collection, id } = Astro.props as Entry;
 
@@ -14,10 +15,11 @@ if (!entry) {
 
 const { Content, remarkPluginFrontmatter } = await render(entry);
 const { title, date, mod, description, tags } = entry.data;
+const readingTime = getReadingTime(entry.body || "");
 ---
 
 <LayoutDefault {...remarkPluginFrontmatter} type="article">
-    <EntryHeading {title} {date} {mod} {description} {tags} />
+    <EntryHeading {title} {date} {mod} {description} {tags} {readingTime} />
     <Divider />
     <Content />
 </LayoutDefault>

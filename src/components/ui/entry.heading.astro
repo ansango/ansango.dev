@@ -10,9 +10,10 @@ interface Props {
     mod?: Date;
     description?: string;
     tags?: string[];
+    readingTime?: number;
 }
 
-const { title, date, mod, description, tags } = Astro.props;
+const { title, date, mod, description, tags, readingTime } = Astro.props;
 const parsedDate = new Date(mod ?? date ?? "");
 const now = new Date();
 const oneYear = 1000 * 60 * 60 * 24 * 365;
@@ -22,31 +23,40 @@ const isOutdated = parsedDate && now.getTime() - parsedDate.getTime() > oneYear;
 <time datetime={parsedDate.toISOString()} class="text-sm text-muted">
     {getFormatDate(parsedDate)}
 </time>
+&nbsp;·&nbsp;
+<span>
+    <span class="text-sm text-muted">{readingTime} min de lectura</span>
+</span>
+<div>
+    <h1 class="my-2">
+        {title}
+    </h1>
+    <ul class="flex flex-wrap gap-1">
+        {
+            tags?.map((tag, i) => {
+                return (
+                    <li class="flex list-none">
+                        <Tag href={`/tags/${tag}`}>
+                            {tag.replace(/-/g, " ")}
+                        </Tag>
+                        {i !== tags.length - 1 && (
+                            <span class="text-muted">,</span>
+                        )}
+                    </li>
+                );
+            })
+        }
+    </ul>
+    <p class="text-muted">
+        {description}
+    </p>
 
-<h1 class="my-2">
-    {title}
-</h1>
-<ul class="flex flex-wrap gap-1">
     {
-        tags?.map((tag, i) => {
-            return (
-                <li class="flex list-none">
-                    <Tag href={`/tags/${tag}`}>{tag.replace(/-/g, " ")}</Tag>
-                    {i !== tags.length - 1 && <span class="text-muted">,</span>}
-                </li>
-            );
-        })
+        isOutdated && (
+            <p class="warning flex items-center gap-2">
+                <InfoIcon />
+                Este contenido tiene más de un año y puede estar desactualizado.
+            </p>
+        )
     }
-</ul>
-<p class="text-muted">
-    {description}
-</p>
-
-{
-    isOutdated && (
-        <p class="warning flex items-center gap-2">
-            <InfoIcon />
-            Este contenido tiene más de un año y puede estar desactualizado.
-        </p>
-    )
-}
+</div>

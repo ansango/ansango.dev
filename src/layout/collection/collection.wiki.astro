@@ -1,14 +1,9 @@
 ---
 import type { Meta } from "@/content.config";
 import type { Entries } from "@/lib/collections";
-import {
-    getWikiTree,
-    renderNode,
-    countCategories,
-    countEntries,
-} from "@/lib/wikis";
+import { getWikiTree, countCategories, countEntries } from "@/lib/wikis";
 import { LayoutDefault } from "@/layout";
-import Node from "@/components/layout/node.astro";
+import { TreeNode } from "@/components";
 
 interface Props {
     entries: Entries;
@@ -39,7 +34,7 @@ const totalCategories = countCategories(wikiStructure);
                         {
                             wikiStructure.map((node) => (
                                 <div class="py-1">
-                                    <Node node={node} level={0} />
+                                    <TreeNode node={node} level={0} />
                                 </div>
                             ))
                         }

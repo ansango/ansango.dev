@@ -348,6 +348,16 @@ You can implement this workflow after setting up your Obsidian vault structure t
 
 TODO
 
+## Performance
+
+The site is optimized for performance with:
+- 100% static output
+- Minimal JavaScript (only for interactive features)
+- Efficient CSS with Tailwind's purge feature
+- Fast load times and high Lighthouse scores
+
+![alt text](assets/image.png)
+
 ## 📄 License
 
 MIT License - feel free to use this template for your own personal site!

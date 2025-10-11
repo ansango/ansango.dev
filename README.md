@@ -356,10 +356,8 @@ The site is optimized for performance with:
 - Efficient CSS with Tailwind's purge feature
 - Fast load times and high Lighthouse scores
 
-<div style="text-align: center;">
-
 ![alt text](/assets/image.png)
-</div>
+
 ## 📄 License
 
 MIT License - feel free to use this template for your own personal site!

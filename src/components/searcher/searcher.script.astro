@@ -1,43 +1,46 @@
 <script lang="ts" is:inline>
-  const clearIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="size-4" width="18" height="18" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M6.225 4.811a1 1 0 0 0-1.414 1.414L10.586 12L4.81 17.775a1 1 0 1 0 1.414 1.414L12 13.414l5.775 5.775a1 1 0 0 0 1.414-1.414L13.414 12l5.775-5.775a1 1 0 0 0-1.414-1.414L12 10.586z"/>
-                      </svg>`;
-
   const searcher = () => {
-    /**
-     * items
-     */
     const searchButton = document.getElementById("searcher-button");
     const dialog = document.getElementById("searcher-dialog");
     const dialogFrame = document.getElementById("searcher-dialog-frame");
     const clearButton = document.querySelector(".pagefind-ui__search-clear");
-    clearButton.innerHTML = clearIcon;
-    /**
-     * functions
-     */
-    const closeDialog = () => {
-      dialog.close();
-      document.body.classList.remove("overflow-hidden");
-    };
+
+    if (!searchButton || !dialog || !dialogFrame) return;
+
+    if (dialog._initialized) return;
+    dialog._initialized = true;
+
+    if (clearButton) {
+      clearButton.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" width="18" height="18" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M6.225 4.811a1 1 0 0 0-1.414 1.414L10.586 12L4.81 17.775a1 1 0 1 0 1.414 1.414L12 13.414l5.775 5.775a1 1 0 0 0 1.414-1.414L13.414 12l5.775-5.775a1 1 0 0 0-1.414-1.414L12 10.586z"/>
+        </svg>`;
+    }
 
     const openDialog = () => {
-      dialog.showModal();
-      document.body.classList.add("overflow-hidden");
+      if (document.body.contains(dialog)) {
+        dialog.showModal();
+        document.body.classList.add("overflow-hidden");
+      }
     };
-    /**
-     * listeners
-     */
+
+    const closeDialog = () => {
+      if (document.body.contains(dialog)) {
+        dialog.close();
+        document.body.classList.remove("overflow-hidden");
+      }
+    };
+
     searchButton.addEventListener("click", (event) => {
       event.stopPropagation();
       openDialog();
     });
 
     window.addEventListener("click", (event) => {
-      const isLink = "href" in (event.target || {});
       if (
-        isLink ||
-        (document.body.contains(event.target) &&
-          !dialogFrame.contains(event.target))
+        document.body.contains(dialog) &&
+        document.body.contains(event.target) &&
+        !dialogFrame.contains(event.target)
       ) {
         closeDialog();
       }
@@ -48,16 +51,13 @@
         e.preventDefault();
         closeDialog();
       }
-
       if (e.key === "/") {
         e.preventDefault();
         openDialog();
       }
     });
   };
-  /**
-   * init
-   */
-  document.addEventListener("DOMContentLoaded", () => searcher());
-  document.addEventListener("astro:after-swap", () => searcher());
+
+  document.addEventListener("astro:page-load", searcher);
+  document.addEventListener("astro:after-swap", searcher);
 </script>

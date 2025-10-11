@@ -11,8 +11,7 @@ export const slugify = (text: string): string => {
     .replace(/[^\w-]+/g, "");
 };
 
-export const unSlugify = (text: string): string => text.charAt(0).toUpperCase() + text.slice(1).replaceAll("-", " ");
-
+export const capitalize = (s: string) => s && s[0].toUpperCase() + s.slice(1);
 export const getReadingTime = (html: string): number => {
   const text = html.replace(/<[^>]+>/g, "");
   const wordCount = text.trim().split(/\s+/).length;

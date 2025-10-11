@@ -10,7 +10,7 @@ interface Props {
     mod?: Date;
     description?: string;
     tags?: string[];
-    readingTime?: number;
+    readingTime: number;
 }
 
 const { title, date, mod, description, tags, readingTime } = Astro.props;
@@ -23,10 +23,15 @@ const isOutdated = parsedDate && now.getTime() - parsedDate.getTime() > oneYear;
 <time datetime={parsedDate.toISOString()} class="text-sm text-muted">
     {getFormatDate(parsedDate)}
 </time>
-&nbsp;·&nbsp;
-<span>
-    <span class="text-sm text-muted">{readingTime} min de lectura</span>
-</span>
+
+{
+    readingTime > 0 && (
+        <span>
+            &nbsp;·&nbsp;
+            <span class="text-sm text-muted">{readingTime} min de lectura</span>
+        </span>
+    )
+}
 <div>
     <h1 class="my-2">
         {title}

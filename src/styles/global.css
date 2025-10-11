@@ -249,5 +249,7 @@
         @apply text-warning text-sm border-l-4 pl-4;
     }
 
-    
+    details[open]>summary>svg.chevron-right {
+        @apply rotate-90;
+    }
 }

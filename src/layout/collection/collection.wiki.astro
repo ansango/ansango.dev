@@ -8,6 +8,7 @@ import {
     countEntries,
 } from "@/lib/wikis";
 import { LayoutDefault } from "@/layout";
+import Node from "@/components/layout/node.astro";
 
 interface Props {
     entries: Entries;
@@ -37,10 +38,9 @@ const totalCategories = countCategories(wikiStructure);
                     <div class="divide-y divide-divider">
                         {
                             wikiStructure.map((node) => (
-                                <div
-                                    class="py-1"
-                                    set:html={renderNode(node, 0)}
-                                />
+                                <div class="py-1">
+                                    <Node node={node} level={0} />
+                                </div>
                             ))
                         }
                     </div>
@@ -53,10 +53,10 @@ const totalCategories = countCategories(wikiStructure);
             </div>
         </article>
     </div>
-</LayoutDefault>
 
-<style>
-    details > summary::-webkit-details-marker {
-        display: none;
-    }
-</style>
+    <style>
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+    </style>
+</LayoutDefault>

@@ -83,14 +83,10 @@ const blogroll = defineCollection({
  * Bookmarks Collection
  */
 
-const bookmarksSchema = commonSchema.merge(
-    z.object({
-        index: z.boolean().default(true).optional(),
-    })
-);
+const bookmarksSchema = commonSchema
 
 const bookmarks = defineCollection({
-    loader: glob({ pattern: "bookmarks.md", base: path }),
+    loader: glob({ pattern: "**/*.md", base: `${path}/bookmarks` }),
     schema: bookmarksSchema,
 });
 

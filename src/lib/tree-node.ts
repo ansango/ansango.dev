@@ -1,3 +1,4 @@
+import type { CollectionName } from "@/content.config";
 import type { Entries } from "@/lib/collections";
 
 export type NodeItem = {
@@ -9,8 +10,8 @@ export type NodeItem = {
 
 };
 
-export const getWikiTree = (entries: Entries) => {
-  const mappedEntries = entries.filter(({ collection }) => collection === "wiki").map((entry) => {
+export const getTreeNode = (entries: Entries, collectionName: CollectionName) => {
+  const mappedEntries = entries.filter(({ collection }) => collection === collectionName).map((entry) => {
     const { collection, id, data } = entry;
     const { title } = data;
     return { path: `/${collection}/${id}`, title, collection, id };
@@ -71,5 +72,22 @@ export function countCategories(nodes: NodeItem[]) {
     }
   }
   return count;
+}
+
+export function sortTreeNodeFilesFirst(nodes: NodeItem[]): NodeItem[] {
+  // Ordenar recursivamente: archivos primero, luego carpetas
+  return nodes
+    .map(node => ({
+      ...node,
+      children: node.children ? sortTreeNodeFilesFirst(node.children) : undefined
+    }))
+    .sort((a, b) => {
+      // Si son del mismo tipo, ordenar alfabéticamente
+      if (a.type === b.type) {
+        return a.name.localeCompare(b.name);
+      }
+      // Archivos primero (file), luego carpetas (folder)
+      return a.type === 'file' ? -1 : 1;
+    });
 }
 

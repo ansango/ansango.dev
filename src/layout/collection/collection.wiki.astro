@@ -1,7 +1,7 @@
 ---
 import type { Meta } from "@/content.config";
 import type { Entries } from "@/lib/collections";
-import { getWikiTree, countCategories, countEntries } from "@/lib/wikis";
+import { getTreeNode, countCategories, countEntries } from "@/lib/tree-node";
 import { LayoutDefault } from "@/layout";
 import { TreeNode } from "@/components";
 
@@ -11,7 +11,7 @@ interface Props {
 }
 
 const { entries, meta } = Astro.props;
-const wikiStructure = getWikiTree(entries);
+const wikiStructure = getTreeNode(entries, "wiki");
 
 const totalEntries = countEntries(wikiStructure);
 const totalCategories = countCategories(wikiStructure);

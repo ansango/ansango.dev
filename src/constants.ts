@@ -33,7 +33,7 @@ const archive: Meta = {
 const wiki: Meta = {
     title: "Wiki",
     description: "Una colección de artículos y recursos técnicos.",
-    entriesPerPage: 20,
+    entriesPerPage: 10,
     url: "/wiki",
     published: true,
 }
@@ -85,7 +85,7 @@ const contentCollections: Record<CollectionName, Meta> = {
     bookmarks: {
         title: "Bookmarks",
         description: "Una colección de mis enlaces y recursos favoritos.",
-        entriesPerPage: 0,
+        entriesPerPage: 10,
         url: "/bookmarks",
         published: true,
     },

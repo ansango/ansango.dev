@@ -191,22 +191,24 @@ export const getSortedCollectionsByYear = async () => {
 }
 
 export const getCollectionsByYear = (collections: Entries) => {
-  const groupedByYear = collections.reduce(
-    (acc, publication) => {
-      const year = publication.data.mod
-        ? new Date(publication.data.mod).getFullYear()
-        : publication.data.date
-          ? new Date(publication.data.date).getFullYear()
-          : "Sin fecha";
-      if (!acc[year]) {
-        acc[year] = [];
-      }
-      acc[year].push(publication);
-      return acc;
-    },
-    {} as Record<string | number, typeof collections>,
-  );
 
-  return Object.entries(groupedByYear)
-    .sort((a, b) => (a[0] < b[0] ? 1 : -1))
+  collections.sort((a, b) => {
+    if (!a.data.date) return -1
+    if (!b.data.date) return 1
+    return new Date(b.data.date).getFullYear() - new Date(a.data.date).getFullYear()
+  })
+
+  return collections
+    .reduce(
+      (acc, publication) => {
+        const year = new Date(publication.data.date ?? "").getFullYear()
+        if (!acc[year]) {
+          acc[year] = [];
+        }
+        acc[year].push(publication);
+        return acc;
+      },
+      {} as Record<string | number, typeof collections>,
+    );
 }
+

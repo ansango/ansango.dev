@@ -6,6 +6,11 @@ import { LayoutDefault } from "@/layout";
 
 const tags = await getTagsGroupedByLetter();
 const meta = site.pages.tags;
+
+if (!tags) {
+    return Astro.redirect("/");
+}
+
 ---
 
 <LayoutDefault {...meta} type="main">

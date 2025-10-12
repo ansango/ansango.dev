@@ -8,6 +8,10 @@ const entries = await getSortedCollectionsByYear();
 const meta = site.pages.archive;
 const entriesPerPage = meta.entriesPerPage || 10;
 
+if (!entries) {
+    return Astro.redirect("/");
+}
+
 ---
 
 <LayoutArchive

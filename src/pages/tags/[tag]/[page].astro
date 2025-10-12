@@ -15,6 +15,11 @@ const entries = await getCollectionsByTag(tag);
 const isIndex = false;
 const meta = site.pages.tags;
 const entriesPerPage = meta.entriesPerPage;
+
+if (!entries) {
+    return Astro.redirect("/");
+}
+
 ---
 
 <LayoutTag

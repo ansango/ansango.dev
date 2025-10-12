@@ -21,6 +21,11 @@ const entries = (await getAllCollectionsByCategory())[collection];
 const meta = site.pages[collection as CollectionName];
 const entriesPerPage = meta.entriesPerPage;
 const isIndex = false;
+
+
+if (!entry && (!entries || isNaN(page) || page < 1)) {
+    return Astro.redirect("/");
+}
 ---
 
 {

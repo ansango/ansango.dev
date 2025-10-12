@@ -15,6 +15,11 @@ const entries = await getSortedCollectionsByYear();
 const meta = site.pages.archive;
 const entriesPerPage = meta.entriesPerPage || 10;
 const isIndex = false;
+
+if (!entries) {
+    return Astro.redirect("/");
+}
+
 ---
 
 <LayoutArchive

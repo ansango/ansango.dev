@@ -1,9 +1,8 @@
 ---
-
 import { type CollectionName } from "@/content.config";
 import { site } from "@/constants";
 import { getCollectionStaticPaths } from "@/lib/astro";
-import { getAllCollectionsByCategory, type Entries } from "@/lib/collections";
+import { getAllCollectionsByCategory } from "@/lib/collections";
 import { LayoutCollection, LayoutSingle } from "@/layout";
 
 export function getStaticPaths() {
@@ -19,15 +18,23 @@ const entries = (await getAllCollectionsByCategory())[collection];
 const meta = site.pages[collection];
 const entriesPerPage = meta.entriesPerPage || 10;
 
+if (!entries) {
+    return Astro.redirect("/");
+}
+
 const onlyOnePage =
     entries.length === 1 &&
     entries.some(({ data }: { data: any }) => data.index === true);
 ---
 
 {
-    onlyOnePage ? (
+    onlyOnePage && entries && (
         <LayoutSingle {collection} entryId={entries[0].id} />
-    ) : (
+    )
+}
+
+{
+    !onlyOnePage && entries && (
         <LayoutCollection
             {collection}
             {entries}

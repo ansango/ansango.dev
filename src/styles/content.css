@@ -18,6 +18,9 @@
         @apply pl-0;
     }
 
+    strong {
+        @apply font-semibold;
+    }
 
     p {
         @apply mb-4;

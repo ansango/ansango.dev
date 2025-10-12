@@ -36,3 +36,4 @@ Cuando tengamos un archivo `docker-compose.yml`, lo levantamos con:
 ```bash
 docker-compose up -d
 ```
+## **Para detenerlo:**

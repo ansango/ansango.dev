@@ -323,6 +323,12 @@ To sync content from an Obsidian vault stored in a separate GitHub repository, y
 2. **Action**: Clone Obsidian repo, copy markdown files to this repo
 3. **Commit**: Auto-commit and push changes
 
+### Steps
+
+- Create a new repo for your Obsidian vault
+- Add a GitHub Actions workflow in this repo `.github/workflows/sync.yml`:
+
+
 ### Template Workflow File
 
 TODO

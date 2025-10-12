@@ -122,7 +122,7 @@ const explore: TreeNode = {
         title: "Feed",
         description: "Suscríbete para recibir las últimas actualizaciones.",
         entriesPerPage: 0,
-        url: "/feed.xml",
+        url: "/rss.xml",
         blank: true,
         published: true,
     },

@@ -16,10 +16,20 @@ if (!entry) {
 const { Content, remarkPluginFrontmatter } = await render(entry);
 const { title, date, mod, description, tags } = entry.data;
 const readingTime = getReadingTime(entry.body || "");
+
+const headingProps = {
+    title,
+    date,
+    mod,
+    description,
+    tags,
+    readingTime,
+    collection,
+};
 ---
 
 <LayoutDefault {...remarkPluginFrontmatter} type="article">
-    <EntryHeading {title} {date} {mod} {description} {tags} {readingTime} />
+    <EntryHeading {...headingProps} />
     <Divider />
     <Content />
 </LayoutDefault>

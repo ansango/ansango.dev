@@ -3,6 +3,7 @@ import type { Entry } from "@/lib/collections";
 import { getFormatDate } from "@/lib/utils";
 import { InfoIcon } from "./icons";
 import Tag from "./tag.astro";
+import type { CollectionName } from "@/content.config";
 
 interface Props {
     title: string;
@@ -11,18 +12,28 @@ interface Props {
     description?: string;
     tags?: string[];
     readingTime: number;
+    collection: CollectionName;
 }
 
-const { title, date, mod, description, tags, readingTime } = Astro.props;
+const { title, date, mod, description, tags, readingTime, collection } =
+    Astro.props;
 const parsedDate = new Date(mod ?? date ?? "");
 const now = new Date();
 const oneYear = 1000 * 60 * 60 * 24 * 365;
 const isOutdated = parsedDate && now.getTime() - parsedDate.getTime() > oneYear;
+const pub = collection !== "blog" ? mod : date;
 ---
 
-<time datetime={parsedDate.toISOString()} class="text-sm text-muted">
-    {getFormatDate(parsedDate)}
-</time>
+{
+    date && (
+        <time
+            datetime={getFormatDate(pub ?? date, "es-ES")}
+            class="text-sm text-muted"
+        >
+            {getFormatDate(pub ?? date, "es-ES")}
+        </time>
+    )
+}
 
 {
     readingTime > 0 && (

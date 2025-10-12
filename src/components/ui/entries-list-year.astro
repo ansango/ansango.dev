@@ -13,7 +13,7 @@ const parsedEntriesByYear = getCollectionsByYear(entries);
 
 {
     Object.entries(parsedEntriesByYear)
-    //if is nan put first
+        //if is nan put first
         .sort(([yearA], [yearB]) => {
             const yearANum = parseInt(yearA);
             const yearBNum = parseInt(yearB);
@@ -25,14 +25,17 @@ const parsedEntriesByYear = getCollectionsByYear(entries);
         .map(([year, entries]) => {
             return (
                 <section>
-                    <h2 class="text-xl font-semibold mb-2">{isNaN(parseInt(year)) ? "Sin fecha" : year}</h2>
+                    <h2 class="text-xl font-semibold mb-2">
+                        {isNaN(parseInt(year)) ? "Sin fecha" : year}
+                    </h2>
                     <ul class="list-none space-y-2">
                         {entries.map(
                             ({
                                 collection,
                                 id,
-                                data: { date, title, index },
+                                data: { date, title, index, mod },
                             }) => {
+                                const pub = collection !== "blog" ? mod : date;
                                 return (
                                     <li class="list-none">
                                         <a
@@ -46,11 +49,11 @@ const parsedEntriesByYear = getCollectionsByYear(entries);
                                                 <time
                                                     class="text-sm text-muted whitespace-nowrap min-w-20"
                                                     datetime={getFormatDate(
-                                                        date,
+                                                        pub ?? date,
                                                     )}
                                                 >
                                                     {getFormatDate(
-                                                        date,
+                                                        pub ?? date,
                                                         "es-ES",
                                                         {
                                                             year: "numeric",

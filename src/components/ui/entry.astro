@@ -7,10 +7,11 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const { data, body} = entry;
-const { title, date, description } = data;
+const { data, body, collection } = entry;
+const { title, date, description, mod } = data;
 const timeReading = getReadingTime(body);
-const time = date && getFormatDate(date);
+const pub = collection !== "blog" ? mod : date;
+const time = date && getFormatDate(pub ?? date);
 ---
 
 <h3 class="line-clamp-1 font-medium group-hover:text-link">

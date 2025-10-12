@@ -1,0 +1,27 @@
+@layer base {
+    table {
+        @apply w-full mb-4 text-sm border-collapse table-auto;
+        @apply overflow-x-auto block;
+    }
+
+    thead {
+        @apply bg-astro-code border-b-2 border-divider;
+    }
+
+    th {
+        @apply px-4 py-3 text-left font-semibold text-accent;
+        @apply border-b border-divider;
+    }
+
+    td {
+        @apply px-4 py-3 border-b border-divider;
+    }
+
+    tbody tr {
+        @apply hover:bg-astro-code transition-colors;
+    }
+
+    tbody tr:last-child td {
+        @apply border-b-0;
+    }
+}

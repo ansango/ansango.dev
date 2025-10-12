@@ -1,0 +1,81 @@
+@theme {
+    --font-sans: "font", "Inter Variable", sans-serif;
+    --color-muted: var(--muted);
+    --color-accent: var(--accent);
+    --color-content: var(--content);
+    --color-body: var(--body);
+    --color-link: var(--link);
+    --color-divider: var(--divider);
+    --color-code-border: var(--code-border);
+    --color-quote: var(--quote);
+    --color-astro-code: var(--astro-code);
+    --color-astro-code-content: var(--astro-code-content);
+    --color-pagefind-body: var(--pagefind-background);
+    --color-warning: var(--warning);
+}
+
+@layer base {
+    :root {
+        --body: theme(colors.white);
+        --accent: theme(colors.neutral.900);
+        --content: theme(colors.neutral.700);
+        --muted: theme(colors.neutral.500);
+        --link: theme(colors.blue.600);
+        --divider: theme(colors.neutral.200);
+        --code-border: theme(colors.neutral.200);
+        --quote: theme(colors.neutral.400);
+        --warning: theme(colors.purple.600);
+
+        /* Shiki syntax highlighting colors */
+
+        --astro-code: theme(colors.neutral.50);
+
+        /* Pagefind */
+
+        --pagefind-background: theme(colors.neutral.50);
+        /* Obsidian metadatalinks */
+
+        --background-modifier-border: theme(colors.neutral.200);
+        --background-primary: theme(colors.neutral.50);
+        --background-secondary: theme(colors.neutral.100);
+        --text-normal: var(--color-content);
+        --text-muted: var(--color-muted);
+        --text-faint: var(--color-muted);
+    }
+
+    :root.dark {
+        --body: theme(colors.zinc.900);
+        --accent: theme(colors.zinc.50);
+        --content: theme(colors.zinc.200);
+        --muted: theme(colors.zinc.500);
+        --link: theme(colors.blue.400);
+        --divider: theme(colors.zinc.700);
+        --code-border: theme(colors.zinc.900);
+        --quote: theme(colors.zinc.500);
+        --warning: theme(colors.purple.400);
+
+        /* Shiki syntax highlighting colors */
+
+        --astro-code: theme(colors.zinc.800);
+
+        /* Pagefind */
+
+        --pagefind-background: theme(colors.zinc.700);
+
+        /* Obsidian metadatalinks */
+
+        --background-modifier-border: theme(colors.zinc.700);
+        --background-primary: theme(colors.zinc.900);
+        --background-secondary: theme(colors.zinc.800);
+        --text-normal: var(--color-content);
+        --text-muted: var(--color-muted);
+        --text-faint: var(--color-muted);
+
+        color-scheme: dark;
+    }
+
+    :root.dark .astro-code,
+    :root.dark .astro-code span {
+        color: var(--shiki-dark) !important;
+    }
+}

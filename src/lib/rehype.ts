@@ -19,7 +19,7 @@ export const elementArrow = {
     target: "_blank",
     rel: ["noopener", "noreferrer"],
     properties: {
-        className: ["external-link inline-flex items-center"],
+        className: ["external-link"],
     },
     content: {
         type: 'element',
@@ -29,7 +29,7 @@ export const elementArrow = {
             width: '20',
             height: '20',
             viewBox: '0 0 24 24',
-            className: ['size-4']
+            className: ['size-4 inline-flex items-center']
         },
         children: [
             {

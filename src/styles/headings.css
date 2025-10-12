@@ -1,0 +1,54 @@
+@layer base {
+    h1,
+    h2,
+    h3,
+    h4 {
+        text-wrap: balance;
+        @apply text-accent;
+    }
+
+    h1 {
+        @apply text-2xl;
+        @apply mb-4;
+
+    }
+
+    h1,
+    h2,
+    h3 {
+        @apply font-semibold;
+    }
+
+    h2 {
+        @apply text-xl;
+        @apply mb-3;
+    }
+
+    h3 {
+        @apply text-lg;
+        @apply mb-2;
+    }
+
+    h4,
+    h5,
+    h6 {
+        @apply font-medium;
+        @apply mb-1;
+    }
+
+    h4 {
+        @apply text-base;
+
+    }
+
+    h5,
+    h6 {
+        @apply text-base;
+
+    }
+
+    h6 {
+        @apply text-sm;
+
+    }
+}

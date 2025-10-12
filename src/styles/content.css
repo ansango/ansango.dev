@@ -1,0 +1,91 @@
+@layer base {
+    ul {
+        @apply list-outside list-disc mb-4 pl-4;
+    }
+
+    ol {
+        @apply list-outside list-decimal mb-4 pl-4;
+
+    }
+
+
+    li {
+        @apply leading-relaxed;
+
+    }
+
+    ul:has(li.list-none) {
+        @apply pl-0;
+    }
+
+
+    p {
+        @apply mb-4;
+        @apply leading-relaxed;
+    }
+
+    a:hover {
+        @apply text-link;
+    }
+
+    a.external-link {
+        @apply text-link;
+    }
+
+    blockquote {
+        @apply italic border-quote text-quote border-l-[3px];
+        @apply pl-4 mb-4;
+    }
+
+    a.external-link {
+        @apply hover:underline hover:underline-offset-2;
+    }
+
+    pre::-webkit-scrollbar {
+        display: none;
+    }
+
+    pre {
+        @apply p-2.5;
+        @apply rounded;
+        @apply text-sm leading-snug;
+        @apply mb-4;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+
+        @apply border border-code-border;
+
+        code {
+            @apply border-0;
+        }
+    }
+
+    code {
+        @apply font-mono bg-astro-code px-1.5 p-0.5 rounded border border-code-border text-sm;
+    }
+
+    .astro-code,
+    .astro-code span {
+        @apply !bg-astro-code;
+    }
+
+    hr {
+        @apply my-5 border-divider;
+    }
+
+    img {
+        @apply aspect-video max-w-full rounded object-cover;
+    }
+
+    u {
+        @apply no-underline;
+    }
+
+    p.warning {
+        @apply text-warning text-sm border-l-4 pl-4;
+    }
+
+    details[open]>summary>svg.chevron-right {
+        @apply rotate-90;
+    }
+}

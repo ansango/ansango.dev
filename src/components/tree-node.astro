@@ -17,7 +17,7 @@ const paddingLeft = level * 12 + 8;
 
 {
     isFolder && hasChildren ? (
-        <details open={level === 0}>
+        <details open={level === 0 || level === 1}>
             <summary
                 class="flex cursor-pointer items-center gap-1.5 rounded px-2 py-1 text-sm transition-colors list-none font-semibold"
                 style={`padding-left: ${paddingLeft}px`}

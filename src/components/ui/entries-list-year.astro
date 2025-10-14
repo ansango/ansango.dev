@@ -33,13 +33,12 @@ const parsedEntriesByYear = getCollectionsByYear(entries);
                             ({
                                 collection,
                                 id,
-                                data: { date, title, index, mod },
+                                data: { date, title, index },
                             }) => {
-                                const pub = collection !== "blog" ? mod : date;
                                 return (
-                                    <li class="list-none">
+                                    <li class="list-none flex items-center gap-3">
                                         <a
-                                            class="flex items-baseline"
+                                            class="flex items-baseline gap-2"
                                             href={
                                                 `/${collection}` +
                                                 (index ? "" : `/${id}`)
@@ -49,11 +48,11 @@ const parsedEntriesByYear = getCollectionsByYear(entries);
                                                 <time
                                                     class="text-sm text-muted whitespace-nowrap min-w-20"
                                                     datetime={getFormatDate(
-                                                        pub ?? date,
+                                                        date,
                                                     )}
                                                 >
                                                     {getFormatDate(
-                                                        pub ?? date,
+                                                        date,
                                                         "es-ES",
                                                         {
                                                             year: "numeric",
@@ -65,8 +64,13 @@ const parsedEntriesByYear = getCollectionsByYear(entries);
                                                         .join(" · ")}
                                                 </time>
                                             )}
+                                            
+                                            
                                             <u class="line-clamp-1">{title}</u>
+
+                                
                                         </a>
+                                        <a href={`/${collection}`} class="inline whitespace-nowrap italic text-sm text-muted hover:text-link">{collection}</a>
                                     </li>
                                 );
                             },

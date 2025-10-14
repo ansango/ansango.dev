@@ -2,11 +2,7 @@
 import { EntriesListYear, Pagination } from "@/components";
 import type { Meta } from "@/content.config";
 import { LayoutDefault } from "@/layout";
-import {
-    getPagination,
-    type Entries,
-    getCollectionsByYear,
-} from "@/lib/collections";
+import { getPagination, type Entries } from "@/lib/collections";
 
 interface Props {
     entries: Entries;
@@ -18,22 +14,19 @@ interface Props {
 
 const { entries, page, entriesPerPage, isIndex, meta } = Astro.props;
 
-
-
 const { currentPage, paginatedEntries, totalPages } = getPagination({
     isIndex,
     entries,
     page,
     entriesPerPage,
 });
-
 ---
 
 <LayoutDefault {...meta} type="main">
     <h1>Archivo</h1>
     <div class="flex flex-col h-full">
         <div class="flex-1 space-y-4">
-             <EntriesListYear entries={paginatedEntries} />
+            <EntriesListYear entries={paginatedEntries} />
         </div>
 
         <Pagination

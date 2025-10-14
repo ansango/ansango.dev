@@ -11,8 +11,8 @@ const { entries } = Astro.props;
 
 <ul class="list-none space-y-2">
   {
-    entries.map(({ collection, id, data: { date, title, index, mod } }) => {
-      const pub = collection !== "blog" ? mod : date;
+    entries.map(({ collection, id, data: { date, title, index } }) => {
+
       return (
         <li class="list-none">
           <a
@@ -22,9 +22,9 @@ const { entries } = Astro.props;
             {date && (
               <time
                 class="text-sm text-muted whitespace-nowrap min-w-20"
-                datetime={getFormatDate(pub ?? date)}
+                datetime={getFormatDate(date)}
               >
-                {getFormatDate(pub ?? date, "es-ES", {
+                {getFormatDate(date, "es-ES", {
                   year: "numeric",
                   month: "2-digit",
                 })

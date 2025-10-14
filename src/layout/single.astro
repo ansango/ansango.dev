@@ -3,6 +3,7 @@ import type { CollectionName } from "@/content.config";
 
 import { getEntry, render } from "astro:content";
 import { LayoutDefault } from ".";
+import { getFormatDate } from "@/lib/utils";
 
 interface Props {
     collection: CollectionName;
@@ -16,13 +17,22 @@ if (!entry) {
     throw new Error(`Entry not found: ${collection}/${entryId}`);
 }
 
-const { title } = entry.data;
-
+const { title, date, mod } = entry.data;
 
 const { Content, remarkPluginFrontmatter } = await render(entry);
 ---
 
 <LayoutDefault {...remarkPluginFrontmatter} type="main">
+    {
+        date && (
+            <time
+                datetime={getFormatDate(mod ?? date, "es-ES")}
+                class="text-sm text-muted"
+            >
+                actualizado el {getFormatDate(mod ?? date, "es-ES")}
+            </time>
+        )
+    }
     <h1>{title}</h1>
     <Content />
 </LayoutDefault>

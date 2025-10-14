@@ -15,22 +15,22 @@ interface Props {
     collection: CollectionName;
 }
 
-const { title, date, mod, description, tags, readingTime, collection } =
+const { title, date, mod, description, tags, readingTime } =
     Astro.props;
 const parsedDate = new Date(mod ?? date ?? "");
 const now = new Date();
 const oneYear = 1000 * 60 * 60 * 24 * 365;
 const isOutdated = parsedDate && now.getTime() - parsedDate.getTime() > oneYear;
-const pub = collection !== "blog" ? mod : date;
+
 ---
 
 {
     date && (
         <time
-            datetime={getFormatDate(pub ?? date, "es-ES")}
+            datetime={getFormatDate(date, "es-ES")}
             class="text-sm text-muted"
         >
-            {getFormatDate(pub ?? date, "es-ES")}
+            {mod && "actualizado el "} {getFormatDate(mod ?? date, "es-ES")}
         </time>
     )
 }

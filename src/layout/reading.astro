@@ -30,6 +30,11 @@ const { currentPage, paginatedEntries, totalPages } = getPagination({
     <h1>Reading</h1>
     <p>Estos son algunos de los artículos, posts y recursos que he guardado para leer más tarde o para referencia futura.</p>
     <Divider/>
+
+    {entries.length === 0 && (
+        <p class="text-center text-muted">No hay elementos para mostrar.</p>
+    )}
+
     <ul class="space-y-6">
         {paginatedEntries?.map((item) => (
             <li class="list-none space-y-0.5">

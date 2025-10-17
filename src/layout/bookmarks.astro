@@ -43,33 +43,47 @@ const { currentPage, paginatedEntries, totalPages } = getPagination({
     entries.length === 0 ? (
       <p class="text-center text-muted">No hay elementos para mostrar.</p>
     ) : (
-      <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 ">
-        {paginatedEntries?.map((item) => (
-          <li class="list-none space-y-0.5  w-full flex flex-col justify-between">
-            <Link href={item.link} blank={true} className="group">
-              <div class="space-y-1">
-                <h2 class="line-clamp-1 text-lg leading-tight group-hover:text-link">
-                  {item.title}
-                  <ExternalLinkIcon className="inline-block size-5 ml-0.5 mb-0.5" />
-                </h2>
-                {item.excerpt && (
-                  <p class="text-sm text-muted line-clamp-2 leading-normal mb-1.5">
-                    {item.excerpt}
-                  </p>
-                )}
-              </div>
-              {item.tags && (
-                <div class="space-x-1.5">
-                  {item.tags.map((tag: string) => (
-                    <span class="group-hover:!text-content text-xs bg-divider px-1.5 py-0.5 rounded-full">
-                      {tag}
-                    </span>
-                  ))}
+      <ul class="grid grid-cols-1 gap-4">
+        {paginatedEntries?.map((item) => {
+          return (
+            <li class="list-none space-y-0.5 w-full">
+              <Link href={item.link} blank={true} className="group">
+                <div class="flex gap-2 sm:gap-4">
+                  <div class="max-w-12 max-h-12 size-full border border-divider rounded-md overflow-hidden flex-shrink-0 sm:max-w-16 sm:max-h-16">
+                    <img
+                      src={item.cover}
+                      alt={item.title}
+                      class="w-full h-auto object-cover aspect-square"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div>
+                    <div class="space-y-0.5">
+                      <h2 class="line-clamp-1 text-lg leading-tight group-hover:text-link">
+                        {item.title}
+                        <ExternalLinkIcon className="inline-block size-5 ml-0.5 mb-0.5" />
+                      </h2>
+                      {item.excerpt && (
+                        <p class="text-sm text-muted line-clamp-2 leading-normal mb-1.5">
+                          {item.excerpt}
+                        </p>
+                      )}
+                    </div>
+                    {item.tags && (
+                      <div class="space-x-1.5">
+                        {item.tags.map((tag: string) => (
+                          <span class="group-hover:!text-content text-xs bg-divider px-1.5 py-0.5 rounded-full">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
-              )}
-            </Link>
-          </li>
-        ))}
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     )
   }

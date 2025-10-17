@@ -7,7 +7,12 @@ import {
   getSortedCollectionsByYear,
   getUniqueTags,
 } from "@/lib/collections";
-import { getBookmarksByCollection,getCollectionsExcludingReading, getRaindropData } from "./cached";
+
+import {
+  getBookmarksByCollection,
+  getCollectionsExcludingReading,
+  getRaindropData,
+} from "@/lib/raindrop";
 
 export const getCollectionStaticPaths = () => {
   return collectionNames.map((collection) => ({
@@ -90,9 +95,6 @@ export const getTagStaticPathsPage = async () => {
   });
 };
 
-
-
-
 export const getReadingStaticPathsPage = async () => {
   const entries = await getBookmarksByCollection("reading");
   const totalPages = getPageNumbers(
@@ -107,7 +109,6 @@ export const getReadingStaticPathsPage = async () => {
   });
 };
 
-
 export const getBookmarksStaticPaths = async () => {
   const collections = await getCollectionsExcludingReading();
   return collections.map(({ title }) => {
@@ -115,20 +116,23 @@ export const getBookmarksStaticPaths = async () => {
       params: { collection: title },
     };
   });
-}
+};
 
 export const getBookmarksStaticPathsPage = async () => {
-    const { bookmarks,collections} = await getRaindropData();
-    return collections.flatMap((collection) => {
-        const items = bookmarks.filter(b => b.collectionId === collection._id);
-        const totalPages = getPageNumbers(items.length, site.pages.bookmarks.entriesPerPage);
-        return totalPages.map((page) => {
-            return {
-                params: {
-                    collection: collection.title,
-                    page,
-                },
-            };
-        });
+  const { bookmarks, collections } = await getRaindropData();
+  return collections.flatMap((collection) => {
+    const items = bookmarks.filter((b) => b.collectionId === collection._id);
+    const totalPages = getPageNumbers(
+      items.length,
+      site.pages.bookmarks.entriesPerPage
+    );
+    return totalPages.map((page) => {
+      return {
+        params: {
+          collection: collection.title,
+          page,
+        },
+      };
     });
-}
+  });
+};

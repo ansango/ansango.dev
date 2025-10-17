@@ -2,7 +2,7 @@
 
 import { LayoutReading } from "@/layout";
 import { site } from "@/constants";
-import { getBookmarksByCollection } from "@/lib/cached";
+import { getBookmarksByCollection } from "@/lib/raindrop";
 
 const entries = await getBookmarksByCollection("reading");
 const entriesPerPage = site.pages.reading.entriesPerPage;

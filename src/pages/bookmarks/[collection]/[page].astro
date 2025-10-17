@@ -1,9 +1,8 @@
 ---
-
 import { site } from "@/constants";
 import { getBookmarksStaticPathsPage } from "@/lib/astro";
-import {  LayoutBookmarks  } from "@/layout";
-import { getBookmarksByCollection } from "@/lib/cached";
+import { LayoutBookmarks } from "@/layout";
+import { getBookmarksByCollection } from "@/lib/raindrop";
 
 export { getBookmarksStaticPathsPage as getStaticPaths };
 
@@ -11,10 +10,7 @@ const { page, collection } = Astro.params;
 const entries = await getBookmarksByCollection(collection);
 const entriesPerPage = site.pages.bookmarks.entriesPerPage;
 const meta = site.pages.bookmarks;
-
 ---
-
-
 
 <LayoutBookmarks
   collection={collection}
@@ -24,4 +20,3 @@ const meta = site.pages.bookmarks;
   page={page}
   isIndex={false}
 />
-    

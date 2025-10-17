@@ -54,7 +54,7 @@ export const getArchiveStaticPathsPage = async () => {
 
   const totalPages = getPageNumbers(
     content.length,
-    site.pages.archive.entriesPerPage || 10
+    site.pages.archive.entriesPerPage || 10,
   );
 
   return totalPages.map((page) => {
@@ -77,12 +77,12 @@ export const getTagStaticPathsPage = async () => {
   const tags = await getUniqueTags();
   return tags.flatMap((tag) => {
     const allCollections = content.filter((collection) =>
-      collection.data.tags?.includes(tag)
+      collection.data.tags?.includes(tag),
     );
 
     const totalPages = getPageNumbers(
       allCollections.length,
-      site.pages.tags.entriesPerPage
+      site.pages.tags.entriesPerPage,
     );
     return totalPages.map((page) => {
       return {
@@ -99,7 +99,7 @@ export const getReadingStaticPathsPage = async () => {
   const entries = await getBookmarksByCollection("reading");
   const totalPages = getPageNumbers(
     entries.length,
-    site.pages.reading.entriesPerPage
+    site.pages.reading.entriesPerPage,
   );
 
   return totalPages.map((page) => {
@@ -124,7 +124,7 @@ export const getBookmarksStaticPathsPage = async () => {
     const items = bookmarks.filter((b) => b.collectionId === collection._id);
     const totalPages = getPageNumbers(
       items.length,
-      site.pages.bookmarks.entriesPerPage
+      site.pages.bookmarks.entriesPerPage,
     );
     return totalPages.map((page) => {
       return {

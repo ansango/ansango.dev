@@ -1,8 +1,11 @@
-import { getCollection, type InferEntrySchema, type RenderedContent } from "astro:content";
+import {
+  getCollection,
+  type InferEntrySchema,
+  type RenderedContent,
+} from "astro:content";
 import { slugify } from "./utils";
 import { collectionNames, type CollectionName } from "@/content.config";
 import { site } from "@/constants";
-
 
 export type Entry = {
   id: string;
@@ -24,7 +27,8 @@ export const getAllPromiseCollections = async () => {
 
 export const getAllCollections = async () => {
   const collections = await getAllPromiseCollections();
-  return collections.filter(({ data: { published } }) => published)
+  return collections
+    .filter(({ data: { published } }) => published)
     .map((entry) => {
       return {
         ...entry,
@@ -90,7 +94,8 @@ export const getAllNumberPaths = async () => {
   return Object.keys(contentByCategory)
     .map((collection) => {
       const collectionContent = contentByCategory[collection];
-      const entriesPerPage = site.pages[collection as CollectionName]?.entriesPerPage || 10;
+      const entriesPerPage =
+        site.pages[collection as CollectionName]?.entriesPerPage || 10;
       const pathNumbers = getPageNumbers(
         collectionContent.length,
         entriesPerPage,
@@ -102,7 +107,6 @@ export const getAllNumberPaths = async () => {
     })
     .flat();
 };
-
 
 export const getUniqueTags = async () => {
   const collections = await getAllCollections();
@@ -148,11 +152,20 @@ type GetPaginationProps<T> = {
   entriesPerPage: number;
 };
 
-export const getPagination = <T>({ entries, page, isIndex = false, entriesPerPage }: GetPaginationProps<T[]>) => {
+export const getPagination = <T>({
+  entries,
+  page,
+  isIndex = false,
+  entriesPerPage,
+}: GetPaginationProps<T[]>) => {
   const totalPagesArray = getPageNumbers(entries.length, entriesPerPage);
   const totalPages = totalPagesArray.length;
 
-  const currentPage = isIndex ? 1 : page && !isNaN(Number(page)) && totalPagesArray.includes(Number(page)) ? Number(page) : 0;
+  const currentPage = isIndex
+    ? 1
+    : page && !isNaN(Number(page)) && totalPagesArray.includes(Number(page))
+      ? Number(page)
+      : 0;
 
   const lastEntry = isIndex ? entriesPerPage : currentPage * entriesPerPage;
   const startEntry = isIndex ? 0 : lastEntry - entriesPerPage;
@@ -164,7 +177,6 @@ export const getPagination = <T>({ entries, page, isIndex = false, entriesPerPag
     paginatedEntries,
   };
 };
-
 
 export const getCollectionsByTag = async (tag: string) => {
   const collections = await getAllCollections();
@@ -182,33 +194,34 @@ export const getTagsGroupedByLetter = async () => {
 };
 
 export const getSortedCollectionsByYear = async () => {
-  const collections = await getAllCollections()
+  const collections = await getAllCollections();
   return collections.sort((a, b) => {
-    if (!a.data.date) return -1
-    if (!b.data.date) return 1
-    return new Date(b.data.date).getFullYear() - new Date(a.data.date).getFullYear()
-  })
-}
+    if (!a.data.date) return -1;
+    if (!b.data.date) return 1;
+    return (
+      new Date(b.data.date).getFullYear() - new Date(a.data.date).getFullYear()
+    );
+  });
+};
 
 export const getCollectionsByYear = (collections: Entries) => {
-
   collections.sort((a, b) => {
-    if (!a.data.date) return -1
-    if (!b.data.date) return 1
-    return new Date(b.data.date).getFullYear() - new Date(a.data.date).getFullYear()
-  })
-
-  return collections
-    .reduce(
-      (acc, publication) => {
-        const year = new Date(publication.data.date ?? "").getFullYear()
-        if (!acc[year]) {
-          acc[year] = [];
-        }
-        acc[year].push(publication);
-        return acc;
-      },
-      {} as Record<string | number, typeof collections>,
+    if (!a.data.date) return -1;
+    if (!b.data.date) return 1;
+    return (
+      new Date(b.data.date).getFullYear() - new Date(a.data.date).getFullYear()
     );
-}
+  });
 
+  return collections.reduce(
+    (acc, publication) => {
+      const year = new Date(publication.data.date ?? "").getFullYear();
+      if (!acc[year]) {
+        acc[year] = [];
+      }
+      acc[year].push(publication);
+      return acc;
+    },
+    {} as Record<string | number, typeof collections>,
+  );
+};

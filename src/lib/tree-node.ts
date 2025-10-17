@@ -7,32 +7,39 @@ export type NodeItem = {
   path: string;
   children?: NodeItem[];
   level: number;
-
 };
 
-export const getTreeNode = (entries: Entries, collectionName: CollectionName) => {
-  const mappedEntries = entries.filter(({ collection }) => collection === collectionName).map((entry) => {
-    const { collection, id, data } = entry;
-    const { title } = data;
-    return { path: `/${collection}/${id}`, title, collection, id };
-  }).sort((a, b) => a.title.localeCompare(b.title));
+export const getTreeNode = (
+  entries: Entries,
+  collectionName: CollectionName,
+) => {
+  const mappedEntries = entries
+    .filter(({ collection }) => collection === collectionName)
+    .map((entry) => {
+      const { collection, id, data } = entry;
+      const { title } = data;
+      return { path: `/${collection}/${id}`, title, collection, id };
+    })
+    .sort((a, b) => a.title.localeCompare(b.title));
 
   const structure: NodeItem[] = [];
 
   mappedEntries.forEach((entry) => {
-    const parts = entry.path.split('/').filter(part => part !== 'wiki' && part !== '');
+    const parts = entry.path
+      .split("/")
+      .filter((part) => part !== "wiki" && part !== "");
     let currentLevel = structure;
 
     parts.forEach((part, index) => {
-      let existingPath = currentLevel.find(item => item.name === part);
-      const type = index === parts.length - 1 ? 'file' : 'folder';
+      let existingPath = currentLevel.find((item) => item.name === part);
+      const type = index === parts.length - 1 ? "file" : "folder";
       if (!existingPath) {
         existingPath = {
           name: type == "file" ? entry.title : part,
           type,
           path: `/${entry.collection}/${entry.id}`,
           children: [],
-          level: index
+          level: index,
         };
         currentLevel.push(existingPath);
       }
@@ -44,7 +51,7 @@ export const getTreeNode = (entries: Entries, collectionName: CollectionName) =>
     if (a.type === b.type) {
       return a.name.localeCompare(b.name);
     }
-    return a.type === 'folder' ? -1 : 1;
+    return a.type === "folder" ? -1 : 1;
   });
 };
 
@@ -77,9 +84,11 @@ export function countCategories(nodes: NodeItem[]) {
 export function sortTreeNodeFilesFirst(nodes: NodeItem[]): NodeItem[] {
   // Ordenar recursivamente: archivos primero, luego carpetas
   return nodes
-    .map(node => ({
+    .map((node) => ({
       ...node,
-      children: node.children ? sortTreeNodeFilesFirst(node.children) : undefined
+      children: node.children
+        ? sortTreeNodeFilesFirst(node.children)
+        : undefined,
     }))
     .sort((a, b) => {
       // Si son del mismo tipo, ordenar alfabéticamente
@@ -87,7 +96,6 @@ export function sortTreeNodeFilesFirst(nodes: NodeItem[]): NodeItem[] {
         return a.name.localeCompare(b.name);
       }
       // Archivos primero (file), luego carpetas (folder)
-      return a.type === 'file' ? -1 : 1;
+      return a.type === "file" ? -1 : 1;
     });
 }
-

@@ -3,14 +3,31 @@ import {
 	getAllCollectionsByCategory,
 	getLastEntriesByAllCollections,
 	getTagsLimitedByLetter,
+	type Entry as EntryType,
 } from "@/lib/collections";
 import { site } from "@/constants";
 import { Divider, EntriesList, Entry, ExternalLinkIcon, Link, Tag } from "@/components";
 import { LayoutDefault } from "@/layout";
+import { getLatestReading } from "@/lib/raindrop";
+
 const meta = site.pages.home;
 const tags = await getTagsLimitedByLetter(1);
 const latests = await getLastEntriesByAllCollections();
 const collections = await getAllCollectionsByCategory();
+const LIMIT_BOOKMARKS = 5;
+const bookmarks = await getLatestReading(LIMIT_BOOKMARKS);
+const latestBookmarks = bookmarks.map(({title, excerpt: description,created:date}) => {
+	return {
+		data: {
+			title,
+			description,
+			date
+		},
+	} as unknown as EntryType;
+});
+
+
+
 ---
 
 <LayoutDefault {...meta} type="main">
@@ -76,6 +93,21 @@ const collections = await getAllCollectionsByCategory();
 					</section>
 				)
 			}
+
+			<section>
+					<h2 class="font-medium text-muted">
+						<a href="/bookmarks">Bookmarks</a> & <a href="/reading">Reading</a>
+					</h2>
+					<EntriesList entries={latestBookmarks} />
+					{ latestBookmarks.length >= LIMIT_BOOKMARKS && (
+						<span class="block mt-4 text-sm">
+							<a href="/reading">
+								Ver todos los enlaces →
+							</a>
+						</span>
+					)}
+				<Divider />
+				</section>
 
 			{
 				Object.entries(collections).map(([collection, entries]) => {

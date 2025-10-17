@@ -46,7 +46,7 @@ interface GetBookmarkItemsResponse {
 
 export const getBookmarkItems = async (
   id = 0,
-  pageIndex = 0
+  pageIndex = 0,
 ): Promise<GetBookmarkItemsResponse | null> => {
   if (typeof pageIndex !== "number" || pageIndex < 0) {
     throw new Error("Invalid page index");
@@ -59,7 +59,7 @@ export const getBookmarkItems = async (
           page: String(pageIndex),
           perpage: String(50),
         }),
-      options
+      options,
     );
 
     if (!response.ok) {
@@ -85,7 +85,7 @@ export const getAllBookmarkItems = async (id = 0) => {
       totalItems = data.count || 0;
       pageIndex++;
       console.log(
-        `Fetched page ${pageIndex}, total items so far: ${allItems.length}`
+        `Fetched page ${pageIndex}, total items so far: ${allItems.length}`,
       );
     } else {
       break;
@@ -93,7 +93,7 @@ export const getAllBookmarkItems = async (id = 0) => {
   } while (allItems.length < totalItems);
 
   return allItems.sort(
-    (a, b) => new Date(b.created).getTime() - new Date(a.created).getTime()
+    (a, b) => new Date(b.created).getTime() - new Date(a.created).getTime(),
   );
 };
 

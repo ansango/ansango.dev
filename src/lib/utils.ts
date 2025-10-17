@@ -25,10 +25,16 @@ const formatDateOptionsDefault: Intl.DateTimeFormatOptions = {
   year: "numeric",
 };
 
-export const getFormatDate = (date: Date | string, locale: "en-US" | "es-ES" = "es-ES", options = formatDateOptionsDefault): string =>
-  Intl.DateTimeFormat(locale, options).format(new Date(date));
+export const getFormatDate = (
+  date: Date | string,
+  locale: "en-US" | "es-ES" = "es-ES",
+  options = formatDateOptionsDefault,
+): string => Intl.DateTimeFormat(locale, options).format(new Date(date));
 
-export const getPageNumbers = (numberOfPosts: number, entriesPerPage: number) => {
+export const getPageNumbers = (
+  numberOfPosts: number,
+  entriesPerPage: number,
+) => {
   const numberOfPages = numberOfPosts / Number(entriesPerPage);
 
   let pageNumbers: number[] = [];
@@ -40,4 +46,4 @@ export const getPageNumbers = (numberOfPosts: number, entriesPerPage: number) =>
 };
 
 export const getPublishedEntries = (node: TreeNode) =>
-  Object.entries(node).filter(([, { published }]) => published)
+  Object.entries(node).filter(([, { published }]) => published);

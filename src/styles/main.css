@@ -1,20 +1,20 @@
 @layer base {
-    html {
-        @apply motion-safe:scroll-smooth size-full text-base;
-        @apply text-content bg-body;
-        scrollbar-gutter: stable;
-    }
+  html {
+    @apply motion-safe:scroll-smooth size-full text-base;
+    @apply text-content bg-body;
+    scrollbar-gutter: stable;
+  }
 
-    body {
-        @apply h-dvh subpixel-antialiased;
-        text-rendering: optimizeLegibility;
-    }
+  body {
+    @apply h-dvh subpixel-antialiased;
+    text-rendering: optimizeLegibility;
+  }
 
-    main {
-        @apply p-4;
-    }
+  main {
+    @apply p-4;
+  }
 
-    section {
-        @apply my-8;
-    }
+  section {
+    @apply my-8;
+  }
 }

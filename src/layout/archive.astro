@@ -5,35 +5,35 @@ import { LayoutDefault } from "@/layout";
 import { getPagination, type Entries } from "@/lib/collections";
 
 interface Props {
-    entries: Entries;
-    page: number;
-    entriesPerPage: number;
-    isIndex: boolean;
-    meta: Meta;
+  entries: Entries;
+  page: number;
+  entriesPerPage: number;
+  isIndex: boolean;
+  meta: Meta;
 }
 
 const { entries, page, entriesPerPage, isIndex, meta } = Astro.props;
 
 const { currentPage, paginatedEntries, totalPages } = getPagination({
-    isIndex,
-    entries,
-    page,
-    entriesPerPage,
+  isIndex,
+  entries,
+  page,
+  entriesPerPage,
 });
 ---
 
 <LayoutDefault {...meta} type="main">
-    <h1>Archivo</h1>
-    <div class="flex flex-col h-full">
-        <div class="flex-1 space-y-4">
-            <EntriesListYear entries={paginatedEntries} />
-        </div>
-
-        <Pagination
-            {currentPage}
-            {totalPages}
-            prevUrl={`/archive${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
-            nextUrl={`/archive/${currentPage + 1}/`}
-        />
+  <h1>Archivo</h1>
+  <div class="flex flex-col h-full">
+    <div class="flex-1 space-y-4">
+      <EntriesListYear entries={paginatedEntries} />
     </div>
+
+    <Pagination
+      {currentPage}
+      {totalPages}
+      prevUrl={`/archive${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
+      nextUrl={`/archive/${currentPage + 1}/`}
+    />
+  </div>
 </LayoutDefault>

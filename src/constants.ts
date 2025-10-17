@@ -98,7 +98,7 @@ const contentCollections: Record<CollectionName, Meta> = {
         url: "/uses",
         published: true,
     },
-    bookmarks,
+    
     wiki
 }
 
@@ -107,6 +107,7 @@ const pages = {
     tags,
     archive,
     reading,
+    bookmarks,
     ...contentCollections,
 }
 
@@ -150,8 +151,8 @@ const tree: Tree = {
         blog: contentCollections.blog,
         projects: contentCollections.projects,
         blogroll: contentCollections.blogroll,
-        bookmarks: contentCollections.bookmarks,
-        reading: reading,
+        bookmarks,
+        reading,
     },
     explore,
     social,

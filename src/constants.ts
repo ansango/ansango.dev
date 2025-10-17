@@ -38,6 +38,14 @@ const reading: Meta = {
     published: true,
 }
 
+const bookmarks: Meta =  {
+        title: "Bookmarks",
+        description: "Aquí encontrarás todos mis marcadores organizados por etiquetas y colecciones.",
+        entriesPerPage: 50,
+        url: "/bookmarks",
+        published: true,
+    }
+
 const wiki: Meta = {
     title: "Wiki",
     description: "Una colección de artículos y recursos técnicos.",
@@ -90,13 +98,7 @@ const contentCollections: Record<CollectionName, Meta> = {
         url: "/uses",
         published: true,
     },
-    bookmarks: {
-        title: "Bookmarks",
-        description: "Una colección de mis enlaces y recursos favoritos.",
-        entriesPerPage: 10,
-        url: "/bookmarks",
-        published: true,
-    },
+    bookmarks,
     wiki
 }
 

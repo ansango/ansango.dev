@@ -2,69 +2,76 @@
 import { Divider, ExternalLinkIcon, Link, Pagination } from "@/components";
 import { LayoutDefault } from "@/layout";
 import { getPagination } from "@/lib/collections";
-import { type Raindrop } from "@/lib/raindrop";
+
 import type { Meta } from "@/content.config";
 import { getFormatDate } from "@/lib/utils";
+import { site } from "@/constants";
+
+import type { CachedBookmarkData } from "@/lib/cached";
 
 interface Props {
-    entries: Raindrop[];
-    page: number;
-    entriesPerPage: number;
-    isIndex: boolean;
-    meta: Meta;
+  entries: CachedBookmarkData[];
+  page: number;
+  entriesPerPage: number;
+  isIndex: boolean;
+  meta: Meta;
 }
 
 const { entries, page, entriesPerPage, isIndex, meta } = Astro.props;
 
-
 const { currentPage, paginatedEntries, totalPages } = getPagination({
-    isIndex,
-    entries,
-    page,
-    entriesPerPage,
+  isIndex,
+  entries,
+  page,
+  entriesPerPage,
 });
-
 ---
 
 <LayoutDefault {...meta} type="article">
-    <h1>Reading</h1>
-    <p>Estos son algunos de los artículos, posts y recursos que he guardado para leer más tarde o para referencia futura.</p>
-    <Divider/>
-
-    {entries.length === 0 && (
-        <p class="text-center text-muted">No hay elementos para mostrar.</p>
-    )}
-
-    <ul class="space-y-6">
+  <h1>{site.pages.reading.title}</h1>
+  <p class="text-muted">{site.pages.reading.description}</p>
+  <Divider />
+  {
+    entries.length === 0 ? (
+      <p class="text-center text-muted">No hay elementos para mostrar.</p>
+    ) : (
+      <ul class="space-y-6">
         {paginatedEntries?.map((item) => (
-            <li class="list-none space-y-0.5">
-                <time
-                    datetime={getFormatDate(item.created, "es-ES")}
-            class="text-xs text-muted"
-        >
-           {getFormatDate(item.created, "es-ES")}
-        </time>
-                <h2 class="line-clamp-2 text-xl">
-                    <Link href={item.link} blank={true}  >
-                        {item.title}<ExternalLinkIcon className="inline-block size-5 ml-0.5 mb-0.5" />
-                    </Link>
-                </h2>
-                {item.excerpt && <p class="text-sm text-muted line-clamp-2">{item.excerpt}</p>}
-                {item.tags && (
-                    <div class="mt-2 space-x-2">
-                        {item.tags.map((tag:string) => (
-                            <span class="text-xs bg-muted/10 text-muted px-2 py-1 rounded-full">{tag}</span>
-                        ))}
-                    </div>
-                )}
-            </li>
+          <li class="list-none">
+            <Link href={item.link} blank={true} className="group space-y-0.5">
+              <time
+                datetime={getFormatDate(item.created, "es-ES")}
+                class="text-xs text-muted"
+              >
+                {getFormatDate(item.created, "es-ES")}
+              </time>
+              <h2 class="line-clamp-2 group-hover:text-link">
+                {item.title}
+                <ExternalLinkIcon className="inline-block size-5 ml-0.5 mb-0.5" />
+              </h2>
+              {item.excerpt && (
+                <p class="text-sm text-muted line-clamp-2">{item.excerpt}</p>
+              )}
+              {item.tags && (
+                <div class="mt-1 space-x-2">
+                  {item.tags.map((tag: string) => (
+                    <span class="text-xs bg-muted/10 text-muted px-2 py-1 rounded-full">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </Link>
+          </li>
         ))}
-    </ul>
+      </ul>
+    )
+  }
 
-     <Pagination
-            {currentPage}
-            {totalPages}
-            prevUrl={`/reading${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
-            nextUrl={`/reading/${currentPage + 1}/`}
-        />
+  <Pagination
+    {currentPage}
+    {totalPages}
+    prevUrl={`/reading${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
+    nextUrl={`/reading/${currentPage + 1}/`}
+  />
 </LayoutDefault>

@@ -1,19 +1,17 @@
 ---
 
-import { getAllBookmarkItems } from "@/lib/raindrop";
 import { site } from "@/constants";
-import { getReadingStaticPathsPage } from "@/lib/astro";
+import { getReadingStaticPathsPage as getStaticPaths } from "@/lib/astro";
 import {  LayoutReading } from "@/layout";
+import { getBookmarksByCollection } from "@/lib/cached";
 
-
-export async function getStaticPaths() {
-    return getReadingStaticPathsPage();
-}
+export { getStaticPaths };
 
 const { page } = Astro.params;
-const entries = await getAllBookmarkItems();
+const entries = await getBookmarksByCollection("reading");
 const entriesPerPage = site.pages.reading.entriesPerPage;
 const meta = site.pages.reading;
+
 ---
 <LayoutReading
   entries={entries}

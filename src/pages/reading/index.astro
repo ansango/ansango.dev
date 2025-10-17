@@ -1,16 +1,14 @@
 ---
 
-import {  LayoutReading } from "@/layout";
-import {  getAllBookmarkItems } from "@/lib/raindrop";
+import { LayoutReading } from "@/layout";
 import { site } from "@/constants";
+import { getBookmarksByCollection } from "@/lib/cached";
 
-const entries = await getAllBookmarkItems();
+const entries = await getBookmarksByCollection("reading");
 const entriesPerPage = site.pages.reading.entriesPerPage;
 const meta = site.pages.reading;
-
-
-
 ---
+
 <LayoutReading
   entries={entries}
   entriesPerPage={entriesPerPage}

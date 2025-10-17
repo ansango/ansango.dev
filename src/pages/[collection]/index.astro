@@ -5,18 +5,12 @@ import { getCollectionStaticPaths } from "@/lib/astro";
 import { getAllCollectionsByCategory } from "@/lib/collections";
 import { LayoutCollection, LayoutSingle } from "@/layout";
 
-export function getStaticPaths() {
-    return getCollectionStaticPaths();
-}
+export { getCollectionStaticPaths as getStaticPaths };
 
-interface Params {
-    collection: CollectionName;
-}
-
-const { collection } = Astro.params as Params;
+const { collection } = Astro.params;
 const entries = (await getAllCollectionsByCategory())[collection];
-const meta = site.pages[collection];
-const entriesPerPage = meta.entriesPerPage || 10;
+const meta = site.pages[collection as CollectionName];
+const entriesPerPage = meta.entriesPerPage;
 
 if (!entries) {
     return Astro.redirect("/");

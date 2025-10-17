@@ -5,9 +5,7 @@ import { site } from "@/constants";
 import type { CollectionName } from "@/content.config";
 import { getCollectionStaticPathsSlug } from "@/lib/astro";
 
-export async function getStaticPaths() {
-    return getCollectionStaticPathsSlug();
-}
+export { getCollectionStaticPathsSlug as getStaticPaths };
 
 const { slug, collection } = Astro.params as {
     slug: string;

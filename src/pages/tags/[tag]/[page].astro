@@ -5,9 +5,7 @@ import { LayoutTag } from "@/layout";
 import { getCollectionsByTag } from "@/lib/collections";
 import { getTagStaticPathsPage } from "@/lib/astro";
 
-export async function getStaticPaths() {
-  return getTagStaticPathsPage();
-}
+export { getTagStaticPathsPage as getStaticPaths };
 
 const { page, tag } = Astro.params;
 

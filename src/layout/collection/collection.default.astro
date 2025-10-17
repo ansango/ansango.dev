@@ -1,5 +1,5 @@
 ---
-import { Divider, Entry, Pagination } from "@/components";
+import { Divider, Entry, Link, Pagination } from "@/components";
 import type { CollectionName, Meta } from "@/content.config";
 import { LayoutDefault } from "@/layout";
 import { getPagination, type Entries } from "@/lib/collections";
@@ -31,13 +31,13 @@ const { currentPage, paginatedEntries, totalPages } = getPagination({
             {
                 paginatedEntries.map((entry, i) => (
                     <li class="list-none">
-                        <a
+                        <Link
                             href={`/${entry.collection}/${entry.id}`}
-                            class="space-y-1"
+                            className="space-y-1 group"
                         >
                             <Entry entry={entry} />
                             {i < paginatedEntries.length - 1 && <Divider />}
-                        </a>
+                        </Link>
                     </li>
                 ))
             }

@@ -5,9 +5,7 @@ import { getArchiveStaticPathsPage } from "@/lib/astro";
 import { getSortedCollectionsByYear } from "@/lib/collections";
 
 
-export async function getStaticPaths() {
-    return getArchiveStaticPathsPage();
-}
+export { getArchiveStaticPathsPage as getStaticPaths };
 
 const { page } = Astro.params;
 const entries = await getSortedCollectionsByYear();

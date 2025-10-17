@@ -2,11 +2,9 @@
 import { site } from "@/constants";
 import { LayoutTag } from "@/layout";
 import { getTagStaticPaths } from "@/lib/astro";
-import { getCollectionsByTag, getUniqueTags } from "@/lib/collections";
+import { getCollectionsByTag} from "@/lib/collections";
 
-export async function getStaticPaths() {
-  return getTagStaticPaths();
-}
+export { getTagStaticPaths as getStaticPaths };
 
 const { tag } = Astro.props;
 const entries = await getCollectionsByTag(tag);

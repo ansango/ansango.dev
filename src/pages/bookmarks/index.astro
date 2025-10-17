@@ -1,0 +1,27 @@
+---
+import { LayoutDefault } from "@/layout";
+import { getCollectionsExcludingReading } from "@/lib/cached";
+import { site } from "@/constants";
+import { Divider, Link } from "@/components";
+const collections = await getCollectionsExcludingReading();
+---
+
+<LayoutDefault>
+  <h1>{site.pages.bookmarks.title}</h1>
+  <p>{site.pages.bookmarks.description}</p>
+  <Divider />
+    <ul class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ">
+        {collections?.map(({  title }) => {
+           
+            return (
+                <li class="list-none">
+                    <Link className="flex capitalize font-medium border border-divider p-2.5 rounded" href={`/bookmarks/${title}`}>
+                        {title}
+                    </Link>
+                </li>
+            );
+
+        })}
+
+    </ul>
+</LayoutDefault>

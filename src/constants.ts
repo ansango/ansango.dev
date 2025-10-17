@@ -30,6 +30,14 @@ const archive: Meta = {
     published: true,
 }
 
+const reading: Meta = {
+    title: "Reading",
+    description: "Estos son algunos de los artículos, posts y recursos que he guardado para leer más tarde o para referencia futura.",
+    entriesPerPage: 20,
+    url: "/reading",
+    published: true,
+}
+
 const wiki: Meta = {
     title: "Wiki",
     description: "Una colección de artículos y recursos técnicos.",
@@ -96,6 +104,7 @@ const pages = {
     home,
     tags,
     archive,
+    reading,
     ...contentCollections,
 }
 
@@ -140,6 +149,7 @@ const tree: Tree = {
         projects: contentCollections.projects,
         blogroll: contentCollections.blogroll,
         bookmarks: contentCollections.bookmarks,
+        reading: reading,
     },
     explore,
     social,

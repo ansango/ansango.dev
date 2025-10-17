@@ -22,12 +22,14 @@ const metaSchema = seoSchema.extend({
 });
 
 const commonSchema = seoSchema.extend(
-    z.object({
+   {
+  
         tags: z.array(z.string()).optional(),
         date: z.date().optional(),
         mod: z.date().optional(),
         index: z.boolean().default(false).optional(),
-    })
+  
+   }
 ).merge(metaSchema.pick({ published: true }));
 
 /**

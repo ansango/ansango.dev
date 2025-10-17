@@ -6,6 +6,7 @@ import {
     getSortedCollectionsByYear,
     getUniqueTags,
 } from "@/lib/collections";
+import { getAllBookmarkItems } from "./raindrop";
 
 
 export const getCollectionStaticPaths = () => {
@@ -83,5 +84,17 @@ export const getTagStaticPathsPage = async () => {
                 },
             };
         });
+    });
+}
+
+export const getReadingStaticPathsPage = async () => {
+    const entriesPerPage = site.pages.reading.entriesPerPage;
+    const data = await getAllBookmarkItems();
+    const totalPages = getPageNumbers(data.length, entriesPerPage);
+
+    return totalPages.map((page) => {
+        return {
+            params: { page },
+        };
     });
 }

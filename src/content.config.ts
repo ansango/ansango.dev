@@ -21,7 +21,7 @@ const metaSchema = seoSchema.extend({
     published: z.boolean().default(false).optional(),
 });
 
-const commonSchema = seoSchema.pick({ title: true, description: true }).merge(
+const commonSchema = seoSchema.extend(
     z.object({
         tags: z.array(z.string()).optional(),
         date: z.date().optional(),
@@ -29,7 +29,6 @@ const commonSchema = seoSchema.pick({ title: true, description: true }).merge(
         index: z.boolean().default(false).optional(),
     })
 ).merge(metaSchema.pick({ published: true }));
-
 
 /**
  * Collections

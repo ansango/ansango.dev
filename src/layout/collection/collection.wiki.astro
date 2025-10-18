@@ -4,6 +4,7 @@ import type { Entries } from "@/lib/collections";
 import { getTreeNode, countCategories, countEntries } from "@/lib/tree-node";
 import { LayoutDefault } from "@/layout";
 import { TreeNode } from "@/components";
+import { site } from "@/constants";
 
 interface Props {
   entries: Entries;
@@ -18,13 +19,15 @@ const totalCategories = countCategories(wikiStructure);
 ---
 
 <LayoutDefault {...meta} type="main">
-  <h1>Wiki</h1>
-  <p class="text-muted text-sm text-pretty">
-    {totalCategories === 1 ? "1 categoría" : `${totalCategories} categorías`} · {
-      totalEntries === 1 ? "1 entrada" : `${totalEntries} entradas`
-    }
-  </p>
-  <div class="flex h-full flex-col">
+  <div>
+    <h1>{site.pages.wiki.title}</h1>
+    <p class="text-muted text-pretty">
+      {site.pages.wiki.description}
+      {totalCategories === 1 ? "1 categoría" : `${totalCategories} categorías`} ·
+      {totalEntries === 1 ? "1 entrada" : `${totalEntries} entradas`}
+    </p>
+  </div>
+  <div class="flex h-full flex-col py-4">
     <article class="flex-1">
       <div class="space-y-4">
         <div class="border-divider rounded border">
@@ -39,7 +42,7 @@ const totalCategories = countCategories(wikiStructure);
           </div>
         </div>
 
-        <p class="text-muted text-xs">
+        <p class="text-muted text-sm">
           Haz clic en las carpetas para expandir o contraer las subcategorías
         </p>
       </div>

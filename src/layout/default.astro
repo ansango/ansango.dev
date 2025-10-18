@@ -22,7 +22,7 @@ const headProps = {
     <Head {...headProps} />
     <body class="flex flex-col min-h-dvh">
         <Header />
-        <Container className={`pt-20 flex-1 [&_h1~_p]:text-muted`} element={type}>
+        <Container className={`pt-20 flex-1 [&_h1+_p]:text-muted`} element={type}>
             <slot />
         </Container>
         <Footer />

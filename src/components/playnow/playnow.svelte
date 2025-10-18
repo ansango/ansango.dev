@@ -4,12 +4,13 @@
   import { createQuery } from "@tanstack/svelte-query";
 
   const { getRecentTracks } = userApiMethods;
-
+  const FIVE_MINUTES = 5 * 60 * 1000;
   const query = createQuery(
     () => ({
       queryKey: ["recent-tracks"],
       queryFn: () => getRecentTracks({ user: "ansango", limit: 1 }),
       select: ({ recenttracks: { track } }) => ({ track: track.at(0) }),
+      refetchInterval: FIVE_MINUTES,
     }),
     queryClient,
   );

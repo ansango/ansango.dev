@@ -38,29 +38,40 @@ const { currentPage, paginatedEntries, totalPages } = getPagination({
       <ul class="space-y-6">
         {paginatedEntries?.map((item) => (
           <li class="list-none">
-            <Link href={item.link} blank={true} className="group space-y-0.5">
-              <time
-                datetime={getFormatDate(item.created, "es-ES")}
-                class="text-xs text-muted"
-              >
-                {getFormatDate(item.created, "es-ES")}
-              </time>
-              <h2 class="line-clamp-2 group-hover:text-link">
-                {item.title}
-                <ExternalLinkIcon className="inline-block size-5 mb-0.5" />
-              </h2>
-              {item.excerpt && (
-                <p class="text-sm text-muted line-clamp-2">{item.excerpt}</p>
-              )}
-              {item.tags && (
-                <div class="mt-1 space-x-2">
-                  {item.tags.map((tag: string) => (
-                    <span class="text-xs bg-muted/10 text-muted px-2 py-1 rounded-full">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
+            <Link href={item.link} blank={true} className="group flex gap-2 sm:gap-4">
+              <div class="mt-8 sm:mt-6 max-w-8 max-h-8 size-full border border-divider rounded-full overflow-hidden flex-shrink-0 sm:max-w-12 sm:max-h-12">
+                <img
+                  src={item.cover}
+                  alt={item.title}
+                  class="w-full h-auto object-cover aspect-square"
+                  loading="lazy"
+                />
+              </div>
+              <div class="space-y-0.5">
+                <time
+                  datetime={getFormatDate(item.created, "es-ES")}
+                  class="text-xs text-muted"
+                >
+                  {getFormatDate(item.created, "es-ES")}
+                </time>
+
+                <h2 class="line-clamp-2 group-hover:text-link">
+                  {item.title}
+                  <ExternalLinkIcon className="inline-block size-5 mb-0.5" />
+                </h2>
+                {item.excerpt && (
+                  <p class="text-sm text-muted line-clamp-2">{item.excerpt}</p>
+                )}
+                {item.tags && (
+                  <div class="mt-1 space-x-2">
+                    {item.tags.map((tag: string) => (
+                      <span class="text-xs bg-muted/10 text-muted px-2 py-1 rounded-full">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
             </Link>
           </li>
         ))}

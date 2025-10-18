@@ -13,44 +13,9 @@ import {
 } from "@/components";
 
 import PlayNow from "@/components/playnow/playnow.svelte";
+import { getLastfmData } from "@/lib/music";
 
-const { getInfo, getRecentTracks, getTopArtists, getTopAlbums } =
-  userApiMethods;
-
-const { user } = await getInfo({ user: "ansango" });
-
-const { recenttracks: recentTrackData } = await getRecentTracks({
-  user: "ansango",
-  limit: 1,
-});
-
-const { track: trackraw } = recentTrackData;
-const currentTrack = Boolean(trackraw[0]["@attr"]?.nowplaying)
-  ? trackraw[0]
-  : null;
-const { recenttracks } = await getRecentTracks({ user: "ansango", limit: 11 });
-const {
-  topartists: { artist: artists },
-} = await getTopArtists({
-  user: "ansango",
-  limit: 10,
-  period: "7day",
-});
-const {
-  topalbums: { album: albums },
-} = await getTopAlbums({
-  user: "ansango",
-  limit: 12,
-  period: "1month",
-});
-
-const imageUrl = currentTrack?.image.find((img) => img.size === "large")?.[
-  "#text"
-];
-
-const tracks = recenttracks.track
-  .filter((track) => !track["@attr"]?.nowplaying)
-  .slice(0, 10);
+const { tracks, artists, albums } = await getLastfmData();
 ---
 
 <LayoutDefault type="main">
@@ -60,8 +25,6 @@ const tracks = recenttracks.track
       {site.pages.music.description}
     </p>
   </div>
-
-  
 
   <section class="space-y-4">
     <h2>Escuchando ahora <PlayIcon className="inline-flex size-4" /></h2>

@@ -9,7 +9,6 @@ export const bookmarksMapper = (bookmarks: Raindrop[]) =>
       created,
       excerpt,
       collectionId,
-      // replace http with https
       cover: cover === "" ? undefined : cover.replace(/^http?:\/\//, "https://"), // Normalize empty covers and use i.raindrop.io for better performance
       link,
       tags: tags.slice(0, 3),

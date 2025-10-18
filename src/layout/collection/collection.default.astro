@@ -21,7 +21,6 @@ const { currentPage, paginatedEntries, totalPages } = getPagination({
     page,
     entriesPerPage: meta.entriesPerPage,
 });
-
 ---
 
 <LayoutDefault {...meta} type="main">
@@ -29,28 +28,27 @@ const { currentPage, paginatedEntries, totalPages } = getPagination({
     <p class="text-muted">
         {meta.description}
     </p>
-    <Divider/>
-    <div class="flex flex-col h-full">
-        <ul class="flex-1">
-            {
-                paginatedEntries.map((entry, i) => (
-                    <li class="list-none">
-                        <Link
-                            href={`/${entry.collection}/${entry.id}`}
-                            className="space-y-1 group"
-                        >
-                            <Entry entry={entry} />
-                            {i < paginatedEntries.length - 1 && <Divider />}
-                        </Link>
-                    </li>
-                ))
-            }
-        </ul>
-        <Pagination
-            {currentPage}
-            {totalPages}
-            prevUrl={`/${collection}${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
-            nextUrl={`/${collection}/${currentPage + 1}/`}
-        />
-    </div>
+    <Divider />
+
+    <ul>
+        {
+            paginatedEntries.map((entry, i) => (
+                <li class="list-none">
+                    <Link
+                        href={`/${entry.collection}/${entry.id}`}
+                        className="space-y-1 group"
+                    >
+                        <Entry entry={entry} />
+                        {i < paginatedEntries.length - 1 && <Divider />}
+                    </Link>
+                </li>
+            ))
+        }
+    </ul>
+    <Pagination
+        {currentPage}
+        {totalPages}
+        prevUrl={`/${collection}${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
+        nextUrl={`/${collection}/${currentPage + 1}/`}
+    />
 </LayoutDefault>

@@ -28,8 +28,7 @@ const { currentPage, paginatedEntries, totalPages } = getPagination({
     {meta.description} Hay un total de {entries.length} entradas publicadas
   </p>
   <Divider/>
-  <div class="flex flex-col h-full">
-    <div class="flex-1 space-y-4">
+  
       <EntriesListYear entries={paginatedEntries} />
     </div>
 
@@ -39,5 +38,5 @@ const { currentPage, paginatedEntries, totalPages } = getPagination({
       prevUrl={`/archive${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
       nextUrl={`/archive/${currentPage + 1}/`}
     />
-  </div>
+  
 </LayoutDefault>

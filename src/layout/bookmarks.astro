@@ -12,7 +12,7 @@ import { getPagination } from "@/lib/collections";
 import type { Meta } from "@/content.config";
 import { site } from "@/constants";
 import type { CachedBookmarkData } from "@/lib/raindrop";
-import Image from "astro/components/Image.astro";
+import { Image } from "astro:assets";
 
 interface Props {
   entries: CachedBookmarkData[];

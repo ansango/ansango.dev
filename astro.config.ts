@@ -23,7 +23,7 @@ export default defineConfig({
                 dark: "github-dark"
             }
         }
-
+ 
     },
     vite: {
         plugins: [tailwindcss()],

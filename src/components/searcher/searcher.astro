@@ -62,7 +62,7 @@ import Script from "./searcher.script.astro";
 
   #searcher-button {
     @apply cursor-pointer focus:outline-none px-1 py-0.5;
-    @apply sm:inline-flex sm:items-center sm:gap-1 sm:rounded-full sm:bg-muted/5 sm:inset-ring-muted/5 sm:hover:bg-muted/10 sm:border-divider sm:border;
+    @apply sm:inline-flex sm:items-center sm:gap-1 sm:rounded-full  sm:inset-ring-muted/5 sm:hover:bg-muted/5 sm:border-divider sm:border;
     kbd {
       @apply leading-none hidden sm:inline-flex gap-0.5 text-xs text-muted rounded-full px-1 py-0.5;
 
@@ -80,7 +80,7 @@ import Script from "./searcher.script.astro";
 
   #searcher-dialog-frame {
     @apply h-max max-h-[calc(100vh-40px)] overflow-y-auto mx-auto;
-    @apply rounded-xl shadow-lg;
+    @apply rounded-xl;
   }
 
   #searcher {
@@ -99,7 +99,7 @@ import Script from "./searcher.script.astro";
     }
 
     .pagefind-ui__search-input {
-      @apply font-normal focus:outline-none;
+      @apply font-normal focus:outline-none border-none;
     }
 
     .pagefind-ui__drawer {

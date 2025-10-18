@@ -1,17 +1,55 @@
 ---
+/**
+ * Base SVG component for custom icons.
+ *
+ * Props:
+ * - id: string (optional)
+ * - className: string (Tailwind, optional, default 'size-4')
+ * - color: string (optional, default 'currentColor')
+ * - strokeWidth: string (optional, default '1')
+ * - fill: string (optional, default 'none')
+ * - ariaLabel: string (optional, for accessibility)
+ * - title: string (optional, for accessibility)
+ *
+ * Default usage is for line icons (stroke icons).
+ *
+ * Example usage:
+ * <Svg className="size-6 text-blue-500" ariaLabel="Search">
+ *   <path d="..." fill="currentColor" />
+ * </Svg>
+ */
 interface Props {
   id?: string;
   className?: string;
+  color?: string;
+  strokeWidth?: string;
+  fill?: string;
+  ariaLabel?: string;
+  title?: string;
 }
 
-const { className = "size-4", id } = Astro.props;
----
+const {
+  className = "size-4",
+  id,
+  color = "currentColor",
+  strokeWidth = "1",
+  fill = "none",
+  ariaLabel,
+  title
+} = Astro.props;
 
+---
 <svg
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 24 24"
   id={id}
   class={className}
+  fill={fill}
+  stroke-width={strokeWidth}
+  color={color}
+  aria-label={ariaLabel}
+  role={ariaLabel ? "img" : undefined}
 >
+  {title && <title>{title}</title>}
   <slot />
 </svg>

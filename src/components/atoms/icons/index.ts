@@ -4,3 +4,6 @@ export { default as ThemeIcon } from "./theme-icon.astro";
 export { default as ExternalLinkIcon } from "./external-link-icon.astro";
 export { default as InfoIcon } from "./info-icon.astro";
 export { default as PlaceholderIcon } from "./placeholder.icon.astro";
+export { default as ChevronIcon } from "./chevron.icon.astro";
+export { default as FolderIcon } from "./folder.icon.astro";
+export { default as FileIcon } from "./file.icon.astro";

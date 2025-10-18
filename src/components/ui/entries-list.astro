@@ -1,8 +1,7 @@
 ---
 import type { Entry } from "@/lib/collections";
 import { getFormatDate } from "@/lib/utils";
-import Link from "./link.astro";
-import { ExternalLinkIcon } from "./icons";
+import { Link, ExternalLinkIcon } from "@/components";
 type EntryExternal = Entry & { link?: string; external?: boolean };
 
 interface Props {

@@ -4,7 +4,8 @@
  *
  * Props:
  * - id: string (optional)
- * - className: string (Tailwind, optional, default 'size-4')
+ * - className: string (Tailwind, optional, default 'size-4'),
+ * - viewBox: string (optional, default '0 0 24 24')
  * - color: string (optional, default 'currentColor')
  * - strokeWidth: string (optional, default '1')
  * - fill: string (optional, default 'none')
@@ -21,6 +22,7 @@
 interface Props {
   id?: string;
   className?: string;
+  viewBox?: string;
   color?: string;
   strokeWidth?: string;
   fill?: string;
@@ -34,6 +36,7 @@ const {
   color = "currentColor",
   strokeWidth = "1",
   fill = "none",
+  viewBox = "0 0 24 24",
   ariaLabel,
   title
 } = Astro.props;
@@ -41,7 +44,7 @@ const {
 ---
 <svg
   xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 24 24"
+  viewBox={viewBox}
   id={id}
   class={className}
   fill={fill}

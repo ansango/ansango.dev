@@ -6,7 +6,7 @@ import { getPublishedEntries } from "@/lib/utils";
 
 <Container>
   <footer class="border-divider grid grid-cols-12 gap-4 border-t py-4">
-    <div class="col-span-12 sm:col-span-3">
+    <div class="col-span-6 sm:col-span-3">
       <ul class="text-muted">
         {
           getPublishedEntries(site.tree.personal).map(
@@ -21,7 +21,7 @@ import { getPublishedEntries } from "@/lib/utils";
         }
       </ul>
     </div>
-    <div class="col-span-12 sm:col-span-3">
+    <div class="col-span-6 sm:col-span-3">
       <ul class="text-muted">
         {
           getPublishedEntries(site.tree.content).map(
@@ -36,7 +36,7 @@ import { getPublishedEntries } from "@/lib/utils";
         }
       </ul>
     </div>
-    <div class="col-span-12 sm:col-span-3">
+    <div class="col-span-6 sm:col-span-3">
       <ul class="text-muted">
         {
           getPublishedEntries(site.tree.explore).map(
@@ -53,7 +53,7 @@ import { getPublishedEntries } from "@/lib/utils";
         }
       </ul>
     </div>
-    <div class="col-span-12 sm:col-span-3">
+    <div class="col-span-6 sm:col-span-3">
       <ul class="text-muted">
         {
           getPublishedEntries(site.tree.social).map(

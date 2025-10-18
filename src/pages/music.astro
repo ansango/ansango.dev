@@ -1,0 +1,180 @@
+---
+import { LayoutDefault } from "@/layout";
+import { userApiMethods } from "@/lib/lastfm/services";
+import { site } from "@/constants";
+import { getFormatDate } from "@/lib/utils";
+import {
+  Link,
+  PlayIcon,
+  RepeatIcon,
+  CheckIcon,
+  HeartIcon,
+  Image,
+  PlayNow,
+} from "@/components";
+const { getInfo, getRecentTracks, getTopArtists, getTopAlbums } =
+  userApiMethods;
+
+const { user } = await getInfo({ user: "ansango" });
+
+const { recenttracks: recentTrackData } = await getRecentTracks({
+  user: "ansango",
+  limit: 1,
+});
+
+const { track: trackraw } = recentTrackData;
+const currentTrack = Boolean(trackraw[0]["@attr"]?.nowplaying)
+  ? trackraw[0]
+  : null;
+const { recenttracks } = await getRecentTracks({ user: "ansango", limit: 11 });
+const {
+  topartists: { artist: artists },
+} = await getTopArtists({
+  user: "ansango",
+  limit: 10,
+  period: "7day",
+});
+const {
+  topalbums: { album: albums },
+} = await getTopAlbums({
+  user: "ansango",
+  limit: 12,
+  period: "1month",
+});
+
+const imageUrl = currentTrack?.image.find((img) => img.size === "large")?.[
+  "#text"
+];
+
+const tracks = recenttracks.track
+  .filter((track) => !track["@attr"]?.nowplaying)
+  .slice(0, 10);
+---
+
+<LayoutDefault type="main">
+  <div class="border-divider border-b-[1px]">
+    <h1>{site.pages.music.title}</h1>
+    <p>
+      {site.pages.music.description}
+    </p>
+  </div>
+
+  <PlayNow />
+
+  <section class="space-y-4">
+    <h2>Escuchando ahora <PlayIcon className="inline-flex size-4" /></h2>
+    <div class="flex items-start gap-4">
+      <div class="border-divider overflow-hidden rounded-md border-[1px]">
+        <Image
+          src={imageUrl}
+          alt={currentTrack?.album["#text"]}
+          className="size-20 rounded object-cover"
+        />
+      </div>
+
+      <div class="min-w-0 flex-1 space-y-0.5">
+        <p class="font-medium text-pretty">
+          {currentTrack?.name}
+        </p>
+        <p class="text-muted text-sm">
+          {currentTrack?.artist["#text"]}
+        </p>
+        {
+          currentTrack?.album["#text"] && (
+            <p class="text-muted text-xs">{currentTrack.album["#text"]}</p>
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="space-y-4">
+    <h2>
+      Escuchado recientemente <CheckIcon className="inline-flex size-4" />
+    </h2>
+    <ul class="space-y-2">
+      {
+        tracks.map(({ date, name, artist }) => (
+          <li class="list-none">
+            <Link href={"#"} className="flex items-baseline">
+              {date && (
+                <time
+                  class="text-muted min-w-20 text-sm whitespace-nowrap"
+                  datetime={getFormatDate(
+                    new Date(Number.parseInt(date.uts) * 1000),
+                  )}
+                >
+                  {getFormatDate(
+                    new Date(Number.parseInt(date.uts) * 1000),
+                    "es-ES",
+                    {
+                      year: "numeric",
+                      month: "2-digit",
+                    },
+                  )
+                    .split("/")
+                    .reverse()
+                    .join(" · ")}
+                </time>
+              )}
+              <u class="gap-1 font-medium sm:flex sm:items-center">
+                <span class="line-clamp-1 max-w-2xs">{name}</span>
+                <span class="text-muted line-clamp-1 text-sm">
+                  <span class="hidden text-base sm:inline-flex">{" · "}</span>
+                  {artist["#text"]}
+                </span>
+              </u>
+            </Link>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section>
+    <h2>En bucle últimamente <RepeatIcon className="inline-flex size-5" /></h2>
+    <ul class="space-y-2">
+      {
+        artists.map((artist, index) => (
+          <li class="list-none">
+            <Link
+              href={"#"}
+              className="flex items-baseline justify-between gap-4"
+            >
+              <span class="line-clamp-1 w-full font-medium">{artist.name}</span>
+              <span class="text-muted inline-block min-w-16 text-right text-sm">
+                {artist.playcount} rep.
+              </span>
+            </Link>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section>
+    <h2>Obsesionado con <HeartIcon className="inline-flex size-4" /></h2>
+    <div class="grid grid-cols-2 gap-4 [@media(min-width:480px)]:grid-cols-4">
+      {
+        albums.map((album) => {
+          const imageUrl = album.image.find((img) => img.size === "large")?.[
+            "#text"
+          ];
+          return (
+            <div class="space-y-2">
+              <div class="border-divider overflow-hidden rounded-md border-[1px]">
+                <Image src={imageUrl} alt={album.name} />
+              </div>
+              <div class="space-y-0.5">
+                <p class="line-clamp-1 text-sm leading-snug font-medium text-pretty">
+                  {album.name}
+                </p>
+                <p class="text-muted m-0 text-xs">{album.artist.name}</p>
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+  </section>
+</LayoutDefault>

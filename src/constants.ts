@@ -57,6 +57,14 @@ const wiki: Meta = {
   published: true,
 };
 
+const music: Meta = {
+  title: "Music",
+  description: "Mi colección de música y listas de reproducción favoritas.",
+  entriesPerPage: 0,
+  url: "/music",
+  published: true,
+};
+
 const contentCollections: Record<CollectionName, Meta> = {
   blog: {
     title: "Blog",
@@ -112,6 +120,7 @@ const pages = {
   archive,
   reading,
   bookmarks,
+  music,
   ...contentCollections,
 };
 
@@ -150,6 +159,7 @@ const tree: Tree = {
     now: contentCollections.now,
     uses: contentCollections.uses,
     about: contentCollections.about,
+    music,
   },
   content: {
     blog: contentCollections.blog,

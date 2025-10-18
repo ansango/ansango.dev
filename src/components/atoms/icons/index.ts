@@ -7,3 +7,8 @@ export { default as PlaceholderIcon } from "./placeholder.icon.astro";
 export { default as ChevronIcon } from "./chevron.icon.astro";
 export { default as FolderIcon } from "./folder.icon.astro";
 export { default as FileIcon } from "./file.icon.astro";
+export { default as PlayIcon } from "./play.icon.astro";
+export { default as RepeatIcon } from "./repeat.icon.astro";
+// export { default as TimelapseIcon } from "./timelapse.icon.astro";
+export { default as HeartIcon } from "./heart.icon.astro";
+export { default as CheckIcon } from "./check.icon.astro";

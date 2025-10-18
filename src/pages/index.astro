@@ -15,28 +15,15 @@ import {
   Tag,
 } from "@/components";
 import { LayoutDefault } from "@/layout";
-import { getLatestReading } from "@/lib/raindrop";
+import { latestReadingMapped } from "@/lib/raindrop";
 
 const meta = site.pages.home;
+const LIMIT_BOOKMARKS = 5;
+const latestBookmarks = await latestReadingMapped(5) as unknown as EntryType[];
 const tags = await getTagsLimitedByLetter(1);
 const latests = await getLastEntriesByAllCollections();
 const collections = await getAllCollectionsByCategory();
-const LIMIT_BOOKMARKS = 5;
-const bookmarks = await getLatestReading(LIMIT_BOOKMARKS);
-const latestBookmarks = bookmarks.map(
-  ({ title, excerpt: description, created: date, collection, link }) => {
-    return {
-      collection,
-      link,
-      external: true,
-      data: {
-        title,
-        description,
-        date,
-      },
-    } as unknown as EntryType;
-  },
-);
+
 ---
 
 <LayoutDefault {...meta} type="main">
@@ -67,14 +54,14 @@ const latestBookmarks = bookmarks.map(
           {latests.map((latest) => {
             const isIndex = Boolean((latest.data as any).index);
             return (
-              <a
+              <Link
                 href={
                   `/${latest.collection}` + (isIndex ? "" : `/${latest.id}`)
                 }
-                class="space-y-1"
+                className="space-y-1"
               >
                 <Entry entry={latest} />
-              </a>
+              </Link>
             );
           })}
         </div>
@@ -86,7 +73,7 @@ const latestBookmarks = bookmarks.map(
     tags.length > 0 && (
       <section>
         <h2 class="text-muted font-medium">
-          <a href="/tags">Tags</a>
+          <Link href="/tags">Tags</Link>
         </h2>
 
         <ul class="flex flex-wrap gap-1">
@@ -105,14 +92,16 @@ const latestBookmarks = bookmarks.map(
 
   <section>
     <h2 class="text-muted font-medium">
-      <a href="/bookmarks">Bookmarks</a> & <a href="/reading">Reading</a>
+      <Link href="/bookmarks">Bookmarks</Link> & <Link href="/reading"
+        >Reading</Link
+      >
     </h2>
     <EntriesList entries={latestBookmarks} />
     {
       latestBookmarks.length >= LIMIT_BOOKMARKS && (
-        <span class="mt-4 block text-sm">
-          <a href="/reading">Ver todos los enlaces →</a>
-        </span>
+        <Link className="mt-4 block text-sm" href="/reading">
+          Ver todos los enlaces →
+        </Link>
       )
     }
   </section>
@@ -138,9 +127,9 @@ const latestBookmarks = bookmarks.map(
           </h2>
           <EntriesList entries={slicedEntries} />
           {entries.length > (meta.entriesPerPage || 0) && (
-            <span class="mt-4 block text-sm">
-              <a href={collectionlink}>Ver todas las publicaciones →</a>
-            </span>
+            <Link className="mt-4 block text-sm" href={collectionlink}>
+              Ver todas las publicaciones →
+            </Link>
           )}
         </section>
       );

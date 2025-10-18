@@ -68,3 +68,21 @@ export const getLatestReading = async (limit: number) => {
     collection: "reading",
   }));
 };
+
+export const latestReadingMapped = async (limit: number) => {
+  const latestBookmarks = await getLatestReading(limit);
+  return latestBookmarks.map(
+    ({ title, excerpt: description, created: date, collection, link }) => {
+      return {
+        collection,
+        link,
+        external: true,
+        data: {
+          title,
+          description,
+          date,
+        },
+      };
+    },
+  );
+};

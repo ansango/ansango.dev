@@ -1,9 +1,12 @@
 ---
 import type { Entry } from "@/lib/collections";
 import { getFormatDate } from "@/lib/utils";
+import Link from "./link.astro";
+import { ExternalLinkIcon } from "./icons";
+type EntryExternal = Entry & { link?: string; external?: boolean };
 
 interface Props {
-  entries: Entry[];
+  entries: EntryExternal[];
 }
 
 const { entries } = Astro.props;
@@ -11,32 +14,39 @@ const { entries } = Astro.props;
 
 <ul class="list-none space-y-2">
   {
-    entries.map(({ collection, id, data: { date, title, index } }) => {
-
-      return (
-        <li class="list-none">
-          <a
-            class="flex items-baseline"
-            href={`/${collection}` + (index ? "" : `/${id}`)}
-          >
-            {date && (
-              <time
-                class="text-sm text-muted whitespace-nowrap min-w-20"
-                datetime={getFormatDate(date)}
-              >
-                {getFormatDate(date, "es-ES", {
-                  year: "numeric",
-                  month: "2-digit",
-                })
-                  .split("/")
-                  .reverse()
-                  .join(" · ")}
-              </time>
-            )}
-            <u class="line-clamp-1">{title}</u>
-          </a>
-        </li>
-      );
-    })
+    entries.map(
+      ({ collection, id, link, external, data: { date, title, index } }) => {
+        const url = external
+          ? link
+          : `/${collection}` + (index ? "" : `/${id}`);
+        return (
+          <li class="list-none">
+            <Link
+              className="flex items-baseline"
+              href={url ?? "#"}
+              blank={Boolean(external)}
+            >
+              {date && (
+                <time
+                  class="text-sm text-muted whitespace-nowrap min-w-20"
+                  datetime={getFormatDate(date)}
+                >
+                  {getFormatDate(date, "es-ES", {
+                    year: "numeric",
+                    month: "2-digit",
+                  })
+                    .split("/")
+                    .reverse()
+                    .join(" · ")}
+                </time>
+              )}
+              <u class="w-full flex items-center gap-1" ><span class="line-clamp-1">{title}</span>
+                {external && <ExternalLinkIcon className="inline-flex max-w-4 size-full" />}
+              </u>
+            </Link>
+          </li>
+        );
+      },
+    )
   }
 </ul>

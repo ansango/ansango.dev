@@ -18,9 +18,10 @@ export const bookmarksMapper = (bookmarks: Raindrop[]) =>
 export const collectionsMapper = ({ items }: GetCollectionsResponse) =>
   items
     .filter(({ title }) => title.includes(site.name))
-    .map(({ _id, title, created, description }) => ({
+    .map(({ _id, title, created, description, count }) => ({
       _id,
       title: title.replace(site.name.concat("."), ""),
       created,
       description,
-    }));
+      count,
+    })).sort((a, b) => a.title.localeCompare(b.title));

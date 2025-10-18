@@ -16,8 +16,11 @@ const latests = await getLastEntriesByAllCollections();
 const collections = await getAllCollectionsByCategory();
 const LIMIT_BOOKMARKS = 5;
 const bookmarks = await getLatestReading(LIMIT_BOOKMARKS);
-const latestBookmarks = bookmarks.map(({title, excerpt: description,created:date}) => {
+const latestBookmarks = bookmarks.map(({title, excerpt: description,created:date, collection,link}) => {
 	return {
+		collection,
+		link,
+		external: true,
 		data: {
 			title,
 			description,
@@ -26,6 +29,7 @@ const latestBookmarks = bookmarks.map(({title, excerpt: description,created:date
 	} as unknown as EntryType;
 });
 
+console.log('latestBookmarks', latestBookmarks);
 
 
 ---

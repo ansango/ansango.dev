@@ -8,6 +8,7 @@ import { getFormatDate } from "@/lib/utils";
 import { site } from "@/constants";
 
 import type { CachedBookmarkData } from "@/lib/raindrop";
+import Image from "astro/components/Image.astro";
 
 interface Props {
   entries: CachedBookmarkData[];
@@ -44,7 +45,7 @@ const { currentPage, paginatedEntries, totalPages } = getPagination({
               className="group flex gap-2 sm:gap-4"
             >
               <div class="mt-8 sm:mt-6 max-w-8 max-h-8 size-full border border-divider rounded-full overflow-hidden flex-shrink-0 sm:max-w-12 sm:max-h-12">
-                <img
+                <Image
                   src={item.cover}
                   alt={item.title}
                   class="w-full h-auto object-cover aspect-square"

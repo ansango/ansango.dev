@@ -22,23 +22,23 @@ const oneYear = 1000 * 60 * 60 * 24 * 365;
 const isOutdated = parsedDate && now.getTime() - parsedDate.getTime() > oneYear;
 ---
 
-{
-  date && (
-    <time datetime={getFormatDate(date, "es-ES")} class="text-muted text-sm">
-      {mod && "actualizado el "} {getFormatDate(mod ?? date, "es-ES")}
-    </time>
-  )
-}
+<div class="border-divider border-b-[1px] mb-4">
+  {
+    date && (
+      <time datetime={getFormatDate(date, "es-ES")} class="text-muted text-sm">
+        {mod && "actualizado el "} {getFormatDate(mod ?? date, "es-ES")}
+      </time>
+    )
+  }
 
-{
-  readingTime > 0 && (
-    <span>
-      &nbsp;·&nbsp;
-      <span class="text-muted text-sm">{readingTime} min de lectura</span>
-    </span>
-  )
-}
-<div>
+  {
+    readingTime > 0 && (
+      <span>
+        &nbsp;·&nbsp;
+        <span class="text-muted text-sm">{readingTime} min de lectura</span>
+      </span>
+    )
+  }
   <h1 class="my-2">
     {title}
   </h1>

@@ -1,8 +1,12 @@
 ---
-import { Divider, Entry, Link, Pagination } from "@/components";
+import { Entry, Link, Pagination } from "@/components";
 import type { CollectionName, Meta } from "@/content.config";
 import { LayoutDefault } from "@/layout";
-import { getPagination, type Entries } from "@/lib/collections";
+import {
+  Entry as EntryType,
+  getPagination,
+  type Entries,
+} from "@/lib/collections";
 
 interface Props {
   collection: CollectionName;
@@ -15,7 +19,7 @@ interface Props {
 
 const { entries, page, isIndex, meta, collection } = Astro.props;
 
-const { currentPage, paginatedEntries, totalPages } = getPagination({
+const { currentPage, paginatedEntries, totalPages } = getPagination<EntryType>({
   isIndex,
   entries,
   page,
@@ -24,22 +28,23 @@ const { currentPage, paginatedEntries, totalPages } = getPagination({
 ---
 
 <LayoutDefault {...meta} type="main">
-  <h1 class="capitalize">{collection}</h1>
-  <p class="text-muted">
-    {meta.description}
-  </p>
-  <Divider />
-
+  <div class="border-divider border-b-[1px]">
+    <h1 class="capitalize">{collection}</h1>
+    <p class="text-muted">
+      {meta.description}
+    </p>
+  </div>
   <ul>
     {
       paginatedEntries.map((entry, i) => (
-        <li class="list-none">
+        <li
+          class={`border-divider list-none py-4 [&:not(:last-child)]:border-b-[1px]`}
+        >
           <Link
             href={`/${entry.collection}/${entry.id}`}
             className="space-y-1 group"
           >
             <Entry entry={entry} />
-            {i < paginatedEntries.length - 1 && <Divider />}
           </Link>
         </li>
       ))

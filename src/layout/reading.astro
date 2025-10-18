@@ -1,11 +1,5 @@
 ---
-import {
-  Divider,
-  ExternalLinkIcon,
-  Link,
-  Pagination,
-  Image,
-} from "@/components";
+import { ExternalLinkIcon, Link, Pagination, Image } from "@/components";
 import { LayoutDefault } from "@/layout";
 import { getPagination } from "@/lib/collections";
 
@@ -25,23 +19,25 @@ interface Props {
 
 const { entries, page, entriesPerPage, isIndex, meta } = Astro.props;
 
-const { currentPage, paginatedEntries, totalPages } = getPagination({
-  isIndex,
-  entries,
-  page,
-  entriesPerPage,
-});
+const { currentPage, paginatedEntries, totalPages } =
+  getPagination<CachedBookmarkData>({
+    isIndex,
+    entries,
+    page,
+    entriesPerPage,
+  });
 ---
 
 <LayoutDefault {...meta} type="article">
-  <h1>{site.pages.reading.title}</h1>
-  <p class="text-muted">{site.pages.reading.description}</p>
-  <Divider />
+  <div class="border-divider border-b-[1px]">
+    <h1>{site.pages.reading.title}</h1>
+    <p class="text-muted">{site.pages.reading.description}</p>
+  </div>
   {
     entries.length === 0 ? (
-      <p class="text-muted text-center">No hay elementos para mostrar.</p>
+      <p class="text-muted py-4 text-center">No hay elementos para mostrar.</p>
     ) : (
-      <ul class="space-y-6">
+      <ul class="space-y-6 pt-4">
         {paginatedEntries?.map((item) => (
           <li class="list-none">
             <Link
@@ -85,6 +81,7 @@ const { currentPage, paginatedEntries, totalPages } = getPagination({
   }
 
   <Pagination
+    className="pb-4"
     {currentPage}
     {totalPages}
     prevUrl={`/reading${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}

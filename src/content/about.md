@@ -9,6 +9,8 @@ published: true
 
 Hola — soy desarrollador/a centrado/a en experiencias web rápidas y mantenibles. Este sitio recoge notas, proyectos y recursos que uso en mi día a día.
 
+---
+
 ## Un poco sobre mí
 
 - Especialidad: front-end, arquitectura de contenidos y herramientas estáticas (Jamstack, Astro).

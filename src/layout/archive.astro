@@ -1,8 +1,8 @@
 ---
-import { Divider, EntriesListYear, Pagination } from "@/components";
+import { EntriesListYear, Pagination } from "@/components";
 import type { Meta } from "@/content.config";
 import { LayoutDefault } from "@/layout";
-import { getPagination, type Entries } from "@/lib/collections";
+import { Entry, getPagination, type Entries } from "@/lib/collections";
 
 interface Props {
   entries: Entries;
@@ -14,7 +14,7 @@ interface Props {
 
 const { entries, page, entriesPerPage, isIndex, meta } = Astro.props;
 
-const { currentPage, paginatedEntries, totalPages } = getPagination({
+const { currentPage, paginatedEntries, totalPages } = getPagination<Entry>({
   isIndex,
   entries,
   page,
@@ -23,11 +23,12 @@ const { currentPage, paginatedEntries, totalPages } = getPagination({
 ---
 
 <LayoutDefault {...meta} type="main">
-  <h1>Archivo</h1>
-  <p class="text-muted">
-    {meta.description} Hay un total de {entries.length} entradas publicadas
-  </p>
-  <Divider />
+  <div class="border-divider border-b-[1px]">
+    <h1>Archivo</h1>
+    <p class="text-muted">
+      {meta.description} Hay un total de {entries.length} entradas publicadas
+    </p>
+  </div>
 
   <EntriesListYear entries={paginatedEntries} />
 </LayoutDefault>

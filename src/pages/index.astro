@@ -7,7 +7,6 @@ import {
 } from "@/lib/collections";
 import { site } from "@/constants";
 import {
-  Divider,
   EntriesList,
   Entry,
   ExternalLinkIcon,
@@ -41,8 +40,8 @@ const latestBookmarks = bookmarks.map(
 ---
 
 <LayoutDefault {...meta} type="main">
-  <div>
-    <div class="mb-6 flex flex-row-reverse items-center justify-end gap-4">
+  <section class="space-y-4">
+    <div class="flex flex-row-reverse items-center justify-end gap-4">
       <h1 class="mb-0">ansango</h1>
       <div
         class="border-divider size-12 overflow-hidden rounded-full border-[1.5px]"
@@ -59,95 +58,92 @@ const latestBookmarks = bookmarks.map(
         >innusual <ExternalLinkIcon />
       </Link>. Aquí encontrarás parte de mis wikis, insights, y algunos hacks.
     </p>
+  </section>
+  {
+    latests.length > 0 && (
+      <section class="group">
+        <h2 class="text-muted font-medium">Última publicación</h2>
+        <div>
+          {latests.map((latest) => {
+            const isIndex = Boolean((latest.data as any).index);
+            return (
+              <a
+                href={
+                  `/${latest.collection}` + (isIndex ? "" : `/${latest.id}`)
+                }
+                class="space-y-1"
+              >
+                <Entry entry={latest} />
+              </a>
+            );
+          })}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    tags.length > 0 && (
+      <section>
+        <h2 class="text-muted font-medium">
+          <a href="/tags">Tags</a>
+        </h2>
+
+        <ul class="flex flex-wrap gap-1">
+          {tags.map((tag, i) => {
+            return (
+              <li class="flex list-none">
+                <Tag href={`/tags/${tag}`}>{tag.replace(/-/g, " ")}</Tag>
+                {i !== tags.length - 1 && <span class="text-muted">,</span>}
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    )
+  }
+
+  <section>
+    <h2 class="text-muted font-medium">
+      <a href="/bookmarks">Bookmarks</a> & <a href="/reading">Reading</a>
+    </h2>
+    <EntriesList entries={latestBookmarks} />
     {
-      latests.length > 0 && (
-        <section class="group">
-          <h2 class="text-muted font-medium">Última publicación</h2>
-          <div>
-            {latests.map((latest) => {
-              const isIndex = Boolean((latest.data as any).index);
-              return (
-                <a
-                  href={
-                    `/${latest.collection}` + (isIndex ? "" : `/${latest.id}`)
-                  }
-                  class="space-y-1"
-                >
-                  <Entry entry={latest} />
-                </a>
-              );
-            })}
-          </div>
-          <Divider />
-        </section>
+      latestBookmarks.length >= LIMIT_BOOKMARKS && (
+        <span class="mt-4 block text-sm">
+          <a href="/reading">Ver todos los enlaces →</a>
+        </span>
       )
     }
+  </section>
 
-    {
-      tags.length > 0 && (
+  {
+    Object.entries(collections).map(([collection, entries]) => {
+      const slicedEntries = entries.slice(0, meta.entriesPerPage);
+      const collectionlink = `/${collection}`;
+
+      const isOnlyOnePage =
+        entries.length === 1 && (entries[0].data as any).index === true;
+
+      if (isOnlyOnePage) {
+        return <Fragment />;
+      }
+
+      return (
         <section>
           <h2 class="text-muted font-medium">
-            <a href="/tags">Tags</a>
+            <a class="capitalize" href={collectionlink}>
+              {collection}
+            </a>
           </h2>
-
-          <ul class="flex flex-wrap gap-1">
-            {tags.map((tag, i) => {
-              return (
-                <li class="flex list-none">
-                  <Tag href={`/tags/${tag}`}>{tag.replace(/-/g, " ")}</Tag>
-                  {i !== tags.length - 1 && <span class="text-muted">,</span>}
-                </li>
-              );
-            })}
-          </ul>
-          <Divider />
+          <EntriesList entries={slicedEntries} />
+          {entries.length > (meta.entriesPerPage || 0) && (
+            <span class="mt-4 block text-sm">
+              <a href={collectionlink}>Ver todas las publicaciones →</a>
+            </span>
+          )}
         </section>
-      )
-    }
-
-    <section>
-      <h2 class="text-muted font-medium">
-        <a href="/bookmarks">Bookmarks</a> & <a href="/reading">Reading</a>
-      </h2>
-      <EntriesList entries={latestBookmarks} />
-      {
-        latestBookmarks.length >= LIMIT_BOOKMARKS && (
-          <span class="mt-4 block text-sm">
-            <a href="/reading">Ver todos los enlaces →</a>
-          </span>
-        )
-      }
-      <Divider />
-    </section>
-
-    {
-      Object.entries(collections).map(([collection, entries]) => {
-        const slicedEntries = entries.slice(0, meta.entriesPerPage);
-        const collectionlink = `/${collection}`;
-
-        const isOnlyOnePage =
-          entries.length === 1 && (entries[0].data as any).index === true;
-
-        if (isOnlyOnePage) {
-          return <Fragment />;
-        }
-
-        return (
-          <section>
-            <h2 class="text-muted font-medium">
-              <a class="capitalize" href={collectionlink}>
-                {collection}
-              </a>
-            </h2>
-            <EntriesList entries={slicedEntries} />
-            {entries.length > (meta.entriesPerPage || 0) && (
-              <span class="mt-4 block text-sm">
-                <a href={collectionlink}>Ver todas las publicaciones →</a>
-              </span>
-            )}
-          </section>
-        );
-      })
-    }
-  </div>
+      );
+    })
+  }
 </LayoutDefault>

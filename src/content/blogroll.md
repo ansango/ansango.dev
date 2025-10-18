@@ -9,6 +9,8 @@ published: true
 
 Una lista curada de blogs y autores que sigo. Incluyo una breve nota sobre por qué los recomiendo. Si quieres, puedo convertir esto en una colección enlazable con RSS.
 
+---
+
 ## Tecnología
 
 - Smashing Magazine — artículos profundos sobre front-end, UX y performance.

@@ -2,7 +2,7 @@
 import type { Entry } from "@/lib/collections";
 import { getEntry, render } from "astro:content";
 import { LayoutDefault } from "@/layout";
-import { Divider, EntryHeading } from "@/components";
+import { EntryHeading } from "@/components";
 import { getReadingTime } from "@/lib/utils";
 
 const { collection, id } = Astro.props as Entry;
@@ -30,6 +30,5 @@ const headingProps = {
 
 <LayoutDefault {...remarkPluginFrontmatter} type="article">
   <EntryHeading {...headingProps} />
-  <Divider />
   <Content />
 </LayoutDefault>

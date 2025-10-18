@@ -15,6 +15,6 @@
   }
 
   section {
-    @apply my-6;
+    @apply py-4 [&:not(:last-child)]:border-b-[1px] border-divider;
   }
 }

@@ -25,10 +25,10 @@ const parsedEntriesByYear = getCollectionsByYear(entries);
     .map(([year, entries]) => {
       return (
         <section>
-          <h2 class="mb-2 text-xl font-semibold">
+          <h2 class="mb-2 text-xl font-semibold m-0">
             {isNaN(parseInt(year)) ? "Sin fecha" : year}
           </h2>
-          <ul class="list-none space-y-2">
+          <ul class="list-none m-0 space-y-2">
             {entries.map(({ collection, id, data: { date, title, index } }) => {
               return (
                 <li class="flex list-none items-center gap-3">

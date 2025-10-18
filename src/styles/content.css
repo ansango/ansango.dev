@@ -70,7 +70,7 @@
   }
 
   hr {
-    @apply border-divider my-5;
+    @apply border-divider my-4;
   }
 
   img {

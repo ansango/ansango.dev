@@ -6,16 +6,26 @@ export interface Props {
   totalPages: number;
   prevUrl: string;
   nextUrl: string;
+  className?: string;
 }
 
-const { currentPage, totalPages, prevUrl, nextUrl } = Astro.props;
+const {
+  currentPage,
+  totalPages,
+  prevUrl,
+  nextUrl,
+  className = "",
+} = Astro.props;
 const prevDisabled = currentPage <= 1;
 const nextDisabled = currentPage >= totalPages;
 ---
 
 {
   totalPages > 1 && (
-    <nav aria-label="Pagination" class="flex justify-between pt-4">
+    <nav
+      aria-label="Pagination"
+      class={`flex justify-between pt-4 ${className}`}
+    >
       <Link
         disabled={prevDisabled}
         href={prevUrl}

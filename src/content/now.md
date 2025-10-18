@@ -10,6 +10,8 @@ published: true
 
 Esta página recoge en pocas líneas en qué estoy ahora: prioridades, proyectos activos, cosas que estoy aprendiendo y herramientas que uso día a día. La idea es mantener un registro corto y útil para quien me sigue o para mi yo futuro.
 
+---
+
 ## En qué estoy trabajando
 
 - Trabajo principal: desarrollo de sitios y herramientas front-end, con foco en rendimiento y arquitectura de contenido. Actualmente mantengo y mejoro este sitio construido con Astro.

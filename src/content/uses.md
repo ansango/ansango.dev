@@ -10,6 +10,8 @@ published: true
 
 Esta página describe mi setup: hardware, software, flujo de trabajo, accesos y dotfiles. Está pensada para quien quiera reproducir mi entorno o sacar ideas prácticas. Uso lo que me hace más productivo y lo que me permite iterar rápido en proyectos personales y profesionales.
 
+---
+
 ## Hardware
 
 - Portátil: Lenovo ThinkPad (X1 Carbon / X13 o similar). Prioridad en teclado, robustez y batería.

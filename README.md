@@ -11,7 +11,7 @@ A modern, content-first personal website built with [Astro](https://astro.build)
 - 🌓 **Theme Switching**: Built-in dark/light mode toggle
 - 📱 **Fully Responsive**: Mobile-first design
 - 🚀 **100% Static**: Lightning-fast performance with zero JavaScript overhead (except for interactive features)
-- 🔗 **Indie Web Ready**: Blogroll, bookmarks, and RSS feed support
+- 🔗 **Indie Web Ready**: Blogroll, bookmarks (Raindrop-backed), and RSS feed support
 - ✍️ **Obsidian Integration**: Write content in Obsidian, sync via GitHub Actions (see TODO section)
 - 🏷️ **Smart Tagging**: Automatic tag aggregation and filtering
 - 📄 **SEO Optimized**: Sitemap, RSS feed, and semantic HTML
@@ -29,7 +29,9 @@ The site is built around 8 content types, all defined in `src/content.config.ts`
 - **uses**: Tools and setup
 - **now**: Current activities (inspired by [nownownow.com](https://nownownow.com/))
 - **blogroll**: Curated list of blogs you follow
-- **bookmarks**: Saved links and resources
+- **bookmarks**: Saved links and resources (backed by Raindrop.io collections — see 'Raindrop.io Integration' below)
+
+> Note: The `reading` page is also powered by a Raindrop collection named "reading" rather than being a local content collection.
 
 ### Configuration System
 
@@ -62,7 +64,7 @@ src/content/
 ├── uses.md            # Uses page
 ├── now.md             # Now page
 ├── blogroll.md        # Blogroll
-└── bookmarks.md       # Bookmarks
+└── bookmarks.md       # Bookmarks (now backed by Raindrop collections)
 ```
 
 ## 🚀 Getting Started
@@ -96,6 +98,13 @@ npm run build        # Build for production
 npm run preview      # Preview production build
 npm run astro        # Run Astro CLI commands
 ```
+
+Quick checklist:
+
+- Ensure Node.js 18+ is installed
+- Copy `.env.sample` to `.env` and fill required tokens (see 'Environment variables')
+- Install dependencies with `npm install`
+- Run `npm run dev` while developing
 
 ## 📝 Content Management
 
@@ -183,6 +192,54 @@ Custom plugins in `src/lib/rehype.ts`:
 
 - **astro-rehype-relative-markdown-links**: Converts relative MD links to proper routes
 - **rehype-external-links**: Enhanced external link handling
+
+### Raindrop.io Integration
+
+This project integrates with Raindrop.io to power the Bookmarks and Reading sections. These are no longer implemented as local content collections: instead, the site fetches your Raindrop collections and items at build/runtime.
+
+Quick setup:
+
+1. Create a Raindrop API access token at: https://raindrop.io/settings/api
+2. Copy the provided `.env.sample` to `.env` and set your token:
+
+```
+RAINDROP_ACCESS_TOKEN=your_raindrop_access_token_here
+```
+
+3. Ensure your environment (local development and deployment) provides the `RAINDROP_ACCESS_TOKEN` env var. In code the value is read from `import.meta.env.RAINDROP_ACCESS_TOKEN`.
+
+Notes and behavior:
+
+- The `reading` page expects a Raindrop collection titled `reading`. Create or rename a collection in Raindrop to populate this list.
+- The bookmarks index lists your Raindrop collections (the app excludes the `reading` collection from the bookmarks list by default).
+- If the access token is missing or invalid, bookmark/reading fetches will fail and those sections will appear empty; errors are logged to the console.
+- The Raindrop client in `src/lib/raindrop` implements simple caching and pagination to avoid hitting API rate limits; see that folder for implementation details.
+
+Collection naming and filters:
+
+- Collections are filtered by the site name. The mapper strips the `site.name.` prefix from collection titles. To make collections visible in the bookmarks list, name them following this convention (e.g., `ansango.reading` or `ansango.work`). The `reading` collection should be named `reading` (without site prefix) if you want it to be used by the Reading page.
+- The site excludes the collection titled `reading` from the bookmarks collection list and uses it for the Reading page.
+
+Deployment:
+
+Set `RAINDROP_ACCESS_TOKEN` in your hosting provider (Vercel, Netlify, etc.) environment variables before building/previewing the site.
+
+Environment variables
+
+- `RAINDROP_ACCESS_TOKEN`: required to fetch Raindrop collections and items. Add this to your `.env` during development and as an environment variable in production.
+
+Search & sitemap
+
+- Search is powered by Pagefind (integration via `astro-pagefind`). The index is generated at build time and served from `/pagefind/`.
+- Sitemap is generated with `@astrojs/sitemap` and published at `/sitemap-index.xml`.
+
+Troubleshooting
+
+- If bookmarks or reading are empty, verify:
+  - `RAINDROP_ACCESS_TOKEN` is valid and set in the environment
+  - Collections exist in Raindrop and are named correctly (see the 'Collection naming and filters' notes)
+  - Check server logs for fetch errors; the raindrop client will log HTTP status and errors
+- If Pagefind doesn't show recent content, rebuild the site to regenerate the index (`npm run build`).
 
 ## 📦 Project Structure
 
@@ -288,7 +345,7 @@ Search is powered by Pagefind and automatically indexes all published content du
 
 ## 📡 RSS Feed
 
-RSS feed is automatically generated at `/feed.xml` and includes:
+RSS feed is automatically generated at `/rss.xml` and includes:
 
 - All published blog posts
 - Full content for each entry
@@ -342,7 +399,7 @@ TODO
 ### Setup Instructions
 
 1. Create a Personal Access Token (PAT) with `repo` scope
-2. Add it as `OBSIDIAN_PAT` secret in your site repository settings
+2. Add it as a repository secret in your site repository settings (choose a name for the secret) so your GitHub Actions workflow can authenticate to the vault repository
 3. Structure your Obsidian vault to match the content structure
 4. Customize the `rsync` commands based on your folder structure
 5. Optional: Add content validation or frontmatter checks before committing

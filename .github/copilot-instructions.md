@@ -1,122 +1,84 @@
-# Copilot Instructions for ansango.com
+# Copilot Instructions for ansango.dev
 
-This is an **Astro-based personal website** featuring a content management system with multiple collections (blog, wiki, projects, etc.) and a hierarchical content organization system.
+This guide helps AI coding agents work productively in the `ansango.dev` codebase. It covers architecture, workflows, conventions, and integration points unique to this project.
 
 ## 🏗️ Architecture Overview
 
-### Content-First Design
+- **Framework:** Built with [Astro](https://astro.build) and [Tailwind CSS v4].
+- **Content Collections:** Defined in `src/content.config.ts` and managed in `src/content/`. Types: blog, wiki, projects, about, uses, now, blogroll, bookmarks.
+- **Site Metadata:** Centralized in `src/site.json` and `src/constants.ts`.
+- **Layouts:** Modular layouts in `src/layout/` (e.g., `default.astro`, `archive.astro`, `collection/`).
+- **Components:** Reusable Astro components in `src/components/` (UI, layout, searcher, theme).
+- **Utilities:** Custom logic in `src/lib/` (content fetching, wiki tree, rehype plugins).
 
-- **Collections**: 8 content types defined in `src/content.config.ts` (blog, wiki, projects, about, uses, etc.)
-- **Schema-driven**: Zod schemas enforce consistent frontmatter across collections
-- **Hierarchical organization**: Wiki content supports nested folder structures with automatic tree navigation
+## 🚦 Developer Workflows
 
-### Key Architectural Patterns
+- **Install:** `npm install`
+- **Dev Server:** `npm run dev` (http://localhost:4321)
+- **Build:** `npm run build`
+- **Preview:** `npm run preview`
+- **Astro CLI:** `npm run astro`
+- **Content:** Add markdown files to `src/content/` with required frontmatter. Set `published: true` to publish.
+- **Add Collection:**
+  1. Define schema in `src/content.config.ts`
+  2. Add metadata in `src/constants.ts`
+  3. Create folder in `src/content/`
 
-- **Static generation**: All content is statically generated using Astro's content collections
-- **Unified entry system**: `src/lib/collections.ts` provides centralized content fetching with filtering, sorting, and pagination
-- **Layout composition**: Modular layout system in `src/layout/` with collection-specific variants
-- **Type-safe configuration**: Central configuration in `src/constants.ts` defines site structure and metadata
+## 📝 Project Conventions
 
-## 📁 Critical File Patterns
+- **Frontmatter:** Each content type has strict frontmatter requirements (see `src/content.config.ts`).
+- **Wiki:** Supports nested folders; navigation auto-generated from structure.
+- **Styling:** Use Tailwind classes; global styles in `src/styles/global.css`.
+- **Theme:** Dark/light mode via class strategy; theme switcher in `src/components/theme/`.
+- **Pagination:** Controlled in `src/constants.ts` per collection.
+- **Tagging:** Tags are slugified and aggregated automatically.
 
-### Content Structure
+## 🔌 Integrations & Plugins
 
-```
-src/content/
-├── [collection-name]/     # Collection folders (blog, wiki, projects, etc.)
-├── [single-pages].md      # Standalone pages (about.md, uses.md, now.md, etc.)
-└── wiki/                  # Hierarchical wiki with nested folders
-```
+- **Astro Integrations:**
+  - `@astrojs/sitemap` for sitemap
+  - `astro-pagefind` for search
+- **Rehype Plugins:** Custom plugins in `src/lib/rehype.ts` (e.g., removeH1, external link enhancement).
+- **Third-party:** `astro-rehype-relative-markdown-links`, `rehype-external-links`.
 
-### Component Organization
+## 🛠️ Key Files & Directories
 
-- **Index exports**: Every component folder exports through `index.ts` for clean imports
-- **Astro components**: Mix of `.astro` components and TypeScript utilities
-- **Layout composition**: `src/layout/collection/` contains collection-specific layouts
+- `src/content.config.ts`: Collection schemas
+- `src/constants.ts`: Site/collection metadata
+- `src/site.json`: Global site info
+- `src/layout/`: Page layouts
+- `src/components/`: UI and layout components
+- `src/lib/`: Utilities and plugins
+- `src/styles/`: CSS
+- `public/`: Static assets
 
-### Content Processing
+## 🧩 Patterns & Examples
 
-- **Custom rehype plugins**: `src/lib/rehype.ts` removes H1 tags and adds external link icons
-- **Wiki tree generation**: `src/lib/wikis.ts` creates hierarchical navigation from folder structure
-- **Pagination logic**: Centralized in `src/lib/collections.ts` with configurable entries per page
+- **Layout Usage:**
+  - `src/layout/default.astro` wraps pages with `<Head>`, `<Header>`, `<Container>`, `<Footer>`.
+- **Content Example:**
+  ```markdown
+  ---
+  title: "My First Post"
+  description: "Intro to my blog"
+  date: 2025-10-11
+  mod: 2025-10-11
+  published: true
+  tags: [astro, web-development]
+  ---
 
-## 🔧 Development Workflows
+  ...
+  ```
+- **Add New Collection:**
+  - Update schema, metadata, and create folder as above.
 
-### Content Management
+## ⚡ Productivity Tips
 
-- **Published flag**: Use `published: true/false` in frontmatter to control visibility
-- **Index pages**: Set `index: true` for collection root pages that don't use the filename as slug
-- **Tags system**: Automatic tag aggregation and filtering across all collections
-- **Date handling**: Supports both `date` and `mod` (modified) dates with automatic sorting
+- Reference `README.md` for full architecture and workflow details.
+- Follow existing folder and naming conventions for new features.
+- Use modular layouts and components for consistency.
+- Validate frontmatter and content structure before publishing.
 
-### Adding New Content
+---
 
-1. Create `.md` file in appropriate `src/content/[collection]/` folder
-2. Include required frontmatter (title, description, published, etc.)
-3. For wiki content, use folder nesting for hierarchical organization
-4. Tags are automatically slugified and aggregated site-wide
-
-### Build Commands
-
-```bash
-npm run dev       # Development server with hot reload
-npm run build     # Production build
-npm run preview   # Preview production build
-```
-
-## 🎯 Project-Specific Conventions
-
-### Collection Configuration
-
-- Collections defined in `src/content.config.ts` with Zod schemas
-- Metadata in `src/constants.ts` defines URLs, pagination, and site structure
-- Each collection has configurable `entriesPerPage` for pagination
-
-### URL Structure
-
-- Collections: `/[collection]/` (e.g., `/blog/`, `/wiki/`)
-- Entries: `/[collection]/[slug]` (e.g., `/blog/my-post`)
-- Pagination: `/[collection]/[page-number]` (e.g., `/blog/2`)
-- Tags: `/tags/[tag-name]`
-
-### Wiki-Specific Features
-
-- **Tree navigation**: Automatic sidebar generation from folder structure
-- **Breadcrumbs**: Generated from file path
-- **Sorting**: Files first, then folders, alphabetically within each type
-
-### Styling & Theming
-
-- **TailwindCSS v4**: Modern Tailwind with Vite plugin
-- **Theme switching**: Built-in dark/light mode toggle
-- **Inter font**: Variable font loaded from Fontsource
-
-## 🔍 Key Integration Points
-
-### Astro Integrations
-
-- **Pagefind**: Site-wide search functionality
-- **Sitemap**: Automatic XML sitemap generation
-- **RSS feed**: Available at `/feed.xml`
-
-### Content Processing Pipeline
-
-1. Markdown files → Astro content collections
-2. Frontmatter validation via Zod schemas
-3. Custom rehype plugins for link processing
-4. Static generation with pagination support
-
-### External Dependencies
-
-- **astro-rehype-relative-markdown-links**: Converts relative MD links to proper routes
-- **rehype-external-links**: Adds target="\_blank" and icons to external links
-
-## 🚨 Important Gotchas
-
-- **H1 removal**: Custom rehype plugin automatically removes H1 tags (page titles come from frontmatter)
-- **Index pages**: Use `index: true` for collection root pages, not filename-based routing
-- **Published flag**: Content is filtered by `published: true` in production
-- **Wiki navigation**: Tree structure is generated from actual folder hierarchy, not frontmatter
-- **Collection types**: TypeScript types are auto-generated from Zod schemas in `content.config.ts`
-
-When working on this project, focus on the content-first approach and understand that most functionality revolves around the collection system and hierarchical content organization.
+If any section is unclear or missing, please provide feedback to improve these instructions.

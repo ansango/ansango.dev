@@ -22,7 +22,7 @@ const oneYear = 1000 * 60 * 60 * 24 * 365;
 const isOutdated = parsedDate && now.getTime() - parsedDate.getTime() > oneYear;
 ---
 
-<div class="border-divider border-b-[1px] mb-4">
+<div class="border-divider mb-4 border-b-[1px]">
   {
     date && (
       <time datetime={getFormatDate(date, "es-ES")} class="text-muted text-sm">

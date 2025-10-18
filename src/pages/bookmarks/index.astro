@@ -8,18 +8,23 @@ const collections = await getCollectionsExcludingReading();
 
 <LayoutDefault>
     <h1>{site.pages.bookmarks.title}</h1>
-    <p>{site.pages.bookmarks.description}</p>
+    <p class="text-muted/90">{site.pages.bookmarks.description} Un total de <span class="font-medium text-muted">{collections?.reduce((acc, { count }) => acc + count, 0)}</span> marcadores, 
+        distribuidos en <span class="font-medium text-muted">{collections?.length}</span> colecciones.
+    </p>
     <Divider />
-    <ul class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+    <ul class="grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
         {
-            collections?.map(({ title }) => {
+            collections?.map(({ title, count }) => {
                 return (
-                    <li class="list-none">
+                    <li class="list-none flex">
                         <Link
-                            className="flex capitalize font-medium border border-divider p-2.5 rounded"
+                            className="font-medium w-full px-1.5 py-1.5 border border-divider rounded"
                             href={`/bookmarks/${title}`}
                         >
-                            {title}
+                            
+                           
+                            <span class="text-sm">{title.replaceAll(/[.-]/g, " ")}</span>
+                            <span class="text-muted text-xs">({String(count).padStart(2, "0")})</span> 
                         </Link>
                     </li>
                 );

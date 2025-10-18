@@ -16,7 +16,7 @@ const home: Meta = {
 
 const tags: Meta = {
     title: "Tags",
-    description: "Aquí puedes encontrar todas las etiquetas.",
+    description: "Encuentra entradas organizadas por etiquetas y explora temas específicos de interés.",
     entriesPerPage: 20,
     url: "/tags",
     published: true,
@@ -24,7 +24,7 @@ const tags: Meta = {
 
 const archive: Meta = {
     title: "Archivo",
-    description: "Archivo de todas las publicaciones.",
+    description: "Explora todas las entradas de mi sitio web organizadas por fecha de publicación.",
     entriesPerPage: 20,
     url: "/archive",
     published: true,
@@ -57,7 +57,7 @@ const wiki: Meta = {
 const contentCollections: Record<CollectionName, Meta> = {
     blog: {
         title: "Blog",
-        description: "Aquí encontrarás todos los artículos del blog.",
+        description: "En este blog comparto, experiencias y conocimientos sobre tecnología, desarrollo web y otros temas de interés.",
         entriesPerPage: 10,
         url: "/blog",
         published: true,
@@ -72,7 +72,7 @@ const contentCollections: Record<CollectionName, Meta> = {
     },
     projects: {
         title: "Proyectos",
-        description: "Aquí encontrarás mis proyectos personales y colaborativos.",
+        description: "Actualmente estoy trabajando en algún proyecto, si consigo acabarlo pronto lo verás en esta sección.",
         entriesPerPage: 5,
         url: "/projects",
         published: true,

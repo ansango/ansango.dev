@@ -35,8 +35,11 @@ const { currentPage, paginatedEntries, totalPages } = getPagination({
 
 <LayoutDefault {...meta} type="article">
   <h1>
-    {site.pages.bookmarks.title} · <span class="capitalize">{collection}</span>
+    {site.pages.bookmarks.title} · <span>{ collection.replaceAll(/[.-]/g, " ")}</span>
   </h1>
+  <p class="text-muted/90">
+    La coleccion <span class="font-medium text-muted">{collection.replaceAll(/[.-]/g, " ")}</span> contiene <span class="font-medium text-muted">{entries.length}</span> elementos.
+  </p>
   <Divider />
 
   {

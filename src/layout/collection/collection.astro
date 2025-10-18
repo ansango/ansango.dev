@@ -1,10 +1,6 @@
 ---
 import type { CollectionName, Meta } from "@/content.config";
-import {
-    LayoutCollectionWiki,
-    LayoutCollectionDefault,
-    LayoutCollectionBookmark,
-} from "@/layout";
+import { LayoutCollectionWiki, LayoutCollectionDefault } from "@/layout";
 import { type Entries } from "@/lib/collections";
 
 interface Props {
@@ -18,11 +14,11 @@ interface Props {
 
 const { entries, page, isIndex, meta, collection, entriesPerPage } =
     Astro.props;
-const customCollections = ["wiki", "bookmarks"];
+const customCollections = ["wiki"];
 ---
 
 {collection === "wiki" && <LayoutCollectionWiki {entries} {meta} />}
-{collection === "bookmarks" && <LayoutCollectionBookmark {entries} {meta} />}
+
 {
     customCollections.includes(collection) === false && (
         <LayoutCollectionDefault

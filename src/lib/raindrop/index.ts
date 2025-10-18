@@ -17,6 +17,7 @@ export type CachedCollectionData = {
   title: string;
   created: string;
   description: string;
+  count: number;
 };
 
 export type CacheRaindropData = {

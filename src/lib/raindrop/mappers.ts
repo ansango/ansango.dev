@@ -3,7 +3,7 @@ import type { GetCollectionsResponse, Raindrop } from "./services";
 
 export const bookmarksMapper = (bookmarks: Raindrop[]) =>
   bookmarks.map(
-    ({ _id, title, created, excerpt, collectionId, cover, link, tags }) => ({
+    ({ _id, title, created, excerpt, collectionId, cover, link, tags, }) => ({
       _id,
       title,
       created,

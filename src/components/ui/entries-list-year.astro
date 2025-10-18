@@ -24,7 +24,7 @@ const parsedEntriesByYear = getCollectionsByYear(entries);
     })
     .map(([year, entries]) => {
       return (
-        <section>
+        <section class="">
           <h2 class="mb-2 text-xl font-semibold m-0">
             {isNaN(parseInt(year)) ? "Sin fecha" : year}
           </h2>

@@ -27,7 +27,9 @@ const { entries, page, entriesPerPage, isIndex, meta, collection } =
 
 const { currentPage, paginatedEntries, totalPages } = getPagination({
   isIndex,
-  entries,
+  entries: entries.sort(
+    (a, b) => a.title.localeCompare(b.title)
+  ),
   page,
   entriesPerPage,
 });
@@ -58,6 +60,8 @@ const { currentPage, paginatedEntries, totalPages } = getPagination({
                       alt={item.title}
                       class="w-full h-auto object-cover aspect-square"
                       loading="lazy"
+                      width={46}
+                      height={46}
                     />
                   </div>
                   <div>

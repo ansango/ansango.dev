@@ -38,13 +38,19 @@ const { currentPage, paginatedEntries, totalPages } = getPagination({
       <ul class="space-y-6">
         {paginatedEntries?.map((item) => (
           <li class="list-none">
-            <Link href={item.link} blank={true} className="group flex gap-2 sm:gap-4">
+            <Link
+              href={item.link}
+              blank={true}
+              className="group flex gap-2 sm:gap-4"
+            >
               <div class="mt-8 sm:mt-6 max-w-8 max-h-8 size-full border border-divider rounded-full overflow-hidden flex-shrink-0 sm:max-w-12 sm:max-h-12">
                 <img
                   src={item.cover}
                   alt={item.title}
                   class="w-full h-auto object-cover aspect-square"
                   loading="lazy"
+                  width={46}
+                  height={46}
                 />
               </div>
               <div class="space-y-0.5">

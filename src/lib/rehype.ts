@@ -2,6 +2,17 @@ import { visit } from "unist-util-visit";
 import type { Plugin } from "unified";
 import type { Root, Element } from "hast";
 
+/**
+ * Rehype plugin to remove the first-level heading (<h1>) nodes from the HAST tree.
+ *
+ * This is useful when the page layout provides a title and you want to avoid
+ * duplicated H1 elements inside the rendered Markdown content.
+ *
+ * The plugin visits all elements and removes nodes where tagName === 'h1'.
+ * It uses visit.SKIP to avoid visiting removed nodes further.
+ *
+ * @type {Plugin<[], Root>} unified plugin that mutates the HAST root.
+ */
 export const rehypeRemoveH1: Plugin<[], Root> = () => {
   return (tree) => {
     visit(tree, "element", (node: Element, index, parent) => {
@@ -14,6 +25,14 @@ export const rehypeRemoveH1: Plugin<[], Root> = () => {
   };
 };
 
+/**
+ * Element representation used to augment external links with an inline SVG arrow.
+ * This object contains HAST element meta describing the svg icon and additional
+ * properties to apply to anchor elements.
+ *
+ * Example usage: use with `rehype` transforms to add this `content` node after
+ * external links and set `target` / `rel` attributes.
+ */
 export const elementArrow = {
   target: "_blank",
   rel: ["noopener", "noreferrer"],

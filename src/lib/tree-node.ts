@@ -1,6 +1,15 @@
 import type { CollectionName } from "@/content.config";
 import type { Entries } from "@/lib/collections";
 
+/**
+ * Represents a node in a hierarchical tree structure for wiki/content navigation.
+ *
+ * - `name`: Display name for the node (folder or file title).
+ * - `type`: Either 'folder' or 'file'.
+ * - `path`: The URL path for the item.
+ * - `children`: Optional nested child nodes.
+ * - `level`: Depth level (0-based) in the tree.
+ */
 export type NodeItem = {
   name: string;
   type: string;
@@ -9,6 +18,17 @@ export type NodeItem = {
   level: number;
 };
 
+/**
+ * Build a tree structure from a flat list of entries for a given collection.
+ *
+ * It filters the entries by collection, maps them into a path/title shape,
+ * then constructs a nested folder/file hierarchy. The resulting top-level
+ * array is sorted to show folders before files and alphabetically within type.
+ *
+ * @param {Entries} entries Array of entries to build the tree from.
+ * @param {CollectionName} collectionName Collection to filter by.
+ * @returns {NodeItem[]} Structured tree suitable for navigation components.
+ */
 export const getTreeNode = (
   entries: Entries,
   collectionName: CollectionName,
@@ -55,6 +75,12 @@ export const getTreeNode = (
   });
 };
 
+/**
+ * Count how many file nodes are contained within a tree (recursive).
+ *
+ * @param {NodeItem[]} nodes The root nodes to traverse.
+ * @returns {number} The total number of file nodes.
+ */
 export function countEntries(nodes: NodeItem[]) {
   let count = 0;
   for (const node of nodes) {
@@ -68,6 +94,12 @@ export function countEntries(nodes: NodeItem[]) {
   return count;
 }
 
+/**
+ * Count top-level category folders (level 0) plus their nested folders.
+ *
+ * @param {NodeItem[]} nodes Root nodes to traverse.
+ * @returns {number} Count of categories and nested folder counts.
+ */
 export function countCategories(nodes: NodeItem[]) {
   let count = 0;
   for (const node of nodes) {
@@ -81,8 +113,14 @@ export function countCategories(nodes: NodeItem[]) {
   return count;
 }
 
+/**
+ * Recursively sort a tree so file nodes appear before folder nodes, and
+ * names are sorted alphabetically within each type.
+ *
+ * @param {NodeItem[]} nodes The tree nodes to sort.
+ * @returns {NodeItem[]} Sorted array (new objects created via shallow clone).
+ */
 export function sortTreeNodeFilesFirst(nodes: NodeItem[]): NodeItem[] {
-  // Ordenar recursivamente: archivos primero, luego carpetas
   return nodes
     .map((node) => ({
       ...node,
@@ -91,11 +129,10 @@ export function sortTreeNodeFilesFirst(nodes: NodeItem[]): NodeItem[] {
         : undefined,
     }))
     .sort((a, b) => {
-      // Si son del mismo tipo, ordenar alfabéticamente
       if (a.type === b.type) {
         return a.name.localeCompare(b.name);
       }
-      // Archivos primero (file), luego carpetas (folder)
+
       return a.type === "file" ? -1 : 1;
     });
 }

@@ -1,5 +1,14 @@
 import type { TreeNode } from "@/constants";
 
+/**
+ * Convert a string to a URL-friendly slug.
+ *
+ * - Removes diacritics, lowercases, trims, replaces spaces with dashes,
+ *   and removes non-word characters.
+ *
+ * @param {string} text The input string to slugify.
+ * @returns {string} The slugified string.
+ */
 export const slugify = (text: string): string => {
   return text
     .toString()
@@ -11,7 +20,21 @@ export const slugify = (text: string): string => {
     .replace(/[^\w-]+/g, "");
 };
 
+/**
+ * Capitalize the first character of a string.
+ *
+ * @param {string} s The string to capitalize.
+ * @returns {string} The capitalized string, or empty if input is falsy.
+ */
 export const capitalize = (s: string) => s && s[0].toUpperCase() + s.slice(1);
+/**
+ * Estimate reading time in minutes for a given HTML string.
+ *
+ * Strips HTML tags, counts words, and divides by 200 wpm.
+ *
+ * @param {string} html The HTML content to analyze.
+ * @returns {number} Estimated reading time in minutes (rounded).
+ */
 export const getReadingTime = (html: string): number => {
   const text = html.replace(/<[^>]+>/g, "");
   const wordCount = text.trim().split(/\s+/).length;
@@ -25,12 +48,27 @@ const formatDateOptionsDefault: Intl.DateTimeFormatOptions = {
   year: "numeric",
 };
 
+/**
+ * Format a date as a localized string.
+ *
+ * @param {Date|string} date The date to format.
+ * @param {"en-US"|"es-ES"} [locale="es-ES"] The locale for formatting.
+ * @param {Intl.DateTimeFormatOptions} [options] Intl formatting options.
+ * @returns {string} The formatted date string.
+ */
 export const getFormatDate = (
   date: Date | string,
   locale: "en-US" | "es-ES" = "es-ES",
   options = formatDateOptionsDefault,
 ): string => Intl.DateTimeFormat(locale, options).format(new Date(date));
 
+/**
+ * Compute an array of page numbers for pagination.
+ *
+ * @param {number} numberOfPosts Total number of posts.
+ * @param {number} entriesPerPage Number of posts per page.
+ * @returns {number[]} Array of page numbers (1-based).
+ */
 export const getPageNumbers = (
   numberOfPosts: number,
   entriesPerPage: number,
@@ -45,5 +83,11 @@ export const getPageNumbers = (
   return pageNumbers;
 };
 
+/**
+ * Filter a TreeNode object to only include entries with published: true.
+ *
+ * @param {TreeNode} node The tree node object to filter.
+ * @returns {Array<[string, any]>} Array of [key, value] pairs for published entries.
+ */
 export const getPublishedEntries = (node: TreeNode) =>
   Object.entries(node).filter(([, { published }]) => published);

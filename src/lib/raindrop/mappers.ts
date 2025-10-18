@@ -9,7 +9,7 @@ export const bookmarksMapper = (bookmarks: Raindrop[]) =>
       created,
       excerpt,
       collectionId,
-      cover,
+      cover: cover === "" ? undefined : cover,
       link,
       tags: tags.slice(0, 3),
     }),

@@ -7,7 +7,7 @@ export type CachedBookmarkData = {
   created: string;
   excerpt: string;
   collectionId: number;
-  cover: string;
+  cover?: string;
   link: string;
   tags?: string[];
 };

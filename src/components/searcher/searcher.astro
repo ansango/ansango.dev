@@ -5,11 +5,13 @@ import Script from "./searcher.script.astro";
 ---
 
 <Script />
-<button id="searcher-button" aria-label="(Press Ctrl+/ to open search)">
+<button
+  id="searcher-button"
+  aria-label="(Press / to open search)"
+  aria-describedby="searcher"
+>
   <SearcherIcon />
   <kbd>
-    <span> ctrl </span>
-    <span> + </span>
     <span> / </span>
   </kbd>
 </button>

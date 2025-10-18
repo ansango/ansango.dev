@@ -90,17 +90,17 @@ export type ArtistApiMethods = {
 
 export const artistApiMethods: ArtistApiMethods = {
 	getInfo: (params, init) =>
-		fetcher<ArtistGetInfoResponse>()(buildUrl(method.artist.getInfo, params), init),
+		fetcher<ArtistGetInfoResponse>(buildUrl(method.artist.getInfo, params), init),
 	getTags: (params, init) =>
-		fetcher<ArtistGetTagsResponse>()(buildUrl(method.artist.getTags, params), init),
+		fetcher<ArtistGetTagsResponse>(buildUrl(method.artist.getTags, params), init),
 	getSimilar: (params, init) =>
-		fetcher<ArtistGetSimilarResponse>()(buildUrl(method.artist.getSimilar, params), init),
+		fetcher<ArtistGetSimilarResponse>(buildUrl(method.artist.getSimilar, params), init),
 	getTopTags: (params, init) =>
-		fetcher<ArtistGetTopTagsResponse>()(buildUrl(method.artist.getTopTags, params), init),
+		fetcher<ArtistGetTopTagsResponse>(buildUrl(method.artist.getTopTags, params), init),
 	getTopAlbums: (params, init) =>
-		fetcher<ArtistGetTopAlbumsResponse>()(buildUrl(method.artist.getTopAlbums, params), init),
+		fetcher<ArtistGetTopAlbumsResponse>(buildUrl(method.artist.getTopAlbums, params), init),
 	getTopTracks: (params, init) =>
-		fetcher<ArtistGetTopTracksResponse>()(buildUrl(method.artist.getTopTracks, params), init),
+		fetcher<ArtistGetTopTracksResponse>(buildUrl(method.artist.getTopTracks, params), init),
 	search: (params, init) =>
-		fetcher<ArtistSearchResponse>()(buildUrl(method.artist.search, params), init)
+		fetcher<ArtistSearchResponse>(buildUrl(method.artist.search, params), init)
 };

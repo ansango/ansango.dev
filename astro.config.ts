@@ -9,11 +9,13 @@ import sitemap from "@astrojs/sitemap";
 import site from "./src/site.json";
 import { rehypeRemoveH1, elementArrow } from "./src/lib/rehype";
 
+import svelte from "@astrojs/svelte";
+
 // https://astro.build/config
 export default defineConfig({
   site: site.url,
   prefetch: true,
-  integrations: [pagefind(), sitemap()],
+  integrations: [pagefind(), sitemap(), svelte({ extensions: [".svelte"] })],
   markdown: {
     rehypePlugins: [
       relativeMdLinks,

@@ -1,0 +1,13 @@
+---
+import { PlaceholderIcon } from "@/components";
+
+interface Props {
+  className?: string;
+}
+
+const { className = "w-full h-auto object-cover aspect-square" } = Astro.props;
+---
+
+<div class={`${className} bg-muted/10 flex items-center justify-center`}>
+  <PlaceholderIcon className="text-muted size-5" />
+</div>

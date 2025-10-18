@@ -34,7 +34,7 @@ export type GeoApiMethods = {
 
 export const geoApiMethods: GeoApiMethods = {
 	getTopArtists: (params, init) =>
-		fetcher<GeoGetTopArtistsResponse>()(buildUrl(method.geo.getTopArtists, params), init),
+		fetcher<GeoGetTopArtistsResponse>(buildUrl(method.geo.getTopArtists, params), init),
 	getTopTracks: (params, init) =>
-		fetcher<GeoGetTopTracksResponse>()(buildUrl(method.geo.getTopTracks, params), init)
+		fetcher<GeoGetTopTracksResponse>(buildUrl(method.geo.getTopTracks, params), init)
 };

@@ -1,4 +1,4 @@
-export { default as Image } from "./image.astro";
+export * from "./image";
 export { default as Link } from "./link.astro";
 export { default as Tag } from "./tag.astro";
 export { default as Svg } from "./svg.astro";

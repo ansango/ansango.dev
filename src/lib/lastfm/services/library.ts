@@ -18,5 +18,5 @@ export type LibraryApiMethods = {
 
 export const libraryApiMethods: LibraryApiMethods = {
 	getArtists: (params, init) =>
-		fetcher<LibraryGetArtistsResponse>()(buildUrl(method.library.getArtists, params), init)
+		fetcher<LibraryGetArtistsResponse>(buildUrl(method.library.getArtists, params), init)
 };

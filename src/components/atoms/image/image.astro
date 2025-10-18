@@ -1,14 +1,9 @@
 ---
 import { Image as ImageAstro } from "astro:assets";
-import { PlaceholderIcon } from "@/components";
-interface Props {
-  className?: string;
-  src?: string;
-  alt?: string;
-  width?: number;
-  height?: number;
-  loading?: "eager" | "lazy";
-}
+import Placeholder from "./placeholder.astro";
+import type { ImageProps  } from "."
+
+interface Props extends ImageProps {}
 
 const {
   className = "w-full h-auto object-cover aspect-square",
@@ -31,8 +26,6 @@ const {
       loading={loading}
     />
   ) : (
-    <div class={`${className} bg-muted/10 flex items-center justify-center`}>
-      <PlaceholderIcon className="size-5 text-muted" />
-    </div>
+    <Placeholder className={className} />
   )
 }

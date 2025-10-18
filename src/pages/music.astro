@@ -10,8 +10,10 @@ import {
   CheckIcon,
   HeartIcon,
   Image,
-  PlayNow,
 } from "@/components";
+
+import PlayNow from "@/components/playnow/playnow.svelte";
+
 const { getInfo, getRecentTracks, getTopArtists, getTopAlbums } =
   userApiMethods;
 
@@ -59,33 +61,11 @@ const tracks = recenttracks.track
     </p>
   </div>
 
-  <PlayNow />
+  
 
   <section class="space-y-4">
     <h2>Escuchando ahora <PlayIcon className="inline-flex size-4" /></h2>
-    <div class="flex items-start gap-4">
-      <div class="border-divider overflow-hidden rounded-md border-[1px]">
-        <Image
-          src={imageUrl}
-          alt={currentTrack?.album["#text"]}
-          className="size-20 rounded object-cover"
-        />
-      </div>
-
-      <div class="min-w-0 flex-1 space-y-0.5">
-        <p class="font-medium text-pretty">
-          {currentTrack?.name}
-        </p>
-        <p class="text-muted text-sm">
-          {currentTrack?.artist["#text"]}
-        </p>
-        {
-          currentTrack?.album["#text"] && (
-            <p class="text-muted text-xs">{currentTrack.album["#text"]}</p>
-          )
-        }
-      </div>
-    </div>
+    <PlayNow client:load />
   </section>
 
   <section class="space-y-4">

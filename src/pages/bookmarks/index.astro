@@ -7,28 +7,33 @@ const collections = await getCollectionsExcludingReading();
 ---
 
 <LayoutDefault>
-    <h1>{site.pages.bookmarks.title}</h1>
-    <p class="text-muted/90">{site.pages.bookmarks.description} Un total de <span class="font-medium text-muted">{collections?.reduce((acc, { count }) => acc + count, 0)}</span> marcadores, 
-        distribuidos en <span class="font-medium text-muted">{collections?.length}</span> colecciones.
-    </p>
-    <Divider />
-    <ul class="grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-        {
-            collections?.map(({ title, count }) => {
-                return (
-                    <li class="list-none flex">
-                        <Link
-                            className="font-medium w-full px-1.5 py-1.5 border border-divider rounded"
-                            href={`/bookmarks/${title}`}
-                        >
-                            
-                           
-                            <span class="text-sm">{title.replaceAll(/[.-]/g, " ")}</span>
-                            <span class="text-muted text-xs">({String(count).padStart(2, "0")})</span> 
-                        </Link>
-                    </li>
-                );
-            })
-        }
-    </ul>
+  <h1>{site.pages.bookmarks.title}</h1>
+  <p class="text-muted/90">
+    {site.pages.bookmarks.description} Un total de <span
+      class="text-muted font-medium"
+      >{collections?.reduce((acc, { count }) => acc + count, 0)}</span
+    > marcadores, distribuidos en <span class="text-muted font-medium"
+      >{collections?.length}</span
+    > colecciones.
+  </p>
+  <Divider />
+  <ul class="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
+    {
+      collections?.map(({ title, count }) => {
+        return (
+          <li class="flex list-none">
+            <Link
+              className="font-medium w-full px-1.5 py-1.5 border border-divider rounded"
+              href={`/bookmarks/${title}`}
+            >
+              <span class="text-sm">{title.replaceAll(/[.-]/g, " ")}</span>
+              <span class="text-muted text-xs">
+                ({String(count).padStart(2, "0")})
+              </span>
+            </Link>
+          </li>
+        );
+      })
+    }
+  </ul>
 </LayoutDefault>

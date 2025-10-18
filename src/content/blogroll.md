@@ -4,6 +4,7 @@ description: "Una lista de blogs que recomiendo."
 index: true
 published: true
 ---
+
 # Blog Roll
 
 Una lista curada de blogs y autores que sigo. Incluyo una breve nota sobre por qué los recomiendo. Si quieres, puedo convertir esto en una colección enlazable con RSS.
@@ -26,4 +27,3 @@ Una lista curada de blogs y autores que sigo. Incluyo una breve nota sobre por q
 ## Investigación y pensamiento crítico
 
 - Distill / Medium essays — artículos técnicos por autores independientes.
-

@@ -1,20 +1,20 @@
 @layer base {
   table {
-    @apply w-full mb-4 text-sm border-collapse table-auto;
-    @apply overflow-x-auto block;
+    @apply mb-4 w-full table-auto border-collapse text-sm;
+    @apply block overflow-x-auto;
   }
 
   thead {
-    @apply bg-astro-code border-b-2 border-divider;
+    @apply bg-astro-code border-divider border-b-2;
   }
 
   th {
-    @apply px-4 py-3 text-left font-semibold text-accent;
-    @apply border-b border-divider;
+    @apply text-accent px-4 py-3 text-left font-semibold;
+    @apply border-divider border-b;
   }
 
   td {
-    @apply px-4 py-3 border-b border-divider;
+    @apply border-divider border-b px-4 py-3;
   }
 
   tbody tr {

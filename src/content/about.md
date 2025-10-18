@@ -4,6 +4,7 @@ description: "Sobre mí y este sitio web."
 index: true
 published: true
 ---
+
 # About
 
 Hola — soy desarrollador/a centrado/a en experiencias web rápidas y mantenibles. Este sitio recoge notas, proyectos y recursos que uso en mi día a día.

@@ -13,29 +13,29 @@ const meta = site.pages[collection as CollectionName];
 const entriesPerPage = meta.entriesPerPage;
 
 if (!entries) {
-    return Astro.redirect("/");
+  return Astro.redirect("/");
 }
 
 const onlyOnePage =
-    entries.length === 1 &&
-    entries.some(({ data }: { data: any }) => data.index === true);
+  entries.length === 1 &&
+  entries.some(({ data }: { data: any }) => data.index === true);
 ---
 
 {
-    onlyOnePage && entries && (
-        <LayoutSingle {collection} entryId={entries[0].id} />
-    )
+  onlyOnePage && entries && (
+    <LayoutSingle {collection} entryId={entries[0].id} />
+  )
 }
 
 {
-    !onlyOnePage && entries && (
-        <LayoutCollection
-            {collection}
-            {entries}
-            {meta}
-            {entriesPerPage}
-            page={1}
-            isIndex
-        />
-    )
+  !onlyOnePage && entries && (
+    <LayoutCollection
+      {collection}
+      {entries}
+      {meta}
+      {entriesPerPage}
+      page={1}
+      isIndex
+    />
+  )
 }

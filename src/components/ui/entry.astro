@@ -14,13 +14,13 @@ const timeReading = getReadingTime(body);
 const time = date && getFormatDate(date);
 ---
 
-<h3 class="line-clamp-1 font-medium group-hover:text-link">
+<h3 class="group-hover:text-link line-clamp-1 font-medium">
   {title}
 </h3>
-<p class="text-sm text-muted">
+<p class="text-muted text-sm">
   {time && <time datetime={time}>{time}</time>}
   {date && timeReading > 1 && <span>·</span>}
   {timeReading > 1 && <span>{timeReading} min de lectura</span>}
 </p>
-<p class="line-clamp-2 text-muted">{description}</p>
-<span class="block text-sm text-muted"> Leer más → </span>
+<p class="text-muted line-clamp-2">{description}</p>
+<span class="text-muted block text-sm"> Leer más → </span>

@@ -41,28 +41,28 @@ const { currentPage, paginatedEntries, totalPages } = getPagination({
     >
   </h1>
   <p class="text-muted/90">
-    La coleccion <span class="font-medium text-muted"
+    La coleccion <span class="text-muted font-medium"
       >{collection.replaceAll(/[.-]/g, " ")}</span
-    > contiene <span class="font-medium text-muted">{entries.length}</span> elementos.
+    > contiene <span class="text-muted font-medium">{entries.length}</span> elementos.
   </p>
   <Divider />
 
   {
     entries.length === 0 ? (
-      <p class="text-center text-muted">No hay elementos para mostrar.</p>
+      <p class="text-muted text-center">No hay elementos para mostrar.</p>
     ) : (
       <ul class="grid grid-cols-1 gap-4">
         {paginatedEntries?.map((item) => {
           return (
-            <li class="list-none space-y-0.5 w-full">
+            <li class="w-full list-none space-y-0.5">
               <Link href={item.link} blank={true} className="group">
                 <div class="flex gap-2 sm:gap-4">
-                  <div class="max-w-8 max-h-8 size-full border border-divider rounded-full overflow-hidden flex-shrink-0 sm:max-w-12 sm:max-h-12">
+                  <div class="border-divider size-full max-h-8 max-w-8 flex-shrink-0 overflow-hidden rounded-full border sm:max-h-12 sm:max-w-12">
                     {item.cover && (
                       <Image
                         src={item.cover}
                         alt={item.title}
-                        class="w-full h-auto object-cover aspect-square"
+                        class="aspect-square h-auto w-full object-cover"
                         loading="lazy"
                         width={46}
                         height={46}
@@ -71,13 +71,13 @@ const { currentPage, paginatedEntries, totalPages } = getPagination({
                   </div>
                   <div>
                     <div class="space-y-0.5">
-                      <h2 class=" text-lg leading-tight group-hover:text-link w-full flex items-center gap-1">
+                      <h2 class="group-hover:text-link flex w-full items-center gap-1 text-lg leading-tight">
                         <span class="line-clamp-1">{item.title}</span>
 
                         <ExternalLinkIcon className="inline-flex max-w-5 size-full" />
                       </h2>
                       {item.excerpt && (
-                        <p class="text-sm text-muted line-clamp-2 leading-normal mb-1.5">
+                        <p class="text-muted mb-1.5 line-clamp-2 text-sm leading-normal">
                           {item.excerpt}
                         </p>
                       )}
@@ -85,7 +85,7 @@ const { currentPage, paginatedEntries, totalPages } = getPagination({
                     {item.tags && (
                       <div class="space-x-1.5">
                         {item.tags.map((tag: string) => (
-                          <span class="group-hover:!text-content text-xs bg-divider px-1.5 py-0.5 rounded-full">
+                          <span class="group-hover:!text-content bg-divider rounded-full px-1.5 py-0.5 text-xs">
                             {tag}
                           </span>
                         ))}

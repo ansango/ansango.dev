@@ -1,8 +1,7 @@
 ---
-
 import { site } from "@/constants";
 import { getReadingStaticPathsPage as getStaticPaths } from "@/lib/astro";
-import {  LayoutReading } from "@/layout";
+import { LayoutReading } from "@/layout";
 import { getBookmarksByCollection } from "@/lib/raindrop";
 
 export { getStaticPaths };
@@ -11,8 +10,8 @@ const { page } = Astro.params;
 const entries = await getBookmarksByCollection("reading");
 const entriesPerPage = site.pages.reading.entriesPerPage;
 const meta = site.pages.reading;
-
 ---
+
 <LayoutReading
   entries={entries}
   entriesPerPage={entriesPerPage}
@@ -20,4 +19,3 @@ const meta = site.pages.reading;
   page={page}
   isIndex={false}
 />
-    

@@ -6,15 +6,15 @@ import { LayoutDefault } from ".";
 import { getFormatDate } from "@/lib/utils";
 
 interface Props {
-    collection: CollectionName;
-    entryId: string;
+  collection: CollectionName;
+  entryId: string;
 }
 
 const { collection, entryId } = Astro.props;
 
 const entry = await getEntry(collection, entryId);
 if (!entry) {
-    throw new Error(`Entry not found: ${collection}/${entryId}`);
+  throw new Error(`Entry not found: ${collection}/${entryId}`);
 }
 
 const { title, date, mod } = entry.data;
@@ -23,16 +23,16 @@ const { Content, remarkPluginFrontmatter } = await render(entry);
 ---
 
 <LayoutDefault {...remarkPluginFrontmatter} type="main">
-    {
-        date && (
-            <time
-                datetime={getFormatDate(mod ?? date, "es-ES")}
-                class="text-sm text-muted"
-            >
-                actualizado el {getFormatDate(mod ?? date, "es-ES")}
-            </time>
-        )
-    }
-    <h1>{title}</h1>
-    <Content />
+  {
+    date && (
+      <time
+        datetime={getFormatDate(mod ?? date, "es-ES")}
+        class="text-muted text-sm"
+      >
+        actualizado el {getFormatDate(mod ?? date, "es-ES")}
+      </time>
+    )
+  }
+  <h1>{title}</h1>
+  <Content />
 </LayoutDefault>

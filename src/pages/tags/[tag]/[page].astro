@@ -1,5 +1,4 @@
 ---
-
 import { site } from "@/constants";
 import { LayoutTag } from "@/layout";
 import { getCollectionsByTag } from "@/lib/collections";
@@ -15,9 +14,8 @@ const meta = site.pages.tags;
 const entriesPerPage = meta.entriesPerPage;
 
 if (!entries) {
-    return Astro.redirect("/");
+  return Astro.redirect("/");
 }
-
 ---
 
 <LayoutTag

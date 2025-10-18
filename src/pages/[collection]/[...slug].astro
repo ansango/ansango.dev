@@ -8,8 +8,8 @@ import { getCollectionStaticPathsSlug } from "@/lib/astro";
 export { getCollectionStaticPathsSlug as getStaticPaths };
 
 const { slug, collection } = Astro.params as {
-    slug: string;
-    collection: CollectionName;
+  slug: string;
+  collection: CollectionName;
 };
 
 const { entry } = Astro.props;
@@ -20,23 +20,22 @@ const meta = site.pages[collection as CollectionName];
 const entriesPerPage = meta.entriesPerPage;
 const isIndex = false;
 
-
 if (!entry && (!entries || isNaN(page) || page < 1)) {
-    return Astro.redirect("/");
+  return Astro.redirect("/");
 }
 ---
 
 {
-    entry ? (
-        <LayoutCollectionEntry {...entry} />
-    ) : (
-        <LayoutCollection
-            {collection}
-            {entries}
-            {meta}
-            {entriesPerPage}
-            {page}
-            {isIndex}
-        />
-    )
+  entry ? (
+    <LayoutCollectionEntry {...entry} />
+  ) : (
+    <LayoutCollection
+      {collection}
+      {entries}
+      {meta}
+      {entriesPerPage}
+      {page}
+      {isIndex}
+    />
+  )
 }

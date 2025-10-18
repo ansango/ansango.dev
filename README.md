@@ -36,12 +36,15 @@ The site is built around 8 content types, all defined in `src/content.config.ts`
 All site behavior is controlled through three main files:
 
 #### `site.json`
+
 Global site metadata (title, description, author, social links, etc.)
 
 #### `src/content.config.ts`
+
 Content collection schemas using Zod. Defines frontmatter structure for each collection.
 
 #### `src/constants.ts`
+
 Collection metadata, pagination settings, URLs, and site structure.
 
 ### Content Structure
@@ -66,7 +69,7 @@ src/content/
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm or pnpm
 
 ### Installation
@@ -212,6 +215,7 @@ Custom plugins in `src/lib/rehype.ts`:
 ### Adding a New Collection
 
 1. **Define schema in `src/content.config.ts`**:
+
 ```typescript
 const newCollection = defineCollection({
   schema: z.object({
@@ -224,6 +228,7 @@ const newCollection = defineCollection({
 ```
 
 2. **Add metadata in `src/constants.ts`**:
+
 ```typescript
 export const COLLECTION_METADATA = {
   // ... existing collections
@@ -237,6 +242,7 @@ export const COLLECTION_METADATA = {
 ```
 
 3. **Create content folder**:
+
 ```bash
 mkdir src/content/new-collection
 ```
@@ -302,6 +308,7 @@ published: true
 ---
 
 ## Web Development
+
 - [Blog Name](https://example.com) - Description
 ```
 
@@ -327,7 +334,6 @@ To sync content from an Obsidian vault stored in a separate GitHub repository, y
 
 - Create a new repo for your Obsidian vault
 - Add a GitHub Actions workflow in this repo `.github/workflows/sync.yml`:
-
 
 ### Template Workflow File
 
@@ -357,6 +363,7 @@ TODO
 ## Performance
 
 The site is optimized for performance with:
+
 - 100% static output
 - Minimal JavaScript (only for interactive features)
 - Efficient CSS with Tailwind's purge feature

@@ -4,7 +4,6 @@ import { LayoutArchive } from "@/layout";
 import { getArchiveStaticPathsPage } from "@/lib/astro";
 import { getSortedCollectionsByYear } from "@/lib/collections";
 
-
 export { getArchiveStaticPathsPage as getStaticPaths };
 
 const { page } = Astro.params;
@@ -15,15 +14,14 @@ const entriesPerPage = meta.entriesPerPage || 10;
 const isIndex = false;
 
 if (!entries) {
-    return Astro.redirect("/");
+  return Astro.redirect("/");
 }
-
 ---
 
 <LayoutArchive
-    entries={entries}
-    entriesPerPage={entriesPerPage}
-    meta={meta}
-    {page}
-    {isIndex}
+  entries={entries}
+  entriesPerPage={entriesPerPage}
+  meta={meta}
+  {page}
+  {isIndex}
 />

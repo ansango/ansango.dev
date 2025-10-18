@@ -6,8 +6,8 @@ import { LayoutDefault } from "@/layout";
 import { TreeNode } from "@/components";
 
 interface Props {
-    entries: Entries;
-    meta: Meta;
+  entries: Entries;
+  meta: Meta;
 }
 
 const { entries, meta } = Astro.props;
@@ -18,40 +18,37 @@ const totalCategories = countCategories(wikiStructure);
 ---
 
 <LayoutDefault {...meta} type="main">
-    <h1>Wiki</h1>
-    <p class="text-pretty text-sm text-muted">
-        {
-            totalCategories === 1
-                ? "1 categoría"
-                : `${totalCategories} categorías`
-        } · {totalEntries === 1 ? "1 entrada" : `${totalEntries} entradas`}
-    </p>
-    <div class="flex flex-col h-full">
-        <article class="flex-1">
-            <div class="space-y-4">
-                <div class="rounded border border-divider">
-                    <div class="divide-y divide-divider">
-                        {
-                            wikiStructure.map((node) => (
-                                <div class="py-1">
-                                    <TreeNode node={node} level={0} />
-                                </div>
-                            ))
-                        }
-                    </div>
+  <h1>Wiki</h1>
+  <p class="text-muted text-sm text-pretty">
+    {totalCategories === 1 ? "1 categoría" : `${totalCategories} categorías`} · {
+      totalEntries === 1 ? "1 entrada" : `${totalEntries} entradas`
+    }
+  </p>
+  <div class="flex h-full flex-col">
+    <article class="flex-1">
+      <div class="space-y-4">
+        <div class="border-divider rounded border">
+          <div class="divide-divider divide-y">
+            {
+              wikiStructure.map((node) => (
+                <div class="py-1">
+                  <TreeNode node={node} level={0} />
                 </div>
+              ))
+            }
+          </div>
+        </div>
 
-                <p class="text-xs text-muted">
-                    Haz clic en las carpetas para expandir o contraer las
-                    subcategorías
-                </p>
-            </div>
-        </article>
-    </div>
+        <p class="text-muted text-xs">
+          Haz clic en las carpetas para expandir o contraer las subcategorías
+        </p>
+      </div>
+    </article>
+  </div>
 
-    <style>
-        details > summary::-webkit-details-marker {
-            display: none;
-        }
-    </style>
+  <style>
+    details > summary::-webkit-details-marker {
+      display: none;
+    }
+  </style>
 </LayoutDefault>

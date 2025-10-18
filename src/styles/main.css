@@ -1,6 +1,6 @@
 @layer base {
   html {
-    @apply motion-safe:scroll-smooth size-full text-base;
+    @apply size-full text-base motion-safe:scroll-smooth;
     @apply text-content bg-body;
     scrollbar-gutter: stable;
   }
@@ -17,5 +17,4 @@
   section {
     @apply my-6;
   }
-  
 }

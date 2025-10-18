@@ -4,9 +4,9 @@ import { capitalize } from "@/lib/utils";
 import { Heading, Link } from "@/components";
 
 interface Props {
-    node: NodeItem;
-    level?: number;
-    index?: number;
+  node: NodeItem;
+  level?: number;
+  index?: number;
 }
 
 const { node, level = 0, index = 0 } = Astro.props;
@@ -16,31 +16,31 @@ const hasChildren = node.children && node.children.length > 0;
 ---
 
 {
-    level === 0 ? (
-        <>
-            {node.children?.map((child, i) => (
-                <Astro.self node={child} level={level + 1} index={i} />
-            ))}
-        </>
-    ) : (
-        <>
-            {isFolder && hasChildren ? (
-                <div class={`${level === 1 ? "border-b border-divider pb-4" : "pt-4"}`}>
-                    {level !== 0 && (
-                        <Heading n={level + 1}>
-                            {capitalize(node.name.replaceAll("-", " "))}
-                        </Heading>
-                    )}
+  level === 0 ? (
+    <>
+      {node.children?.map((child, i) => (
+        <Astro.self node={child} level={level + 1} index={i} />
+      ))}
+    </>
+  ) : (
+    <>
+      {isFolder && hasChildren ? (
+        <div class={`${level === 1 ? "border-divider border-b pb-4" : "pt-4"}`}>
+          {level !== 0 && (
+            <Heading n={level + 1}>
+              {capitalize(node.name.replaceAll("-", " "))}
+            </Heading>
+          )}
 
-                    {node.children?.map((child, i) => (
-                        <Astro.self node={child} level={level + 1} index={i} />
-                    ))}
-                </div>
-            ) : (
-                <div>
-                    <Link href={node.path}>{node.name}</Link>
-                </div>
-            )}
-        </>
-    )
+          {node.children?.map((child, i) => (
+            <Astro.self node={child} level={level + 1} index={i} />
+          ))}
+        </div>
+      ) : (
+        <div>
+          <Link href={node.path}>{node.name}</Link>
+        </div>
+      )}
+    </>
+  )
 }

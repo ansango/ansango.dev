@@ -27,16 +27,14 @@ const { currentPage, paginatedEntries, totalPages } = getPagination({
   <p class="text-muted">
     {meta.description} Hay un total de {entries.length} entradas publicadas
   </p>
-  <Divider/>
-  
-      <EntriesListYear entries={paginatedEntries} />
-    </div>
+  <Divider />
 
-    <Pagination
-      {currentPage}
-      {totalPages}
-      prevUrl={`/archive${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
-      nextUrl={`/archive/${currentPage + 1}/`}
-    />
-  
+  <EntriesListYear entries={paginatedEntries} />
 </LayoutDefault>
+
+<Pagination
+  {currentPage}
+  {totalPages}
+  prevUrl={`/archive${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
+  nextUrl={`/archive/${currentPage + 1}/`}
+/>

@@ -1,63 +1,63 @@
 ---
 import { site } from "@/constants";
 import "@/styles/global.css";
-import { ThemeScript,   ClipboardScript } from "@/components";
+import { ThemeScript, ClipboardScript } from "@/components";
 import { ClientRouter } from "astro:transitions";
 interface Props {
-    title?: string;
-    description?: string;
-    image?: string;
+  title?: string;
+  description?: string;
+  image?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, site.url);
 const {
-    title = site.name,
-    description = site.description,
-    image = site.image,
+  title = site.name,
+  description = site.description,
+  image = site.image,
 } = Astro.props;
 ---
 
 <head>
-    <!-- Global Metadata -->
-    <meta charset="utf-8" />
+  <!-- Global Metadata -->
+  <meta charset="utf-8" />
 
-    <link href="/site.webmanifest" rel="manifest" />
-    <link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180" />
-    <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png" />
-    <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png" />
-    <link color="#4a9885" href="/safari-pinned-tab.svg" rel="mask-icon" />
-    <meta content="#171717" name="theme-color" />
-    <meta content="#171717" name="msapplication-TileColor" />
-    <meta content="/browserconfig.xml" name="msapplication-config" />
+  <link href="/site.webmanifest" rel="manifest" />
+  <link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180" />
+  <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png" />
+  <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png" />
+  <link color="#4a9885" href="/safari-pinned-tab.svg" rel="mask-icon" />
+  <meta content="#171717" name="theme-color" />
+  <meta content="#171717" name="msapplication-TileColor" />
+  <meta content="/browserconfig.xml" name="msapplication-config" />
 
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
+  <meta name="viewport" content="width=device-width" />
+  <meta name="generator" content={Astro.generator} />
 
-    <link rel="sitemap" href={`${site.url}/sitemap-index.xml`} />
+  <link rel="sitemap" href={`${site.url}/sitemap-index.xml`} />
 
-    <!-- Canonical URL -->
-    <link rel="canonical" href={canonicalURL} />
+  <!-- Canonical URL -->
+  <link rel="canonical" href={canonicalURL} />
 
-    <!-- Primary Meta Tags -->
-    <title>{title}</title>
-    <meta name="title" content={title} />
-    <meta name="description" content={description} />
+  <!-- Primary Meta Tags -->
+  <title>{title}</title>
+  <meta name="title" content={title} />
+  <meta name="description" content={description} />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={Astro.url} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(image, Astro.url)} />
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={Astro.url} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={new URL(image, Astro.url)} />
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={Astro.url} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={new URL(image, Astro.url)} />
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content={Astro.url} />
+  <meta property="twitter:title" content={title} />
+  <meta property="twitter:description" content={description} />
+  <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
-    <ThemeScript/>
-    <ClipboardScript/>
-    <ClientRouter/>
+  <ThemeScript />
+  <ClipboardScript />
+  <ClientRouter />
 </head>

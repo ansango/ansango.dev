@@ -1,30 +1,30 @@
 ---
-import { Head, Header, Container, Footer} from "@/components";
+import { Head, Header, Container, Footer } from "@/components";
 import { site } from "@/constants";
 
 import type { Meta } from "@/content.config";
 
 interface Props extends Partial<Omit<Meta, "entriesPerPage">> {
-    lang?: string;
-    type?: "main" | "article" | "section" | "div";
+  lang?: string;
+  type?: "main" | "article" | "section" | "div";
 }
 
-const { title, description, lang = "es", type = "div"} = Astro.props;
+const { title, description, lang = "es", type = "div" } = Astro.props;
 
 const headProps = {
-    title: title ? `${title} | ${site.name}` : site.name,
-    description,
+  title: title ? `${title} | ${site.name}` : site.name,
+  description,
 };
 ---
 
 <!doctype html>
 <html lang={lang}>
-    <Head {...headProps} />
-    <body class="flex flex-col min-h-dvh">
-        <Header />
-        <Container className={`pt-14 flex-1 [&_h1+_p]:text-muted`} element={type}>
-            <slot />
-        </Container>
-        <Footer />
-    </body>
+  <Head {...headProps} />
+  <body class="flex min-h-dvh flex-col">
+    <Header />
+    <Container className={`[&_h1+_p]:text-muted flex-1 pt-14`} element={type}>
+      <slot />
+    </Container>
+    <Footer />
+  </body>
 </html>

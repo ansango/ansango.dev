@@ -8,7 +8,14 @@ interface Props {
   blank?: boolean;
 }
 
-const { href, className, ariaLabel, title, disabled = false, blank = false } = Astro.props;
+const {
+  href,
+  className,
+  ariaLabel,
+  title,
+  disabled = false,
+  blank = false,
+} = Astro.props;
 ---
 
 {
@@ -22,7 +29,14 @@ const { href, className, ariaLabel, title, disabled = false, blank = false } = A
       <slot />
     </span>
   ) : (
-    <a {href} class={`${className ?? ""}`} aria-label={ariaLabel} title={title} target={blank ? "_blank" : undefined} rel={blank ? "noopener noreferrer" : undefined}>
+    <a
+      {href}
+      class={`${className ?? ""}`}
+      aria-label={ariaLabel}
+      title={title}
+      target={blank ? "_blank" : undefined}
+      rel={blank ? "noopener noreferrer" : undefined}
+    >
       <slot />
     </a>
   )

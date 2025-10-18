@@ -29,12 +29,12 @@ const { currentPage, paginatedEntries, totalPages } = getPagination({
       >{tag.replace(/-/g, " ")}
     </span>
   </h1>
-  <div class="flex flex-col h-full">
-  <p class="text-muted">
-    {entries.length}
-    {entries.length === 1 ? "publicación" : "publicaciones"} de esta etiqueta
-  </p>
-  
+  <div class="flex h-full flex-col">
+    <p class="text-muted">
+      {entries.length}
+      {entries.length === 1 ? "publicación" : "publicaciones"} de esta etiqueta
+    </p>
+
     <div class="flex-1">
       <EntriesList entries={paginatedEntries} />
     </div>

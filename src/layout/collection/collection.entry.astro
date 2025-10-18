@@ -10,7 +10,7 @@ const { collection, id } = Astro.props as Entry;
 const entry = await getEntry(collection, id);
 
 if (!entry) {
-    throw new Error(`Entry not found: ${collection}/${id}`);
+  throw new Error(`Entry not found: ${collection}/${id}`);
 }
 
 const { Content, remarkPluginFrontmatter } = await render(entry);
@@ -18,18 +18,18 @@ const { title, date, mod, description, tags } = entry.data;
 const readingTime = getReadingTime(entry.body || "");
 
 const headingProps = {
-    title,
-    date,
-    mod,
-    description,
-    tags,
-    readingTime,
-    collection,
+  title,
+  date,
+  mod,
+  description,
+  tags,
+  readingTime,
+  collection,
 };
 ---
 
 <LayoutDefault {...remarkPluginFrontmatter} type="article">
-    <EntryHeading {...headingProps} />
-    <Divider />
-    <Content />
+  <EntryHeading {...headingProps} />
+  <Divider />
+  <Content />
 </LayoutDefault>

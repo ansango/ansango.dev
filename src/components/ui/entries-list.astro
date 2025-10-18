@@ -28,7 +28,7 @@ const { entries } = Astro.props;
             >
               {date && (
                 <time
-                  class="text-sm text-muted whitespace-nowrap min-w-20"
+                  class="text-muted min-w-20 text-sm whitespace-nowrap"
                   datetime={getFormatDate(date)}
                 >
                   {getFormatDate(date, "es-ES", {
@@ -40,8 +40,11 @@ const { entries } = Astro.props;
                     .join(" · ")}
                 </time>
               )}
-              <u class="w-full flex items-center gap-1" ><span class="line-clamp-1">{title}</span>
-                {external && <ExternalLinkIcon className="inline-flex max-w-4 size-full" />}
+              <u class="flex w-full items-center gap-1">
+                <span class="line-clamp-1">{title}</span>
+                {external && (
+                  <ExternalLinkIcon className="inline-flex max-w-4 size-full" />
+                )}
               </u>
             </Link>
           </li>

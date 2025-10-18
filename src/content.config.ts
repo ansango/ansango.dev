@@ -39,7 +39,7 @@ const commonSchema = seoSchema
 const usesSchema = commonSchema.merge(
   z.object({
     index: z.boolean().default(true).optional(),
-  })
+  }),
 );
 
 const uses = defineCollection({
@@ -54,7 +54,7 @@ const uses = defineCollection({
 const aboutSchema = commonSchema.merge(
   z.object({
     index: z.boolean().default(true).optional(),
-  })
+  }),
 );
 
 const about = defineCollection({
@@ -69,7 +69,7 @@ const about = defineCollection({
 const blogRollSchema = commonSchema.merge(
   z.object({
     index: z.boolean().default(true).optional(),
-  })
+  }),
 );
 
 const blogroll = defineCollection({
@@ -84,7 +84,7 @@ const blogroll = defineCollection({
 const nowSchema = commonSchema.merge(
   z.object({
     index: z.boolean().default(true).optional(),
-  })
+  }),
 );
 
 const now = defineCollection({

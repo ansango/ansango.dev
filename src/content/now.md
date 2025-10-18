@@ -5,6 +5,7 @@ date: 2024-06-20
 index: true
 published: true
 ---
+
 # Now
 
 Esta página recoge en pocas líneas en qué estoy ahora: prioridades, proyectos activos, cosas que estoy aprendiendo y herramientas que uso día a día. La idea es mantener un registro corto y útil para quien me sigue o para mi yo futuro.
@@ -42,4 +43,3 @@ Esta página recoge en pocas líneas en qué estoy ahora: prioridades, proyectos
 ## Cómo seguirme o contactarme
 
 Si quieres seguir el progreso de estos proyectos o colaborar, abre un issue o PR en los repos correspondientes, o utiliza los enlaces de contacto del footer del sitio.
-

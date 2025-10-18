@@ -5,6 +5,7 @@ index: true
 date: 2025-06-18
 published: true
 ---
+
 # Uses
 
 Esta página describe mi setup: hardware, software, flujo de trabajo, accesos y dotfiles. Está pensada para quien quiera reproducir mi entorno o sacar ideas prácticas. Uso lo que me hace más productivo y lo que me permite iterar rápido en proyectos personales y profesionales.
@@ -61,4 +62,3 @@ Puedes ver mis dotfiles y configuraciones en los siguientes enlaces (ejemplos):
 - Config de VS Code / extensiones: https://github.com/tu-usuario/vscode-settings
 
 Sustituye "tu-usuario" por el nombre de usuario correspondiente o enlaza tus repositorios reales.
-

@@ -1,5 +1,4 @@
 ---
-
 import { site } from "@/constants";
 import { LayoutArchive } from "@/layout";
 import { getSortedCollectionsByYear } from "@/lib/collections";
@@ -9,9 +8,8 @@ const meta = site.pages.archive;
 const entriesPerPage = meta.entriesPerPage || 10;
 
 if (!entries) {
-    return Astro.redirect("/");
+  return Astro.redirect("/");
 }
-
 ---
 
 <LayoutArchive

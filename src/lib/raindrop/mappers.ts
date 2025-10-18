@@ -3,13 +3,14 @@ import type { GetCollectionsResponse, Raindrop } from "./services";
 
 export const bookmarksMapper = (bookmarks: Raindrop[]) =>
   bookmarks.map(
-    ({ _id, title, created, excerpt, collectionId, cover, link, tags, }) => ({
+    ({ _id, title, created, excerpt, collectionId, cover, link, tags }) => ({
       _id,
       title,
       created,
       excerpt,
       collectionId,
-      cover: cover === "" ? undefined : cover.replace(/^http?:\/\//, "https://"), // Normalize empty covers and use i.raindrop.io for better performance
+      cover:
+        cover === "" ? undefined : cover.replace(/^http?:\/\//, "https://"), // Normalize empty covers and use i.raindrop.io for better performance
       link,
       tags: tags.slice(0, 3),
     }),
@@ -24,4 +25,5 @@ export const collectionsMapper = ({ items }: GetCollectionsResponse) =>
       created,
       description,
       count,
-    })).sort((a, b) => a.title.localeCompare(b.title));
+    }))
+    .sort((a, b) => a.title.localeCompare(b.title));

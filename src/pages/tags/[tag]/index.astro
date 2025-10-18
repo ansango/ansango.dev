@@ -2,7 +2,7 @@
 import { site } from "@/constants";
 import { LayoutTag } from "@/layout";
 import { getTagStaticPaths } from "@/lib/astro";
-import { getCollectionsByTag} from "@/lib/collections";
+import { getCollectionsByTag } from "@/lib/collections";
 
 export { getTagStaticPaths as getStaticPaths };
 
@@ -12,7 +12,7 @@ const meta = site.pages.tags;
 const entriesPerPage = meta.entriesPerPage || 10;
 
 if (!entries) {
-    return Astro.redirect("/");
+  return Astro.redirect("/");
 }
 ---
 

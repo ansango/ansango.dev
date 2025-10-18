@@ -3,12 +3,11 @@
     const searchButton = document.getElementById("searcher-button");
     const dialog = document.getElementById("searcher-dialog");
     const dialogFrame = document.getElementById("searcher-dialog-frame");
-    
+
     if (!searchButton || !dialog || !dialogFrame) return;
 
     if (dialog._initialized) return;
     dialog._initialized = true;
-
 
     const customizeClearButton = () => {
       const clearButton = document.querySelector(".pagefind-ui__search-clear");

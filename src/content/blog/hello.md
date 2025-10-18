@@ -119,22 +119,26 @@ git push origin main
 # npm i -g netlify-cli
 # netlify deploy --prod
 ```
+
 ```css
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    margin: 20px;
-    max-width: 800px;
-    color: #333;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 20px;
+  max-width: 800px;
+  color: #333;
 }
-h1, h2, h3 {
-    color: #2c3e50;
+h1,
+h2,
+h3 {
+  color: #2c3e50;
 }
 a {
-    color: #3498db;
-    text-decoration: none;
+  color: #3498db;
+  text-decoration: none;
 }
 ```
+
 > Nota: Ajusta los comandos según tu entorno y plataforma.
 
 ## Check-list antes de publicar
@@ -152,4 +156,3 @@ a {
 Publicar tu primer artículo es más cuestión de empezar que de esperar la perfección. Elige un tema pequeño, cúbrelo bien y publícalo: recibirás feedback real que te permitirá mejorar rápidamente.
 
 ¿Quieres que te escriba un artículo completo sobre un tema específico? Indícame el tema y lo prepararé con la longitud y el tono que prefieras.
-

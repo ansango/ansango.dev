@@ -1,6 +1,15 @@
 import { site } from "@/constants";
 import type { GetCollectionsResponse, Raindrop } from "./services";
 
+/**
+ * Maps an array of Raindrop objects to a normalized format for bookmarks.
+ *
+ * - Normalizes the `cover` property: if empty, sets to `undefined`; if present, ensures it uses HTTPS.
+ * - Limits the `tags` array to the first 3 tags.
+ *
+ * @param bookmarks - The array of Raindrop objects to map.
+ * @returns An array of mapped bookmark objects with normalized properties.
+ */
 export const bookmarksMapper = (bookmarks: Raindrop[]) =>
   bookmarks.map(
     ({ _id, title, created, excerpt, collectionId, cover, link, tags }) => ({
@@ -16,6 +25,18 @@ export const bookmarksMapper = (bookmarks: Raindrop[]) =>
     }),
   );
 
+/**
+ * Maps and filters collections from the Raindrop API response.
+ *
+ * - Filters collections whose titles include the current site's name.
+ * - Removes the site name (with a trailing dot) from the collection title.
+ * - Returns a simplified object with `_id`, `title`, `created`, `description`, and `count`.
+ * - Sorts the resulting collections alphabetically by title.
+ *
+ * @param {GetCollectionsResponse} param0 - The response object containing the collections array.
+ * @returns {Array<{ _id: number; title: string; created: string; description: string; count: number }>} 
+ *          The filtered, mapped, and sorted collections.
+ */
 export const collectionsMapper = ({ items }: GetCollectionsResponse) =>
   items
     .filter(({ title }) => title.includes(site.name))

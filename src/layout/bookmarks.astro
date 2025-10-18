@@ -28,9 +28,7 @@ const { entries, page, entriesPerPage, isIndex, meta, collection } =
 
 const { currentPage, paginatedEntries, totalPages } = getPagination({
   isIndex,
-  entries: entries.sort(
-    (a, b) => a.title.localeCompare(b.title)
-  ),
+  entries: entries.sort((a, b) => a.title.localeCompare(b.title)),
   page,
   entriesPerPage,
 });
@@ -38,10 +36,14 @@ const { currentPage, paginatedEntries, totalPages } = getPagination({
 
 <LayoutDefault {...meta} type="article">
   <h1>
-    {site.pages.bookmarks.title} · <span>{ collection.replaceAll(/[.-]/g, " ")}</span>
+    {site.pages.bookmarks.title} · <span
+      >{collection.replaceAll(/[.-]/g, " ")}</span
+    >
   </h1>
   <p class="text-muted/90">
-    La coleccion <span class="font-medium text-muted">{collection.replaceAll(/[.-]/g, " ")}</span> contiene <span class="font-medium text-muted">{entries.length}</span> elementos.
+    La coleccion <span class="font-medium text-muted"
+      >{collection.replaceAll(/[.-]/g, " ")}</span
+    > contiene <span class="font-medium text-muted">{entries.length}</span> elementos.
   </p>
   <Divider />
 
@@ -62,16 +64,16 @@ const { currentPage, paginatedEntries, totalPages } = getPagination({
                         alt={item.title}
                         class="w-full h-auto object-cover aspect-square"
                         loading="lazy"
-                          width={46}
-                      height={46}
-                    /> 
+                        width={46}
+                        height={46}
+                      />
                     )}
                   </div>
                   <div>
                     <div class="space-y-0.5">
                       <h2 class=" text-lg leading-tight group-hover:text-link w-full flex items-center gap-1">
                         <span class="line-clamp-1">{item.title}</span>
-          
+
                         <ExternalLinkIcon className="inline-flex max-w-5 size-full" />
                       </h2>
                       {item.excerpt && (

@@ -1,5 +1,11 @@
 ---
-import { Divider, ExternalLinkIcon, Link, Pagination } from "@/components";
+import {
+  Divider,
+  ExternalLinkIcon,
+  Link,
+  Pagination,
+  Image,
+} from "@/components";
 import { LayoutDefault } from "@/layout";
 import { getPagination } from "@/lib/collections";
 
@@ -8,7 +14,6 @@ import { getFormatDate } from "@/lib/utils";
 import { site } from "@/constants";
 
 import type { CachedBookmarkData } from "@/lib/raindrop";
-import { Image } from "astro:assets";
 
 interface Props {
   entries: CachedBookmarkData[];
@@ -45,16 +50,7 @@ const { currentPage, paginatedEntries, totalPages } = getPagination({
               className="group flex gap-2 sm:gap-4"
             >
               <div class="mt-8 sm:mt-6 max-w-8 max-h-8 size-full border border-divider rounded-full overflow-hidden flex-shrink-0 sm:max-w-12 sm:max-h-12">
-                {item.cover && (
-                  <Image
-                    src={item.cover}
-                    alt={item.title}
-                    class="w-full h-auto object-cover aspect-square"
-                    loading="lazy"
-                      width={46}
-                  height={46}
-                />
-                )}
+                <Image src={item.cover} alt={item.title} />
               </div>
               <div class="space-y-0.5">
                 <time

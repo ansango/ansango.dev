@@ -21,7 +21,18 @@
 
   p {
     @apply mb-4;
-    @apply leading-relaxed;
+    @apply leading-relaxed break-words;
+
+    overflow-wrap: anywhere; 
+    word-wrap: break-word; 
+    -ms-word-break: break-word;
+    word-break: break-all;
+    hyphens: auto;
+  }
+  a{
+    @apply break-words;
+    overflow-wrap: anywhere;
+    word-wrap: break-word;
   }
 
   a:hover {

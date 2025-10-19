@@ -10,6 +10,7 @@ import {
   CheckIcon,
   HeartIcon,
   Image,
+  NoListenIcon
 } from "@/components";
 
 import PlayNow from "@/components/playnow/playnow.svelte";
@@ -27,8 +28,14 @@ const { tracks, artists, albums } = await getLastfmData();
   </div>
 
   <section class="space-y-4">
-    <h2>Escuchando ahora <PlayIcon className="inline-flex size-4" /></h2>
-    <PlayNow client:load />
+    <PlayNow client:load>\
+      <svelte:fragment slot="play">
+        Escuchando ahora <PlayIcon className="inline-flex size-4" />
+      </svelte:fragment>
+      <svelte:fragment slot="noplay">
+        Última reproducción <NoListenIcon className="inline-flex size-4" />
+      </svelte:fragment>
+    </PlayNow>
   </section>
 
   <section class="space-y-4">

@@ -3,6 +3,7 @@
   import { queryClient } from "@/lib/query";
   import { createQuery } from "@tanstack/svelte-query";
 
+  let { play, noplay } = $props();
   const { getRecentTracks } = userApiMethods;
   const FIVE_MINUTES = 5 * 60 * 1000;
   const query = createQuery(
@@ -15,13 +16,19 @@
     queryClient,
   );
   let track = $derived(query.data?.track);
+  let currentTrack = $derived(track?.["@attr"]?.nowplaying ? track : null);
   let imageUrl = $derived(
-    track?.image.find((img) => img.size === "large")?.["#text"],
+    currentTrack?.image.find((img) => img.size === "large")?.["#text"],
   );
 </script>
 
-
-
+<h2>
+  {#if currentTrack}
+    {@render play?.()}
+  {:else}
+    {@render noplay?.()}
+  {/if}
+</h2>
 {#if query.isError}
   <p>Error: {query.error.message}</p>
 {:else}
@@ -30,13 +37,13 @@
       {#if !query.isLoading && imageUrl}
         <img
           src={imageUrl}
-          alt={track ? track.album["#text"] : "caption"}
+          alt={currentTrack ? currentTrack.album["#text"] : "caption"}
           class="size-20 rounded object-cover"
           loading="eager"
           width={80}
           height={80}
         />
-      {:else}
+      {:else if query.isLoading}
         <div
           class={`size-20 rounded object-cover bg-muted/10 flex items-center justify-center ${query.isLoading ? "animate-pulse" : ""}`}
         >
@@ -50,23 +57,38 @@
             >
           </svg>
         </div>
+      {:else if track && !currentTrack && !query.isLoading}
+        <img
+          src={track.image.find((img) => img.size === "large")?.["#text"]}
+          alt={track ? track.album["#text"] : "caption"}
+          class="size-20 rounded object-cover"
+          loading="eager"
+          width={80}
+          height={80}
+        />
       {/if}
     </div>
-    {#if !query.isLoading && track}
+    {#if !query.isLoading && currentTrack}
       <div class="min-w-0 flex-1 space-y-0.5">
         <p class="font-medium text-pretty">
-          {track.name}
+          {currentTrack.name}
         </p>
         <p class="text-muted text-sm">
-          {track.artist["#text"]}
+          {currentTrack.artist["#text"]}
         </p>
-        <p class="text-muted text-xs">{track.album["#text"]}</p>
+        <p class="text-muted text-xs">{currentTrack.album["#text"]}</p>
       </div>
     {:else if query.isLoading}
       <div class="min-w-0 flex-1 space-y-1 animate-pulse">
         <div class="h-4 w-3/4 rounded bg-muted/10"></div>
         <div class="h-3 w-1/2 rounded bg-muted/10"></div>
         <div class="h-2 w-1/3 rounded bg-muted/10"></div>
+      </div>
+    {:else if track && !currentTrack && !query.isLoading}
+      <div class="min-w-0 flex-1 space-y-1">
+        <p class="font-medium text-pretty">{track.name}</p>
+        <p class="text-muted text-sm">{track.artist["#text"]}</p>
+        <p class="text-muted text-xs">{track.album["#text"]}</p>
       </div>
     {/if}
   </div>

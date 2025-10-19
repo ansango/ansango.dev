@@ -12,18 +12,22 @@ import {
   ExternalLinkIcon,
   Image,
   Link,
+  ListenIcon,
+  NoListenIcon,
   Tag,
 } from "@/components";
 import { LayoutDefault } from "@/layout";
 import { latestReadingMapped } from "@/lib/raindrop";
+import PlaynowMini from "@/components/playnow/playnow-mini.svelte";
 
 const meta = site.pages.home;
 const LIMIT_BOOKMARKS = 5;
-const latestBookmarks = await latestReadingMapped(5) as unknown as EntryType[];
+const latestBookmarks = (await latestReadingMapped(
+  5,
+)) as unknown as EntryType[];
 const tags = await getTagsLimitedByLetter(1);
 const latests = await getLastEntriesByAllCollections();
 const collections = await getAllCollectionsByCategory();
-
 ---
 
 <LayoutDefault {...meta} type="main">
@@ -135,4 +139,14 @@ const collections = await getAllCollectionsByCategory();
       );
     })
   }
+  <section>
+    <PlaynowMini client:load>
+      <svelte:fragment slot="play">
+        <ListenIcon className="size-4.5 inline-flex" />
+      </svelte:fragment>
+      <svelte:fragment slot="noplay">
+        <NoListenIcon className="size-4.5 inline-flex" />
+      </svelte:fragment>
+    </PlaynowMini>
+  </section>
 </LayoutDefault>

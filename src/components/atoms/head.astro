@@ -60,4 +60,17 @@ const {
   <ThemeScript />
   <ClipboardScript />
   <ClientRouter />
+
+  <script is:inline>
+    function restartSVGAnimations() {
+      document.querySelectorAll("svg").forEach((svg) => {
+        if (svg.querySelector("animate")) {
+          const clone = svg.cloneNode(true);
+          svg.replaceWith(clone);
+        }
+      });
+    }
+    document.addEventListener("astro:after-swap", restartSVGAnimations);
+    document.addEventListener("DOMContentLoaded", restartSVGAnimations);
+  </script>
 </head>

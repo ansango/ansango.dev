@@ -426,7 +426,7 @@ The site is optimized for performance with:
 - Efficient CSS with Tailwind's purge feature
 - Fast load times and high Lighthouse scores
 
-![alt text](/assets/performance.png)
+![alt text](performance.png)
 
 ## 📄 License
 

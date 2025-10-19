@@ -39,7 +39,11 @@ const { tracks, artists, albums } = await getLastfmData();
       {
         tracks.map(({ date, name, artist }) => (
           <li class="list-none">
-            <Link href={"#"} className="flex items-baseline">
+            <Link
+              href={`https://www.last.fm/music/${artist["#text"]}/_/${name}`}
+              className="flex items-baseline"
+              blank
+            >
               {date && (
                 <time
                   class="text-muted min-w-20 text-sm whitespace-nowrap"
@@ -78,10 +82,11 @@ const { tracks, artists, albums } = await getLastfmData();
     <h2>En bucle últimamente <RepeatIcon className="inline-flex size-5" /></h2>
     <ul class="space-y-2">
       {
-        artists.map((artist, index) => (
+        artists.map((artist) => (
           <li class="list-none">
             <Link
-              href={"#"}
+              href={`https://www.last.fm/music/${artist.name}`}
+              blank
               className="flex items-baseline justify-between gap-4"
             >
               <span class="line-clamp-1 w-full font-medium">{artist.name}</span>
@@ -97,27 +102,32 @@ const { tracks, artists, albums } = await getLastfmData();
 
   <section>
     <h2>Obsesionado con <HeartIcon className="inline-flex size-4" /></h2>
-    <div class="grid grid-cols-2 gap-4 [@media(min-width:480px)]:grid-cols-4">
+    <ul class="grid grid-cols-2 gap-4 [@media(min-width:480px)]:grid-cols-4">
       {
         albums.map((album) => {
           const imageUrl = album.image.find((img) => img.size === "large")?.[
             "#text"
           ];
           return (
-            <div class="space-y-2">
-              <div class="border-divider overflow-hidden rounded-md border-[1px]">
-                <Image src={imageUrl} alt={album.name} />
-              </div>
-              <div class="space-y-0.5">
-                <p class="line-clamp-1 text-sm leading-snug font-medium text-pretty">
-                  {album.name}
-                </p>
-                <p class="text-muted m-0 text-xs">{album.artist.name}</p>
-              </div>
-            </div>
+            <li class="list-none">
+              <Link
+                href={`https://www.last.fm/music/${album.artist.name}/${album.name}`}
+                blank
+              >
+                <div class="border-divider overflow-hidden rounded-md border-[1px]">
+                  <Image src={imageUrl} alt={album.name} />
+                </div>
+                <div class="space-y-0">
+                  <p class="line-clamp-1 text-sm leading-snug font-medium text-pretty">
+                    {album.name}
+                  </p>
+                  <p class="text-muted m-0 text-xs">{album.artist.name}</p>
+                </div>
+              </Link>
+            </li>
           );
         })
       }
-    </div>
+    </ul>
   </section>
 </LayoutDefault>

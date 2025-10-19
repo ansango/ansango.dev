@@ -21,13 +21,13 @@
 
   p {
     @apply mb-4;
-    @apply leading-relaxed break-words;
+    @apply leading-relaxed text-pretty break-words;
 
     overflow-wrap: anywhere; 
     word-wrap: break-word; 
-    -ms-word-break: break-word;
-    word-break: break-all;
-    hyphens: auto;
+
+
+   
   }
   a{
     @apply break-words;

@@ -14,6 +14,7 @@ import {
   Link,
   ListenIcon,
   NoListenIcon,
+  PlayIcon,
   Tag,
 } from "@/components";
 import { LayoutDefault } from "@/layout";
@@ -142,10 +143,10 @@ const collections = await getAllCollectionsByCategory();
   <section>
     <PlaynowMini client:load>
       <svelte:fragment slot="play">
-        <ListenIcon className="size-4.5 inline-flex" />
+        <PlayIcon className="inline-flex size-4" />
       </svelte:fragment>
       <svelte:fragment slot="noplay">
-        <NoListenIcon className="size-4.5 inline-flex" />
+        <NoListenIcon className="inline-flex size-3.5" />
       </svelte:fragment>
     </PlaynowMini>
   </section>

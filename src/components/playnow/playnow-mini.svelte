@@ -16,19 +16,28 @@
     }),
     queryClient,
   );
-  let track = $derived(query.data?.["@attr"]?.nowplaying ? query.data : null);
+  let track = $derived(query.data);
+  let currentTrack = $derived(track?.["@attr"]?.nowplaying ? query.data : null);
 </script>
 
-{#if track}
+{#if currentTrack}
   <p>
-    {@render play?.()}
-    {track.name} <span class="text-muted">de {track.artist["#text"]}</span>
+   
+    <img
+      src={currentTrack.image.find((img) => img.size === "large")?.["#text"]}
+      alt={currentTrack.album["#text"]}
+      class="inline-block size-6 mx-1 rounded object-cover align-middle"
+      loading="eager"
+      width={20}
+      height={20}
+    />
+    {currentTrack.name}
+    <span class="text-muted mr-1">de {currentTrack.artist["#text"]}</span>  {@render play?.()}
   </p>
 {:else if query.isLoading}
   <p class="h-6 w-32 rounded bg-muted/10 animate-pulse m-0"></p>
-{:else}
-  <p>
-    {@render noplay?.()}
-    <span class="text-muted">No se está reproduciendo nada ahora mismo.</span>
+{:else if !currentTrack && !query.isLoading && track}
+  <p class="text-muted">
+    No se está reproduciendo nada ahora mismo. {@render noplay?.()}
   </p>
 {/if}

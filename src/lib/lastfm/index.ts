@@ -79,9 +79,5 @@ export const buildUrl = (
 
   const api_key = config.api_key;
   const format = config.format.json;
-  console.log(
-    "Built URL:",
-    `${url.toString()}&api_key=${api_key}&format=${format}`,
-  );
   return `${url.toString()}&api_key=${api_key}&format=${format}`;
 };

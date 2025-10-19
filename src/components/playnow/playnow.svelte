@@ -20,11 +20,16 @@
   let imageUrl = $derived(
     currentTrack?.image.find((img) => img.size === "large")?.["#text"],
   );
+  let previousTrack = $derived(
+    !currentTrack && track && !query.isLoading ? track : null,
+  );
 </script>
 
 <h2>
   {#if currentTrack}
     {@render play?.()}
+  {:else if query.isLoading}
+    <span class="h-4 min-w-2xs rounded bg-muted/10 animate-pulse inline-block"></span>
   {:else}
     {@render noplay?.()}
   {/if}
@@ -34,18 +39,9 @@
 {:else}
   <div class="flex items-start gap-4">
     <div class="border-divider overflow-hidden rounded-md border-[1px]">
-      {#if !query.isLoading && imageUrl}
-        <img
-          src={imageUrl}
-          alt={currentTrack ? currentTrack.album["#text"] : "caption"}
-          class="size-20 rounded object-cover"
-          loading="eager"
-          width={80}
-          height={80}
-        />
-      {:else if query.isLoading}
+      {#if query.isLoading || !currentTrack || !imageUrl}
         <div
-          class={`size-20 rounded object-cover bg-muted/10 flex items-center justify-center ${query.isLoading ? "animate-pulse" : ""}`}
+          class={`size-20 rounded object-cover bg-muted/10 flex items-center justify-center ${query.isLoading ? "animate-pulse " : ""}`}
         >
           <svg class="size-5 text-muted" viewBox="0 0 24 24" fill="none">
             <g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"
@@ -57,10 +53,14 @@
             >
           </svg>
         </div>
-      {:else if track && !currentTrack && !query.isLoading}
+      {:else}
         <img
-          src={track.image.find((img) => img.size === "large")?.["#text"]}
-          alt={track ? track.album["#text"] : "caption"}
+          src={imageUrl
+            ? imageUrl
+            : track?.image.find((img) => img.size === "large")?.["#text"]}
+          alt={currentTrack
+            ? currentTrack.album["#text"]
+            : track?.album["#text"]}
           class="size-20 rounded object-cover"
           loading="eager"
           width={80}
@@ -68,28 +68,28 @@
         />
       {/if}
     </div>
-    {#if !query.isLoading && currentTrack}
-      <div class="min-w-0 flex-1 space-y-0.5">
+
+    <div
+      class={`min-w-0 flex-1  ${query.isLoading ? "animate-pulse space-y-2.5" : "space-y-0.5"}`}
+    >
+      {#if query.isLoading}
+        <div class="h-3 w-3/4 rounded bg-muted/10"></div>
+        <div class="h-2 w-1/2 rounded bg-muted/10"></div>
+      {:else}
         <p class="font-medium text-pretty">
-          {currentTrack.name}
+          {currentTrack ? currentTrack.name : previousTrack?.name}
         </p>
         <p class="text-muted text-sm">
-          {currentTrack.artist["#text"]}
+          {currentTrack
+            ? currentTrack.artist["#text"]
+            : previousTrack?.artist["#text"]}
         </p>
-        <p class="text-muted text-xs">{currentTrack.album["#text"]}</p>
-      </div>
-    {:else if query.isLoading}
-      <div class="min-w-0 flex-1 space-y-1 animate-pulse">
-        <div class="h-4 w-3/4 rounded bg-muted/10"></div>
-        <div class="h-3 w-1/2 rounded bg-muted/10"></div>
-        <div class="h-2 w-1/3 rounded bg-muted/10"></div>
-      </div>
-    {:else if track && !currentTrack && !query.isLoading}
-      <div class="min-w-0 flex-1 space-y-1">
-        <p class="font-medium text-pretty">{track.name}</p>
-        <p class="text-muted text-sm">{track.artist["#text"]}</p>
-        <p class="text-muted text-xs">{track.album["#text"]}</p>
-      </div>
-    {/if}
+        <p class="text-muted text-xs">
+          {currentTrack
+            ? currentTrack.album["#text"]
+            : previousTrack?.album["#text"]}
+        </p>
+      {/if}
+    </div>
   </div>
 {/if}

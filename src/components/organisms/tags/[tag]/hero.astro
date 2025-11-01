@@ -1,0 +1,20 @@
+---
+interface Props {
+  entriesCount: number;
+  tag: string;
+}
+
+const { tag, entriesCount } = Astro.props;
+---
+
+<div>
+  <h1>
+    <span class="text-muted">Tags / </span><span class="capitalize"
+      >{tag.replace(/-/g, " ")}
+    </span>
+  </h1>
+  <p class="text-muted">
+    {entriesCount}
+    {entriesCount === 1 ? "publicación" : "publicaciones"} de esta etiqueta
+  </p>
+</div>

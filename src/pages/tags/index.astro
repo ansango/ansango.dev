@@ -1,48 +1,20 @@
 ---
 import { site } from "@/constants";
 import { getTagsGroupedByLetter } from "@/lib/collections";
-import { Tag, LayoutDefault } from "@/components";
+import { LayoutDefault } from "@/components";
+import { TagsHero, TagsTagsCollection } from "@/components/organisms/tags";
 
+const meta = site.pages.tags;
 const tags = await getTagsGroupedByLetter();
 const countTags = Object.values(tags).reduce(
   (acc, curr) => acc + curr.length,
   0,
 );
-const meta = site.pages.tags;
 
-if (!tags) {
-  return Astro.redirect("/");
-}
+if (!tags) Astro.redirect("/");
 ---
 
 <LayoutDefault {...meta} type="main">
-  <div class="border-divider mb-4 border-b-[1px]">
-    <h1>Tags</h1>
-    <p class="text-muted/90">
-      {meta.description} Existen <span class="text-muted font-medium"
-        >{countTags}</span
-      > etiquetas en total.
-    </p>
-  </div>
-
-  {
-    Object.entries(tags).map(([letter, tags]) => {
-      if (tags.length === 0) return;
-      return (
-        <div>
-          <h2 class="text-muted my-2 font-medium">{letter}</h2>
-          <ul class="flex flex-wrap gap-1">
-            {tags.map((tag, i) => {
-              return (
-                <li class="flex">
-                  <Tag href={`/tags/${tag}`}>{tag.replace(/-/g, " ")}</Tag>
-                  {i !== tags.length - 1 && <span class="text-muted">,</span>}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      );
-    })
-  }
+  <TagsHero {countTags} />
+  <TagsTagsCollection {tags} />
 </LayoutDefault>

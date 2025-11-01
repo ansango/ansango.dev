@@ -1,0 +1,21 @@
+---
+import { EntriesList } from "@/components/molecules";
+import { site } from "@/constants";
+import { getPagination, type Entries } from "@/lib/collections";
+
+interface Props {
+  entries: Entries;
+  isIndex: boolean;
+  page?: number;
+}
+const { entries, isIndex, page = 1 } = Astro.props;
+
+const { paginatedEntries } = getPagination({
+  isIndex,
+  entries,
+  page,
+  entriesPerPage: site.pages.tags.entriesPerPage,
+});
+---
+
+<EntriesList entries={paginatedEntries} />

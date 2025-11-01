@@ -1,26 +1,27 @@
 ---
 import { site } from "@/constants";
-import { LayoutTag } from "@/components";
+import { LayoutDefault } from "@/components";
 import { getTagStaticPaths } from "@/lib/astro";
 import { getCollectionsByTag } from "@/lib/collections";
-
+import {
+  TagHero,
+  TagContainer,
+  TagCollectionsEntries,
+  TagPagination,
+} from "@/components/organisms/tags/[tag]";
 export { getTagStaticPaths as getStaticPaths };
 
 const { tag } = Astro.props;
 const entries = await getCollectionsByTag(tag);
 const meta = site.pages.tags;
-const entriesPerPage = meta.entriesPerPage || 10;
 
-if (!entries) {
-  return Astro.redirect("/");
-}
+if (!entries) return Astro.redirect("/");
 ---
 
-<LayoutTag
-  entries={entries}
-  entriesPerPage={entriesPerPage}
-  tag={tag}
-  meta={meta}
-  page={1}
-  isIndex
-/>
+<LayoutDefault {...meta} type="main">
+  <TagHero {tag} entriesCount={entries.length} />
+  <TagContainer>
+    <TagCollectionsEntries {entries} isIndex slot="content" />
+  </TagContainer>
+  <TagPagination {entries} {tag} isIndex slot="pagination" />
+</LayoutDefault>

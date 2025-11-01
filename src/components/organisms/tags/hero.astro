@@ -1,0 +1,21 @@
+---
+import { site } from "@/constants";
+
+const meta = site.pages.tags;
+
+interface Props {
+    countTags: number;
+}
+
+const { countTags } = Astro.props;
+
+---
+
+<div class="border-divider mb-4 border-b-[1px]">
+  <h1>Tags</h1>
+  <p class="text-muted/90">
+    {meta.description} Existen <span class="text-muted font-medium"
+      >{countTags}</span
+    > etiquetas en total.
+  </p>
+</div>

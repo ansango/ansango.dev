@@ -1,0 +1,28 @@
+---
+import { site } from "@/constants";
+import { getPagination, type Entries } from "@/lib/collections";
+import { Pagination as BasePagination } from "@/components";
+
+interface Props {
+  entries: Entries;
+  isIndex: boolean;
+  page?: number;
+  tag: string;
+}
+
+const { entries, isIndex, tag, page = 1 } = Astro.props;
+
+const { currentPage, totalPages } = getPagination({
+  isIndex,
+  entries,
+  page,
+  entriesPerPage: site.pages.tags.entriesPerPage,
+});
+---
+
+<BasePagination
+  {currentPage}
+  {totalPages}
+  prevUrl={`/tags/${tag}${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
+  nextUrl={`/tags/${tag}/${currentPage + 1}/`}
+/>

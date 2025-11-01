@@ -1,0 +1,30 @@
+---
+import { Tag } from '@/components/atoms';
+
+interface Props {
+  tags: Record<string, string[]>;
+}
+
+const { tags } = Astro.props;
+---
+
+{
+  Object.entries(tags).map(([letter, tags]) => {
+    if (tags.length === 0) return;
+    return (
+      <div>
+        <h2 class="text-muted my-2 font-medium">{letter}</h2>
+        <ul class="flex flex-wrap gap-1">
+          {tags.map((tag, i) => {
+            return (
+              <li class="flex">
+                <Tag href={`/tags/${tag}`}>{tag.replace(/-/g, " ")}</Tag>
+                {i !== tags.length - 1 && <span class="text-muted">,</span>}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    );
+  })
+}

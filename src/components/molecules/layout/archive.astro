@@ -1,0 +1,42 @@
+---
+import { EntriesListYear, Pagination,LayoutDefault  } from "@/components";
+import type { Meta } from "@/content.config";
+import { type Entry, getPagination, type Entries } from "@/lib/collections";
+
+interface Props {
+  entries: Entries;
+  page: number;
+  entriesPerPage: number;
+  isIndex: boolean;
+  meta: Meta;
+}
+
+const { entries, page, entriesPerPage, isIndex, meta } = Astro.props;
+
+const { currentPage, paginatedEntries, totalPages } = getPagination<Entry>({
+  isIndex,
+  entries,
+  page,
+  entriesPerPage,
+});
+---
+
+<LayoutDefault {...meta} type="main">
+  <div class="border-divider border-b-[1px]">
+    <h1>Archivo</h1>
+    <p class="text-muted/20">
+      {meta.description} Hay un total de <span class="font-medium"
+        >{entries.length}</span
+      > entradas publicadas.
+    </p>
+  </div>
+  <div>
+    <EntriesListYear entries={paginatedEntries} />
+  </div>
+  <Pagination
+    {currentPage}
+    {totalPages}
+    prevUrl={`/archive${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
+    nextUrl={`/archive/${currentPage + 1}/`}
+  />
+</LayoutDefault>

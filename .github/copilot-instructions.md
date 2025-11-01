@@ -57,6 +57,7 @@ This guide helps AI coding agents work productively in the `ansango.dev` codebas
 - **Layout Usage:**
   - `src/layout/default.astro` wraps pages with `<Head>`, `<Header>`, `<Container>`, `<Footer>`.
 - **Content Example:**
+
   ```markdown
   ---
   title: "My First Post"
@@ -69,6 +70,7 @@ This guide helps AI coding agents work productively in the `ansango.dev` codebas
 
   ...
   ```
+
 - **Add New Collection:**
   - Update schema, metadata, and create folder as above.
 

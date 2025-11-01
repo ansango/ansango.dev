@@ -12,7 +12,17 @@ import type { GetCollectionsResponse, Raindrop } from "./services";
  */
 export const bookmarksMapper = (bookmarks: Raindrop[]) =>
   bookmarks.map(
-    ({ _id, title, created, excerpt, collectionId, cover, link, tags }) => ({
+    ({
+      _id,
+      title,
+      created,
+      excerpt,
+      collectionId,
+      cover,
+      link,
+      tags,
+      important: favorite,
+    }) => ({
       _id,
       title,
       created,
@@ -22,6 +32,7 @@ export const bookmarksMapper = (bookmarks: Raindrop[]) =>
         cover === "" ? undefined : cover.replace(/^http?:\/\//, "https://"), // Normalize empty covers and use i.raindrop.io for better performance
       link,
       tags: tags.slice(0, 3),
+      favorite,
     }),
   );
 
@@ -34,7 +45,7 @@ export const bookmarksMapper = (bookmarks: Raindrop[]) =>
  * - Sorts the resulting collections alphabetically by title.
  *
  * @param {GetCollectionsResponse} param0 - The response object containing the collections array.
- * @returns {Array<{ _id: number; title: string; created: string; description: string; count: number }>} 
+ * @returns {Array<{ _id: number; title: string; created: string; description: string; count: number }>}
  *          The filtered, mapped, and sorted collections.
  */
 export const collectionsMapper = ({ items }: GetCollectionsResponse) =>

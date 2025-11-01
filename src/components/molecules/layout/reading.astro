@@ -1,0 +1,89 @@
+---
+import { ExternalLinkIcon, Link, Pagination, Image, LayoutDefault } from "@/components";
+import { getPagination } from "@/lib/collections";
+
+import type { Meta } from "@/content.config";
+import { getFormatDate } from "@/lib/utils";
+import { site } from "@/constants";
+
+import type { CachedBookmarkData } from "@/lib/raindrop";
+
+interface Props {
+  entries: CachedBookmarkData[];
+  page: number;
+  entriesPerPage: number;
+  isIndex: boolean;
+  meta: Meta;
+}
+
+const { entries, page, entriesPerPage, isIndex, meta } = Astro.props;
+
+const { currentPage, paginatedEntries, totalPages } =
+  getPagination<CachedBookmarkData>({
+    isIndex,
+    entries,
+    page,
+    entriesPerPage,
+  });
+---
+
+<LayoutDefault {...meta} type="article">
+  <div class="border-divider border-b-[1px]">
+    <h1>{site.pages.reading.title}</h1>
+    <p class="text-muted">{site.pages.reading.description}</p>
+  </div>
+  {
+    entries.length === 0 ? (
+      <p class="text-muted py-4 text-center">No hay elementos para mostrar.</p>
+    ) : (
+      <ul class="space-y-6 pt-4">
+        {paginatedEntries?.map((item) => (
+          <li class="list-none">
+            <Link
+              href={item.link}
+              blank={true}
+              className="group flex gap-2 sm:gap-4"
+            >
+              <div class="border-divider mt-8 size-full max-h-8 max-w-8 flex-shrink-0 overflow-hidden rounded-full border-[1.5px] sm:mt-6 sm:max-h-12 sm:max-w-12">
+                <Image src={item.cover} alt={item.title} />
+              </div>
+              <div class="space-y-0.5">
+                <time
+                  datetime={getFormatDate(item.created, "es-ES")}
+                  class="text-muted text-xs"
+                >
+                  {getFormatDate(item.created, "es-ES")}
+                </time>
+
+                <h2 class="group-hover:text-link line-clamp-2">
+                  {item.title}
+                  <ExternalLinkIcon className="inline-block size-5 mb-0.5" />
+                </h2>
+                {item.excerpt && (
+                  <p class="text-muted line-clamp-2 text-sm">{item.excerpt}</p>
+                )}
+                {item.tags && (
+                  <div class="mt-1 space-x-2">
+                    {item.tags.map((tag: string) => (
+                      <span class="bg-muted/10 text-muted rounded-full px-2 py-1 text-xs">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  <Pagination
+    className="pb-4"
+    {currentPage}
+    {totalPages}
+    prevUrl={`/reading${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
+    nextUrl={`/reading/${currentPage + 1}/`}
+  />
+</LayoutDefault>

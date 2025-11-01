@@ -130,5 +130,4 @@ Algunas ideas que tengo para seguir expandiendo ansango.dev:
 
 Si te interesa verlo más de cerca o usarlo como base para tu proyecto, puedes encontrar todo el código y la documentación en GitHub:
 
-👉  [Revisa el repositorio en GitHub](https://github.com/ansango/ansango.dev)
-
+👉 [Revisa el repositorio en GitHub](https://github.com/ansango/ansango.dev)

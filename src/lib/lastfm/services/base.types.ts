@@ -47,8 +47,8 @@ export type SearchTerms = string;
 export type StartPage = string;
 
 export type DateProp = {
-	uts: Uts;
-	'#text': Text;
+  uts: Uts;
+  "#text": Text;
 };
 
 export type TotalPages = string;
@@ -68,8 +68,14 @@ export type Reach = number;
 export type Loc = string;
 
 export type Image = {
-	'#text': Text;
-	size: 'small' | 'medium' | 'large' | 'extralarge' | 'mega';
+  "#text": Text;
+  size: "small" | "medium" | "large" | "extralarge" | "mega";
 };
 
-export type Period = 'overall' | '7day' | '1month' | '3month' | '6month' | '12month';
+export type Period =
+  | "overall"
+  | "7day"
+  | "1month"
+  | "3month"
+  | "6month"
+  | "12month";

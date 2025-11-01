@@ -12,15 +12,14 @@ import {
   ExternalLinkIcon,
   Image,
   Link,
-  ListenIcon,
   NoListenIcon,
   PlaceholderIcon,
   PlayIcon,
   Tag,
+  LayoutDefault,
 } from "@/components";
-import { LayoutDefault } from "@/layout";
+import PlayNowMini from "@/components/atoms/playnow-mini.svelte";
 import { latestReadingMapped } from "@/lib/raindrop";
-import PlaynowMini from "@/components/playnow/playnow-mini.svelte";
 
 const meta = site.pages.home;
 const LIMIT_BOOKMARKS = 5;
@@ -143,7 +142,7 @@ const collections = await getAllCollectionsByCategory();
   }
   <section>
     <Link href="/music">
-      <PlaynowMini client:load>
+      <PlayNowMini client:load>
         <svelte:fragment slot="play">
           <PlayIcon className="inline-flex size-4" />
         </svelte:fragment>
@@ -153,7 +152,7 @@ const collections = await getAllCollectionsByCategory();
         <svelte:fragment slot="noplay">
           <NoListenIcon className="inline-flex size-3.5" />
         </svelte:fragment>
-      </PlaynowMini>
+      </PlayNowMini>
     </Link>
   </section>
 </LayoutDefault>

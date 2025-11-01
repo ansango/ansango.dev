@@ -78,7 +78,7 @@ export const getCollectionStaticPathsSlug = async () => {
  * number of entries per page, and returns an array of path parameters
  * for each archive page.
  *
- * @returns {Promise<Array<{ params: { page: number } }>>} 
+ * @returns {Promise<Array<{ params: { page: number } }>>}
  *   A promise that resolves to an array of objects, each containing
  *   the `page` parameter for static path generation.
  */
@@ -97,7 +97,6 @@ export const getArchiveStaticPathsPage = async () => {
     };
   });
 };
-
 
 /**
  * Generates static paths for each unique tag.
@@ -119,7 +118,6 @@ export const getTagStaticPaths = async () => {
     };
   });
 };
-
 
 /**
  * Generates static paths for paginated tag pages.
@@ -163,7 +161,7 @@ export const getTagStaticPathsPage = async () => {
  * calculates the total number of pages based on the configured entries per page,
  * and returns an array of path parameter objects for each page.
  *
- * @returns {Promise<Array<{ params: { page: number } }>>} 
+ * @returns {Promise<Array<{ params: { page: number } }>>}
  *   A promise that resolves to an array of objects, each containing the page number as a route parameter.
  */
 

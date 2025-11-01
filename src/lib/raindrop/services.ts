@@ -1,9 +1,9 @@
 /**
  * The base URL for the Raindrop.io REST API v1.
- * 
+ *
  * @remarks
  * This constant is used as the root endpoint for all API requests to Raindrop.io.
- * 
+ *
  * @see {@link https://developer.raindrop.io/}
  */
 
@@ -24,8 +24,6 @@ const options = {
     Authorization: `Bearer ${import.meta.env.RAINDROP_ACCESS_TOKEN}`,
   },
 };
-
-
 
 /**
  * Represents a Raindrop item with its metadata and properties.

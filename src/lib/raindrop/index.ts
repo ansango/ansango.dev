@@ -1,4 +1,3 @@
-
 import { bookmarksMapper, collectionsMapper } from "@/lib/raindrop/mappers";
 import {
   getAllBookmarkItems,
@@ -60,7 +59,7 @@ export type CacheRaindropData = {
 
 /**
  * Caches the current Raindrop data for reuse within the application.
- * 
+ *
  * This variable holds the cached data of type `CacheRaindropData` or `null` if no data is cached.
  * It is used to avoid redundant data fetching and improve performance.
  */

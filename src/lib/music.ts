@@ -22,11 +22,11 @@ export type CacheLastfmData = {
 
 /**
  * Caches the most recently fetched Last.fm data to optimize repeated access and reduce redundant API calls.
- * 
+ *
  * @remarks
  * This variable holds the cached data in memory for the current session. It is initialized as `null`
  * and should be updated whenever new Last.fm data is retrieved.
- * 
+ *
  * @see CacheLastfmData
  */
 let cacheLastfmData: CacheLastfmData | null = null;
@@ -38,7 +38,7 @@ let cacheLastfmData: CacheLastfmData | null = null;
  * and top albums (for the last month) from Last.fm. It caches the result to avoid
  * redundant API calls on subsequent invocations.
  *
- * @returns {Promise<{ tracks: any[]; artists: any[]; albums: any[] }>} 
+ * @returns {Promise<{ tracks: any[]; artists: any[]; albums: any[] }>}
  *   An object containing arrays of recent tracks, top artists, and top albums.
  */
 export const getLastfmData = async () => {

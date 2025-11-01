@@ -1,8 +1,8 @@
 ---
-import { LayoutDefault } from "@/layout";
+import { LayoutDefault, Link } from "@/components";
 import { getCollectionsExcludingReading } from "@/lib/raindrop";
 import { site } from "@/constants";
-import { Link } from "@/components";
+
 const collections = await getCollectionsExcludingReading();
 ---
 
@@ -28,9 +28,7 @@ const collections = await getCollectionsExcludingReading();
               href={`/bookmarks/${title}`}
             >
               <span class="text-sm">{title.replaceAll(/[.-]/g, " ")}</span>
-              <span class="text-muted text-xs">
-                ({count})
-              </span>
+              <span class="text-muted text-xs">({count})</span>
             </Link>
           </li>
         );

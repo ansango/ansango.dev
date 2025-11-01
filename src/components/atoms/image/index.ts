@@ -1,4 +1,3 @@
-
 export { default as Image } from "./image.astro";
 export { default as Placeholder } from "./placeholder.astro";
 

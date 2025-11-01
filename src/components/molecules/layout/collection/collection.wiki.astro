@@ -1,0 +1,56 @@
+---
+import type { Meta } from "@/content.config";
+import type { Entries } from "@/lib/collections";
+import { getTreeNode, countCategories, countEntries } from "@/lib/tree-node";
+import { TreeNode,LayoutDefault } from "@/components";
+import { site } from "@/constants";
+
+interface Props {
+  entries: Entries;
+  meta: Meta;
+}
+
+const { entries, meta } = Astro.props;
+const wikiStructure = getTreeNode(entries, "wiki");
+
+const totalEntries = countEntries(wikiStructure);
+const totalCategories = countCategories(wikiStructure);
+---
+
+<LayoutDefault {...meta} type="main">
+  <div>
+    <h1>{site.pages.wiki.title}</h1>
+    <p class="text-muted text-pretty">
+      {site.pages.wiki.description}
+      {totalCategories === 1 ? "1 categoría" : `${totalCategories} categorías`} ·
+      {totalEntries === 1 ? "1 entrada" : `${totalEntries} entradas`}
+    </p>
+  </div>
+  <div class="flex h-full flex-col py-4">
+    <article class="flex-1">
+      <div class="space-y-4">
+        <div class="border-divider rounded border">
+          <div class="divide-divider divide-y">
+            {
+              wikiStructure.map((node) => (
+                <div class="py-1">
+                  <TreeNode node={node} level={0} />
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <p class="text-muted text-sm">
+          Haz clic en las carpetas para expandir o contraer las subcategorías
+        </p>
+      </div>
+    </article>
+  </div>
+
+  <style>
+    details > summary::-webkit-details-marker {
+      display: none;
+    }
+  </style>
+</LayoutDefault>

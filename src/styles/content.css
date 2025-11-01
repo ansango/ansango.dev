@@ -23,13 +23,10 @@
     @apply mb-4;
     @apply leading-relaxed text-pretty break-words;
 
-    overflow-wrap: anywhere; 
-    word-wrap: break-word; 
-
-
-   
+    overflow-wrap: anywhere;
+    word-wrap: break-word;
   }
-  a{
+  a {
     @apply break-words;
     overflow-wrap: anywhere;
     word-wrap: break-word;
@@ -99,5 +96,4 @@
   details[open] > summary > svg.chevron-right {
     @apply rotate-90;
   }
-
 }

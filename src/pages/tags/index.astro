@@ -1,8 +1,7 @@
 ---
 import { site } from "@/constants";
 import { getTagsGroupedByLetter } from "@/lib/collections";
-import { Tag } from "@/components";
-import { LayoutDefault } from "@/layout";
+import { Tag, LayoutDefault } from "@/components";
 
 const tags = await getTagsGroupedByLetter();
 const countTags = Object.values(tags).reduce(

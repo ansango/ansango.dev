@@ -1,6 +1,6 @@
-import { vitePreprocess } from '@astrojs/svelte';
+import { vitePreprocess } from "@astrojs/svelte";
 
 export default {
-	extensions: ['.svelte'],
-	preprocess: vitePreprocess(),
-}
+  extensions: [".svelte"],
+  preprocess: vitePreprocess(),
+};

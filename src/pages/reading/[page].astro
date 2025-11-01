@@ -1,21 +1,24 @@
 ---
 import { site } from "@/constants";
 import { getReadingStaticPathsPage as getStaticPaths } from "@/lib/astro";
-import { LayoutReading } from "@/components";
+import { LayoutDefault } from "@/components";
 import { getBookmarksByCollection } from "@/lib/raindrop";
+import {
+  ReadingHero,
+  ReadingList,
+  ReadingPagination,
+} from "@/components/organisms/reading";
 
 export { getStaticPaths };
 
 const { page } = Astro.params;
 const entries = await getBookmarksByCollection("reading");
-const entriesPerPage = site.pages.reading.entriesPerPage;
 const meta = site.pages.reading;
+const isIndex = false;
 ---
 
-<LayoutReading
-  entries={entries}
-  entriesPerPage={entriesPerPage}
-  meta={meta}
-  page={page}
-  isIndex={false}
-/>
+<LayoutDefault {...meta} type="article">
+  <ReadingHero />
+  <ReadingList {entries} {isIndex} {page} />
+  <ReadingPagination {entries} {isIndex} {page} />
+</LayoutDefault>

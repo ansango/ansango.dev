@@ -1,0 +1,70 @@
+---
+import { Image, Link } from "@/components/atoms";
+import { ExternalLinkIcon } from "@/components/icons";
+import { site } from "@/constants";
+import { getPagination, type Entries } from "@/lib/collections";
+import type { CachedBookmarkData } from "@/lib/raindrop";
+import { getFormatDate } from "@/lib/utils";
+
+interface Props {
+  entries: CachedBookmarkData[];
+  page?: number;
+  isIndex: boolean;
+}
+
+const { entries, isIndex, page = 1 } = Astro.props;
+
+const { paginatedEntries } = getPagination<CachedBookmarkData>({
+  isIndex,
+  entries,
+  page,
+  entriesPerPage: site.pages.reading.entriesPerPage,
+});
+---
+
+{
+  entries.length === 0 ? (
+    <p class="text-muted py-4 text-center">No hay elementos para mostrar.</p>
+  ) : (
+    <ul class="space-y-6 pt-4">
+      {paginatedEntries?.map((item) => (
+        <li class="list-none">
+          <Link
+            href={item.link}
+            blank={true}
+            className="group flex gap-2 sm:gap-4"
+          >
+            <div class="border-divider mt-8 size-full max-h-8 max-w-8 flex-shrink-0 overflow-hidden rounded-full border-[1.5px] sm:mt-6 sm:max-h-12 sm:max-w-12">
+              <Image src={item.cover} alt={item.title} />
+            </div>
+            <div class="space-y-0.5">
+              <time
+                datetime={getFormatDate(item.created, "es-ES")}
+                class="text-muted text-xs"
+              >
+                {getFormatDate(item.created, "es-ES")}
+              </time>
+
+              <h2 class="group-hover:text-link line-clamp-2">
+                {item.title}
+                <ExternalLinkIcon className="inline-block size-5 mb-0.5" />
+              </h2>
+              {item.excerpt && (
+                <p class="text-muted line-clamp-2 text-sm">{item.excerpt}</p>
+              )}
+              {item.tags && (
+                <div class="mt-1 space-x-2">
+                  {item.tags.map((tag: string) => (
+                    <span class="bg-muted/10 text-muted rounded-full px-2 py-1 text-xs">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  )
+}

@@ -33,13 +33,6 @@ if (!entry && (!entries || isNaN(page) || page < 1)) {
   entry ? (
     <CollectionEntryTemplate {...entry} />
   ) : (
-    <CollectionIndexTemplate
-      {collection}
-      {entries}
-      {meta}
-      {entriesPerPage}
-      {page}
-      {isIndex}
-    />
+    <CollectionIndexTemplate {collection} {entries} {page} {isIndex} />
   )
 }

@@ -1,0 +1,33 @@
+---
+import { site } from "@/constants";
+import { getFormatDate } from "@/lib/utils";
+import {
+  Link,
+  PlayIcon,
+  RepeatIcon,
+  CheckIcon,
+  HeartIcon,
+  Image,
+  NoListenIcon,
+  LayoutDefault,
+} from "@/components";
+import PlayNow from "@/components/atoms/playnow.svelte";
+import { getLastfmData } from "@/lib/music";
+import {
+  MusicLiteHero,
+  MusicLiteNowPlaying,
+  MusicLiteRecentTracks,
+  MusicLiteTopArtists,
+  MusicLiteTopAlbums,
+} from "@/components/organisms/music-lite";
+
+const { tracks, artists, albums } = await getLastfmData();
+---
+
+<LayoutDefault type="main">
+  <MusicLiteHero />
+  <MusicLiteNowPlaying />
+  <MusicLiteRecentTracks {tracks} />
+  <MusicLiteTopArtists {artists} />
+  <MusicLiteTopAlbums albums={albums} />
+</LayoutDefault>

@@ -1,0 +1,55 @@
+---
+import { Link } from "@/components/atoms";
+import { CheckIcon } from "@/components/icons";
+import { type Tracks } from "@/lib/music";
+import { getFormatDate } from "@/lib/utils";
+
+interface Props {
+  tracks: Tracks;
+}
+
+const { tracks } = Astro.props;
+---
+
+<section class="space-y-4">
+  <h2>
+    Escuchado recientemente <CheckIcon className="inline-flex size-4" />
+  </h2>
+  <ul class="space-y-2">
+    {
+      tracks.map(({ date, name, artist, url }) => (
+        <li class="list-none">
+          <Link href={url} className="flex items-baseline" blank>
+            {date && (
+              <time
+                class="text-muted min-w-20 text-sm whitespace-nowrap"
+                datetime={getFormatDate(
+                  new Date(Number.parseInt(date.uts) * 1000),
+                )}
+              >
+                {getFormatDate(
+                  new Date(Number.parseInt(date.uts) * 1000),
+                  "es-ES",
+                  {
+                    year: "numeric",
+                    month: "2-digit",
+                  },
+                )
+                  .split("/")
+                  .reverse()
+                  .join(" · ")}
+              </time>
+            )}
+            <u class="gap-1 font-medium sm:flex sm:items-center">
+              <span class="line-clamp-1 max-w-2xs">{name}</span>
+              <span class="text-muted line-clamp-1 text-sm">
+                <span class="hidden text-base sm:inline-flex">{" · "}</span>
+                {artist["#text"]}
+              </span>
+            </u>
+          </Link>
+        </li>
+      ))
+    }
+  </ul>
+</section>

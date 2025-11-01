@@ -78,3 +78,7 @@ export const getLastfmData = async () => {
 
   return cacheLastfmData;
 };
+
+export type Tracks = Awaited<ReturnType<typeof getLastfmData>>["tracks"];
+export type Artists = Awaited<ReturnType<typeof getLastfmData>>["artists"];
+export type Albums = Awaited<ReturnType<typeof getLastfmData>>["albums"];

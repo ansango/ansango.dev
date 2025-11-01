@@ -1,0 +1,37 @@
+---
+import { HeartIcon } from "@/components/icons";
+import { Image, Link } from "@/components/atoms";
+import type { Albums } from "@/lib/music";
+
+interface Props {
+  albums: Albums;
+}
+
+const { albums } = Astro.props;
+---
+
+<section>
+  <h2>Obsesionado con <HeartIcon className="inline-flex size-4" /></h2>
+  <ul class="grid grid-cols-2 gap-4 [@media(min-width:480px)]:grid-cols-4">
+    {
+      albums.map(({ image, name, url, artist: { name: artistName } }) => {
+        const imageUrl = image.find((img) => img.size === "large")?.["#text"];
+        return (
+          <li class="list-none">
+            <Link href={url} blank>
+              <div class="border-divider overflow-hidden rounded-md border-[1px]">
+                <Image src={imageUrl} alt={name} />
+              </div>
+              <div class="mt-1 space-y-0">
+                <p class="line-clamp-1 text-sm leading-snug font-medium text-pretty">
+                  {name}
+                </p>
+                <p class="text-muted m-0 text-xs">{artistName}</p>
+              </div>
+            </Link>
+          </li>
+        );
+      })
+    }
+  </ul>
+</section>

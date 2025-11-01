@@ -1,19 +1,30 @@
 ---
-import { getCollectionsByYear, type Entry } from "@/lib/collections";
+import { site } from "@/constants";
+import {
+  getCollectionsByYear,
+  getPagination,
+  type Entry,
+} from "@/lib/collections";
 import { getFormatDate } from "@/lib/utils";
 
 interface Props {
-  entries: Array<Entry>;
+  entries: Entry[];
+  page?: number;
+  isIndex: boolean;
 }
 
-const { entries } = Astro.props;
-
-const parsedEntriesByYear = getCollectionsByYear(entries);
+const { entries, isIndex, page = 1 } = Astro.props;
+const { paginatedEntries } = getPagination({
+  isIndex,
+  entries,
+  page,
+  entriesPerPage: site.pages.archive.entriesPerPage,
+});
+const parsedEntriesByYear = getCollectionsByYear(paginatedEntries);
 ---
 
 {
   Object.entries(parsedEntriesByYear)
-
     .sort(([yearA], [yearB]) => {
       const yearANum = parseInt(yearA);
       const yearBNum = parseInt(yearB);
@@ -24,7 +35,7 @@ const parsedEntriesByYear = getCollectionsByYear(entries);
     })
     .map(([year, entries]) => {
       return (
-        <section class="">
+        <section>
           <h2 class="m-0 mb-2 text-xl font-semibold">
             {isNaN(parseInt(year)) ? "Sin fecha" : year}
           </h2>

@@ -1,0 +1,18 @@
+---
+import { site } from "@/constants";
+
+interface Props {
+  entriesCount: number;
+}
+
+const { entriesCount } = Astro.props;
+---
+
+<div class="border-divider border-b-[1px]">
+  <h1>Archivo</h1>
+  <p class="text-muted/20">
+    {site.pages.archive.description} Hay un total de <span class="font-medium"
+      >{entriesCount}</span
+    > entradas publicadas.
+  </p>
+</div>

@@ -1,0 +1,27 @@
+---
+import { site } from "@/constants";
+import { getPagination, type Entry } from "@/lib/collections";
+import { Pagination as BasePagination } from "@/components";
+
+interface Props {
+  entries: Entry[];
+  isIndex: boolean;
+  page?: number;
+}
+
+const { entries, isIndex, page = 1 } = Astro.props;
+
+const { currentPage, totalPages } = getPagination({
+  isIndex,
+  entries,
+  page,
+  entriesPerPage: site.pages.archive.entriesPerPage,
+});
+---
+
+<BasePagination
+  {currentPage}
+  {totalPages}
+  prevUrl={`/archive${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
+  nextUrl={`/archive/${currentPage + 1}/`}
+/>

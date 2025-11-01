@@ -1,21 +1,21 @@
 ---
 import { site } from "@/constants";
-import { LayoutArchive } from "@/components";
+import { LayoutDefault } from "@/components";
 import { getSortedCollectionsByYear } from "@/lib/collections";
+import {
+  ArchiveHero,
+  ArchiveList,
+  ArchivePagination,
+} from "@/components/organisms/archive";
 
 const entries = await getSortedCollectionsByYear();
 const meta = site.pages.archive;
-const entriesPerPage = meta.entriesPerPage || 10;
 
-if (!entries) {
-  return Astro.redirect("/");
-}
+if (!entries) return Astro.redirect("/");
 ---
 
-<LayoutArchive
-  entries={entries}
-  entriesPerPage={entriesPerPage}
-  meta={meta}
-  page={1}
-  isIndex
-/>
+<LayoutDefault {...meta} type="main">
+  <ArchiveHero entriesCount={entries.length} />
+  <ArchiveList {entries} isIndex />
+  <ArchivePagination {entries} isIndex />
+</LayoutDefault>

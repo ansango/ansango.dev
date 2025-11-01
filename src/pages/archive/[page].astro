@@ -1,27 +1,26 @@
 ---
 import { site } from "@/constants";
-import { LayoutArchive } from "@/components";
+import { LayoutArchive, LayoutDefault } from "@/components";
 import { getArchiveStaticPathsPage } from "@/lib/astro";
 import { getSortedCollectionsByYear } from "@/lib/collections";
+import {
+  ArchiveHero,
+  ArchiveList,
+  ArchivePagination,
+} from "@/components/organisms/archive";
 
 export { getArchiveStaticPathsPage as getStaticPaths };
 
 const { page } = Astro.params;
 const entries = await getSortedCollectionsByYear();
-
 const meta = site.pages.archive;
-const entriesPerPage = meta.entriesPerPage || 10;
 const isIndex = false;
 
-if (!entries) {
-  return Astro.redirect("/");
-}
+if (!entries) return Astro.redirect("/");
 ---
 
-<LayoutArchive
-  entries={entries}
-  entriesPerPage={entriesPerPage}
-  meta={meta}
-  {page}
-  {isIndex}
-/>
+<LayoutDefault {...meta} type="main">
+  <ArchiveHero entriesCount={entries.length} />
+  <ArchiveList {entries} {isIndex} {page} />
+  <ArchivePagination {entries} {isIndex} {page} />
+</LayoutDefault>

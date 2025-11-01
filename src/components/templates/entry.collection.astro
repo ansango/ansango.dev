@@ -1,0 +1,34 @@
+---
+import type { Entry } from "@/lib/collections";
+import { getEntry, render } from "astro:content";
+
+import { EntryHeading, LayoutDefault } from "@/components";
+import { getReadingTime } from "@/lib/utils";
+
+const { collection, id } = Astro.props as Entry;
+
+const entry = await getEntry(collection, id);
+
+if (!entry) {
+  throw new Error(`Entry not found: ${collection}/${id}`);
+}
+
+const { Content, remarkPluginFrontmatter } = await render(entry);
+const { title, date, mod, description, tags } = entry.data;
+const readingTime = getReadingTime(entry.body || "");
+
+const headingProps = {
+  title,
+  date,
+  mod,
+  description,
+  tags,
+  readingTime,
+  collection,
+};
+---
+
+<LayoutDefault {...remarkPluginFrontmatter} type="article">
+  <EntryHeading {...headingProps} />
+  <Content />
+</LayoutDefault>

@@ -330,3 +330,13 @@ export const getCollectionsByYear = (collections: Entries) => {
     {} as Record<string | number, typeof collections>,
   );
 };
+
+/**
+ * Determines whether a collection is simple based on its entries.
+ * @param entries - Optional array of entries to check
+ * @returns `true` if entries exist and at least one entry has `data.index` set to `true`, otherwise `false`
+ */
+export const getIsSimpleCollection = (entries?: Entries) => {
+  if (!entries || entries.length === 0) return false;
+  return entries.some(({ data }: { data: any }) => data.index === true);
+};

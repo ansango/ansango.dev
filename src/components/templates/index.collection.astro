@@ -1,0 +1,28 @@
+---
+import type { CollectionName, Meta } from "@/content.config";
+import { LayoutCollectionDefault } from "@/components/molecules/layout";
+import { type Entries } from "@/lib/collections";
+import { WikiTemplate } from "@/components/organisms/wiki";
+import { site } from "@/constants";
+
+interface Props {
+  collection: CollectionName;
+  entries: Entries;
+  page?: number;
+  isIndex: boolean;
+}
+
+const { entries, page = 1, isIndex, collection } = Astro.props;
+const meta = site.pages[collection as CollectionName];
+const entriesPerPage = meta.entriesPerPage;
+
+const TemplateCollection: Partial<
+  Record<CollectionName, (_props: Props) => any>
+> = {
+  wiki: WikiTemplate,
+};
+
+const Component = TemplateCollection[collection] ?? LayoutCollectionDefault;
+---
+
+<Component {collection} {entries} {meta} {page} {isIndex} {entriesPerPage} />

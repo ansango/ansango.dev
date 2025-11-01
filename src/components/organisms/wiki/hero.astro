@@ -1,0 +1,19 @@
+---
+import { site } from "@/constants";
+
+interface Props {
+  totalEntries: number;
+  totalCategories: number;
+}
+
+const { totalEntries, totalCategories } = Astro.props;
+
+---
+<div>
+  <h1>{site.pages.wiki.title}</h1>
+  <p class="text-muted">
+    {site.pages.wiki.description}
+    {totalCategories === 1 ? "1 categoría" : `${totalCategories} categorías`} ·
+    {totalEntries === 1 ? "1 entrada" : `${totalEntries} entradas`}
+  </p>
+</div>

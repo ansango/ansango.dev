@@ -1,41 +1,27 @@
 ---
 import { type CollectionName } from "@/content.config";
-import { site } from "@/constants";
 import { getCollectionStaticPaths } from "@/lib/astro";
-import { getAllCollectionsByCategory } from "@/lib/collections";
-import { LayoutCollection, LayoutSingle } from "@/components";
+import {
+  getAllCollectionsByCategory,
+  getIsSimpleCollection,
+} from "@/lib/collections";
+import {
+  CollectionIndexTemplate,
+  CollectionSinglePageTemplate,
+} from "@/components/templates";
 
 export { getCollectionStaticPaths as getStaticPaths };
 
-const { collection } = Astro.params;
+const { collection } = Astro.params as { collection: CollectionName };
 const entries = (await getAllCollectionsByCategory())[collection];
-const meta = site.pages[collection as CollectionName];
-const entriesPerPage = meta.entriesPerPage;
-
-if (!entries) {
-  return Astro.redirect("/");
-}
-
-const onlyOnePage =
-  entries.length === 1 &&
-  entries.some(({ data }: { data: any }) => data.index === true);
+const simpleCollection = getIsSimpleCollection(entries);
+if (!entries) return Astro.redirect("/");
 ---
 
 {
-  onlyOnePage && entries && (
-    <LayoutSingle {collection} entryId={entries[0].id} />
-  )
-}
-
-{
-  !onlyOnePage && entries && (
-    <LayoutCollection
-      {collection}
-      {entries}
-      {meta}
-      {entriesPerPage}
-      page={1}
-      isIndex
-    />
+  simpleCollection ? (
+    <CollectionSinglePageTemplate {collection} entryId={entries[0].id} />
+  ) : (
+    <CollectionIndexTemplate {collection} {entries} isIndex />
   )
 }

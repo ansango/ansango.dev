@@ -1,9 +1,13 @@
 ---
 import { getAllCollectionsByCategory } from "@/lib/collections";
-import { LayoutCollection, LayoutCollectionEntry } from "@/components";
+
 import { site } from "@/constants";
 import type { CollectionName } from "@/content.config";
 import { getCollectionStaticPathsSlug } from "@/lib/astro";
+import {
+  CollectionIndexTemplate,
+  CollectionEntryTemplate,
+} from "@/components/templates";
 
 export { getCollectionStaticPathsSlug as getStaticPaths };
 
@@ -27,9 +31,9 @@ if (!entry && (!entries || isNaN(page) || page < 1)) {
 
 {
   entry ? (
-    <LayoutCollectionEntry {...entry} />
+    <CollectionEntryTemplate {...entry} />
   ) : (
-    <LayoutCollection
+    <CollectionIndexTemplate
       {collection}
       {entries}
       {meta}

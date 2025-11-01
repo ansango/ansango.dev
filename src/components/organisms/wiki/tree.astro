@@ -1,0 +1,24 @@
+---
+import { TreeNode } from "@/components/atoms";
+import type { Entries } from "@/lib/collections";
+import { getTreeNode } from "@/lib/tree-node";
+
+interface Props {
+  entries: Entries;
+}
+
+const { entries } = Astro.props;
+const wikiStructure = getTreeNode(entries, "wiki");
+---
+
+<div class="border-divider rounded border">
+  <div class="divide-divider divide-y">
+    {
+      wikiStructure.map((node) => (
+        <div class="py-1">
+          <TreeNode node={node} level={0} />
+        </div>
+      ))
+    }
+  </div>
+</div>

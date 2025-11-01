@@ -1,6 +1,6 @@
 ---
 import type { CollectionName, Meta } from "@/content.config";
-import { LayoutCollectionWiki, LayoutCollectionDefault } from "@/components";
+
 import { type Entries } from "@/lib/collections";
 
 interface Props {
@@ -14,8 +14,10 @@ interface Props {
 
 const { entries, page, isIndex, meta, collection, entriesPerPage } =
   Astro.props;
-const customCollections = ["wiki"];
+
+
 ---
+
 
 {collection === "wiki" && <LayoutCollectionWiki {entries} {meta} />}
 
@@ -30,4 +32,4 @@ const customCollections = ["wiki"];
       {entriesPerPage}
     />
   )
-}
+} -->

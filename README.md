@@ -666,14 +666,33 @@ MIT License - feel free to use this template for your own personal site!
 ## 🙏 Acknowledgments
 
 - Built with [Astro](https://astro.build)
-- Styled with [Tailwind CSS](https://tailwindcss.com)
+- Styled with [Tailwind CSS v4](https://tailwindcss.com)
 - Search powered by [Pagefind](https://pagefind.app)
+- Interactive components with [Svelte 5](https://svelte.dev)
+- Data fetching with [TanStack Query](https://tanstack.com/query)
+- Music data from [Last.fm API](https://www.last.fm/api)
+- Bookmarks from [Raindrop.io API](https://raindrop.io)
+- Typography with [Inter Variable](https://rsms.me/inter/)
 - Inspired by the [IndieWeb](https://indieweb.org/) movement
 
 ## 🤝 Contributing
 
-This is a personal website template, but suggestions and improvements are welcome! Feel free to open an issue or submit a pull request.
+This is a personal website template, but suggestions and improvements are welcome! Feel free to:
+
+- Open an issue for bugs or feature requests
+- Submit a pull request with improvements
+- Share your own implementation or customizations
+- Suggest new integrations or features
+
+When contributing:
+
+- Follow the existing code style (use `npm run format` with Prettier)
+- Test your changes locally with `npm run dev`
+- Update documentation as needed
+- Ensure all environment-dependent features are well documented
 
 ---
 
-Made with ❤️, [Astro](https://astro.build), and [Svelte](https://svelte.dev) by ansango.
+Made with ❤️ using [Astro](https://astro.build), [Svelte 5](https://svelte.dev), and [Tailwind CSS v4](https://tailwindcss.com)
+
+---

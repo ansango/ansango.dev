@@ -1,9 +1,16 @@
 ---
 import { Image as ImageAstro } from "astro:assets";
-import Placeholder from "./placeholder.astro";
-import type { ImageProps } from ".";
+import Placeholder from "./image.placeholder.astro";
 
-interface Props extends ImageProps {}
+
+export interface Props {
+  className?: string;
+  src?: string;
+  alt?: string;
+  width?: number;
+  height?: number;
+  loading?: "eager" | "lazy";
+}
 
 const {
   className = "w-full h-auto object-cover aspect-square",

@@ -1,10 +1,8 @@
 ---
 import type { CollectionName } from "@/content.config";
-
 import { getEntry, render } from "astro:content";
-
 import { getFormatDate } from "@/lib/utils";
-import { LayoutDefault } from "@/components";
+import { LayoutDefault } from "@/components/layout";
 
 
 interface Props {
@@ -13,8 +11,8 @@ interface Props {
 }
 
 const { collection, entryId } = Astro.props;
-
 const entry = await getEntry(collection, entryId);
+
 if (!entry) {
   throw new Error(`Entry not found: ${collection}/${entryId}`);
 }

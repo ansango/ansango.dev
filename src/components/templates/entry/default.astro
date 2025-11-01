@@ -2,8 +2,9 @@
 import type { Entry } from "@/lib/collections";
 import { getEntry, render } from "astro:content";
 
-import { EntryHeading, LayoutDefault } from "@/components";
+import {  LayoutDefault } from "@/components/layout";
 import { getReadingTime } from "@/lib/utils";
+import { EntryHeading } from "@/components/molecules";
 
 const { collection, id } = Astro.props as Entry;
 

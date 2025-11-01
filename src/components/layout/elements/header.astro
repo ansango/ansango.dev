@@ -1,7 +1,7 @@
 ---
 import { site } from "@/constants";
-import { Container, Searcher } from "@/components";
-
+import { Container } from "@/components/atoms";
+import { Searcher } from "@/components/molecules";
 const pathname = Astro.url.pathname;
 const path = pathname.split("/").filter(Boolean)[0] || null;
 ---

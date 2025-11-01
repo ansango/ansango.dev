@@ -4,7 +4,6 @@ import tailwindcss from "@tailwindcss/vite";
 import relativeMdLinks from "astro-rehype-relative-markdown-links";
 import externalLinks from "rehype-external-links";
 import pagefind from "astro-pagefind";
-
 import sitemap from "@astrojs/sitemap";
 import site from "./src/site.json";
 import { rehypeRemoveH1, elementArrow } from "./src/lib/rehype";

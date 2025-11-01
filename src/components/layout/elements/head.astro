@@ -1,8 +1,11 @@
 ---
-import { site } from "@/constants";
+
 import "@/styles/global.css";
-import { ThemeScript, ClipboardScript } from "@/components";
+import ClipboardScript from "./clipboard.script.astro";
+import ThemeScript from "./theme.script.astro";
+import { site } from "@/constants";
 import { ClientRouter } from "astro:transitions";
+
 interface Props {
   title?: string;
   description?: string;

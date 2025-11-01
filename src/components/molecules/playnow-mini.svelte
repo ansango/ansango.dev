@@ -1,22 +1,9 @@
 <script lang="ts">
-  import { userApiMethods } from "@/lib/lastfm/services";
-  import { queryClient } from "@/lib/queries";
-  import { createQuery } from "@tanstack/svelte-query";
+  import { useGetCurrentTrack } from "@/lib/queries";
 
   let { play, noplay, nocover } = $props();
-  const { getRecentTracks } = userApiMethods;
 
-  const FIVE_MINUTES = 5 * 60 * 1000;
-
-  const query = createQuery(
-    () => ({
-      queryKey: ["recent-tracks"],
-      queryFn: () => getRecentTracks({ user: "ansango", limit: 1 }),
-      select: ({ recenttracks: { track } }) => track.at(0),
-      refetchInterval: FIVE_MINUTES,
-    }),
-    queryClient,
-  );
+  const query = useGetCurrentTrack();
   let track = $derived(query.data);
   let currentTrack = $derived(track?.["@attr"]?.nowplaying ? query.data : null);
   let currentImg = $derived(
@@ -36,7 +23,9 @@
         height={24}
       />
     {:else}
-      <span class="inline-flex items-center justify-center size-6 text-muted rounded bg-muted/10 border-[1px] border-divider">
+      <span
+        class="inline-flex items-center justify-center size-6 text-muted rounded bg-muted/10 border-[1px] border-divider"
+      >
         {@render nocover?.()}
       </span>
     {/if}

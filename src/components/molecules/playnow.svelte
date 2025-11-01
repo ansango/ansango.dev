@@ -1,21 +1,9 @@
 <script lang="ts">
-  import { userApiMethods } from "@/lib/lastfm/services";
-  import { queryClient } from "@/lib/queries";
-  import { createQuery } from "@tanstack/svelte-query";
+  import {  useGetCurrentTrack } from "@/lib/queries";
 
   let { play, noplay } = $props();
-  const { getRecentTracks } = userApiMethods;
-  const FIVE_MINUTES = 5 * 60 * 1000;
-  const query = createQuery(
-    () => ({
-      queryKey: ["recent-tracks"],
-      queryFn: () => getRecentTracks({ user: "ansango", limit: 1 }),
-      select: ({ recenttracks: { track } }) => ({ track: track.at(0) }),
-      refetchInterval: FIVE_MINUTES,
-    }),
-    queryClient,
-  );
-  let track = $derived(query.data?.track);
+  const query = useGetCurrentTrack();
+  let track = $derived(query.data);
   let currentTrack = $derived(track?.["@attr"]?.nowplaying ? track : null);
   let imageUrl = $derived(
     currentTrack?.image.find((img) => img.size === "large")?.["#text"],

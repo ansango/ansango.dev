@@ -1,0 +1,31 @@
+---
+import type { Entries } from "@/lib/collections";
+import { getTreeNode, countCategories, countEntries } from "@/lib/tree-node";
+import { LayoutDefault } from "@/components";
+
+import {
+  WikiHero,
+  WikiContainer,
+  WikiTree,
+  WikiLegend,
+} from "@/components/organisms/wiki";
+import { site } from "@/constants";
+
+interface Props {
+  entries: Entries;
+}
+
+const { entries } = Astro.props;
+const meta = site.pages.wiki;
+const wikiStructure = getTreeNode(entries, "wiki");
+const totalEntries = countEntries(wikiStructure);
+const totalCategories = countCategories(wikiStructure);
+---
+
+<LayoutDefault {...meta} type="main">
+  <WikiHero {totalEntries} {totalCategories} />
+  <WikiContainer>
+    <WikiTree entries={entries} slot="tree" />
+    <WikiLegend slot="legend" />
+  </WikiContainer>
+</LayoutDefault>

@@ -1,0 +1,1 @@
+export { default as CollectionEntryTemplate } from "./default.astro";

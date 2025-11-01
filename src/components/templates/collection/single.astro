@@ -4,7 +4,8 @@ import type { CollectionName } from "@/content.config";
 import { getEntry, render } from "astro:content";
 
 import { getFormatDate } from "@/lib/utils";
-import { LayoutDefault } from "../molecules";
+import { LayoutDefault } from "@/components/molecules";
+
 
 interface Props {
   collection: CollectionName;
@@ -19,7 +20,6 @@ if (!entry) {
 }
 
 const { title, date, mod } = entry.data;
-
 const { Content, remarkPluginFrontmatter } = await render(entry);
 ---
 

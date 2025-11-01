@@ -1,7 +1,6 @@
 ---
 import { getAllCollectionsByCategory } from "@/lib/collections";
 
-import { site } from "@/constants";
 import type { CollectionName } from "@/content.config";
 import { getCollectionStaticPathsSlug } from "@/lib/astro";
 import {
@@ -20,8 +19,6 @@ const { entry } = Astro.props;
 
 const page = parseInt(slug);
 const entries = (await getAllCollectionsByCategory())[collection];
-const meta = site.pages[collection as CollectionName];
-const entriesPerPage = meta.entriesPerPage;
 const isIndex = false;
 
 if (!entry && (!entries || isNaN(page) || page < 1)) {

@@ -1,11 +1,14 @@
 ---
-import { ExternalLinkIcon, Link, Pagination,LayoutDefault  } from "@/components";
+import { LayoutDefault } from "@/components";
 import { getPagination } from "@/lib/collections";
 
 import type { Meta } from "@/content.config";
-import { site } from "@/constants";
 import type { CachedBookmarkData } from "@/lib/raindrop";
-import { Image } from "astro:assets";
+import {
+  BookmarkHero,
+  BookmarkList,
+  BookmarkPagination,
+} from "@/components/organisms/bookmarks/[bookmark]";
 
 interface Props {
   entries: CachedBookmarkData[];
@@ -18,89 +21,13 @@ interface Props {
 
 const { entries, page, entriesPerPage, isIndex, meta, collection } =
   Astro.props;
-
-const { currentPage, paginatedEntries, totalPages } =
-  getPagination<CachedBookmarkData>({
-    isIndex,
-    entries: entries.sort((a, b) => a.title.localeCompare(b.title)),
-    page,
-    entriesPerPage,
-  });
 ---
 
 <LayoutDefault {...meta} type="article">
-  <div class="border-divider border-b-[1px]">
-    <h1>
-      {site.pages.bookmarks.title} · <span
-        >{collection.replaceAll(/[.-]/g, " ")}</span
-      >
-    </h1>
-    <p class="text-muted/90">
-      La coleccion <span class="text-muted font-medium"
-        >{collection.replaceAll(/[.-]/g, " ")}</span
-      > contiene <span class="text-muted font-medium">{entries.length}</span> elementos.
-    </p>
-  </div>
-
-  {
-    entries.length === 0 ? (
-      <p class="text-muted py-4 text-center">No hay elementos para mostrar.</p>
-    ) : (
-      <ul class="grid grid-cols-1 gap-4 pt-4">
-        {paginatedEntries?.map((item) => {
-          return (
-            <li class="w-full list-none space-y-0.5">
-              <Link href={item.link} blank={true} className="group">
-                <div class="flex gap-2 sm:gap-4">
-                  <div class="border-divider size-full max-h-8 max-w-8 flex-shrink-0 overflow-hidden rounded-full border-[1.5px] sm:max-h-12 sm:max-w-12">
-                    {item.cover && (
-                      <Image
-                        src={item.cover}
-                        alt={item.title}
-                        class="aspect-square h-auto w-full object-cover"
-                        loading="lazy"
-                        width={46}
-                        height={46}
-                      />
-                    )}
-                  </div>
-                  <div>
-                    <div class="space-y-0.5">
-                      <h2 class="group-hover:text-link flex w-full items-center gap-1 text-lg leading-tight">
-                        <span class="line-clamp-1">{item.title}</span>
-
-                        <ExternalLinkIcon className="inline-flex max-w-5 size-full" />
-                      </h2>
-                      {item.excerpt && (
-                        <p class="text-muted mb-1.5 line-clamp-2 text-sm leading-normal">
-                          {item.excerpt}
-                        </p>
-                      )}
-                    </div>
-                    {item.tags && (
-                      <div class="space-x-1.5">
-                        {item.tags.map((tag: string) => (
-                          <span class="group-hover:!text-content bg-divider rounded-full px-1.5 py-0.5 text-xs">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    )
-  }
-
-  <Pagination
-    className="pb-4"
-    {currentPage}
-    {totalPages}
-    prevUrl={`/bookmarks/${collection}${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
-    nextUrl={`/bookmarks/${collection}/${currentPage + 1}/`}
+  <BookmarkHero
+    collection={collection.replaceAll(/[.-]/g, " ")}
+    entriesCount={entries.length}
   />
+  <BookmarkList {entries} isIndex={isIndex} page={page} />
+  <BookmarkPagination {entries} {isIndex} {page} {collection} />
 </LayoutDefault>

@@ -1,38 +1,20 @@
 ---
-import { LayoutDefault, Link } from "@/components";
+import { LayoutDefault } from "@/components";
 import { getCollectionsExcludingReading } from "@/lib/raindrop";
-import { site } from "@/constants";
+import {
+  BookmarkCollectionHero,
+  BookmarkCollectionList,
+} from "@/components/organisms/bookmarks";
 
 const collections = await getCollectionsExcludingReading();
+const totalCollectionsCount = collections?.length;
+const totalBookmarksCount = collections?.reduce(
+  (acc, curr) => acc + curr.count,
+  0,
+);
 ---
 
 <LayoutDefault>
-  <div class="border-divider mb-4 border-b-[1px]">
-    <h1>{site.pages.bookmarks.title}</h1>
-    <p class="text-muted/90">
-      {site.pages.bookmarks.description} Un total de <span
-        class="text-muted font-medium"
-        >{collections?.reduce((acc, { count }) => acc + count, 0)}</span
-      > marcadores, distribuidos en <span class="text-muted font-medium"
-        >{collections?.length}</span
-      > colecciones.
-    </p>
-  </div>
-  <ul class="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
-    {
-      collections?.map(({ title, count }) => {
-        return (
-          <li class="flex list-none">
-            <Link
-              className="font-medium w-full px-1.5 py-1.5 border border-divider rounded"
-              href={`/bookmarks/${title}`}
-            >
-              <span class="text-sm">{title.replaceAll(/[.-]/g, " ")}</span>
-              <span class="text-muted text-xs">({count})</span>
-            </Link>
-          </li>
-        );
-      })
-    }
-  </ul>
+  <BookmarkCollectionHero {totalBookmarksCount} {totalCollectionsCount} />
+  <BookmarkCollectionList {collections} />
 </LayoutDefault>

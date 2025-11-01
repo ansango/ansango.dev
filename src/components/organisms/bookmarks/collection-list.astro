@@ -1,0 +1,28 @@
+---
+import { Link } from "@/components/atoms";
+import type { CachedCollectionData } from "@/lib/raindrop";
+
+interface Props {
+  collections: CachedCollectionData[];
+}
+
+const { collections } = Astro.props;
+---
+
+<ul class="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
+  {
+    collections?.map(({ title, count }) => {
+      return (
+        <li class="flex list-none">
+          <Link
+            className="font-medium w-full px-1.5 py-1.5 border border-divider rounded"
+            href={`/bookmarks/${title}`}
+          >
+            <span class="text-sm">{title.replaceAll(/[.-]/g, " ")}</span>
+            <span class="text-muted text-xs">({count})</span>
+          </Link>
+        </li>
+      );
+    })
+  }
+</ul>

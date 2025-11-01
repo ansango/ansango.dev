@@ -1,0 +1,21 @@
+---
+import { site } from "@/constants";
+
+interface Props {
+  totalCollectionsCount: number;
+  totalBookmarksCount: number;
+}
+
+const { totalBookmarksCount, totalCollectionsCount } = Astro.props;
+---
+
+<div class="border-divider mb-4 border-b-[1px]">
+  <h1>{site.pages.bookmarks.title}</h1>
+  <p class="text-muted/90">
+    {site.pages.bookmarks.description} Un total de <span
+      class="text-muted font-medium">{totalBookmarksCount}</span
+    > marcadores, distribuidos en <span class="text-muted font-medium"
+      >{totalCollectionsCount}</span
+    > colecciones.
+  </p>
+</div>

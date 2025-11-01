@@ -1,0 +1,28 @@
+---
+import { Link } from "@/components/atoms";
+import { EntriesList } from "@/components/molecules";
+import { type Entry } from "@/lib/collections";
+
+interface Props {
+  bookmarks: Entry[];
+  maxItems?: number;
+}
+
+const { bookmarks, maxItems = 5 } = Astro.props;
+---
+
+<section>
+  <h2 class="text-muted font-medium">
+    <Link href="/bookmarks">Bookmarks</Link> & <Link href="/reading"
+      >Reading</Link
+    >
+  </h2>
+  <EntriesList entries={bookmarks} />
+  {
+    bookmarks.length >= maxItems && (
+      <Link className="mt-4 block text-sm" href="/reading">
+        Ver todos los enlaces →
+      </Link>
+    )
+  }
+</section>

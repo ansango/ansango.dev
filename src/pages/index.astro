@@ -6,23 +6,18 @@ import {
   type Entry as EntryType,
 } from "@/lib/collections";
 import { site } from "@/constants";
-import {
-  EntriesList,
-  Entry,
-  ExternalLinkIcon,
-  Image,
-  Link,
-  NoListenIcon,
-  PlaceholderIcon,
-  PlayIcon,
-  Tag,
-  LayoutDefault,
-} from "@/components";
-import PlayNowMini from "@/components/atoms/playnow-mini.svelte";
+import { LayoutDefault } from "@/components";
 import { latestReadingMapped } from "@/lib/raindrop";
+import {
+  HomeBookmarks,
+  HomeCollections,
+  HomeHero,
+  HomeLastPublication,
+  HomeTags,
+  HomePlayNow,
+} from "@/components/organisms/home";
 
 const meta = site.pages.home;
-const LIMIT_BOOKMARKS = 5;
 const latestBookmarks = (await latestReadingMapped(
   5,
 )) as unknown as EntryType[];
@@ -32,127 +27,13 @@ const collections = await getAllCollectionsByCategory();
 ---
 
 <LayoutDefault {...meta} type="main">
-  <section class="space-y-4">
-    <div class="flex flex-row-reverse items-center justify-end gap-4">
-      <h1 class="mb-0">ansango</h1>
-      <div
-        class="border-divider size-12 overflow-hidden rounded-full border-[1.5px]"
-      >
-        <Image src={site.image} />
-      </div>
-    </div>
-    <p>
-      Hola, soy <span class="font-medium">Aníbal Santos</span> 👋, escribo sobre
-      tecnología, trabajo como Tech Lead en <Link
-        className="external-link inline-flex items-center font-medium underline underline-offset-2"
-        href="https://innusual.tech"
-        blank
-        >innusual <ExternalLinkIcon />
-      </Link>. Aquí encontrarás parte de mis wikis, insights, y algunos hacks.
-    </p>
-  </section>
-  {
-    latests.length > 0 && (
-      <section class="group">
-        <h2 class="text-muted font-medium">Última publicación</h2>
-        <div>
-          {latests.map((latest) => {
-            const isIndex = Boolean((latest.data as any).index);
-            return (
-              <Link
-                href={
-                  `/${latest.collection}` + (isIndex ? "" : `/${latest.id}`)
-                }
-                className="space-y-1"
-              >
-                <Entry entry={latest} />
-              </Link>
-            );
-          })}
-        </div>
-      </section>
-    )
-  }
-
-  {
-    tags.length > 0 && (
-      <section>
-        <h2 class="text-muted font-medium">
-          <Link href="/tags">Tags</Link>
-        </h2>
-
-        <ul class="flex flex-wrap gap-1">
-          {tags.map((tag, i) => {
-            return (
-              <li class="flex list-none">
-                <Tag href={`/tags/${tag}`}>{tag.replace(/-/g, " ")}</Tag>
-                {i !== tags.length - 1 && <span class="text-muted">,</span>}
-              </li>
-            );
-          })}
-        </ul>
-      </section>
-    )
-  }
-
-  <section>
-    <h2 class="text-muted font-medium">
-      <Link href="/bookmarks">Bookmarks</Link> & <Link href="/reading"
-        >Reading</Link
-      >
-    </h2>
-    <EntriesList entries={latestBookmarks} />
-    {
-      latestBookmarks.length >= LIMIT_BOOKMARKS && (
-        <Link className="mt-4 block text-sm" href="/reading">
-          Ver todos los enlaces →
-        </Link>
-      )
-    }
-  </section>
-
-  {
-    Object.entries(collections).map(([collection, entries]) => {
-      const slicedEntries = entries.slice(0, meta.entriesPerPage);
-      const collectionlink = `/${collection}`;
-
-      const isOnlyOnePage =
-        entries.length === 1 && (entries[0].data as any).index === true;
-
-      if (isOnlyOnePage) {
-        return <Fragment />;
-      }
-
-      return (
-        <section>
-          <h2 class="text-muted font-medium">
-            <a class="capitalize" href={collectionlink}>
-              {collection}
-            </a>
-          </h2>
-          <EntriesList entries={slicedEntries} />
-          {entries.length > (meta.entriesPerPage || 0) && (
-            <Link className="mt-4 block text-sm" href={collectionlink}>
-              Ver todas las publicaciones →
-            </Link>
-          )}
-        </section>
-      );
-    })
-  }
-  <section>
-    <Link href="/music">
-      <PlayNowMini client:load>
-        <svelte:fragment slot="play">
-          <PlayIcon className="inline-flex size-4" />
-        </svelte:fragment>
-        <svelte:fragment slot="nocover">
-          <PlaceholderIcon className="inline-flex size-3 pb-0.5" />
-        </svelte:fragment>
-        <svelte:fragment slot="noplay">
-          <NoListenIcon className="inline-flex size-3.5" />
-        </svelte:fragment>
-      </PlayNowMini>
-    </Link>
-  </section>
+  <HomeHero />
+  <HomeLastPublication
+    entry={latests[0]}
+    isIndex={Boolean((latests[0]?.data as any)?.index)}
+  />
+  <HomeTags tags={tags} />
+  <HomeBookmarks bookmarks={latestBookmarks} />
+  <HomeCollections collections={collections} />
+  <HomePlayNow />
 </LayoutDefault>

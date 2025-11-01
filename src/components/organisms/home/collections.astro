@@ -1,0 +1,44 @@
+---
+import { Link } from "@/components/atoms";
+import { EntriesList } from "@/components/molecules";
+import { site } from "@/constants";
+import type { CollectionName } from "@/content.config";
+import type { Entries } from "@/lib/collections";
+
+interface Props {
+  collections: Record<CollectionName, Entries>;
+}
+
+const { collections } = Astro.props;
+const meta = site.pages.home;
+---
+
+{
+  Object.entries(collections).map(([collection, entries]) => {
+    const slicedEntries = entries.slice(0, meta.entriesPerPage);
+    const collectionlink = `/${collection}`;
+
+    const isOnlyOnePage =
+      entries.length === 1 && (entries[0].data as any).index === true;
+
+    if (isOnlyOnePage) {
+      return <Fragment />;
+    }
+
+    return (
+      <section>
+        <h2 class="text-muted font-medium">
+          <a class="capitalize" href={collectionlink}>
+            {collection}
+          </a>
+        </h2>
+        <EntriesList entries={slicedEntries} />
+        {entries.length > (meta.entriesPerPage || 0) && (
+          <Link className="mt-4 block text-sm" href={collectionlink}>
+            Ver todas las publicaciones →
+          </Link>
+        )}
+      </section>
+    );
+  })
+}

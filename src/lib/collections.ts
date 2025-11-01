@@ -75,7 +75,9 @@ export const getAllCollections = async () => {
  *
  * @returns {Promise<Record<string, Entries>>} An object keyed by collection name containing entries for each collection.
  */
-export const getAllCollectionsByCategory = async () => {
+export const getAllCollectionsByCategory = async (): Promise<
+  Record<CollectionName, Entries>
+> => {
   const content = await getAllCollections();
   const contentByCategory = content.reduce(
     (acc: { [key: string]: any }, entry) => {
@@ -96,7 +98,7 @@ export const getAllCollectionsByCategory = async () => {
       sortedContentByCategory[key] = contentByCategory[key];
     });
 
-  return sortedContentByCategory;
+  return sortedContentByCategory as Record<CollectionName, Entries>;
 };
 
 /**
@@ -141,7 +143,7 @@ export const getAllNumberPaths = async () => {
   const contentByCategory = await getAllCollectionsByCategory();
   return Object.keys(contentByCategory)
     .map((collection) => {
-      const collectionContent = contentByCategory[collection];
+      const collectionContent = contentByCategory[collection as CollectionName];
       const entriesPerPage =
         site.pages[collection as CollectionName]?.entriesPerPage || 10;
       const pathNumbers = getPageNumbers(

@@ -1,0 +1,24 @@
+---
+import { Link } from "@/components/atoms";
+import { Entry } from "@/components/molecules";
+import type { Entry as EntryType } from "@/lib/collections";
+interface Props {
+  entry: EntryType
+  isIndex: boolean;
+}
+
+const { entry, isIndex } = Astro.props;
+
+---
+
+<section class="group">
+  <h2 class="text-muted font-medium">Última publicación</h2>
+  <div>
+    <Link
+      href={`/${entry.collection}` + (isIndex ? "" : `/${entry.id}`)}
+      className="space-y-1"
+    >
+      <Entry entry={entry} />
+    </Link>
+  </div>
+</section>

@@ -1,8 +1,8 @@
 ---
 import type { CollectionName } from "@/content.config";
-import { LayoutCollectionDefault } from "@/components/molecules/layout";
+import WikiTemplate from "./wiki.astro"
+import DefaultTemplate from "./default.astro"
 import { type Entries } from "@/lib/collections";
-import { WikiTemplate } from "@/components/organisms/wiki";
 import { site } from "@/constants";
 
 interface Props {
@@ -22,7 +22,7 @@ const TemplateCollection: Partial<
   wiki: WikiTemplate,
 };
 
-const Component = TemplateCollection[collection] ?? LayoutCollectionDefault;
+const Component = TemplateCollection[collection] ?? DefaultTemplate;
 ---
 
 <Component {collection} {entries} {meta} {page} {isIndex} {entriesPerPage} />

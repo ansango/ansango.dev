@@ -12,7 +12,7 @@
 </script>
 
 {#if currentTrack}
-  <p>
+  <p class="mb-0">
     {#if currentImg}
       <img
         src={currentImg}
@@ -36,7 +36,7 @@
 {:else if query.isLoading}
   <p class="h-6 w-32 rounded bg-muted/10 animate-pulse m-0"></p>
 {:else if !currentTrack && !query.isLoading && track}
-  <p class="text-muted">
+  <p class="text-muted mb-0">
     No se está reproduciendo nada ahora mismo. {@render noplay?.()}
   </p>
 {/if}

@@ -12,7 +12,7 @@ interface Props {
 const { entries } = Astro.props;
 ---
 
-<ul class="list-none space-y-2">
+<ul class="list-none space-y-2 mb-0">
   {
     entries.map(
       ({ collection, id, link, external, data: { date, title, index } }) => {

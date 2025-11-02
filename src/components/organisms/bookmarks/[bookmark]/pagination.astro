@@ -22,7 +22,6 @@ const { currentPage, totalPages } = getPagination({
 ---
 
 <BasePagination
-  className="pb-4"
   {currentPage}
   {totalPages}
   prevUrl={`/bookmarks/${collection}${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}

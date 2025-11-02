@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "362f402a7966f2f4",
+        "id": "fc6764d5df28948b",
         "type": "tabs",
         "children": [
           {
-            "id": "ce04dd4c680bd79b",
+            "id": "13100db33e5fb35f",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "performance",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -156,7 +156,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 727.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -173,31 +173,31 @@
       "obsidian-metadata-links:Undo Metadata links": false
     }
   },
-  "active": "ce04dd4c680bd79b",
+  "active": "13100db33e5fb35f",
   "lastOpenFiles": [
-    "pepe.md",
+    "docs/05-styling.md",
     "README.md",
+    "docs/13-deployment.md",
+    "docs/12-obsidian-deployment.md",
+    "docs/10-search.md",
+    "docs/09-seo.md",
+    "docs/06-integrations.md",
+    "docs/01-features.md",
+    "docs/14-contributing.md",
+    "docs/14-performance.md",
+    "docs/04-content-management.md",
+    "docs/11-rss.md",
+    "docs/12-indie-web.md",
+    "docs/08-configuration.md",
+    "docs/07-project-structure.md",
+    "docs/03-installation.md",
+    "README 1.md",
+    "docs/02-architecture.md",
+    "pepe.md",
     "src/content/blog/demo-grid-obsidian.md",
     "src/content/blog/ansango dev.md",
     "src/content/blog/hello.md",
     "roadmap.md",
-    "README 1.md",
-    "docs/16-contributing.md",
-    "docs/15-performance.md",
-    "docs/14-deployment.md",
-    "docs/13-obsidian-deployment.md",
-    "docs/12-indie-web.md",
-    "docs/11-rss.md",
-    "docs/04-content-management.md",
-    "docs/10-search.md",
-    "docs/09-seo.md",
-    "docs/08-configuration.md",
-    "docs/07-project-structure.md",
-    "docs/06-integrations.md",
-    "docs/05-styling.md",
-    "docs/03-installation.md",
-    "docs/02-architecture.md",
-    "docs/01-features.md",
     "obsidian_test/output/assets/417c2aada88626fa87cb5915134ab048_MD5.webp",
     "obsidian_test/output/assets",
     "obsidian_test/output/content/wiki/tooling/docker/instalar docker en mac.md",

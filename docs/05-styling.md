@@ -181,56 +181,6 @@ Page-level templates:
 - `collection/index.astro` - Collection listing page
 - `entry/index.astro` - Single entry page
 
-### Creating Components
-
-#### Astro Components
-
-```astro
----
-interface Props {
-  title: string;
-  description?: string;
-}
-
-const { title, description } = Astro.props;
----
-
-<div class="component">
-  <h2>{title}</h2>
-  {description && <p>{description}</p>}
-</div>
-
-<style>
-  .component {
-    /* Scoped styles */
-  }
-</style>
-```
-
-#### Svelte 5 Components
-
-```svelte
-<script lang="ts">
-  import { type Snippet } from 'svelte';
-  
-  interface Props {
-    title: string;
-    children?: Snippet;
-  }
-  
-  let { title, children }: Props = $props();
-  let count = $state(0);
-  let doubled = $derived(count * 2);
-</script>
-
-<div>
-  <h2>{title}</h2>
-  {#if children}
-    {@render children()}
-  {/if}
-</div>
-```
-
 ## Typography
 
 ### Font Family
@@ -306,22 +256,6 @@ Edit `src/styles/theme.css`:
 .dark {
   --color-primary: #your-dark-color;
   --color-accent: #your-dark-accent;
-}
-```
-
-### Adjusting Spacing
-
-Use Tailwind's spacing scale or create custom values in `tailwind.config.cjs`:
-
-```javascript
-module.exports = {
-  theme: {
-    extend: {
-      spacing: {
-        '128': '32rem',
-      }
-    }
-  }
 }
 ```
 

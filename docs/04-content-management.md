@@ -143,15 +143,12 @@ All tags are automatically:
 
 ### Code Blocks
 
-Use triple backticks with language identifier:
+Use triple backticks with language identifier: 
 
-\`\`\`javascript
-
+```javascript
 const greeting = "Hello, world!";
-
 console.log(greeting);
-
-\`\`\`
+```
 
 ### Images
 
@@ -206,51 +203,7 @@ If you're using Obsidian for content management:
 4. Let Obsidian Git auto-commit and sync
 5. GitHub Actions handles conversion and deployment
 
-See [Obsidian & Deployment documentation](./13-obsidian-deployment.md) for detailed setup.
-
-## Frontmatter Tips
-
-### Date Formats
-
-Always use ISO format (YYYY-MM-DD):
-
-```markdown
----
-date: 2025-10-11
-mod: 2025-10-11
----
-```
-
-### Multiple Authors
-
-Override the default author:
-
-```markdown
----
-author: "Guest Author Name"
----
-```
-
-### Custom OG Images
-
-Use a custom image for social sharing:
-
-```markdown
----
-image: "/assets/images/custom-og.jpg"
----
-```
-
-### Tag Organization
-
-Group related content with consistent tags:
-
-```markdown
----
-tags: [tutorial, astro, beginner]  # Good - consistent, specific
-tags: [Tutorial, ASTRO, beginners] # Avoid - inconsistent casing
----
-```
+See [Obsidian & Deployment documentation](12-obsidian-deployment.md) for detailed setup.
 
 ## Validation
 

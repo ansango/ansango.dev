@@ -68,7 +68,6 @@ See [RSS Documentation](./11-rss.md) for feed structure.
 ## Svelte 5 Components
 
 Interactive features powered by Svelte 5 with modern reactivity.
-
 ### Features
 
 - **Runes**: `$state`, `$derived`, `$effect` for reactive state
@@ -290,13 +289,6 @@ const reading = await getRaindropReading();
 
 Set `RAINDROP_ACCESS_TOKEN` in your hosting environment before building.
 
-### Troubleshooting
-
-- Verify access token is valid and set
-- Check collections exist and follow naming conventions
-- Review server logs for API errors during build
-- Ensure collections are public or token has access
-
 ## Last.fm Integration
 
 Live music integration showing current playing track and listening history.
@@ -328,14 +320,6 @@ lastfm/
     └── top-albums.ts
 ```
 
-### Features
-
-- **Current Track**: Real-time now playing with auto-refresh
-- **Recent Tracks**: Last 10 played tracks
-- **Top Artists**: Top 10 artists (last 7 days)
-- **Top Albums**: Top 12 albums (last month)
-- **Auto-refresh**: 5-minute polling interval
-
 ### Data Fetching Strategies
 
 #### Build-time (Server-side)
@@ -354,11 +338,6 @@ import { useGetCurrentTrack } from '@/lib/queries';
 const query = useGetCurrentTrack();
 ```
 
-### Pages
-
-- `/music` - Full music page with all data
-- `/music-lite` - Lightweight version
-
 ### Customization
 
 Update username in:
@@ -367,14 +346,6 @@ Update username in:
 - `src/lib/queries/current-track.ts`
 
 Change from default `"ansango"` to your username.
-
-### Troubleshooting
-
-- Verify `PUBLIC_LASTFM_API_KEY` is set correctly
-- Check username matches your Last.fm account
-- Ensure API key has sufficient permissions
-- Review browser console for API errors
-- Check Last.fm account privacy settings
 
 ## Integration Checklist
 

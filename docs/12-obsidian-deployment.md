@@ -55,9 +55,10 @@ The following plugins are configured for optimal workflow:
 ### Setup in Obsidian
 
 1. **Open Vault**: Open this repository as an Obsidian vault
-2. **Install Plugins**: Install community plugins when prompted or manually enable in Settings → Community Plugins
-3. **Configure Git**: Settings → Obsidian Git → Set credentials
-4. **Adjust Linter**: Settings → Linter → Customize rules if needed
+2. Obsidian plugins are presents in this repository in .obsidian folder.
+3. **Install Plugins**: Install community plugins when prompted or manually enable in Settings → Community Plugins
+4. **Configure Git**: Settings → Obsidian Git → Set credentials
+5. **Adjust Linter**: Settings → Linter → Customize rules if needed
 
 ## Deployment Pipeline
 
@@ -463,7 +464,7 @@ If migrating from separate repos:
 ## Related Documentation
 
 - [Content Management](./04-content-management.md)
-- [Deployment](./14-deployment.md)
+- [Deployment](13-deployment.md)
 - [Integrations](./06-integrations.md)
 
 ## External Resources

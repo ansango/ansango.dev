@@ -134,13 +134,13 @@ const pages = {
 const social: TreeNode = {
   github: {
     title: "GitHub",
-    url: "https://github.com/ansango",
+    url: `https://github.com/${metasite.github}`,
     blank: true,
     published: true,
   },
   linkedin: {
     title: "LinkedIn",
-    url: "https://www.linkedin.com/in/ansango/",
+    url: `https://www.linkedin.com/in/${metasite.linkedin}/`,
     blank: true,
     published: true,
   },

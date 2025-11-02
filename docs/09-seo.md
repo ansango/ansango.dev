@@ -339,40 +339,6 @@ Test your social cards before sharing:
 ## Performance & SEO
 
 Performance impacts SEO rankings (Core Web Vitals).
-
-### Core Web Vitals
-
-- **LCP (Largest Contentful Paint)**: < 2.5s
-- **FID (First Input Delay)**: < 100ms
-- **CLS (Cumulative Layout Shift)**: < 0.1
-
-**Optimizations**:
-- Preload critical fonts
-- Optimize images
-- Minimize JavaScript
-- Use static generation
-- Implement lazy loading
-
-### Mobile-Friendly
-
-Google uses mobile-first indexing:
-
-- ✅ Responsive design (Tailwind)
-- ✅ Touch-friendly navigation
-- ✅ Readable font sizes
-- ✅ No horizontal scrolling
-- ✅ Fast mobile performance
-
-### Page Speed
-
-Faster pages rank better:
-
-- ✅ Static generation (Astro)
-- ✅ Minimal JavaScript
-- ✅ Optimized assets
-- ✅ CDN delivery
-- ✅ Code splitting
-
 ## SEO Checklist
 
 ### Before Launch
@@ -422,61 +388,6 @@ Faster pages rank better:
 - **Schema.org Validator**: Structured data testing
 - **Meta Tags Checker**: Verify meta tags
 - **Broken Link Checker**: Find dead links
-
-## Monitoring
-
-Track SEO performance over time:
-
-### Key Metrics
-
-- **Organic traffic**: Google Analytics
-- **Search rankings**: Google Search Console
-- **Click-through rate**: Search Console
-- **Indexed pages**: Search Console
-- **Crawl errors**: Search Console
-- **Core Web Vitals**: Search Console / PageSpeed Insights
-
-### Regular Tasks
-
-- **Weekly**: Check Search Console for errors
-- **Monthly**: Review organic traffic trends
-- **Quarterly**: Audit content and update old posts
-- **Yearly**: Comprehensive SEO audit
-
-## Advanced SEO
-
-### Rich Snippets
-
-Potential for enhanced search results:
-
-- **Article**: Blog posts with author, date, image
-- **Breadcrumbs**: Hierarchical navigation in results
-- **Site search**: Potential for search box in results
-
-### Schema Extensions
-
-Add more structured data as needed:
-
-- **FAQPage**: For FAQ sections
-- **HowTo**: For tutorial content
-- **Person**: Author profiles
-- **Organization**: About page
-
-### Internationalization
-
-For multilingual sites:
-
-- Add `hreflang` tags
-- Separate URLs per language
-- Language-specific sitemaps
-- Localized structured data
-
-**Example**:
-
-```html
-<link rel="alternate" hreflang="en" href="https://example.com/en/" />
-<link rel="alternate" hreflang="es" href="https://example.com/es/" />
-```
 
 ## Implementation Files
 

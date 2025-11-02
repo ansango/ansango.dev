@@ -58,18 +58,6 @@ Use `.env` file for local development.
 
 Set environment variables in your hosting provider:
 
-**Vercel**:
-1. Project Settings → Environment Variables
-2. Add each variable with production value
-
-**Netlify**:
-1. Site Settings → Build & Deploy → Environment
-2. Add each variable
-
-**Cloudflare Pages**:
-1. Pages project → Settings → Environment variables
-2. Add for Production and Preview environments
-
 ## Site Metadata
 
 Global site information is centralized in `src/site.json`.
@@ -85,31 +73,8 @@ Global site information is centralized in `src/site.json`.
   "email": "anibalsantosgo@gmail.com",
   "lang": "es",
   "author": "Anibal Santos",
-  "social": {
-    "github": "ansango",
-    "twitter": "ansango_"
-  }
-}
-```
-
-### Customization
-
-Edit `src/site.json` with your information:
-
-```json
-{
-  "url": "https://yoursite.com",
-  "name": "Your Site Name",
-  "description": "Your site description for SEO",
-  "image": "/your-avatar.jpg",
-  "email": "you@example.com",
-  "lang": "en",
-  "author": "Your Name",
-  "social": {
-    "github": "yourusername",
-    "twitter": "yourhandle",
-    "linkedin": "yourprofile"
-  }
+  "github": "ansango",
+  "twitter": "iamasync_"
 }
 ```
 
@@ -377,78 +342,6 @@ export default defineConfig({
     ],
   },
 });
-```
-
-### Build Options
-
-```typescript
-export default defineConfig({
-  output: 'static',  // or 'server' for SSR
-  build: {
-    inlineStylesheets: 'auto',
-  },
-});
-```
-
-## Tailwind Configuration
-
-Customize Tailwind in `tailwind.config.cjs` (if needed).
-
-### Extending Theme
-
-```javascript
-module.exports = {
-  theme: {
-    extend: {
-      colors: {
-        brand: '#your-color',
-      },
-      fontFamily: {
-        custom: ['Your Font', 'sans-serif'],
-      },
-    },
-  },
-};
-```
-
-### Custom Plugins
-
-```javascript
-module.exports = {
-  plugins: [
-    require('@tailwindcss/typography'),
-    // Add more plugins
-  ],
-};
-```
-
-## TypeScript Configuration
-
-TypeScript settings are in `tsconfig.json`.
-
-### Path Aliases
-
-```json
-{
-  "compilerOptions": {
-    "paths": {
-      "@/*": ["./src/*"],
-      "@components/*": ["./src/components/*"],
-      "@lib/*": ["./src/lib/*"]
-    }
-  }
-}
-```
-
-### Strict Mode
-
-```json
-{
-  "compilerOptions": {
-    "strict": true,
-    "strictNullChecks": true
-  }
-}
 ```
 
 ## RSS Feed Configuration

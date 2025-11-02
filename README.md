@@ -96,7 +96,7 @@ src/content/
 └── now.md # Current activities
 ```
 
-See [Obsidian integration →](./docs/13-obsidian-deployment.md) | [Content management →](./docs/04-content-management.md)
+See [Obsidian integration →](12-obsidian-deployment.md) | [Content management →](./docs/04-content-management.md)
 
 ## 📦 Available Commands
 
@@ -134,20 +134,13 @@ Complete documentation available in the \`/docs\` directory:
 - [SEO](./docs/09-seo.md) - Search engine optimization
 - [Search](./docs/10-search.md) - Full-text search implementation
 - [RSS Feed](./docs/11-rss.md) - RSS configuration and usage
-
-### Indie Web
-
-- [Indie Web Features](./docs/12-indie-web.md) - Blogroll, Now page, Uses, Music
-
 ### Deployment
 
-- [Obsidian & Deployment](./docs/13-obsidian-deployment.md) - Obsidian workflow and GitHub Actions
-- [Deployment](./docs/14-deployment.md) - Hosting on Cloudflare Pages, Vercel, Netlify
-- [Performance](./docs/15-performance.md) - Optimization and Core Web Vitals
-
+- [Obsidian & Deployment](12-obsidian-deployment.md) - Obsidian workflow and GitHub Actions
+- [Deployment](13-deployment.md) - Hosting on Cloudflare Pages, Vercel, Netlify
 ### Contributing
 
-- [Contributing](./docs/16-contributing.md) - How to contribute to this project
+- [Contributing](14-contributing.md) - How to contribute to this project
 
 ## 🔧 Environment Variables
 
@@ -184,15 +177,13 @@ Built with:
 - [Astro](https://astro.build) - Static site framework
 - [Svelte 5](https://svelte.dev) - Interactive components
 - [Tailwind CSS v4](https://tailwindcss.com) - Styling
-- [Pagefind](https://pagefind.app) - Search functionality
 - [TanStack Query](https://tanstack.com/query) - Data fetching
-- [Inter Variable](https://rsms.me/inter/) - Typography
 
 Inspired by the [IndieWeb](https://indieweb.org/) movement.
 
 ## 🤝 Contributing
 
-Contributions welcome! See [Contributing Guide](./docs/16-contributing.md) for details.
+Contributions welcome! See [Contributing Guide](14-contributing.md) for details.
 
 ---
 

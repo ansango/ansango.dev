@@ -104,18 +104,6 @@ Now that your site is running:
 
 ## Troubleshooting
 
-### Port Already in Use
-
-If port 4321 is already in use, Astro will automatically try the next available port.
-
-### Build Errors
-
-If you encounter build errors:
-
-1. Clear the cache: `rm -rf node_modules/.astro`
-2. Reinstall dependencies: `rm -rf node_modules && npm install`
-3. Check that all environment variables are set correctly
-
 ### Image Optimization Issues
 
 Ensure images are placed in:

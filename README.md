@@ -1,6 +1,13 @@
 
 # ansango.dev
 
+[![Astro](https://img.shields.io/badge/Astro-5.14-FF5D01?style=flat&logo=astro&logoColor=white)](https://astro.build)
+[![Svelte](https://img.shields.io/badge/Svelte-5-FF3E00?style=flat&logo=svelte&logoColor=white)](https://svelte.dev)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind-4.1-38B2AC?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat)](LICENSE)
+[![Deploy](https://img.shields.io/badge/Deploy-Cloudflare-F38020?style=flat&logo=cloudflare&logoColor=white)](https://pages.cloudflare.com)
+
 ## 🌐 Personal Blog & Wiki Template
 
 A modern, content-first personal website built with [Astro](https://astro.build), designed for technology articles, wikis, projects, and indie web principles. Write in [Obsidian](https://obsidian.md), publish with ease.

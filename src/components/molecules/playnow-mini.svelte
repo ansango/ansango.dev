@@ -1,4 +1,24 @@
 <script lang="ts">
+/**
+ * 🎶 PlayNowMini Component
+ * 
+ * @description Compact inline display of currently playing track.
+ * Shows small album cover, track name, and artist in a single line.
+ * 
+ * @usage
+ * ```astro
+ * <PlayNowMini>
+ *   {#snippet play()}<PlayIcon />{/snippet}
+ *   {#snippet noplay()}<span>Not playing</span>{/snippet}
+ *   {#snippet nocover()}<PlaceholderIcon />{/snippet}
+ * </PlayNowMini>
+ * ```
+ * 
+ * @compatible
+ * - 🎵 Lighter version of PlayNow component
+ * - 🔊 Last.fm integration with TanStack Query
+ * - 📱 Optimized for inline/header placement
+ */
   import { useGetCurrentTrack } from "@/lib/queries";
 
   let { play, noplay, nocover } = $props();

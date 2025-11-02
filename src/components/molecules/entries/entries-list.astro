@@ -1,4 +1,21 @@
 ---
+/**
+ * 📚 EntriesList Component
+ * 
+ * @description Compact list view of entries with dates and titles.
+ * Supports both internal and external links with appropriate icons.
+ * 
+ * @usage
+ * ```astro
+ * <EntriesList entries={recentPosts} />
+ * ```
+ * 
+ * @compatible
+ * - 📅 Displays formatted dates in YYYY · MM format
+ * - 🔗 Uses Link component for navigation
+ * - 🌐 Shows ExternalLinkIcon for external entries
+ * - 🏠 Used in homepage and collection pages
+ */
 import type { Entry } from "@/lib/collections";
 import { getFormatDate } from "@/lib/utils";
 import { Link } from "@/components/atoms";

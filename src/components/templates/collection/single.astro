@@ -1,4 +1,21 @@
 ---
+/**
+ * 📄 SingleEntry Template
+ * 
+ * @description Simple single-page entry template.
+ * Used for standalone pages like About, Uses, Now, etc.
+ * 
+ * @usage
+ * ```astro
+ * <SingleEntry collection="about" entryId="index" />
+ * ```
+ * 
+ * @compatible
+ * - 🎯 Uses LayoutDefault wrapper
+ * - 📅 Shows publication/modification date
+ * - 📝 Renders markdown content
+ * - 🧩 Includes Open Graph metadata
+ */
 import type { CollectionName } from "@/content.config";
 import { getEntry, render } from "astro:content";
 import { getFormatDate } from "@/lib/utils";

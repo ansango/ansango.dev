@@ -1,4 +1,25 @@
 ---
+/**
+ * 📄 Pagination Component
+ * 
+ * @description Navigation component for paginated content lists.
+ * Displays current page, total pages, and prev/next navigation links.
+ * 
+ * @usage
+ * ```astro
+ * <Pagination
+ *   currentPage={2}
+ *   totalPages={5}
+ *   prevUrl="/blog/"
+ *   nextUrl="/blog/3/"
+ * />
+ * ```
+ * 
+ * @compatible
+ * - 🔗 Uses Link component for navigation
+ * - 📝 Used in collection and archive pages
+ * - ♿ Accessible with ARIA labels
+ */
 import { Link } from "@/components/atoms";
 
 export interface Props {

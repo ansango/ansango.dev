@@ -1,4 +1,23 @@
 ---
+/**
+ * 📝 EntryDefault Template
+ * 
+ * @description Default template for individual entry pages.
+ * Full entry view with heading, content, tags, and share options.
+ * 
+ * @usage
+ * ```astro
+ * <EntryDefault entry={blogEntry} />
+ * ```
+ * 
+ * @compatible
+ * - 📌 EntryHeading for metadata display
+ * - 📤 Share component for RSS/copy
+ * - 🧩 Breadcrumbs for nested content
+ * - 🎯 LayoutDefault wrapper
+ * - 📝 Markdown content rendering
+ * - ⏱️ Reading time calculation
+ */
 import type { Entry } from "@/lib/collections";
 import { getEntry, render } from "astro:content";
 

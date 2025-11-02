@@ -1,4 +1,27 @@
 ---
+/**
+ * 📌 EntryHeading Component
+ * 
+ * @description Full entry header with title, metadata, tags, and outdated warning.
+ * Displays publication/modification date, reading time, description, and tag list.
+ * 
+ * @usage
+ * ```astro
+ * <EntryHeading
+ *   title="My Post"
+ *   date={new Date()}
+ *   readingTime={5}
+ *   tags={['astro', 'web']}
+ *   collection="blog"
+ * />
+ * ```
+ * 
+ * @compatible
+ * - 🏷️ Uses Tag component for tag links
+ * - ℹ️ Shows InfoIcon for outdated content (>1 year)
+ * - 📅 Formatted dates with mod indicator
+ * - 📝 Used in entry detail pages
+ */
 import type { Entry } from "@/lib/collections";
 import { getFormatDate } from "@/lib/utils";
 import {  Tag } from "@/components/atoms";

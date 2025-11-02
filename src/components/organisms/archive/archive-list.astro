@@ -1,4 +1,21 @@
 ---
+/**
+ * 🗃️ ArchiveList Organism
+ * 
+ * @description Chronological archive grouped by year.
+ * Displays all entries organized by publication year in descending order.
+ * 
+ * @usage
+ * ```astro
+ * <ArchiveList entries={allEntries} page={1} isIndex={true} />
+ * ```
+ * 
+ * @compatible
+ * - 📅 Groups entries by year automatically
+ * - 📄 Supports pagination
+ * - 📝 Shows entry date, title, and collection
+ * - 🔢 Handles entries without dates
+ */
 import { site } from "@/constants";
 import {
   getCollectionsByYear,

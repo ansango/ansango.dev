@@ -1,4 +1,21 @@
 ---
+/**
+ * 🧩 Header Element
+ * 
+ * @description Fixed top navigation bar with site name, breadcrumb, and search.
+ * Shows current section based on URL path with backdrop blur effect.
+ * 
+ * @usage
+ * ```astro
+ * <Header />
+ * ```
+ * 
+ * @compatible
+ * - 🔍 Includes Searcher component
+ * - 📦 Uses Container for content alignment
+ * - 🎨 Fixed positioning with backdrop blur
+ * - 🧷 Auto-generates breadcrumb from path
+ */
 import { site } from "@/constants";
 import { Container } from "@/components/atoms";
 import { Searcher } from "@/components/molecules";

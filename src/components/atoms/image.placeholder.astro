@@ -1,4 +1,21 @@
 ---
+/**
+ * 🎭 ImagePlaceholder Component
+ * 
+ * @description Visual placeholder shown when an image has no src.
+ * Displays a centered icon in a container with semi-transparent background.
+ * 
+ * @usage
+ * ```astro
+ * <ImagePlaceholder />
+ * <ImagePlaceholder className="size-20 rounded-full" />
+ * ```
+ * 
+ * @compatible
+ * - 🖼️ Used automatically by Image component
+ * - 🎨 Integrates with PlaceholderIcon
+ * - 📐 Respects parent container aspect-ratio
+ */
 import { PlaceholderIcon } from "@/components/icons";
 
 interface Props {

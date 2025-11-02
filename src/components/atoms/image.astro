@@ -1,4 +1,28 @@
 ---
+/**
+ * 🖼️ Image Component
+ * 
+ * @description Optimized image component using Astro Image with placeholder fallback.
+ * Automatically handles image optimization and shows a placeholder if no src is provided.
+ * 
+ * @usage
+ * ```astro
+ * <Image 
+ *   src="/avatar.jpg" 
+ *   alt="Profile photo" 
+ *   width={100} 
+ *   height={100}
+ * />
+ * 
+ * <!-- Without src, shows placeholder -->
+ * <Image alt="No image" />
+ * ```
+ * 
+ * @compatible
+ * - 🎭 Uses ImagePlaceholder as fallback
+ * - 🚀 Automatic Astro optimization
+ * - 📱 Responsive with lazy loading
+ */
 import { Image as ImageAstro } from "astro:assets";
 import Placeholder from "./image.placeholder.astro";
 

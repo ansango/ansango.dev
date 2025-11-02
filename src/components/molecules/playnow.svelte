@@ -1,4 +1,23 @@
 <script lang="ts">
+/**
+ * 🎵 PlayNow Component
+ * 
+ * @description Displays currently playing or recently played track from Last.fm.
+ * Shows album cover, track name, artist, and album with real-time updates.
+ * 
+ * @usage
+ * ```astro
+ * <PlayNow>
+ *   {#snippet play()}<PlayIcon />{/snippet}
+ *   {#snippet noplay()}<NoListenIcon />{/snippet}
+ * </PlayNow>
+ * ```
+ * 
+ * @compatible
+ * - 🔊 Integrates with Last.fm API via TanStack Query
+ * - ▶️ Uses PlayIcon for active state
+ * - 🖼️ Shows album artwork with fallback
+ */
   import {  useGetCurrentTrack } from "@/lib/queries";
 
   let { play, noplay } = $props();

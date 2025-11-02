@@ -1,4 +1,27 @@
 ---
+/**
+ * 📁 CollectionDefault Template
+ * 
+ * @description Default template for collection index pages.
+ * Displays paginated list of entries with title, description, and navigation.
+ * 
+ * @usage
+ * ```astro
+ * <CollectionDefault
+ *   collection="blog"
+ *   entries={blogEntries}
+ *   page={1}
+ *   isIndex={true}
+ *   meta={blogMeta}
+ * />
+ * ```
+ * 
+ * @compatible
+ * - 🔗 Uses Link for entry navigation
+ * - 📝 Entry component for previews
+ * - 📄 Pagination component for navigation
+ * - 🎯 LayoutDefault wrapper
+ */
 import { Link } from "@/components/atoms";
 import { LayoutDefault } from "@/components/layout";
 import { Entry, Pagination } from "@/components/molecules";

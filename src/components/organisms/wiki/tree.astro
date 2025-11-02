@@ -1,4 +1,21 @@
 ---
+/**
+ * 🌳 WikiTree Organism
+ * 
+ * @description Hierarchical tree navigation for wiki content.
+ * Builds and displays nested folder/file structure from entries.
+ * 
+ * @usage
+ * ```astro
+ * <WikiTree entries={wikiEntries} />
+ * ```
+ * 
+ * @compatible
+ * - 🌳 Uses TreeNode component recursively
+ * - 📁 Displays folder and file icons
+ * - 🔄 Auto-generated from wiki content structure
+ * - ➡️ Expandable/collapsible sections
+ */
 import { TreeNode } from "@/components/molecules";
 import type { Entries } from "@/lib/collections";
 import { getTreeNode } from "@/lib/tree-node";

@@ -1,4 +1,22 @@
 ---
+/**
+ * 🌳 TreeNode Component
+ * 
+ * @description Recursive tree navigation component for hierarchical content.
+ * Renders folders as expandable details and files as links with appropriate icons.
+ * 
+ * @usage
+ * ```astro
+ * <TreeNode node={wikiTree} level={0} />
+ * ```
+ * 
+ * @compatible
+ * - 📁 Uses FolderIcon for directories
+ * - 📄 Uses FileIcon for documents
+ * - ➡️ Includes ChevronIcon for expand/collapse
+ * - 🔄 Recursively renders child nodes
+ * - 📝 Used primarily in Wiki navigation
+ */
 import { capitalize } from "@/lib/utils";
 import type { NodeItem } from "@/lib/tree-node";
 import { ChevronIcon, FolderIcon, FileIcon } from "@/components/icons";

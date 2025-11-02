@@ -1,4 +1,26 @@
 ---
+/**
+ * 🗂️ CollectionIndex Template Router
+ * 
+ * @description Template router that selects appropriate collection template.
+ * Routes wiki collection to WikiTemplate, others to DefaultTemplate.
+ * 
+ * @usage
+ * ```astro
+ * <CollectionIndex
+ *   collection="wiki"
+ *   entries={wikiEntries}
+ *   page={1}
+ *   isIndex={true}
+ * />
+ * ```
+ * 
+ * @compatible
+ * - 🌳 Routes wiki to specialized WikiTemplate
+ * - 📄 Routes others to DefaultTemplate
+ * - 🔢 Passes pagination and meta props
+ * - 🎯 Extensible template system
+ */
 import type { CollectionName } from "@/content.config";
 import WikiTemplate from "./wiki.astro"
 import DefaultTemplate from "./default.astro"

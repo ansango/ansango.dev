@@ -1,4 +1,21 @@
 ---
+/**
+ * 📤 Share Component
+ *
+ * @description Subscription and sharing section for blog entries.
+ * Provides RSS feed link and copy URL functionality with view count from GoatCounter.
+ *
+ * @usage
+ * ```astro
+ * <Share url="https://ansango.dev/blog/my-post" />
+ * ```
+ *
+ * @compatible
+ * - 📡 Uses RssIcon for feed subscription
+ * - 📋 Includes CopyIcon and CopiedIcon for URL copying
+ * - 🔘 Built with Button component
+ * - 📈 Displays view count if available
+ */
 import { site } from "@/constants";
 import { RssIcon, CopyIcon, CopiedIcon } from "@/components/icons";
 import { Button } from "@/components/atoms";
@@ -34,20 +51,20 @@ if (goatCounterCode) {
   <h3 class="mb-2 text-sm font-medium">
     Suscríbete para recibir actualizaciones
   </h3>
-  </div>
-  <p class="text-muted mt-3 text-xs">
-    Usa tu lector RSS favorito para seguir este sitio.
-    {
-      viewCount !== null && viewCount > 0 && (
+
+  {
+    viewCount !== null && viewCount > 0 && (
+      <p class="text-muted mt-3 text-xs">
         <span class="text-muted/70">
           {" "}
           · Este artículo lleva {viewCount}{" "}
           {viewCount === 1 ? "lectura" : "lecturas"}.
         </span>
-      )
-    }
-  </p>
-</aside>lass="flex flex-wrap gap-3">
+      </p>
+    )
+  }
+
+  <div class="flex flex-wrap gap-3">
     <Button href={rssUrl} ariaLabel="Suscribirse al RSS feed">
       <RssIcon />
       <span>RSS Feed</span>

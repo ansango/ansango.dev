@@ -1,4 +1,21 @@
 ---
+/**
+ * 📝 Entry Component
+ * 
+ * @description Card component displaying entry metadata preview.
+ * Shows title, date, reading time, description, and call-to-action.
+ * 
+ * @usage
+ * ```astro
+ * <Entry entry={blogEntry} />
+ * ```
+ * 
+ * @compatible
+ * - 📄 Used in collection lists and archives
+ * - 🔗 Typically wrapped with Link component
+ * - ⏱️ Calculates and displays reading time
+ * - 📝 Shows formatted dates and descriptions
+ */
 import type { Entry } from "@/lib/collections";
 import { getFormatDate, getReadingTime } from "@/lib/utils";
 

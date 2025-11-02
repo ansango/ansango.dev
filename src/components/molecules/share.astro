@@ -9,17 +9,45 @@ interface Props {
 
 const { url } = Astro.props;
 const rssUrl = `${site.url}/rss.xml`;
+
+// Fetch view count from GoatCounter at build time
+let viewCount: number | null = null;
+const goatCounterCode = import.meta.env.PUBLIC_GOATCOUNTER_CODE;
+
+if (goatCounterCode) {
+  try {
+    const path = new URL(url).pathname;
+    const response = await fetch(
+      `https://${goatCounterCode}.goatcounter.com/counter${path}.json`,
+    );
+    if (response.ok) {
+      const data = await response.json();
+      viewCount = data.count || 0;
+    }
+  } catch (error) {
+    console.warn("Failed to fetch GoatCounter views:", error);
+  }
+}
 ---
 
 <aside class="border-divider border-t pt-4">
   <h3 class="mb-2 text-sm font-medium">
     Suscríbete para recibir actualizaciones
   </h3>
-  <p class="text-muted mb-3 text-sm">
-    Si te ha gustado este artículo, suscríbete a mi feed RSS para no perderte
-    las próximas publicaciones. O copiar la URL y compartirla.
+  </div>
+  <p class="text-muted mt-3 text-xs">
+    Usa tu lector RSS favorito para seguir este sitio.
+    {
+      viewCount !== null && viewCount > 0 && (
+        <span class="text-muted/70">
+          {" "}
+          · Este artículo lleva {viewCount}{" "}
+          {viewCount === 1 ? "lectura" : "lecturas"}.
+        </span>
+      )
+    }
   </p>
-  <div class="flex flex-wrap gap-3">
+</aside>lass="flex flex-wrap gap-3">
     <Button href={rssUrl} ariaLabel="Suscribirse al RSS feed">
       <RssIcon />
       <span>RSS Feed</span>

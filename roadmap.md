@@ -273,8 +273,8 @@
 - [ ] Gráfico de crecimiento de contenido
 
 #### Dark/Light Mode Avanzado
-- [ ] Auto-switching basado en hora
-- [ ] Transiciones suaves entre modos
+- [x] Transiciones suaves entre modos
+
 #### Bookmarks Import Tool
 - [ ] CLI para importar desde Chrome
 - [ ] CLI para importar desde Firefox

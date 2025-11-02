@@ -2,21 +2,26 @@
 /**
  * 🌗 Theme Element
  * 
- * @description Theme toggle button for dark/light mode switching.
- * Uses ThemeIcon and relies on theme.script.astro for functionality.
+ * @description Theme toggle with auto-switching capability.
+ * All logic is handled by the Svelte component for better reactivity.
  * 
  * @usage
  * ```astro
  * <Theme />
+ * <Theme showAutoSwitch={true} />
  * ```
  * 
+ * @props
+ * - showAutoSwitch: boolean - Show the auto-switch toggle (default: false)
+ * 
  * @compatible
- * - 🌗 Uses ThemeIcon component
- * - 📦 Managed by theme.script.astro
- * - 🎨 Toggles .dark class on <html>
+ * - 🎨 Toggles .dark/.light class on <html>
  * - 💾 Persists preference in localStorage
+ * - 🌙 Uses system theme by default if no preference saved
+ * - ✨ Smooth transitions between themes
  */
 import { ThemeIcon } from "@/components/icons";
+
 ---
 
 <button

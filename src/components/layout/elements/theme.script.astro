@@ -33,6 +33,7 @@
   }
 
   function toggleTheme(dark) {
+    document.documentElement.classList.add("theme-transitioning");
     if (dark) {
       document.documentElement.classList.remove("light");
       document.documentElement.classList.add("dark");
@@ -40,6 +41,9 @@
       document.documentElement.classList.remove("dark");
       document.documentElement.classList.add("light");
     }
+    setTimeout(() => {
+      document.documentElement.classList.remove("theme-transitioning");
+    }, 500);
   }
 
   function preloadTheme() {

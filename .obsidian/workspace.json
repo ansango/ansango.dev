@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "roadmap.md",
+                "file": "src/content/blogroll.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "roadmap"
+              "title": "blogroll"
             }
           }
         ]
@@ -185,6 +185,11 @@
   },
   "active": "13100db33e5fb35f",
   "lastOpenFiles": [
+    "src/content/now.md",
+    "src/content/blogroll.md",
+    "src/content/about.md",
+    "src/content/uses.md",
+    "roadmap.md",
     "src/content/blog/vue 3 y tanstack query.md",
     "src/content/blog/proteger node.js en prod.md",
     "src/content/blog/hello world.md",
@@ -206,11 +211,6 @@
     "src/content/wiki/development/frontend/react/conceptos avanzados/como conectar con backend.md",
     "src/content/wiki/home-lab/self-hosted/wikis/docmost.md",
     "src/content/wiki/home-lab/self-hosted/vpn/wireguard.md",
-    "src/content/wiki/home-lab/self-hosted/vpn/tailscale.md",
-    "src/content/wiki/home-lab/self-hosted/storage/nextcloud.md",
-    "src/content/wiki/home-lab/self-hosted/storage/filebrowser.md",
-    "src/content/wiki/home-lab/self-hosted/monitoring/monitoring.md",
-    "src/content/wiki/home-lab/self-hosted/proxy-networks/traefik.md",
     "src/content/wiki/development/frontend/react/router y context api",
     "src/content/wiki/development/frontend/react/introduccion",
     "src/content/wiki/development/frontend/react/fundamentos",

@@ -1,22 +1,20 @@
 ---
-title: Now
+title: En qué estoy ~~trabajando~~ enredando
 description: Las últimas cosas en las que estoy metido hasta el fondo, o al menos con la mesa sucia
 date: 2024-06-20
-mod: 2025-10-18
+mod: 2025-11-02
 published: true
 tags: [3d-printer, bambulab, debian, docker, homelab, linux, now, personal, projects, proxmox, svelte]
 index: true
 ---
 
-# Now
+# En qué estoy ~~trabajando~~ enredando
 
 Esta página recoge en pocas líneas en qué estoy ahora: prioridades, proyectos activos, cosas que estoy aprendiendo y herramientas que uso día a día. La idea es mantener un registro corto y útil para mi yo futuro.
 
 ---
 
 Muchas veces empiezo con multitud de cosas, pero acabo teniendo el foco en un par de ellas, esta entrada es básicamente el caos que de noche me asalta.
-
-## En qué estoy ~~trabajando~~ enredando
 
 - Enredo principal: desarrollo de sitios y herramientas front-end, con foco en rendimiento y arquitectura de contenido. Actualmente mantengo y mejoro este sitio construido con Astro. Siempre que me aburro estoy enredando con algún proyecto de frontend.
 - Profundizando un poco más en Svelte.

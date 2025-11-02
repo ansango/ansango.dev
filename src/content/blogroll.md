@@ -1,14 +1,14 @@
 ---
-title: Blogroll
+title: Recomendados de la web
 description: Un listado de sitios que sigo normalmente
 date: 2025-10-14
-mod: 2025-10-18
+mod: 2025-11-02
 published: true
 tags: [blogroll, community, development, linux, personal, software, technology]
 index: true
 ---
 
-# Blogroll
+# Recomendados de la web
 
 Tengo un montón de listas y marcadores sobre sitios que me parecen interesantes, pero prefiero ir completando poco a poco aquellos que suelo leer, aunque no siempre, de vez en cuando. También haré algo polémico y es incluir canales de Youtube, que considero que suben contenido interesante. Encontrarás cada recurso en el formato que normalmente consumo más.
 

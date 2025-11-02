@@ -1,14 +1,14 @@
 ---
-title: Uses
+title: Cómo construyo lo que construyo
 description: Mi setup, hardware y software, incluyendo PC de escritorio, portátil, periféricos y herramientas clave.
 date: 2025-06-18
-mod: 2025-10-18
+mod: 2025-11-02
 published: true
 tags: [3d-printer, desktop, display, keyboards, laptop, mouse, personal, setup, software, uses]
 index: true
 ---
 
-# Uses
+# Cómo construyo lo que construyo
 
 Esta es mi configuración de trabajo y desarrollo actual. Incluye mi ordenador principal de sobremesa, un portátil de trabajo, periféricos, un servidor de laboratorio en casa y herramientas de software que utilizo a diario para desarrollo, productividad y gestión de proyectos. He ido adaptando poco a poco mi espacio de trabajo, pero bueno digamos que es un proyecto, como siempre, en crecimiento.
 

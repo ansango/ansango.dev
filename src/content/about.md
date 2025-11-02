@@ -1,5 +1,5 @@
 ---
-title: About
+title: Cómo llegué hasta aquí
 description: Sobre mí y este sitio web.
 date: 2025-10-12
 mod: 2025-11-02
@@ -8,7 +8,7 @@ tags: [about, personal]
 index: true
 ---
 
-# About
+# Cómo llegué hasta aquí
 
 Hola—soy *software senior engineer*, a menudo centrado en el ecosistema Javascript, el rendimiento, la usabilidad y buenas prácticas en aplicaciones mayoritariamente frontend (aunque a veces también backend).
 

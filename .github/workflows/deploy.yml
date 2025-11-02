@@ -67,7 +67,6 @@ jobs:
       - name: 📦 Replace content with converted files
         run: |
           rm -rf ${{ env.CONTENT_DIR }}
-          rm -rf ${{ env.ASSETS_DIR }}
           cp -r obsidian_output/content ./src/
           rm -rf obsidian_input obsidian_output
       

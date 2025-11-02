@@ -1,0 +1,16 @@
+---
+import { Svg } from "@/components/atoms";
+
+interface Props {
+  className?: string;
+}
+
+const { className } = Astro.props;
+---
+
+<Svg className={className}>
+  <path
+    fill="currentColor"
+    d="m10.586 13.414l-2.829-2.828L6.343 12l4.243 4.243l7.07-7.071l-1.413-1.415z"
+  ></path>
+</Svg>

@@ -1,0 +1,77 @@
+---
+import { site } from "@/constants";
+import { RssIcon, CopyIcon, CopiedIcon } from "@/components/icons";
+import { Button } from "@/components/atoms";
+
+interface Props {
+  url: string;
+}
+
+const { url } = Astro.props;
+const rssUrl = `${site.url}/rss.xml`;
+---
+
+<aside class="border-divider border-t pt-4">
+  <h3 class="mb-2 text-sm font-medium">
+    Suscríbete para recibir actualizaciones
+  </h3>
+  <p class="text-muted mb-3 text-sm">
+    Si te ha gustado este artículo, suscríbete a mi feed RSS para no perderte
+    las próximas publicaciones. O copiar la URL y compartirla.
+  </p>
+  <div class="flex flex-wrap gap-3">
+    <Button href={rssUrl} ariaLabel="Suscribirse al RSS feed">
+      <RssIcon />
+      <span>RSS Feed</span>
+    </Button>
+
+    <Button id="copy-rss-btn" data-url={url} ariaLabel="Copiar URL del RSS">
+      <span id="copy-rss-icon">
+        <CopyIcon />
+      </span>
+      <span id="copied-rss-icon" class="hidden">
+        <CopiedIcon />
+      </span>
+      <span id="copy-rss-text">Copiar URL</span>
+    </Button>
+  </div>
+  <p class="text-muted mt-3 text-xs">
+    Usa tu lector RSS favorito para seguir este sitio.
+  </p>
+</aside>
+
+<script>
+  function setupCopyRSS() {
+    const copyBtn = document.getElementById("copy-rss-btn");
+    const copyText = document.getElementById("copy-rss-text");
+    const copyIcon = document.getElementById("copy-rss-icon");
+    const copiedIcon = document.getElementById("copied-rss-icon");
+
+    if (!copyBtn) return;
+
+    copyBtn.addEventListener("click", async () => {
+      const url = copyBtn.getAttribute("data-url");
+      if (!url) return;
+
+      try {
+        await navigator.clipboard.writeText(url);
+        if (copyText && copyIcon && copiedIcon) {
+          copyText.textContent = "¡Copiado!";
+          copyIcon.classList.add("hidden");
+          copiedIcon.classList.remove("hidden");
+
+          setTimeout(() => {
+            copyText.textContent = "Copiar URL";
+            copyIcon.classList.remove("hidden");
+            copiedIcon.classList.add("hidden");
+          }, 2000);
+        }
+      } catch (err) {
+        console.error("Error al copiar:", err);
+      }
+    });
+  }
+
+  setupCopyRSS();
+  document.addEventListener("astro:page-load", setupCopyRSS);
+</script>

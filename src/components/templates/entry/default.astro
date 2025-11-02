@@ -4,8 +4,9 @@ import { getEntry, render } from "astro:content";
 
 import { LayoutDefault } from "@/components/layout";
 import { getReadingTime } from "@/lib/utils";
-import { EntryHeading } from "@/components/molecules";
+import { EntryHeading, Share } from "@/components/molecules";
 import { getBreadcrumbs } from "@/lib/breadcrumbs";
+import { site } from "@/constants";
 
 const { collection, id } = Astro.props as Entry;
 
@@ -44,9 +45,14 @@ const layoutProps = {
   tags,
   breadcrumbs,
 };
+
+// Only show share buttons for blog, wiki, and projects
+const showShare = ["blog", "wiki", "projects"].includes(collection);
+const shareUrl = `${site.url}${Astro.url.pathname}`;
 ---
 
 <LayoutDefault {...layoutProps} type="article">
   <EntryHeading {...headingProps} />
   <Content />
+  {showShare && <Share url={shareUrl} />}
 </LayoutDefault>

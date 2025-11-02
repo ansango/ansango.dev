@@ -1,0 +1,57 @@
+---
+import { Link } from "@/components/atoms";
+
+interface Props {
+  href?: string;
+  className?: string;
+  ariaLabel?: string;
+  title?: string;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
+  blank?: boolean;
+  id?: string;
+}
+
+const {
+  href,
+  className = "",
+  ariaLabel,
+  title,
+  type = "button",
+  disabled = false,
+  blank = false,
+  id,
+  ...rest
+} = Astro.props;
+
+const baseStyles =
+  "inline-flex items-center gap-2 rounded-lg border border-border bg-background px-2 py-1.5 text-sm font-medium transition-colors hover:bg-muted/10 hover:text-accent";
+
+const classes = `${baseStyles} ${className}`.trim();
+---
+
+{
+  href ? (
+    <Link
+      href={href}
+      className={classes}
+      ariaLabel={ariaLabel}
+      title={title}
+      blank={blank}
+    >
+      <slot />
+    </Link>
+  ) : (
+    <button
+      {id}
+      type={type}
+      class={`${classes} ${disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+      aria-label={ariaLabel}
+      {title}
+      {disabled}
+      {...rest}
+    >
+      <slot />
+    </button>
+  )
+}

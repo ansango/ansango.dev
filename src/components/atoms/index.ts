@@ -1,3 +1,4 @@
+export { default as Button } from "./button.astro";
 export { default as Link } from "./link.astro";
 export { default as Tag } from "./tag.astro";
 export { default as Svg } from "./svg.astro";

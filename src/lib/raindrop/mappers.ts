@@ -1,3 +1,18 @@
+/**
+ * 🗂️ Raindrop Data Mappers
+ * 
+ * @description Transforms Raindrop.io API responses into normalized formats.
+ * Filters, maps, and sanitizes bookmark and collection data.
+ * 
+ * @module lib/raindrop/mappers
+ * 
+ * @compatible
+ * - 🧹 Normalizes API data structures
+ * - 🔒 HTTPS enforcement for covers
+ * - 🏷️ Tag limiting and management
+ * - 🔤 Filters by site name
+ */
+
 import { site } from "@/constants";
 import type { GetCollectionsResponse, Raindrop } from "./services";
 

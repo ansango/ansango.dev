@@ -1,3 +1,18 @@
+/**
+ * 🔧 Rehype Plugin Utilities
+ * 
+ * @description Custom rehype plugins for markdown transformation.
+ * Removes H1 tags and adds external link icons to outbound links.
+ * 
+ * @module lib/rehype
+ * 
+ * @compatible
+ * - 📝 Used in Astro markdown rendering
+ * - 🌐 Enhances external links with icons
+ * - ♿ Improves accessibility and UX
+ * - 🎨 Maintains consistent heading hierarchy
+ */
+
 import { visit } from "unist-util-visit";
 import type { Plugin } from "unified";
 import type { Root, Element } from "hast";

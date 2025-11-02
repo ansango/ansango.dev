@@ -1,3 +1,18 @@
+/**
+ * 🧩 Breadcrumb Navigation Utilities
+ * 
+ * @description Generates breadcrumb navigation and JSON-LD structured data.
+ * Creates hierarchical navigation trails from URL paths with SEO-friendly markup.
+ * 
+ * @module lib/breadcrumbs
+ * 
+ * @compatible
+ * - 🔍 Improves site navigation and UX
+ * - 🎯 Used in Head component for SEO
+ * - 📄 Supports nested wiki pages
+ * - 🌐 Generates schema.org BreadcrumbList
+ */
+
 import { site } from "@/constants";
 
 export type BreadcrumbItem = {

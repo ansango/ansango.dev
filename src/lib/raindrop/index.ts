@@ -1,3 +1,18 @@
+/**
+ * 🔖 Raindrop.io Integration
+ * 
+ * @description Main entry point for Raindrop.io bookmark management.
+ * Fetches, caches, and provides access to bookmarks and collections.
+ * 
+ * @module lib/raindrop
+ * 
+ * @compatible
+ * - 📚 Powers bookmarks and reading pages
+ * - 💾 Caches data to minimize API calls
+ * - 📁 Collection-based organization
+ * - 🔗 External link management
+ */
+
 import { bookmarksMapper, collectionsMapper } from "@/lib/raindrop/mappers";
 import {
   getAllBookmarkItems,

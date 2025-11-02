@@ -1,3 +1,19 @@
+/**
+ * 📚 Content Collections Manager
+ * 
+ * @description Core utilities for managing Astro content collections.
+ * Handles fetching, filtering, sorting, pagination, and grouping of entries.
+ * 
+ * @module lib/collections
+ * 
+ * @compatible
+ * - 📄 Used throughout the site for content retrieval
+ * - 🏷️ Tag extraction and grouping
+ * - 🔢 Pagination support
+ * - 📅 Date-based sorting and grouping
+ * - 🔍 Filtering published content
+ */
+
 import {
   getCollection,
   type InferEntrySchema,

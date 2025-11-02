@@ -1,3 +1,18 @@
+/**
+ * 🧰 Raindrop Utility Functions
+ * 
+ * @description Helper functions for working with Raindrop data.
+ * Filters collections, fetches bookmarks by collection, and maps data.
+ * 
+ * @module lib/raindrop/utils
+ * 
+ * @compatible
+ * - 🔍 Filters reading vs other collections
+ * - 📅 Date-based sorting
+ * - 📊 Latest entries retrieval
+ * - 🗂️ Data transformation for entries
+ */
+
 import { getRaindropData } from "@/lib/raindrop";
 
 /**

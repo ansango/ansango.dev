@@ -1,3 +1,18 @@
+/**
+ * 🌳 Tree Structure Builder
+ * 
+ * @description Builds hierarchical tree structures from flat entry lists.
+ * Creates folder/file navigation trees for wiki and nested content.
+ * 
+ * @module lib/tree-node
+ * 
+ * @compatible
+ * - 📁 Used by WikiTree component
+ * - 📄 Converts flat lists to nested structures
+ * - 📊 Counts entries and categories
+ * - 🔄 Supports recursive sorting and traversal
+ */
+
 import type { CollectionName } from "@/content.config";
 import type { Entries } from "@/lib/collections";
 

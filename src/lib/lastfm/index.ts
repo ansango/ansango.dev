@@ -1,3 +1,18 @@
+/**
+ * 🎵 Last.fm API Service Layer
+ * 
+ * @description Main entry point for Last.fm API interactions.
+ * Provides method constants and URL building utilities.
+ * 
+ * @module lib/lastfm
+ * 
+ * @compatible
+ * - 📦 Exports all Last.fm API methods
+ * - 🔗 URL builder for API requests
+ * - 🔑 Automatic API key injection
+ * - 📊 User, track, artist, album, tag APIs
+ */
+
 import { config } from "./config";
 
 export const method = {

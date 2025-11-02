@@ -1,3 +1,19 @@
+/**
+ * 🧰 General Utility Functions
+ * 
+ * @description Collection of helper functions for common operations.
+ * Includes string manipulation, date formatting, pagination, and HTTP utilities.
+ * 
+ * @module lib/utils
+ * 
+ * @compatible
+ * - 🔗 Slugification for URLs and tags
+ * - 📅 Date formatting with locale support
+ * - 📚 Reading time estimation
+ * - 📄 Pagination helpers
+ * - 🌐 Generic fetch wrapper
+ */
+
 import type { TreeNode } from "@/constants";
 
 /**

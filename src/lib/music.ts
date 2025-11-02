@@ -1,3 +1,18 @@
+/**
+ * 🎵 Last.fm Music Data Integration
+ * 
+ * @description Fetches and caches music data from Last.fm API.
+ * Retrieves recent tracks, top artists, and top albums for display.
+ * 
+ * @module lib/music
+ * 
+ * @compatible
+ * - 🎶 Powers PlayNow and music pages
+ * - ⏱️ Caches data to minimize API calls
+ * - 🔊 Displays current listening activity
+ * - 📈 Shows top artists and albums statistics
+ */
+
 import {
   userApiMethods,
   type RecentTracks,

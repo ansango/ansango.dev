@@ -65,9 +65,5 @@
   Cache-Control: public, max-age=86400
   Content-Type: text/plain; charset=utf-8
 
-# Security headers globales
-/*
-  X-Content-Type-Options: nosniff
-  X-Frame-Options: DENY
-  Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: geolocation=(), microphone=(), camera=()
+# Security headers globales (aplicados en reglas específicas arriba)
+# Evitamos duplicados con configuración global de Cloudflare

@@ -442,10 +442,10 @@
 
 - [x] **Output mode:** Mantener `static` - SSG es perfecto para este caso de uso
 - [ ] **Testing library:** ¿Vitest + Testing Library o alternativa?
-- [ ] **Comments:** ¿Giscus, Webmentions, o ambos?
+- [x] **Comments:** ¿Giscus, Webmentions, o ambos?
 - [ ] **Newsletter:** ¿Buttondown, ConvertKit, o self-hosted?
-- [ ] **Error tracking:** ¿Sentry (paid) o alternativa open-source?
-- [ ] **Rebuild frequency:** ¿Cada 6h, 12h, o manual trigger solamente?
+- [-] **Error tracking:** ¿Sentry (paid) o alternativa open-source?
+- [x] **Rebuild frequency:** ¿Cada 6h, 12h, o manual trigger solamente?
 
 ### Métricas de Éxito
 

@@ -13,12 +13,12 @@
 
       if (userTheme === "light") {
         localStorage.setItem("theme", "dark");
-        toggleTheme(true);
+        toggleTheme(true, true);
       } else if (userTheme === "dark") {
         localStorage.setItem("theme", "light");
-        toggleTheme(false);
+        toggleTheme(false, true);
       } else {
-        toggleTheme(systemTheme === "dark");
+        toggleTheme(systemTheme === "dark", true);
         localStorage.setItem("theme", systemTheme);
       }
     });
@@ -32,8 +32,10 @@
       });
   }
 
-  function toggleTheme(dark) {
-    document.documentElement.classList.add("theme-transitioning");
+  function toggleTheme(dark, transition = false) {
+    if (transition) {
+      document.documentElement.classList.add("theme-transitioning");
+    }
     if (dark) {
       document.documentElement.classList.remove("light");
       document.documentElement.classList.add("dark");
@@ -41,9 +43,11 @@
       document.documentElement.classList.remove("dark");
       document.documentElement.classList.add("light");
     }
-    setTimeout(() => {
-      document.documentElement.classList.remove("theme-transitioning");
-    }, 500);
+    if (transition) {
+      setTimeout(() => {
+        document.documentElement.classList.remove("theme-transitioning");
+      }, 500);
+    }
   }
 
   function preloadTheme() {

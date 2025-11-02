@@ -8,23 +8,23 @@
 
 ### Cache & Build Optimization
 - [x] Configurar Cache-Control headers óptimos en Cloudflare Pages
-- [ ] Implementar service worker para offline support y PWA
-- [ ] Auto-rebuild schedule con GitHub Actions (cada 6-12h para música/bookmarks)
-- [ ] Optimizar build time (análisis de dependencias pesadas)
-- [ ] Pre-compress assets (gzip/brotli) en build time
-- [ ] Implementar stale-while-revalidate strategy para assets
+- [x] Implementar service worker para offline support y PWA
+- [x] Auto-rebuild schedule con GitHub Actions (cada 6-12h para música/bookmarks)
+- [x] Optimizar build time (análisis de dependencias pesadas)
+- [x] Pre-compress assets (gzip/brotli) en build time
+- [x] Implementar stale-while-revalidate strategy para assets
 
 ### Image Optimization
-- [ ] Generar automáticamente formatos WebP/AVIF
-- [ ] Añadir blur placeholders para lazy loading
-- [ ] Integrar `sharp` para mejor compresión en build
-- [ ] Optimizar tamaños de imagen responsive
+- [x] Generar automáticamente formatos WebP/AVIF
+- [x] Añadir blur placeholders para lazy loading
+- [x] Integrar `sharp` para mejor compresión en build
+- [x] Optimizar tamaños de imagen responsive
 
 ### Bundle Size
-- [ ] Instalar y configurar `rollup-plugin-visualizer`
-- [ ] Analizar y optimizar tamaño de bundles
-- [ ] Code splitting más agresivo
-- [ ] Tree-shaking de dependencias no usadas
+- [x] Instalar y configurar `rollup-plugin-visualizer`
+- [x] Analizar y optimizar tamaño de bundles
+- [x] Code splitting más agresivo
+- [x] Tree-shaking de dependencias no usadas
 
 
 ## 🧪 Testing & Quality

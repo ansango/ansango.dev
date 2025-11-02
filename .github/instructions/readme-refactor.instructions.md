@@ -23,8 +23,8 @@ description: 'Refactor the README by separating each section into individual mar
 1. Listar las sacciones que se van a crear.
 2. Validar con el usuario si esta de acuerdo con las secciones.
 3. Crear la carpeta /docs en el proyecto si no existe.
-4. Crear archivos .md para cada seccion del README original, siguiendo el formato "01-nombre-de-la-seccion-1.md", "02-nombre-de-la-seccion-2.md", etc.
-5. Mover el contenido de cada seccion del README original a su respectivo archivo en /docs.
+4. Crear archivos .md uno por uno para cada seccion del README original, siguiendo el formato "01-nombre-de-la-seccion-1.md", "02-nombre-de-la-seccion-2.md", etc.
+5. Mover el contenido, uno por uno, de cada seccion del README original a su respectivo archivo en /docs.
 6. Actualizar el README.md para incluir solo la informacion esencial mencionada anteriormente.
 7. Agregar una tabla de contenidos en el README.md con enlaces a cada archivo.
 

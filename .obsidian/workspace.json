@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "roadmap.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "roadmap"
             }
           }
         ]
@@ -175,6 +175,25 @@
   },
   "active": "ce04dd4c680bd79b",
   "lastOpenFiles": [
+    "README 1.md",
+    "README.md",
+    "roadmap.md",
+    "docs/16-contributing.md",
+    "docs/15-performance.md",
+    "docs/14-deployment.md",
+    "docs/13-obsidian-deployment.md",
+    "docs/12-indie-web.md",
+    "docs/11-rss.md",
+    "docs/04-content-management.md",
+    "docs/10-search.md",
+    "docs/09-seo.md",
+    "docs/08-configuration.md",
+    "docs/07-project-structure.md",
+    "docs/06-integrations.md",
+    "docs/05-styling.md",
+    "docs/03-installation.md",
+    "docs/02-architecture.md",
+    "docs/01-features.md",
     "obsidian_test/output/assets/417c2aada88626fa87cb5915134ab048_MD5.webp",
     "obsidian_test/output/assets",
     "obsidian_test/output/content/wiki/tooling/docker/instalar docker en mac.md",
@@ -186,40 +205,21 @@
     "obsidian_test/output/content/wiki/tooling/docker",
     "obsidian_test/output/content/wiki/tooling",
     "obsidian_test/output/content/bookmarks/roadmaps.md",
-    "obsidian_test/output/content/bookmarks/daily.md",
-    "obsidian_test/output/content/projects/ansango.md",
-    "obsidian_test/output/content/blog/test-image.md",
     "obsidian_test/output/content/blog/image.png",
     "obsidian_test/output/content/blog/image-1.png",
-    "obsidian_test/output/content/blog/hello.md",
-    "obsidian_test/output/content/blog/demo-grid-obsidian.md",
-    "obsidian_test/output/content/blog/ansango dev.md",
     "obsidian_test/output/content/wiki",
-    "obsidian_test/output/content/uses.md",
     "obsidian_test/output/content/projects",
-    "obsidian_test/output/content/now.md",
     "obsidian_test/output/content/bookmarks",
-    "obsidian_test/output/content/blogroll.md",
     "obsidian_test/output/content/blog",
-    "obsidian_test/output/content/about.md",
     "obsidian_test/output/content",
     "obsidian-export_Linux-x86_64.bin",
     "obsidian_test/input/assets/417c2aada88626fa87cb5915134ab048_MD5.webp",
     "obsidian_test/input/assets",
-    "obsidian_test/input/content/blog/test-image.md",
     "obsidian_test/input/content/blog/image.png",
     "obsidian_test/input/content/blog/image-1.png",
-    "obsidian_test/input/content/blog/hello.md",
-    "obsidian_test/input/content/blog/demo-grid-obsidian.md",
-    "obsidian_test/input/content/blog/ansango dev.md",
-    "src/content/wiki/tooling/docker/instalar docker en mac.md",
-    "src/content/wiki/tooling/docker/instalar docker en linux.md",
-    "src/content/wiki/tooling/docker/docker.md",
-    "src/content/wiki/tooling/docker/docker compose.md",
     "src/content/blog/image.png",
     "src/content/blog/image-1.png",
     "src/content/assets/417c2aada88626fa87cb5915134ab048_MD5.webp",
-    "src/_content/blog/image.png",
-    "src/_content/blog/image-1.png"
+    "src/_content/blog/image.png"
   ]
 }

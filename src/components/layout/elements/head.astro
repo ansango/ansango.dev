@@ -144,6 +144,17 @@ const breadcrumbsJsonLd = breadcrumbs
   <ClipboardScript />
   <ClientRouter />
 
+  <!-- GoatCounter Analytics -->
+  {
+    import.meta.env.PUBLIC_GOATCOUNTER_CODE && (
+      <script
+        data-goatcounter={`https://${import.meta.env.PUBLIC_GOATCOUNTER_CODE}.goatcounter.com/count`}
+        async
+        src="//gc.zgo.at/count.js"
+      />
+    )
+  }
+
   <script is:inline>
     function restartSVGAnimations() {
       document.querySelectorAll("svg").forEach((svg) => {

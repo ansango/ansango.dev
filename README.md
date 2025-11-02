@@ -12,12 +12,13 @@ A modern, content-first personal website built with [Astro](https://astro.build)
 - 📱 **Fully Responsive**: Mobile-first design
 - 🚀 **Mostly Static**: Lightning-fast performance with minimal JavaScript for interactive features
 - 🔗 **Indie Web Ready**: Blogroll, bookmarks, and RSS feed support
+- 📊 **Privacy-focused Analytics**: GoatCounter integration (optional, lightweight, no cookies)
 - 🎵 **Music Integration**: Live Last.fm integration showing current playing track and listening history
 - 🔖 **Raindrop.io Integration**: Dynamic bookmarks and reading lists from your Raindrop collections
 - ⚡ **Interactive Components**: Svelte 5 components with TanStack Query for real-time data
 - ✍️ **Obsidian Integration**: Write content in Obsidian, sync via GitHub Actions (see TODO section)
 - 🏷️ **Smart Tagging**: Automatic tag aggregation and filtering
-- 📄 **SEO Optimized**: Sitemap, RSS feed, and semantic HTML
+- 📄 **SEO Optimized**: Comprehensive meta tags, Open Graph, Twitter Cards, JSON-LD structured data, breadcrumbs, sitemap with priorities, and enhanced RSS feed
 - 🎯 **Custom Rehype Plugins**: Automatic external link icons, H1 removal, and relative link conversion
 
 ## 🏗️ Architecture
@@ -219,10 +220,10 @@ src/components/
 
 ### Astro Integrations
 
-- **@astrojs/sitemap**: Automatic XML sitemap generation
+- **@astrojs/sitemap**: Automatic XML sitemap generation with custom priorities and change frequencies
 - **astro-pagefind**: Full-text search indexing with zero-config setup
 - **@astrojs/svelte**: Svelte 5 integration for interactive components
-- **@astrojs/rss**: RSS feed generation for blog posts
+- **@astrojs/rss**: RSS feed generation with full metadata and structured content
 
 ### Svelte 5 Components
 
@@ -243,6 +244,60 @@ Custom plugins in `src/lib/rehype.ts`:
 
 - **astro-rehype-relative-markdown-links**: Converts relative MD links to proper routes
 - **rehype-external-links**: Enhanced external link handling with `target="_blank"` and security attributes
+
+### GoatCounter Analytics
+
+Privacy-focused, lightweight analytics integration with zero cookies and GDPR compliance.
+
+#### Quick Setup
+
+1. Sign up for a free account at: https://www.goatcounter.com/
+2. Choose your site code (e.g., `yoursite` for `yoursite.goatcounter.com`)
+3. Add it to your `.env`:
+
+```env
+PUBLIC_GOATCOUNTER_CODE=yoursite
+```
+
+#### Features
+
+- **Lightweight**: Only ~3.5KB, minimal performance impact
+- **No cookies**: GDPR compliant by default, no consent banner needed
+- **Privacy-first**: Doesn't track users, only page views
+- **Auto-detects**: Referrers, screen size, location (country only)
+- **Bot filtering**: Automatically filters out bots and crawlers
+- **Real-time**: Live dashboard updates
+- **Free hosting**: No cost for reasonable usage on goatcounter.com
+
+#### Implementation
+
+The script is conditionally loaded in `src/components/layout/elements/head.astro`:
+- Only loads if `PUBLIC_GOATCOUNTER_CODE` is set
+- Async loading for zero render blocking
+- Works seamlessly with Astro view transitions
+- Script source: `//gc.zgo.at/count.js` (official CDN)
+
+#### Dashboard
+
+Access your analytics at:
+```
+https://yoursite.goatcounter.com
+```
+
+#### Self-hosting (Optional)
+
+GoatCounter can be self-hosted if you prefer full control:
+1. Download the Go binary from: https://github.com/arp242/goatcounter
+2. Run with SQLite (no external database needed)
+3. Update script URL in `head.astro` to your domain
+
+#### Troubleshooting
+
+- If analytics don't appear, verify:
+  - `PUBLIC_GOATCOUNTER_CODE` is set correctly
+  - Code matches your GoatCounter account (check dashboard URL)
+  - Site is publicly accessible (GoatCounter can't track localhost)
+  - Check browser console for script loading errors
 
 ### Raindrop.io Integration
 
@@ -358,16 +413,19 @@ The integration provides two data fetching strategies:
 │   │   ├── organisms/     # Complex sections (Archive, Bookmarks, Music, etc.)
 │   │   ├── templates/     # Page templates for collections
 │   │   ├── icons/         # SVG icon components
-│   │   └── layout/        # Layout wrapper components
-│   ├── content/           # Content collections
-│   │   ├── blog/
-│   │   ├── wiki/
-│   │   ├── projects/
-│   │   ├── bookmarks/     # (Note: now powered by Raindrop.io)
-│   │   ├── about.md
-│   │   ├── blogroll.md
-│   │   ├── now.md
-│   │   └── uses.md
+```env
+# Raindrop.io Integration (for bookmarks and reading)
+RAINDROP_ACCESS_TOKEN=your_raindrop_access_token_here
+
+# Last.fm Integration (for music)
+PUBLIC_LASTFM_API_KEY=your_api_key_here
+PUBLIC_LASTFM_APPNAME=ansango.dev
+PUBLIC_LASTFM_API_BASE_URL=https://ws.audioscrobbler.com/2.0
+LASTFM_SHARED_SECRET=your_shared_secret_here
+
+# GoatCounter Analytics (optional)
+PUBLIC_GOATCOUNTER_CODE=your-site-code
+``` │   └── uses.md
 │   ├── layout/            # Page layouts
 │   │   ├── default.astro
 │   │   └── elements/      # Layout sub-components
@@ -506,7 +564,80 @@ const contentCollections: Record<CollectionName, Meta> = {
 
 Set `entriesPerPage: 0` for single-page collections without pagination (like About, Now, Uses).
 
-## 🔍 Search
+## � SEO Optimization
+
+The site is fully optimized for search engines and social sharing with comprehensive SEO features:
+
+### Meta Tags & Social Cards
+
+- **Complete Meta Tags**: Author, description, keywords, robots directives, googlebot settings
+- **Open Graph**: Full Open Graph protocol support for Facebook, LinkedIn sharing
+  - Type (website/article), title, description, URL, image
+  - Locale, site name, image alt text
+  - Article metadata (published/modified times, tags, author)
+- **Twitter Cards**: Summary large image cards with creator/site handles
+- **Canonical URLs**: Proper canonical URL for each page
+
+### Structured Data (JSON-LD)
+
+Automatic JSON-LD structured data using Schema.org vocabulary:
+
+- **Article schema**: For blog posts, wiki entries, and projects
+  - Headline, description, image, author, publisher
+  - Published and modified dates
+  - Keywords from tags
+- **WebSite schema**: For static pages and indexes
+- **Breadcrumbs**: Hierarchical navigation for nested content (3+ path segments)
+  - Auto-generated from URL structure
+  - Proper position indexing
+  - Full URL paths for each breadcrumb
+
+### Sitemap
+
+Advanced XML sitemap at `/sitemap.xml` with intelligent prioritization:
+
+| Page Type | Priority | Change Frequency |
+|-----------|----------|------------------|
+| Homepage | 1.0 | Daily |
+| Blog posts | 0.9 | Monthly |
+| Wiki entries | 0.8 | Monthly |
+| Projects | 0.8 | Monthly |
+| Collection indexes | 0.7 | Weekly |
+| Static pages (about, uses, now) | 0.6 | Monthly |
+| Paginated pages | 0.5 | Weekly |
+| Other pages | 0.5 | Weekly |
+
+Implementation in `src/lib/sitemap.ts` with custom `serializeSitemap()` function.
+
+### Implementation Files
+
+- **`src/components/layout/elements/head.astro`**: Main SEO component with all meta tags and JSON-LD
+- **`src/lib/breadcrumbs.ts`**: Breadcrumb generation and JSON-LD formatting
+- **`src/lib/sitemap.ts`**: Sitemap serialization with priorities
+- **`src/pages/rss.xml.ts`**: Enhanced RSS feed generation
+- **`src/components/layout/default.astro`**: Layout with SEO props interface
+
+### SEO Checklist
+
+When deploying, verify:
+- [ ] Set correct `url` in `src/site.json` (production domain)
+- [ ] Update `author` and `email` in `src/site.json`
+- [ ] Set `twitter` handle if using Twitter Cards
+- [ ] Create OG image at `/public/og-default.jpg` (1200x630px recommended)
+- [ ] Test structured data with [Google Rich Results Test](https://search.google.com/test/rich-results)
+- [ ] Validate Open Graph with [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/)
+- [ ] Check sitemap at `/sitemap.xml`
+- [ ] Submit sitemap to Google Search Console
+
+### Testing Tools
+
+- **Google Search Console**: Monitor indexation and Core Web Vitals
+- **Rich Results Test**: Validate JSON-LD structured data
+- **Facebook Sharing Debugger**: Test Open Graph tags
+- **Twitter Card Validator**: Verify Twitter Cards (if using)
+- **Lighthouse**: SEO audit score and best practices
+
+## �🔍 Search
 
 Search is powered by Pagefind and automatically indexes all published content during build:
 
@@ -528,11 +659,66 @@ Search is powered by Pagefind and automatically indexes all published content du
 
 ## 📡 RSS Feed
 
-RSS feed is automatically generated at `/rss.xml` and includes:
+RSS feed is automatically generated at `/rss.xml` with comprehensive metadata:
 
-- All published blog posts
-- Full content for each entry
-- Proper timestamps and metadata
+### Features
+
+- **All published content**: Includes blog posts, wiki entries, and projects
+- **Full metadata**: Title, description, author, categories (tags)
+- **Timestamps**: Publication date (`pubDate`) and modification date (`updated`)
+- **Channel information**: Language, managing editor, webmaster
+- **Feed image**: Site logo/default OG image
+- **Sorted by date**: Newest content first
+- **Author format**: Email (Name) for proper RSS client display
+- **Standards compliant**: Follows RSS 2.0 specification
+
+### Feed Structure
+
+```xml
+<rss version="2.0">
+  <channel>
+    <title>Site Name</title>
+    <description>Site description</description>
+    <link>https://yoursite.com</link>
+    <language>es</language>
+    <lastBuildDate>...</lastBuildDate>
+    <managingEditor>email@example.com (Author Name)</managingEditor>
+    <webMaster>email@example.com (Author Name)</webMaster>
+    <image>
+      <url>https://yoursite.com/og-default.jpg</url>
+      <title>Site Name</title>
+      <link>https://yoursite.com</link>
+    </image>
+    <item>
+      <title>Article Title</title>
+      <description>Article description</description>
+      <link>https://yoursite.com/blog/article-slug</link>
+      <pubDate>...</pubDate>
+      <updated>...</updated>
+      <category>tag1</category>
+      <category>tag2</category>
+      <author>email@example.com (Author Name)</author>
+    </item>
+  </channel>
+</rss>
+```
+
+### Implementation
+
+The RSS feed is generated in `src/pages/rss.xml.ts` using:
+- `@astrojs/rss` for RSS generation
+- `getAllCollectionsByCategory()` to fetch all published content
+- Automatic sorting by publication date
+- Custom metadata injection for enhanced reader support
+
+### Usage
+
+Readers can subscribe to your feed at:
+```
+https://yoursite.com/rss.xml
+```
+
+Compatible with all major RSS readers (Feedly, Inoreader, NetNewsWire, etc.)
 
 ## 🎯 Indie Web Features
 
@@ -610,12 +796,13 @@ You can implement this workflow after setting up your Obsidian vault structure t
 
 ## 🚢 Deployment
 
-The site is optimized for static deployment on platforms like Vercel, Netlify, or Cloudflare Pages.
-
-### Deployment Steps
-
 1. **Environment Variables**: Set up environment variables in your hosting provider:
    - `RAINDROP_ACCESS_TOKEN` (if using Raindrop integration)
+   - `PUBLIC_LASTFM_API_KEY` (if using Last.fm integration)
+   - `LASTFM_SHARED_SECRET` (if using Last.fm integration)
+   - `PUBLIC_GOATCOUNTER_CODE` (if using analytics)
+
+2. **Build Command**: `npm run build`g Raindrop integration)
    - `PUBLIC_LASTFM_API_KEY` (if using Last.fm integration)
    - `LASTFM_SHARED_SECRET` (if using Last.fm integration)
 

@@ -7,7 +7,8 @@ export type Tree = Record<string, TreeNode>;
 
 const home: Meta = {
   title: "Inicio",
-  description: "Esta es mi página de notas de tecnología.",
+  description:
+    "Notas sobre tecnología, desarrollo web y aprendizajes del día a día.",
   entriesPerPage: 15,
   url: "/",
   published: true,
@@ -16,7 +17,7 @@ const home: Meta = {
 const tags: Meta = {
   title: "Tags",
   description:
-    "Encuentra entradas organizadas por etiquetas y explora temas específicos de interés.",
+    "Explora contenido organizado por temas: desarrollo web, herramientas, arquitectura y más.",
   entriesPerPage: 20,
   url: "/tags",
   published: true,
@@ -25,7 +26,7 @@ const tags: Meta = {
 const archive: Meta = {
   title: "Archivo",
   description:
-    "Explora todas las entradas de mi sitio web organizadas por fecha de publicación.",
+    "Cronología completa de artículos, notas y proyectos publicados en este sitio.",
   entriesPerPage: 20,
   url: "/archive",
   published: true,
@@ -34,7 +35,7 @@ const archive: Meta = {
 const reading: Meta = {
   title: "Reading",
   description:
-    "Estos son algunos de los artículos, posts y recursos que he guardado para leer más tarde o para referencia futura.",
+    "Artículos, posts y recursos que he guardado para leer, aprender y consultar.",
   entriesPerPage: 20,
   url: "/reading",
   published: true,
@@ -43,7 +44,7 @@ const reading: Meta = {
 const bookmarks: Meta = {
   title: "Bookmarks",
   description:
-    "Aquí encontrarás todos mis marcadores organizados por etiquetas y colecciones.",
+    "Colección curada de enlaces útiles sobre desarrollo, diseño y tecnología.",
   entriesPerPage: 50,
   url: "/bookmarks",
   published: true,
@@ -51,7 +52,8 @@ const bookmarks: Meta = {
 
 const wiki: Meta = {
   title: "Wiki",
-  description: "Una colección de artículos y recursos técnicos.",
+  description:
+    "Base de conocimiento técnico: guías, referencias y apuntes de desarrollo.",
   entriesPerPage: 10,
   url: "/wiki",
   published: true,
@@ -59,7 +61,8 @@ const wiki: Meta = {
 
 const music: Meta = {
   title: "Music",
-  description: "Mi colección de música y listas de reproducción favoritas.",
+  description:
+    "Lo que escucho mientras programo: estadísticas y últimas reproducciones de Last.fm.",
   entriesPerPage: 0,
   url: "/music",
   published: true,
@@ -69,14 +72,15 @@ const contentCollections: Record<CollectionName, Meta> = {
   blog: {
     title: "Blog",
     description:
-      "En este blog comparto, experiencias y conocimientos sobre tecnología, desarrollo web y otros temas de interés.",
+      "Artículos sobre desarrollo web, tecnología y experiencias construyendo software.",
     entriesPerPage: 10,
     url: "/blog",
     published: true,
   },
   now: {
     title: "Now",
-    description: "Aquí encontrarás las últimas actualizaciones y noticias.",
+    description:
+      "En qué estoy trabajando ahora: proyectos actuales, aprendizajes y prioridades.",
     entriesPerPage: 0,
     url: "/now",
     published: true,
@@ -84,28 +88,31 @@ const contentCollections: Record<CollectionName, Meta> = {
   projects: {
     title: "Proyectos",
     description:
-      "Actualmente estoy trabajando en algún proyecto, si consigo acabarlo pronto lo verás en esta sección.",
+      "Proyectos personales, experimentos y cosas que estoy construyendo o he construido.",
     entriesPerPage: 5,
     url: "/projects",
     published: true,
   },
   about: {
     title: "About",
-    description: "Sobre mí y este sitio web.",
+    description:
+      "Quién soy, qué hago y por qué existe este sitio. Un poco sobre mí y mi trabajo.",
     entriesPerPage: 0,
     url: "/about",
     published: true,
   },
   blogroll: {
     title: "Blog Roll",
-    description: "Una lista de blogs que recomiendo.",
+    description:
+      "Blogs y sitios personales que leo y recomiendo. Gente interesante haciendo cosas interesantes.",
     entriesPerPage: 0,
     url: "/blogroll",
     published: true,
   },
   uses: {
     title: "Uses",
-    description: "Las herramientas y tecnologías que utilizo.",
+    description:
+      "Herramientas, software y setup que uso para programar y trabajar cada día.",
     entriesPerPage: 0,
     url: "/uses",
     published: true,
@@ -145,7 +152,8 @@ const explore: TreeNode = {
   archive,
   feed: {
     title: "Feed",
-    description: "Suscríbete para recibir las últimas actualizaciones.",
+    description:
+      "Suscríbete al RSS feed para recibir nuevos artículos en tu lector favorito.",
     entriesPerPage: 0,
     url: "/rss.xml",
     blank: true,

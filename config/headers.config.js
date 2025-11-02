@@ -45,6 +45,9 @@ export default {
         // Hashes se inyectarán automáticamente aquí
         'https://giscus.app',
         'https://pagefind.app',
+        'https://gc.zgo.at',                      // GoatCounter script
+        'https://*.goatcounter.com',              // GoatCounter domain
+        'https://static.cloudflareinsights.com',  // Cloudflare Web Analytics
       ],
       
       'style-src': [
@@ -67,9 +70,11 @@ export default {
       
       'connect-src': [
         "'self'",
-        'https://ws.audioscrobbler.com', // Last.fm API
-        'https://api.raindrop.io',       // Raindrop API
-        'https://giscus.app',             // Giscus
+        'https://ws.audioscrobbler.com',   // Last.fm API
+        'https://api.raindrop.io',         // Raindrop API
+        'https://giscus.app',               // Giscus comments
+        'https://*.goatcounter.com',        // GoatCounter tracking
+        'https://cloudflareinsights.com',   // Cloudflare Web Analytics
       ],
       
       'frame-src': [

@@ -183,8 +183,10 @@
       "obsidian-metadata-links:Undo Metadata links": false
     }
   },
-  "active": "5ef19e6edc2375a3",
+  "active": "49e2fa3886ffede9",
   "lastOpenFiles": [
+    "csp-report",
+    "Unconfirmed 428241.crdownload",
     "public/assets/db0fb99d7fb8533799ea05b00895ccbc_MD5.webp",
     "Pasted image 20251103004720.png",
     "public/assets/29b286a7360199888f4ae69a627a637c_MD5.webp",
@@ -195,7 +197,6 @@
     "public/assets/b6443e6f224752aaa3ac468ae891bf6b_MD5.jpg",
     "public/assets/cadf2e1061bac5f9d411e86d652d5722_MD5.jpeg",
     "public/assets/fb61978e31261d5652410a0bd6f17950_MD5.jpeg",
-    "public/assets/30ca72a9d8902b5b263fa8a93cfebc45_MD5.jpeg",
     "src/content/blog/anatomia de headers http una guia galactica.md",
     "src/content/blogroll.md",
     "dist/sitemap-0.xml",
@@ -207,7 +208,6 @@
     "dist/pagefind/pagefind-ui.css",
     "dist/pagefind/pagefind-ui.js",
     "dist/pagefind/pagefind-highlight.js",
-    "dist/pagefind/pagefind.js",
     "docs/csp-automated-system-es.md",
     "scripts/README-es.md",
     "config/README-es.md",

@@ -12,6 +12,7 @@
   --color-astro-code-content: var(--astro-code-content);
   --color-pagefind-body: var(--pagefind-background);
   --color-warning: var(--warning);
+  --color-info: var(--link);
 }
 
 @layer base {
@@ -25,6 +26,7 @@
     --code-border: theme(colors.neutral.200);
     --quote: theme(colors.neutral.400);
     --warning: theme(colors.purple.600);
+    --info: theme(colors.blue.400);
 
     /* Shiki syntax highlighting colors */
 
@@ -53,6 +55,7 @@
     --code-border: theme(colors.zinc.900);
     --quote: theme(colors.zinc.500);
     --warning: theme(colors.purple.400);
+    --info: theme(colors.blue.400);
 
     /* Shiki syntax highlighting colors */
 

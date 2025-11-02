@@ -26,7 +26,6 @@
 - [ ] Code splitting más agresivo
 - [ ] Tree-shaking de dependencias no usadas
 
----
 
 ## 🧪 Testing & Quality
 
@@ -55,7 +54,6 @@
 - [ ] Tests de dark/light mode
 - [ ] Tests de formularios y acciones
 
----
 
 ## 🔒 Seguridad & Best Practices
 
@@ -106,6 +104,123 @@
 - [ ] Estadísticas por colección
 - [ ] Exportar datos en CSV/JSON
 
+#### Music Stats Dashboard
+**Página completa de estadísticas musicales en `/music/stats`**
+
+**🪩 1. Encabezado Dinámico (Hero Section)**
+- [ ] Título: "🎧 Música"
+- [ ] Subtítulo editorial: "Mi banda sonora digital: lo que estoy escuchando, descubriendo y repitiendo"
+- [ ] Mini reproductor Now Playing (API Last.fm tiempo real)
+- [ ] Dato resumen rápido: "He escuchado X canciones desde YYYY"
+- [ ] Fondo dinámico con cover actual borroso o collage de portadas recientes
+- [ ] Componente: `HeroNowPlaying.astro` con imagen de fondo blur
+- [ ] Actualización en tiempo real con Svelte Islands
+- [ ] Efecto soundwave animado en hero
+
+**📈 2. Estadísticas Generales (Overview Cuantitativo)**
+- [ ] **Total de scrobbles:** histórico o del mes/semana
+  - Visual: número grande + icono 🎧
+- [ ] **Tiempo total de escucha:** aproximado (ej: 3000 scrobbles ≈ 10 días)
+  - Visual: indicador tipo "reloj musical" ⏱️
+- [ ] **Promedio de scrobbles por día:** cuánto escuchas de media
+  - Visual: mini gráfico de barras semanales
+- [ ] **Día/hora de escucha más activa:** cuándo escuchas más
+  - Visual: heatmap o texto tipo "soy más de escuchar por la noche 🌙"
+- [ ] **Artista más reproducido:** del mes/año con reproducciones y enlace Last.fm
+  - Visual: tarjeta destacada con carátula del artista
+- [ ] Componente: `StatsOverview.astro` con grid de stat cards (2-3 columnas)
+- [ ] Tarjetas compactas con íconos y colores distintivos
+- [ ] Visual: números grandes + micro-gráficos + emojis contextuales
+
+**🧠 3. Comportamiento Musical (Insights de Escucha)**
+- [ ] **Géneros más escuchados:** inferidos a partir de tags del artista/álbum
+  - Visual: nube de etiquetas o gráfico circular/donut
+- [ ] **Tendencia temporal:** comparar artistas o géneros a lo largo de los meses
+  - Visual: gráfico de líneas o área
+- [ ] **"Artista del descubrimiento":** primer artista escuchado ese mes que no habías escuchado antes
+  - Visual: tarjeta "descubrimiento del mes" 🧭
+- [ ] **"Artista de confort":** el que más repites, mes tras mes
+  - Visual: tarjeta tipo "mi zona segura" 🛋️
+- [ ] **Porcentaje de repeticiones vs descubrimientos:** mide si estás explorando o repitiendo
+  - Visual: barra comparativa ("80% repeat · 20% new")
+- [ ] Texto tipo insight: "Este mes he explorado más indie rock y menos electrónica"
+- [ ] Componente: `ListeningHabits.astro` con columnas o slider cards
+- [ ] Visualización: Chart.js, Recharts o D3.js para gráficos
+- [ ] Layout de insights cards con texto narrativo y emojis
+
+**💿 4. Álbumes y Canciones Destacadas (Editorial)**
+- [ ] **Canción más reproducida:** total o del mes
+  - Visual: carátula + texto destacado prominente
+- [ ] **Álbum más reproducido:** del mes/año con blurb auto-generado
+  - Visual: card con fondo del cover (blur o gradient)
+- [ ] **Top 5 canciones del mes:** lista con mini portadas
+  - Visual: ranking numerado (#1, #2, etc.)
+- [ ] **Canción con más días consecutivos escuchada:** "mi obsesión reciente"
+  - Visual: tarjeta divertida tipo "en bucle 🎢"
+- [ ] **Primer scrobble y último del mes:** marca el inicio y cierre musical
+  - Visual: texto tipo "Abrí el mes con X, lo cerré con Y"
+- [ ] Implementar `generateAlbumBlurb(album)` para descripción automática
+- [ ] Componente: `AlbumsAndSongs.astro` con cards grandes
+- [ ] Layout: carátulas + texto editorial descriptivo + emojis
+- [ ] Links a Last.fm/Spotify para cada álbum/canción
+
+**🔥 5. Curiosidades & Highlights (Sección Divertida)**
+- [ ] **"Artista que desapareció y volvió":** escuchado hace mucho y vuelve a sonar
+  - Visual: tarjeta "comeback del mes" 🔙
+- [ ] **"Top descubrimiento random":** canción escuchada solo una vez pero diferente
+  - Visual: mini sección curiosa con icono 🎲
+- [ ] **"Compatibilidad con tus meses anteriores":** grado de cambio de gustos
+  - Visual: gráfico de radar o porcentaje de similitud
+- [ ] **"Energía promedio del mes":** si enriqueces datos con Spotify Audio Features
+  - Visual: indicador tipo termómetro 🎚️ o barra de energía
+  - Muestra si escuchas más chill o energético
+- [ ] **"Canción más saltada":** ideal si trackeas eventos manuales (opcional)
+  - Visual: icono de 🚫 o 😂 con humor
+- [ ] Componente: `Highlights.astro` con badges y frases divertidas
+- [ ] Visual: emojis, barras animadas, texto tipo "Mi mes fue 73% más electrónico"
+- [ ] Tarjetas de curiosidades con colores vibrantes y diseño lúdico
+
+**🎧 6. Historial Reciente (Recently Played)**
+- [ ] Últimas 10-20 canciones escuchadas
+- [ ] Mostrar: carátula, artista, título, hora/dispositivo
+- [ ] Scroll horizontal o tabla compacta con covers
+- [ ] Componente: `RecentlyPlayed.astro` lista o carrusel
+- [ ] Enlace "Ver todo en Last.fm" al final
+- [ ] Actualización en tiempo real (opcional, con polling)
+
+**🪄 7. Editorial / Resumen del Mes (Narrativo)**
+- [ ] Bloque de texto narrativo tipo bitácora musical
+- [ ] Ejemplo: "Este mes he vuelto a obsesionarme con la producción nostálgica de los 2000..."
+- [ ] Puede ser auto-generado con IA o escrito manualmente
+- [ ] Mencionar: álbum favorito, descubrimientos, tema en bucle
+- [ ] Componente: `MonthlySummary.astro` con párrafo editorial
+- [ ] Incluir fecha de actualización del resumen
+
+**💫 8. Pie Musical (Footer de Sección)**
+- [ ] Fecha última actualización: "Datos actualizados el DD de MMM"
+- [ ] Enlaces a: Last.fm / Spotify / MusicBrainz
+- [ ] Frase de cierre: "Cada scrobble cuenta una historia" o similar
+- [ ] Créditos a APIs utilizadas
+
+**🔧 Infraestructura Técnica**
+- [ ] Script `/src/scripts/updateLastfmData.js` para cache pre-build
+- [ ] Guardar datos en `/src/content/music.json` (opcional)
+- [ ] Prerenderizar info estática con `Astro.fetchContent` o server load
+- [ ] Endpoint API `/api/music/stats` para datos dinámicos
+- [ ] Rate limiting y error handling para Last.fm API
+- [ ] Fallback cuando API no disponible
+- [ ] TypeScript types para todos los datos de música
+
+**🎨 Mejoras Visuales y UX**
+- [ ] Animaciones smooth entre secciones (scroll fluido)
+- [ ] Skeleton loaders mientras cargan stats
+- [ ] Transiciones entre estados (cargando → datos)
+- [ ] Responsive design optimizado para móvil
+- [ ] Dark/light mode para todos los componentes
+- [ ] Hover effects en cards de álbumes/canciones
+- [ ] Loading states para Now Playing en tiempo real
+- [ ] Tooltips explicativos en métricas complejas
+
 #### Newsletter/RSS Features
 - [ ] RSS por tag individual
 - [ ] RSS por colección
@@ -120,12 +235,34 @@
 - [ ] Fallback a posts recientes
 - [ ] Widget en sidebar o footer de artículos
 
+#### Recomendador de Artículos (Content Recommender)
+- [ ] Sistema de recomendaciones basado en tags comunes
+- [ ] Algoritmo por similaridad de contenido (TF-IDF)
+- [ ] Recomendaciones por categoría/colección
+- [ ] "Artículos que también te pueden interesar" en sidebar
+- [ ] Tracking de artículos más leídos juntos
+- [ ] Recomendaciones personalizadas (localStorage)
+- [ ] Widget de "Artículos populares" en home
+- [ ] Algoritmo híbrido (tags + contenido + popularidad)
+- [ ] Excluir artículo actual de recomendaciones
+- [ ] Límite configurable (3-6 artículos sugeridos)
+
 #### Reading Progress Bar
 - [ ] Barra de progreso en top de página
 - [ ] Animación smooth
 - [ ] Responsive design
 - [ ] Guardar posición de lectura (localStorage)
 - [ ] Indicador de tiempo restante
+
+#### Navegación Entre Entradas (Entry Navigation)
+- [ ] Botones prev/next al final de cada entrada
+- [ ] Navegación entre entradas de blog (cronológico)
+- [ ] Navegación entre proyectos (alfabético o por fecha)
+- [ ] Navegación en wiki (según estructura de árbol)
+- [ ] Mostrar título de entrada anterior/siguiente
+- [ ] Atajos de teclado (← →) para navegar
+- [ ] Responsive design para móviles
+- [ ] Transiciones suaves entre páginas
 
 #### Estadísticas de Contenido
 - [ ] Dashboard interno `/admin/stats`
@@ -196,13 +333,6 @@
 
 ## 📚 Content Features
 
-### Drafts System
-- [ ] Añadir `draft: boolean` a frontmatter
-- [ ] Ocultar drafts en producción
-- [ ] Mostrar drafts en dev mode
-- [ ] Preview URLs para drafts
-- [ ] Lista de drafts en dashboard
-
 ### Series/Multi-part Posts
 - [ ] Esquema para series en frontmatter
 - [ ] Navegación entre partes de serie
@@ -216,18 +346,6 @@
 - [ ] Highlight de sección actual
 - [ ] Smooth scroll a secciones
 - [ ] Colapsable/expandible
-
-### Estimated Read Date
-- [ ] Calcular basado en palabras por minuto
-- [ ] Personalizable por usuario
-- [ ] "Puedes terminar esto en X minutos"
-- [ ] Mostrar en card de preview
-
-### Content Scheduling
-- [ ] Publicación programada (date future)
-- [ ] Preview de contenido futuro
-- [ ] Notificación al publicar
-- [ ] Queue de publicaciones
 
 ---
 
@@ -275,21 +393,6 @@
 ---
 
 ## 🔄 Automation & CI/CD
-
-### GitHub Actions CI
-- [ ] Crear workflow de CI
-- [ ] Run tests on PR
-- [ ] Type checking
-- [ ] Linting
-- [ ] Build check
-- [ ] Deploy preview environments
-
-### Scheduled Rebuilds
-- [ ] Workflow para rebuild automático (2x/día)
-- [ ] Manual trigger con workflow_dispatch
-- [ ] Notificaciones de builds fallidos
-- [ ] Cache de node_modules entre builds
-- [ ] Invalidación de CDN después de deploy
 
 ### Lighthouse CI
 - [ ] Integrar Lighthouse CI
@@ -339,64 +442,6 @@
 - [ ] Conversion funnels
 - [ ] A/B testing capability
 - [ ] Heatmaps (opcional)
-
----
-
-## 🎯 Prioridades de Implementación
-
-### 🔥 Phase 1 - Quick Wins (1-2 semanas)
-
-**Crítico:**
-1. ✅ Tests básicos (Vitest setup + tests de utils)
-2. ✅ Pre-commit hooks (Husky + lint-staged)
-3. ✅ GitHub Actions CI/CD
-4. ✅ Related posts feature
-5. ✅ Reading progress bar
-
-**Valor alto, esfuerzo bajo:**
-- Skeleton loaders
-- Toasts/notifications
-- Better scripts en package.json
-- Print styles básicos
-
-### 🌟 Phase 2 - Core Features (3-4 semanas)
-
-**Features principales:**
-1. Sistema de comentarios (Giscus)
-2. Search filters mejorados
-3. Analytics dashboard
-4. Drafts system
-5. Table of Contents auto-generado
-
-**Developer Experience:**
-- TypeScript strict mode
-- ESLint configuración
-- Component tests
-
-### 🚀 Phase 3 - Advanced Features (1-2 meses)
-
-**Features avanzadas:**
-1. Wiki graph visualization
-2. Newsletter integration
-3. Command palette (⌘K)
-4. Series/multi-part posts
-5. Bookmarks import tool
-
-**Performance:**
-- Scheduled rebuild automation
-- Image optimization avanzada
-- Bundle size optimization
-- Service worker & PWA implementation
-
-### 📈 Phase 4 - Polish & Scale (ongoing)
-
-**Optimización continua:**
-- E2E tests completos
-- Performance monitoring
-- Error tracking
-- A/B testing
-- Content scheduling
-- Accessibility audit completo
 
 ---
 

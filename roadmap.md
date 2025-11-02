@@ -58,10 +58,10 @@
 ## 🔒 Seguridad & Best Practices
 
 ### Content Security Policy
-- [ ] Implementar CSP headers
-- [ ] Configurar nonces para scripts inline
-- [ ] Whitelist de dominios externos
-- [ ] Reportar violaciones de CSP
+- [x] Implementar CSP headers
+- [x] Configurar hashes SHA-256 para scripts inline
+- [x] Whitelist de dominios externos
+- [x] Reportar violaciones de CSP
 
 ### Rate Limiting
 - [ ] Rate limiter para Last.fm API

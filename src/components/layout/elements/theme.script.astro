@@ -9,25 +9,29 @@
         ? "dark"
         : "light";
 
-      const userTheme = localStorage.theme ?? systemTheme;
+      const userTheme = localStorage['ansango-theme'] ?? systemTheme;
 
       if (userTheme === "light") {
-        localStorage.setItem("theme", "dark");
+        localStorage.setItem("ansango-theme", "dark");
         toggleTheme(true, true);
+        setGiscusTheme();
       } else if (userTheme === "dark") {
-        localStorage.setItem("theme", "light");
+        localStorage.setItem("ansango-theme", "light");
         toggleTheme(false, true);
+        setGiscusTheme();
       } else {
         toggleTheme(systemTheme === "dark", true);
-        localStorage.setItem("theme", systemTheme);
+        localStorage.setItem("ansango-theme", systemTheme);
+        setGiscusTheme();
       }
     });
 
     window
       .matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", (event) => {
-        if (localStorage.theme === "system") {
+        if (localStorage['ansango-theme'] === "system") {
           toggleTheme(event.matches);
+          setGiscusTheme();
         }
       });
   }
@@ -48,16 +52,17 @@
         document.documentElement.classList.remove("theme-transitioning");
       }, 100);
     }
-
     setGiscusTheme();
   }
 
   function preloadTheme() {
-    const userTheme = localStorage.theme;
+    const userTheme = localStorage['ansango-theme'];
     if (userTheme === "light" || userTheme === "dark") {
       toggleTheme(userTheme === "dark");
+      setGiscusTheme();
     } else {
       toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+      setGiscusTheme();
     }
   }
 

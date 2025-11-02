@@ -4,10 +4,11 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "bun run generate:headers && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier --write .",
+    "generate:headers": "bun scripts/generate-headers.js",
     "obsidian": "bun run obsidian:test && bun run obsidian:clean:export",
     "obsidian:test": "chmod +x test-obsidian-export.sh && ./test-obsidian-export.sh",
     "obsidian:clean": "rm -rf obsidian_test",

@@ -1,0 +1,11 @@
+# Dependencies
+node_modules/
+dist/
+.astro/
+
+# Build outputs
+public/count.js
+
+# Cache
+.DS_Store
+*.log

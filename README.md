@@ -5,6 +5,8 @@
 
 A modern, content-first personal website built with [Astro](https://astro.build), designed for technology articles, wikis, projects, and indie web principles. Write in [Obsidian](https://obsidian.md), publish with ease.
 
+See [live demo →](https://ansango.com) | [GitHub Template Repository →](https://github.com/ansango/ansango.template)
+
 ## ✨ Features
 
 Modern template for bloggers, developers, and indie web enthusiasts with:

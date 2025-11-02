@@ -102,7 +102,13 @@ import { ExternalLinkIcon } from "@/components/icons";
     >
       <p class="text-muted mb-0 text-sm">
         &copy; {new Date().getFullYear()}
-        {site.author}. Todos los derechos reservados.
+        {site.author}. Construido con
+        <Link className="inline-flex items-center" href="https://astro.build/">Astro</Link> y <a
+          class="inline-flex items-center"
+          href="https://svelte.dev/"
+        >
+          Svelte
+        </a>.
       </p>
       <Theme />
     </div>

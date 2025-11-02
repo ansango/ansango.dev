@@ -1,0 +1,10 @@
+{
+	"id": "obsidian-metadata-links",
+	"name": "Metadata Links",
+	"version": "1.0.0",
+	"minAppVersion": "0.15.0",
+	"description": "Add metadata blocks",
+	"author": "Anibal Santos",
+	"authorUrl": "https://ansango.com",
+	"isDesktopOnly": true
+}

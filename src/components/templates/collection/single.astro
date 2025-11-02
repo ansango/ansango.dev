@@ -17,11 +17,20 @@ if (!entry) {
   throw new Error(`Entry not found: ${collection}/${entryId}`);
 }
 
-const { title, date, mod } = entry.data;
-const { Content, remarkPluginFrontmatter } = await render(entry);
+const { title, date, mod, description, tags } = entry.data;
+const { Content } = await render(entry);
+
+const layoutProps = {
+  title,
+  description,
+  ogType: "article" as const,
+  publishedTime: date?.toISOString(),
+  modifiedTime: mod?.toISOString(),
+  tags,
+};
 ---
 
-<LayoutDefault {...remarkPluginFrontmatter} type="main">
+<LayoutDefault {...layoutProps} type="main">
   {
     date && (
       <time

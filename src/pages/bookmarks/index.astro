@@ -5,6 +5,7 @@ import {
   BookmarkCollectionHero,
   BookmarkCollectionList,
 } from "@/components/organisms/bookmarks";
+import { site } from "@/constants";
 
 const collections = await getCollectionsExcludingReading();
 const totalCollectionsCount = collections?.length;
@@ -12,9 +13,11 @@ const totalBookmarksCount = collections?.reduce(
   (acc, curr) => acc + curr.count,
   0,
 );
+
+const meta = site.pages.bookmarks;
 ---
 
-<LayoutDefault>
+<LayoutDefault {...meta} type="main">
   <BookmarkCollectionHero {totalBookmarksCount} {totalCollectionsCount} />
   <BookmarkCollectionList {collections} />
 </LayoutDefault>

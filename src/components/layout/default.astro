@@ -4,17 +4,41 @@ import { Head, Header, Footer } from "./elements";
 import { site } from "@/constants";
 
 import type { Meta } from "@/content.config";
+import type { BreadcrumbItem } from "@/lib/breadcrumbs";
 
 interface Props extends Partial<Omit<Meta, "entriesPerPage">> {
   lang?: string;
   type?: "main" | "article" | "section" | "div";
+  image?: string;
+  ogType?: "website" | "article";
+  publishedTime?: string;
+  modifiedTime?: string;
+  tags?: string[];
+  breadcrumbs?: BreadcrumbItem[];
 }
 
-const { title, description, lang = "es", type = "div" } = Astro.props;
+const {
+  title,
+  description,
+  lang = site.lang,
+  type = "div",
+  image,
+  ogType,
+  publishedTime,
+  modifiedTime,
+  tags,
+  breadcrumbs,
+} = Astro.props;
 
 const headProps = {
-  title: title ? `${title} | ${site.name}` : site.name,
+  title,
   description,
+  image,
+  type: ogType,
+  publishedTime,
+  modifiedTime,
+  tags,
+  breadcrumbs,
 };
 ---
 

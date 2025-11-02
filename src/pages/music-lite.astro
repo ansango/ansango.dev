@@ -8,11 +8,13 @@ import {
   MusicLiteTopArtists,
   MusicLiteTopAlbums,
 } from "@/components/organisms/music-lite";
+import { site } from "@/constants";
 
 const { tracks, artists, albums } = await getLastfmData();
+const meta = site.pages.music;
 ---
 
-<LayoutDefault type="main">
+<LayoutDefault {...meta} type="main">
   <MusicLiteHero />
   <MusicLiteNowPlaying />
   <MusicLiteRecentTracks {tracks} />

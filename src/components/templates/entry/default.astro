@@ -2,9 +2,10 @@
 import type { Entry } from "@/lib/collections";
 import { getEntry, render } from "astro:content";
 
-import {  LayoutDefault } from "@/components/layout";
+import { LayoutDefault } from "@/components/layout";
 import { getReadingTime } from "@/lib/utils";
 import { EntryHeading } from "@/components/molecules";
+import { getBreadcrumbs } from "@/lib/breadcrumbs";
 
 const { collection, id } = Astro.props as Entry;
 
@@ -14,7 +15,7 @@ if (!entry) {
   throw new Error(`Entry not found: ${collection}/${id}`);
 }
 
-const { Content, remarkPluginFrontmatter } = await render(entry);
+const { Content } = await render(entry);
 const { title, date, mod, description, tags } = entry.data;
 const readingTime = getReadingTime(entry.body || "");
 
@@ -27,9 +28,25 @@ const headingProps = {
   readingTime,
   collection,
 };
+
+const pathSegments = Astro.url.pathname.split("/").filter(Boolean);
+const isNestedContent = pathSegments.length > 2;
+const breadcrumbs = isNestedContent
+  ? getBreadcrumbs(Astro.url.pathname, title)
+  : undefined;
+
+const layoutProps = {
+  title,
+  description,
+  ogType: "article" as const,
+  publishedTime: date?.toISOString(),
+  modifiedTime: mod?.toISOString(),
+  tags,
+  breadcrumbs,
+};
 ---
 
-<LayoutDefault {...remarkPluginFrontmatter} type="article">
+<LayoutDefault {...layoutProps} type="article">
   <EntryHeading {...headingProps} />
   <Content />
 </LayoutDefault>

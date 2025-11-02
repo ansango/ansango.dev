@@ -16,7 +16,7 @@ const entries = await getBookmarksByCollection(collection);
 const meta = site.pages.bookmarks;
 ---
 
-<LayoutDefault {...meta} type="article">
+<LayoutDefault {...meta} type="main">
   <BookmarkHero
     collection={collection.replaceAll(/[.-]/g, " ")}
     entriesCount={entries.length}

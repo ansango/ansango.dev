@@ -12,7 +12,7 @@ const entries = await getBookmarksByCollection("reading");
 const meta = site.pages.reading;
 ---
 
-<LayoutDefault {...meta} type="article">
+<LayoutDefault {...meta} type="main">
   <ReadingHero />
   <ReadingList {entries} isIndex />
   <ReadingPagination {entries} isIndex />

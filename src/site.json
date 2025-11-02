@@ -2,8 +2,10 @@
   "url": "https://ansango.com",
   "name": "ansango",
   "description": "Notas de tecnología y desarrollo web.",
-  "image": "/avatar.jpeg",
+  "avatar": "/avatar.jpeg",
+  "image": "/og-default.jpg",
   "email": "anibalsantosgo@gmail.com",
   "lang": "es",
-  "author": "Anibal Santos"
+  "author": "Anibal Santos",
+  "twitter": "iamasync_"
 }

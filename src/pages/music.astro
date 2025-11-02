@@ -2,9 +2,11 @@
 import { LayoutDefault } from "@/components/layout";
 
 import { site } from "@/constants";
+
+const meta = site.pages.music;
 ---
 
-<LayoutDefault type="main">
+<LayoutDefault {...meta} type="main">
   <div class="border-divider border-b-[1px]">
     <h1>{site.pages.music.title}</h1>
     <p>

@@ -82,11 +82,11 @@
 ### 🌟 Features de Alto Impacto
 
 #### Sistema de Comentarios
-- [ ] Integrar Giscus (GitHub Discussions)
-- [ ] Configurar categorías de discusión
-- [ ] Modales para comentarios
-- [ ] Notificaciones de nuevos comentarios
-- **Alternativa:** Implementar Webmentions
+- [x] Integrar Giscus (GitHub Discussions)
+- [x] Configurar categorías de discusión
+- [x] Modales para comentarios
+- [x] Notificaciones de nuevos comentarios
+- ~~**Alternativa:** Implementar Webmentions~~
 
 #### Search Mejorado
 - [ ] Filtros por fecha en Pagefind
@@ -103,6 +103,15 @@
 - [ ] Tendencias de visitas (gráficos)
 - [ ] Estadísticas por colección
 - [ ] Exportar datos en CSV/JSON
+- [ ] Mis contribuciones al sitio (posts, bookmarks, música)
+
+#### Estadísticas de Contenido
+- [ ] Dashboard interno `/admin/stats`
+- [ ] Total de palabras escritas
+- [ ] Posts por mes/año (gráfico)
+- [ ] Tags más usados (nube de palabras)
+- [ ] Tiempo promedio de lectura
+- [ ] Gráfico de crecimiento de contenido
 
 #### Music Stats Dashboard
 **Página completa de estadísticas musicales en `/music/stats`**
@@ -264,23 +273,9 @@
 - [ ] Responsive design para móviles
 - [ ] Transiciones suaves entre páginas
 
-#### Estadísticas de Contenido
-- [ ] Dashboard interno `/admin/stats`
-- [ ] Total de palabras escritas
-- [ ] Posts por mes/año (gráfico)
-- [ ] Tags más usados (nube de palabras)
-- [ ] Tiempo promedio de lectura
-- [ ] Gráfico de crecimiento de contenido
 
 #### Dark/Light Mode Avanzado
 - [x] Transiciones suaves entre modos
-
-#### Bookmarks Import Tool
-- [ ] CLI para importar desde Chrome
-- [ ] CLI para importar desde Firefox
-- [ ] CLI para importar desde Pocket
-- [ ] Validación y deduplicación
-- [ ] Preservar tags y fechas
 
 #### Wiki Graph Visualization
 - [ ] Network graph con D3.js o Cytoscape

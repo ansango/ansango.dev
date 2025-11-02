@@ -1,11 +1,3 @@
----
-title: 📋 Obsidian Integration & Deployment
-description: descripcion
-date: 2025-11-02
-mod: 2025-11-02
-published: false
-tags: [tag]
----
 
 # 📋 Obsidian Integration & Deployment
 

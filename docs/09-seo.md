@@ -1,11 +1,3 @@
----
-title: 🎯 SEO Optimization
-description: descripcion
-date: 2025-11-02
-mod: 2025-11-02
-published: false
-tags: [tag]
----
 
 # 🎯 SEO Optimization
 

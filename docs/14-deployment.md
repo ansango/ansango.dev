@@ -1,11 +1,3 @@
----
-title: 🚢 Deployment
-description: descripcion
-date: 2025-11-02
-mod: 2025-11-02
-published: false
-tags: [tag]
----
 
 # 🚢 Deployment
 

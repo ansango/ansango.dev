@@ -18,8 +18,6 @@ Desde hace tiempo quería construir algo que reuniera lo mejor de un blog técni
 - Eres desarrollador, creador de contenido técnico, investigador, o alguien que disfruta de tener su contenido organizado y agrupado.
 - Además quieres tener el control 100% de tu contenido
 
----
-
 ## Cómo conseguir ansango.dev
 
 1. Clona el repositorio:

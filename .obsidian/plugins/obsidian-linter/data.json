@@ -274,7 +274,7 @@
   "recordLintOnSaveLogs": false,
   "displayChanged": true,
   "lintOnFileChange": true,
-  "displayLintOnFileChangeNotice": true,
+  "displayLintOnFileChangeNotice": false,
   "settingsConvertedToConfigKeyValues": true,
   "foldersToIgnore": [
     "node_modules",
@@ -283,7 +283,7 @@
     "src/pages",
     "src/styles",
     "public",
-    ""
+    "docs"
   ],
   "filesToIgnore": [
     {

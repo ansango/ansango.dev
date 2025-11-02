@@ -1,4 +1,7 @@
-# 🌐 Personal Blog & Wiki Template
+
+# README
+
+## 🌐 Personal Blog & Wiki Template
 
 A modern, content-first personal website built with [Astro](https://astro.build), designed for technology articles, wikis, projects, and indie web principles. Write in [Obsidian](https://obsidian.md), publish with ease.
 
@@ -21,18 +24,21 @@ See [full feature list →](./docs/01-features.md)
 Built with modern, production-ready technologies:
 
 ### Core
+
 - **[Astro](https://astro.build)** - Static site generator
 - **[Svelte 5](https://svelte.dev)** - Interactive components
 - **[Tailwind CSS v4](https://tailwindcss.com)** - Styling system
 - **[TypeScript](https://www.typescriptlang.org)** - Type safety
 
 ### Integrations
+
 - **[Pagefind](https://pagefind.app)** - Full-text search
 - **[Last.fm API](https://www.last.fm/api)** - Music integration
 - **[Raindrop.io API](https://raindrop.io)** - Bookmarks & reading list
 - **[TanStack Query](https://tanstack.com/query)** - Data fetching
 
 ### Deployment
+
 - **[Obsidian](https://obsidian.md)** - Content writing
 - **[GitHub Actions](https://github.com/features/actions)** - CI/CD pipeline
 - **[Cloudflare Pages](https://pages.cloudflare.com)** - Hosting
@@ -42,12 +48,13 @@ See [architecture details →](./docs/02-architecture.md)
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Node.js 18+
 - npm, pnpm, or bun
 
 ### Installation
 
-\`\`\`bash
+```bash
 # Clone repository
 git clone https://github.com/ansango/ansango.dev.git
 cd ansango.dev
@@ -55,15 +62,13 @@ cd ansango.dev
 # Install dependencies
 npm install
 
-# Configure environment (optional)
-cp .env.sample .env
+# Configure environment (optional), 
 # Edit .env with your API keys for integrations
+cp .env.sample .env
 
-# Start development server
+# Start development server and http://localhost:4321 🎉
 npm run dev
-\`\`\`
-
-Visit \`http://localhost:4321\` 🎉
+```
 
 See [installation guide →](./docs/03-installation.md)
 
@@ -80,15 +85,16 @@ This template is designed to work seamlessly with Obsidian:
 4. **Auto-Deploy**: Push to GitHub → Automatic conversion and deployment
 
 ### Content Structure
-\`\`\`
+
+```
 src/content/
-├── blog/          # Blog posts
-├── wiki/          # Hierarchical knowledge base
-├── projects/      # Portfolio items
-├── about.md       # About page
-├── uses.md        # Tools & setup
-└── now.md         # Current activities
-\`\`\`
+├── blog/ # Blog posts
+├── wiki/ # Hierarchical knowledge base
+├── projects/ # Portfolio items
+├── about.md # About page
+├── uses.md # Tools & setup
+└── now.md # Current activities
+```
 
 See [Obsidian integration →](./docs/13-obsidian-deployment.md) | [Content management →](./docs/04-content-management.md)
 
@@ -110,11 +116,13 @@ All commands run from the project root:
 Complete documentation available in the \`/docs\` directory:
 
 ### Getting Started
+
 - [Features](./docs/01-features.md) - Full feature overview
 - [Architecture](./docs/02-architecture.md) - System design and structure
 - [Installation](./docs/03-installation.md) - Setup and requirements
 
 ### Development
+
 - [Content Management](./docs/04-content-management.md) - Writing and organizing content
 - [Styling](./docs/05-styling.md) - Theme customization and CSS
 - [Integrations](./docs/06-integrations.md) - Third-party services (Last.fm, Raindrop, etc.)
@@ -122,40 +130,48 @@ Complete documentation available in the \`/docs\` directory:
 - [Configuration](./docs/08-configuration.md) - Site configuration options
 
 ### Optimization & SEO
+
 - [SEO](./docs/09-seo.md) - Search engine optimization
 - [Search](./docs/10-search.md) - Full-text search implementation
 - [RSS Feed](./docs/11-rss.md) - RSS configuration and usage
 
 ### Indie Web
+
 - [Indie Web Features](./docs/12-indie-web.md) - Blogroll, Now page, Uses, Music
 
 ### Deployment
+
 - [Obsidian & Deployment](./docs/13-obsidian-deployment.md) - Obsidian workflow and GitHub Actions
 - [Deployment](./docs/14-deployment.md) - Hosting on Cloudflare Pages, Vercel, Netlify
 - [Performance](./docs/15-performance.md) - Optimization and Core Web Vitals
 
 ### Contributing
+
 - [Contributing](./docs/16-contributing.md) - How to contribute to this project
 
 ## 🔧 Environment Variables
 
 Optional API integrations require environment variables:
 
-\`\`\`env
-# Raindrop.io (for bookmarks and reading)
+```bash
+## Raindrop.io (for bookmarks and reading)
 RAINDROP_ACCESS_TOKEN=your_token
 
-# Last.fm (for music integration)
+## Last.fm (for music integration)
 PUBLIC_LASTFM_API_KEY=your_key
 LASTFM_SHARED_SECRET=your_secret
 
-# GoatCounter (optional analytics)
+## GoatCounter (optional analytics)
 PUBLIC_GOATCOUNTER_CODE=yoursite
-\`\`\`
+```
 
-Copy \`.env.sample\` to \`.env\` and add your credentials.
+Copy `.env.sample` to `.env` and add your credentials.
 
 See [configuration guide →](./docs/08-configuration.md)
+
+## Performance
+
+![results](performance.png)
 
 ## 📄 License
 
@@ -164,6 +180,7 @@ MIT License - feel free to use this template for your own site!
 ## 🙏 Acknowledgments
 
 Built with:
+
 - [Astro](https://astro.build) - Static site framework
 - [Svelte 5](https://svelte.dev) - Interactive components
 - [Tailwind CSS v4](https://tailwindcss.com) - Styling

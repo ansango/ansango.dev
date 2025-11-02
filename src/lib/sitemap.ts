@@ -1,6 +1,17 @@
+import type { SitemapItem } from "@astrojs/sitemap";
+import { ChangeFreqEnum } from "@astrojs/sitemap";
+import siteData from "../site.json";
 
-import site from "@/site.json";
-import  { type SitemapItem,ChangeFreqEnum } from "@astrojs/sitemap";
+const site = siteData as {
+  url: string;
+  name: string;
+  description: string;
+  image: string;
+  email: string;
+  lang: string;
+  author: string;
+  twitter: string;
+};
 
 /**
  * Serialize sitemap items with custom priorities and change frequencies

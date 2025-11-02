@@ -27,7 +27,6 @@ interface Props {
 const { url } = Astro.props;
 const rssUrl = `${site.url}/rss.xml`;
 
-// Fetch view count from GoatCounter at build time
 let viewCount: number | null = null;
 const goatCounterCode = import.meta.env.PUBLIC_GOATCOUNTER_CODE;
 
@@ -47,22 +46,15 @@ if (goatCounterCode) {
 }
 ---
 
-<aside class="border-divider border-t pt-4">
+<aside class="border-divider border-t py-4">
   <h3 class="mb-2 text-sm font-medium">
     Suscríbete para recibir actualizaciones
   </h3>
 
-  {
-    viewCount !== null && viewCount > 0 && (
-      <p class="text-muted mt-3 text-xs">
-        <span class="text-muted/70">
-          {" "}
-          · Este artículo lleva {viewCount}{" "}
-          {viewCount === 1 ? "lectura" : "lecturas"}.
-        </span>
-      </p>
-    )
-  }
+  <p class="text-muted mt-1.5 text-sm">
+    Usa tu lector RSS favorito para seguir este sitio, o comparte esta
+    publicación.
+  </p>
 
   <div class="flex flex-wrap gap-3">
     <Button href={rssUrl} ariaLabel="Suscribirse al RSS feed">
@@ -80,9 +72,14 @@ if (goatCounterCode) {
       <span id="copy-rss-text">Copiar URL</span>
     </Button>
   </div>
-  <p class="text-muted mt-3 text-xs">
-    Usa tu lector RSS favorito para seguir este sitio.
-  </p>
+  {
+    viewCount !== null && viewCount > 0 && (
+      <p class="text-muted/70 mt-1.5 text-xs mb-0">
+        Este artículo lleva {viewCount}{" "}
+        {viewCount === 1 ? "lectura" : "lecturas"}.
+      </p>
+    )
+  }
 </aside>
 
 <script>

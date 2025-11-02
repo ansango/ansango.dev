@@ -1,15 +1,14 @@
 name: ansango.com
 env:
-  TEMPLATE_REPO: ansango/ansango.dev
-  CONTENT_DIR: sites/ansango.com/content
-  ASSETS_DIR: system/assets
+  CONTENT_DIR: src/content
+  ASSETS_DIR: public/assets
 
 on:
   workflow_dispatch:
   push:
     branches: [main]
     paths:
-      - "sites/ansango.com/content/**"
+      - "src/content/**"
   schedule:
     - cron: "0 9 */2 * *" # Every 2 days at 9 AM UTC
 
@@ -24,21 +23,12 @@ jobs:
     timeout-minutes: 15
     
     steps:
-      # ==========================================
-      # CHECKOUT REPOSITORIES
+     # ==========================================
+      # CHECKOUT REPOSITORY
       # ==========================================
       
-      - name: 📥 Checkout content repository
+      - name: 📥 Checkout repository
         uses: actions/checkout@v4
-        with:
-          path: temp_md
-          
-      - name: 📥 Checkout blog template
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ env.TEMPLATE_REPO }}
-          token: ${{ secrets.PAT }}
-          path: template_blog
       
       # ==========================================
       # PREPARE CONTENT FOR CONVERSION
@@ -46,9 +36,11 @@ jobs:
           
       - name: 📝 Prepare content and assets for export
         run: |
-          mkdir -p temp_md/publish
-          cp -r temp_md/${{ env.CONTENT_DIR }} temp_md/publish
-          cp -r temp_md/${{ env.ASSETS_DIR }} temp_md/publish
+          mkdir -p obsidian_input
+          cp -r ${{ env.CONTENT_DIR }} obsidian_input/
+          if [ -d "${{ env.ASSETS_DIR }}" ]; then
+            cp -r ${{ env.ASSETS_DIR }} obsidian_input/
+          fi
       
       # ==========================================
       # OBSIDIAN TO MARKDOWN CONVERSION
@@ -69,14 +61,15 @@ jobs:
           
       - name: 🔄 Convert Obsidian to Markdown
         run: |
-          find template_blog/src/content -mindepth 1 -maxdepth 1 -type d -exec rm -rf {} \;
-          ./obsidian-export_Linux-x86_64.bin ./temp_md/publish template_blog/src
+          mkdir -p obsidian_output
+          ./obsidian-export_Linux-x86_64.bin ./obsidian_input ./obsidian_output
           
-      - name: 📦 Move converted files to working directory
+      - name: 📦 Replace content with converted files
         run: |
-          cp -r template_blog/. .
-          rm -rf template_blog
-          rm -rf temp_md
+          rm -rf ${{ env.CONTENT_DIR }}
+          rm -rf ${{ env.ASSETS_DIR }}
+          cp -r obsidian_output/content ./src/
+          rm -rf obsidian_input obsidian_output
       
       # ==========================================
       # BUILD SITE
@@ -112,12 +105,12 @@ jobs:
       # DEPLOY TO CLOUDFLARE PAGES
       # ==========================================
         
-      - name: 🚀 Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=ansango-dev --commit-dirty=true
+      # - name: 🚀 Deploy to Cloudflare Pages
+      #   uses: cloudflare/wrangler-action@v3
+      #   with:
+      #     apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      #     accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      #     command: pages deploy dist --project-name=ansango-dev --commit-dirty=true
       
       # ==========================================
       # NOTIFICATIONS

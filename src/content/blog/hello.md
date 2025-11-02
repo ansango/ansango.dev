@@ -1,7 +1,8 @@
 ---
-title: "Cómo escribir y publicar tu primer artículo de blog (guía práctica)"
+mod: 2025-11-02
+title: Cómo escribir y publicar tu primer artículo de blog (guía práctica)
 description: "Guía paso a paso para escribir y publicar tu primer artículo de blog."
-tags: ["blog", "escribir", "publicar", "guía"]
+tags: ["blog", "escribir", "guía", "publicar"]
 date: 2024-06-15
 published: true
 ---
@@ -38,7 +39,7 @@ Define una o dos personas tipo: ¿principiantes, profesionales, curiosos? Ajusta
 
 ### 3. Título y promesa clara
 
-El título debe prometer un beneficio. Ejemplo: "Cómo publicar tu primer artículo en 60 minutos" — sugiere resultado y tiempo.
+El título debe prometer un beneficio. Ejemplo: "Cómo publicar tu primer artículo en 60 minutos"—sugiere resultado y tiempo.
 
 ## Estructura recomendada del artículo
 

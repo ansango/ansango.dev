@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+obsidian_test/
+obsidian-export_Linux-x86_64.bin

@@ -2,7 +2,7 @@
 title: ansango.dev
 description: Mi webiste en Astro 100% estática compatible con Obsidian, desplegada en Cloudflare y Git based
 date: 2025-10-01
-mod: 2025-10-19
+mod: 2025-11-02
 published: true
 tags: [astro, blogs, cloudflare, obsidian, project, static-site, template]
 ---

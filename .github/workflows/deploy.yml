@@ -39,7 +39,8 @@ jobs:
           mkdir -p obsidian_input
           cp -r ${{ env.CONTENT_DIR }} obsidian_input/
           if [ -d "${{ env.ASSETS_DIR }}" ]; then
-            cp -r ${{ env.ASSETS_DIR }} obsidian_input/
+            mkdir -p obsidian_input/assets
+            cp -r ${{ env.ASSETS_DIR }}/* obsidian_input/assets/
           fi
       
       # ==========================================
@@ -67,7 +68,11 @@ jobs:
       - name: 📦 Replace content with converted files
         run: |
           rm -rf ${{ env.CONTENT_DIR }}
+          rm -rf src/assets
           cp -r obsidian_output/content ./src/
+          if [ -d "obsidian_output/assets" ]; then
+            cp -r obsidian_output/assets ./src/
+          fi
           rm -rf obsidian_input obsidian_output
       
       # ==========================================

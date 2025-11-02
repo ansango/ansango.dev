@@ -8,9 +8,10 @@
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier --write .",
-    "obsidian": "bun run obsidian:test && bun run obsidian:clean",
+    "obsidian": "bun run obsidian:test && bun run obsidian:clean:export",
     "obsidian:test": "chmod +x test-obsidian-export.sh && ./test-obsidian-export.sh",
-    "obsidian:clean": "rm obsidian-export_Linux-x86_64.bin"
+    "obsidian:clean": "rm -rf obsidian_test",
+    "obsidian:clean:export": "rm obsidian-export_Linux-x86_64.bin"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.12",

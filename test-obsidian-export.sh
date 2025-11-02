@@ -15,7 +15,7 @@ echo -e "${GREEN}=== Test de Obsidian Export ===${NC}\n"
 
 # Variables de configuración
 CONTENT_DIR="src/content"
-ASSETS_DIR="public/assets"
+ASSETS_DIR="public/assets"  # Ubicación actual de assets
 OBSIDIAN_VERSION="v22.11.0"
 OBSIDIAN_BINARY="obsidian-export_Linux-x86_64.bin"
 
@@ -23,7 +23,6 @@ OBSIDIAN_BINARY="obsidian-export_Linux-x86_64.bin"
 WORK_DIR="obsidian_test"
 INPUT_DIR="${WORK_DIR}/input"
 OUTPUT_DIR="${WORK_DIR}/output"
-BACKUP_DIR="${WORK_DIR}/backup"
 
 # Limpiar directorios de prueba anteriores
 if [ -d "$WORK_DIR" ]; then
@@ -35,9 +34,8 @@ fi
 echo -e "${GREEN}📁 Creando estructura de directorios...${NC}"
 mkdir -p "$INPUT_DIR"
 mkdir -p "$OUTPUT_DIR"
-mkdir -p "$BACKUP_DIR"
 
-# Copiar contenido y assets al directorio de input
+# Copiar contenido al directorio de input
 echo -e "${GREEN}📝 Copiando contenido para prueba...${NC}"
 if [ -d "$CONTENT_DIR" ]; then
     cp -r "$CONTENT_DIR" "$INPUT_DIR/"
@@ -47,11 +45,13 @@ else
     exit 1
 fi
 
+# Copiar assets desde public/assets si existe
 if [ -d "$ASSETS_DIR" ]; then
-    cp -r "$ASSETS_DIR" "$INPUT_DIR/"
-    echo -e "   ✓ Copiado: $ASSETS_DIR"
+    mkdir -p "$INPUT_DIR/assets"
+    cp -r "$ASSETS_DIR"/* "$INPUT_DIR/assets/"
+    echo -e "   ✓ Copiado: $ASSETS_DIR → $INPUT_DIR/assets"
 else
-    echo -e "${YELLOW}⚠️  Advertencia: No existe $ASSETS_DIR (puede ser normal)${NC}"
+    echo -e "${YELLOW}⚠️  Advertencia: No existe $ASSETS_DIR${NC}"
 fi
 
 # Descargar obsidian-export si no existe
@@ -92,10 +92,23 @@ else
     find "$OUTPUT_DIR" -type f | head -20
 fi
 
+# Verificar ubicación de assets
+echo -e "\n${GREEN}📁 Verificación de assets:${NC}"
+if [ -d "$OUTPUT_DIR/assets" ]; then
+    echo -e "${GREEN}✓ Carpeta assets encontrada en: ${YELLOW}$OUTPUT_DIR/assets${NC}"
+    ASSETS_COUNT=$(find "$OUTPUT_DIR/assets" -type f | wc -l)
+    echo -e "  Archivos en assets: $ASSETS_COUNT"
+    echo -e "\n${GREEN}Archivos en assets:${NC}"
+    ls -lh "$OUTPUT_DIR/assets" | head -10
+else
+    echo -e "${YELLOW}⚠️  No se encontró carpeta assets en el output${NC}"
+    echo -e "${YELLOW}   Esto puede ser normal si no hay imágenes referenciadas${NC}"
+fi
+
 # Comparar un archivo de ejemplo
 echo -e "\n${GREEN}📄 Comparación de archivos (ejemplo):${NC}\n"
 
-EXAMPLE_FILE=$(find "$INPUT_DIR" -name "*.md" -type f | head -1)
+EXAMPLE_FILE=$(find "$INPUT_DIR/content" -name "*.md" -type f | head -1)
 if [ -n "$EXAMPLE_FILE" ]; then
     RELATIVE_PATH=${EXAMPLE_FILE#$INPUT_DIR/}
     CONVERTED_FILE="$OUTPUT_DIR/$RELATIVE_PATH"
@@ -120,12 +133,22 @@ CONVERTED_COUNT=$(find "$OUTPUT_DIR" -name "*.md" -type f | wc -l)
 echo -e "   Archivos .md originales: $ORIGINAL_COUNT"
 echo -e "   Archivos .md convertidos: $CONVERTED_COUNT"
 
+# Simular el reemplazo que haría la pipeline
+echo -e "\n${GREEN}🔄 Simulando reemplazo de la pipeline:${NC}"
+echo -e "${YELLOW}Esto es lo que haría la GitHub Action:${NC}"
+echo -e "   1. rm -rf src/content"
+echo -e "   2. rm -rf src/assets"
+echo -e "   3. cp -r ${OUTPUT_DIR}/content ./src/"
+echo -e "   4. cp -r ${OUTPUT_DIR}/assets ./src/ (si existe)"
+
 # Instrucciones finales
 echo -e "\n${GREEN}🎯 Próximos pasos:${NC}"
 echo -e "   1. Revisa los archivos en: ${YELLOW}${OUTPUT_DIR}${NC}"
-echo -e "   2. Compara con los originales en: ${YELLOW}${INPUT_DIR}${NC}"
-echo -e "   3. Si todo está bien, puedes integrar en la pipeline de GitHub"
+echo -e "   2. Verifica que assets esté en: ${YELLOW}${OUTPUT_DIR}/assets${NC}"
+echo -e "   3. Compara con los originales en: ${YELLOW}${INPUT_DIR}${NC}"
+echo -e "   4. Si todo está bien, la pipeline lo aplicará automáticamente"
 echo -e "\n${YELLOW}💡 Comandos útiles:${NC}"
+echo -e "   - Ver assets: ${YELLOW}ls -la ${OUTPUT_DIR}/assets 2>/dev/null || echo 'No hay assets'${NC}"
 echo -e "   - Ver diferencias: ${YELLOW}diff -r ${INPUT_DIR}/content ${OUTPUT_DIR}/content${NC}"
 echo -e "   - Limpiar prueba: ${YELLOW}rm -rf ${WORK_DIR}${NC}"
 echo -e "   - Limpiar binary: ${YELLOW}rm ${OBSIDIAN_BINARY}${NC}"

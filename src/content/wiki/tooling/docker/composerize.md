@@ -1,11 +1,9 @@
 ---
 title: Composerize
-description: "description"
-draft: false
+description: "Composerize: herramienta para convertir comandos docker run a docker-compose.yml automáticamente"
 date: 2024-12-17
-mod: 2025-08-28
+mod: 2025-10-25
 published: true
-order: 0
 tags: [development, docker, tool]
 ---
 
@@ -41,14 +39,14 @@ Composerize es una herramienta que convierte comandos `docker run` en formato de
 
 1. Instala Composerize globalmente usando `npm`:
 
-   ```bash
-   npm install -g composerize
-   ```
+    ```bash
+    npm install -g composerize
+    ```
 
 2. Ejecuta Composerize con un comando `docker run` entre comillas:
 
-   ```bash
-   composerize "docker run -d -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock:ro --name my-container some-image"
-   ```
+    ```bash
+    composerize "docker run -d -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock:ro --name my-container some-image"
+    ```
 
 Esto imprimirá el `docker-compose.yml` resultante en la salida estándar.

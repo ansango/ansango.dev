@@ -1,375 +1,150 @@
 ---
-title: "ansango — Personal Blog & Wiki Template"
-description: "A modern, content-first personal website template built with Astro."
-tags: ["project", "astro", "static-site"]
+title: ansango.dev
+description: Mi webiste en Astro 100% estática compatible con Obsidian, desplegada en Cloudflare y Git based
 date: 2025-10-01
+mod: 2025-11-02
 published: true
+tags: [astro, blogs, cloudflare, obsidian, project, static-site, template]
 ---
 
-# 🌐 ansango — Personal Blog & Wiki Template
+# ansango.dev
 
-A modern, content-first personal website built with [Astro](https://astro.build), designed for technology articles, wikis, projects, and indie web principles. Write in [Obsidian](https://obsidian.md), publish with ease.
+Desde hace tiempo quería construir algo que reuniera lo mejor de un blog técnico, una wiki personal y un portafolio de proyecto, pero sin depender de plataformas rígidas ni perder control del contenido. Así nació **ansango.dev**, una "plantilla" construida para mis propios sitios.
 
-## ✨ Features
+- Quieres tener un sitio personal con blog + wiki + portafolio sin fragmentarlo en múltiples herramientas.
+- Te gusta escribir en Markdown / Obsidian y no depender de CMS complejos. Además puedes elegir si tener un repositorio con tu contenido de forma independiente o utilizar este template.
+- Buscas rendimiento, SEO optimizado y arquitectura ligera.
+- Te interesa la filosofía del Indie Web: feed RSS, backlinks, control total.
+- Eres desarrollador, creador de contenido técnico, investigador, o alguien que disfruta de tener su contenido organizado y agrupado.
+- Además quieres tener el control 100% de tu contenido
 
-- 📝 **Multiple Content Collections**: Blog, Wiki, Projects, and standalone pages (About, Now, Uses, Blogroll, Bookmarks)
-- 🌳 **Hierarchical Wiki**: Nested folder structure with automatic tree navigation
-- 🎨 **Tailwind CSS v4**: Centralized styling system, minimal class repetition
-- 🔍 **Full-text Search**: Powered by [Pagefind](https://pagefind.app/)
-- 🌓 **Theme Switching**: Built-in dark/light mode toggle
-- 📱 **Fully Responsive**: Mobile-first design
-- 🚀 **100% Static**: Lightning-fast performance with zero JavaScript overhead (except for interactive features)
-- 🔗 **Indie Web Ready**: Blogroll, bookmarks, and RSS feed support
-- ✍️ **Obsidian Integration**: Write content in Obsidian, sync via GitHub Actions (see TODO section)
-- 🏷️ **Smart Tagging**: Automatic tag aggregation and filtering
-- 📄 **SEO Optimized**: Sitemap, RSS feed, and semantic HTML
+---
 
-## 🏗️ Architecture
+## Cómo conseguir ansango.dev
 
-### Content Collections
-
-The site is built around 8 content types, all defined in `src/content.config.ts`:
-
-- **blog**: Technology articles and posts
-- **wiki**: Hierarchical knowledge base
-- **projects**: Portfolio and project showcases
-- **about**: Personal information
-- **uses**: Tools and setup
-- **now**: Current activities (inspired by [nownownow.com](https://nownownow.com/))
-- **blogroll**: Curated list of blogs you follow
-- **bookmarks**: Saved links and resources
-
-### Configuration System
-
-All site behavior is controlled through three main files:
-
-#### `site.json`
-
-Global site metadata (title, description, author, social links, etc.)
-
-#### `src/content.config.ts`
-
-Content collection schemas using Zod. Defines frontmatter structure for each collection.
-
-#### `src/constants.ts`
-
-Collection metadata, pagination settings, URLs, and site structure.
-
-### Content Structure
-
-```
-src/content/
-├── blog/              # Blog posts
-├── wiki/              # Hierarchical wiki
-│   ├── ai/
-│   │   └── agentes.md
-│   └── development/
-│       └── web/
-├── projects/          # Project showcases
-├── about.md           # About page
-├── uses.md            # Uses page
-├── now.md             # Now page
-├── blogroll.md        # Blogroll
-└── bookmarks.md       # Bookmarks
-```
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js 18+
-- npm or pnpm
-
-### Installation
+1. Clona el repositorio:
 
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/your-repo.git
-cd your-repo
+git clone https://github.com/ansango/ansango.dev.git
+cd ansango.dev
+```
 
-# Install dependencies
+1. Instala dependencias:
+
+```bash
 npm install
+```
 
-# Start development server
+1. Levanta el entorno de desarrollo:
+
+```bash
 npm run dev
 ```
 
-Visit `http://localhost:4321` to see your site.
+Abre `http://localhost:4321` para ver tu sitio en local.
 
-### Available Commands
+1. Escribe contenido en **Markdown / Obsidian**, dentro de las carpetas correspondientes:
+   - `src/content/blog/`
+   - `src/content/wiki/`
+   - `src/content/projects/`, etc.
+2. Configura Frontmatter en cada archivo para que tenga título, descripción, fecha, etiquetas y publicación real.
 
-```bash
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run preview      # Preview production build
-npm run astro        # Run Astro CLI commands
-```
-
-## 📝 Content Management
-
-### Frontmatter Format
-
-Each content type has specific frontmatter requirements. Example for a blog post:
-
-```markdown
----
-title: "My First Post"
-description: "A great introduction to my blog"
-date: 2025-10-11
-mod: 2025-10-11
-published: true
-tags: [astro, web-development]
 ---
 
-Your content here...
+## Cómo desplegar ansango.dev
+
+Actualmente despliego esta plantilla con una `github action`, que básicamente lo que hace es clonar el contenido de un vault de Obsidian, para ellos simplemente tengo en el vault una carpeta llamada `sites/ansango.com/content/**` que sigue la estructura de contenido que comentaba anteriormente.
+
+En el vault, tenemos la configuración de la `gh action`, que es parecida a esto:
+
+```yml
+#.github/workflows/ansango.yml
+name: ansango.com
+env:
+  TEMPLATE_REPO: ansango/ansango.dev # Change this to your blog repo template
+  CONTENT_DIR: sites/ansango.com/content
+  ASSETS_DIR: system/assets
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "sites/ansango.com/content/**"
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+        with:
+          path: temp_md
+      - name: Checkout linked blog starter repo
+        uses: actions/checkout@v4.1.1
+        with:
+          repository: ${{ env.TEMPLATE_REPO }}
+          token: ${{ secrets.PAT }}
+          path: template_blog
+      - name: Create a publish folder with content and asssets
+        run: |
+          mkdir -p temp_md/publish
+          cp -r temp_md/${{ env.CONTENT_DIR }} temp_md/publish
+          cp -r temp_md/${{ env.ASSETS_DIR }} temp_md/publish
+      - name: Install obsidian-export
+        run: |
+          wget https://github.com/zoni/obsidian-export/releases/download/v22.11.0/obsidian-export_Linux-x86_64.bin
+          chmod +x obsidian-export_Linux-x86_64.bin
+      - name: Run obsidian-export
+        run: |
+          find template_blog/src/content -mindepth 1 -maxdepth 1 -type d -exec rm -rf {} \;
+          ./obsidian-export_Linux-x86_64.bin ./temp_md/publish template_blog/src
+      - name: Move blog dir to currDir
+        run: |
+          cp -r template_blog/. .
+          rm -rf template_blog
+          rm -rf temp_md
+      - name: Build
+        run: npm install && npm run build
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }} # Required
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }} # Required
+          command: pages deploy dist --project-name=ansango-dev --commit-dirty=true # Required
 ```
 
-### Publishing Content
+este action lo que hace en resumidas cuentas es, clonar la plantilla `ansango.dev`, copiar los assets, convertir todos las entradas de obsidian con sus backlinks en markdown regulares y compilar el proyecto de astro con el contenido del vault. Por último se depliega directamente en Cloudflare cada vez que hagamos push en el repositorio (para ello utilizo el plugin Git de Obsidian), y la action se dispara cuando se ha hecho push en todo aquello que sea contenido.
 
-- Set `published: true` in frontmatter to make content visible
-- Use `published: false` to keep drafts hidden
-- The `mod` field tracks last modification date
-- Tags are automatically slugified and aggregated
-
-### Wiki Organization
-
-The wiki supports nested folders for hierarchical content:
-
-```
-wiki/
-├── development/
-│   ├── web/
-│   │   └── frameworks.md
-│   └── devtools.md
-```
-
-Navigation is automatically generated from folder structure.
-
-## 🎨 Styling
-
-### Tailwind CSS v4
-
-The project uses Tailwind CSS v4 with a centralized styling approach:
-
-- Global styles in `src/styles/global.css`
-- Component-specific styles are minimal
-- Theme tokens defined in CSS custom properties
-- Dark mode support via class strategy
-
-### Layout System
-
-Layouts are modular and composable:
-
-```
-src/layout/
-├── default.astro           # Base layout
-├── single.astro            # Single pages (About, Uses, etc.)
-├── archive.astro           # Archive/listing pages
-├── tag.astro               # Tag pages
-└── collection/
-    ├── collection.astro           # Collection wrapper
-    ├── collection.default.astro   # Standard collection layout
-    ├── collection.entry.astro     # Single entry layout
-    └── collection.wiki.astro      # Wiki-specific layout
-```
-
-## 🔌 Integrations
-
-### Astro Integrations
-
-- **@astrojs/sitemap**: Automatic XML sitemap generation
-- **astro-pagefind**: Full-text search indexing
-
-### Rehype Plugins
-
-Custom plugins in `src/lib/rehype.ts`:
-
-- **removeH1Plugin**: Removes H1 tags (titles come from frontmatter)
-- **External link enhancement**: Adds icons and `target="_blank"` to external links
-
-### Third-party Plugins
-
-- **astro-rehype-relative-markdown-links**: Converts relative MD links to proper routes
-- **rehype-external-links**: Enhanced external link handling
-
-## 📦 Project Structure
-
-```
-/
-├── public/                 # Static assets
-├── src/
-│   ├── components/         # Reusable Astro components
-│   │   ├── layout/        # Layout components
-│   │   ├── ui/            # UI components
-│   │   ├── searcher/      # Search functionality
-│   │   └── theme/         # Theme switcher
-│   ├── content/           # Content collections
-│   ├── layout/            # Page layouts
-│   ├── lib/               # Utilities and helpers
-│   │   ├── collections.ts # Content fetching & pagination
-│   │   ├── wikis.ts       # Wiki tree generation
-│   │   └── rehype.ts      # Custom rehype plugins
-│   ├── pages/             # Astro pages
-│   ├── styles/            # Global styles
-│   ├── constants.ts       # Site configuration
-│   ├── content.config.ts  # Collection schemas
-│   └── site.json          # Site metadata
-├── astro.config.ts        # Astro configuration
-└── package.json
-```
-
-## 🔧 Configuration
-
-### Adding a New Collection
-
-1. **Define schema in `src/content.config.ts`**:
-
-```typescript
-const newCollection = defineCollection({
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    published: z.boolean().default(false),
-    // ... more fields
-  }),
-});
-```
-
-2. **Add metadata in `src/constants.ts`**:
-
-```typescript
-export const COLLECTION_METADATA = {
-  // ... existing collections
-  "new-collection": {
-    title: "New Collection",
-    description: "Description here",
-    url: "/new-collection",
-    entriesPerPage: 10,
-  },
-};
-```
-
-3. **Create content folder**:
-
-```bash
-mkdir src/content/new-collection
-```
-
-### Customizing Site Metadata
-
-Edit `src/site.json`:
-
-```json
-{
-  "title": "Your Site Name",
-  "description": "Your site description",
-  "author": "Your Name",
-  "url": "https://yoursite.com",
-  "social": {
-    "github": "yourusername",
-    "twitter": "yourusername"
-  }
-}
-```
-
-### Pagination Settings
-
-Adjust entries per page in `src/constants.ts`:
-
-```typescript
-export const COLLECTION_METADATA = {
-  blog: {
-    // ...
-    entriesPerPage: 10, // Change this value
-  },
-};
-```
-
-## 🔍 Search
-
-Search is powered by Pagefind and automatically indexes all published content during build:
-
-- Searches titles, descriptions, and content
-- Fuzzy matching support
-- Zero-config setup
-- Lightweight client (~10kb gzipped)
-
-## 📡 RSS Feed
-
-RSS feed is automatically generated at `/feed.xml` and includes:
-
-- All published blog posts
-- Full content for each entry
-- Proper timestamps and metadata
-
-## 🎯 Indie Web Features
-
-### Blogroll
-
-Curate a list of blogs you follow in `src/content/blogroll.md`:
-
-```markdown
----
-title: "Blogroll"
-description: "Blogs I follow and recommend"
-published: true
 ---
 
-## Web Development
+## Futuras mejoras / roadmap
 
-- [Blog Name](https://example.com) - Description
+Algunas ideas que tengo para seguir expandiendo ansango.dev:
+
+- [x] ~~Flujo completo ya automatizado de sincronización Obsidian → repo → build → despliegue~~ ✅ 2025-10-19
+- [x] Mejores plantillas para proyectos (portafolio más visual), para ello estaria guay poder utilizar en el yml una propiedad que indique el template a usar, y sino generico, genericos tendriamos, entrada, indice de entradas con paginacion. ✅ 2025-11-02
+	- [x] bookmarks ✅ 2025-10-19
+	- [x] reading ✅ 2025-10-19
+	- [x] wiki ✅ 2025-10-19
+	- [x] archive ✅ 2025-10-19
+	- [x] music ✅ 2025-10-19
+
+```ts
+const renderFunction = () => (onlyOnePage ? LayoutSingle : LayoutCollection);
+const Component = renderFunction();
 ```
 
-### Now Page
+> igual no es mas complicado porque en las paginas especiales a diferentes patrones, habria que revisarlo con tiempo
 
-Share what you're currently working on in `src/content/now.md` (inspired by [Derek Sivers' Now page movement](https://nownownow.com/)).
+- [ ] ~~Integración con comentarios o funcionalidades interactivas opcionales~~ 
+- [ ] Integracion directa con este proyecto de obsidian y configuración de la gh action.
+- [ ] Qué plugins de obsidian recomiendo para este proyecto
+- [ ] Dejar un repositorio base como plantilla, es decir, hacer un fork y subir el contenido como vault independiente
+- [x] Reescribir el readme, explicando como configurar obsidian, la gh action, variables de entorno, las colecciones, las colecciones index, las colecciones genericas, colecciones con layout propio, el uso en obsidian de bloques de codigo con tailwind, hablar de que la gh soporta los backlinks y referencias de enlaces ✅ 2025-11-02
+- [ ] paginacion entre entradas de contenido
 
-### Uses
+---
 
-Document your tools and setup in `src/content/uses.md`.
+Si te interesa verlo más de cerca o usarlo como base para tu proyecto, puedes encontrar todo el código y la documentación en GitHub:
 
-## 📋 TODO: Obsidian Integration via GitHub Actions
-
-To sync content from an Obsidian vault stored in a separate GitHub repository, you'll need to create a GitHub Action workflow. Below is a template structure:
-
-### Workflow Overview
-
-1. **Trigger**: On push to your Obsidian repository or on schedule
-2. **Action**: Clone Obsidian repo, copy markdown files to this repo
-3. **Commit**: Auto-commit and push changes
-
-### Template Workflow File
-
-TODO
-
-### Setup Instructions
-
-1. Create a Personal Access Token (PAT) with `repo` scope
-2. Add it as `OBSIDIAN_PAT` secret in your site repository settings
-3. Structure your Obsidian vault to match the content structure
-4. Customize the `rsync` commands based on your folder structure
-5. Optional: Add content validation or frontmatter checks before committing
-
-### Advanced Options
-
-- **Image sync**: Add steps to copy images from Obsidian to `public/`
-- **Link conversion**: Process Obsidian-style `[[wikilinks]]` to markdown links
-- **Frontmatter validation**: Add a step to validate frontmatter before pushing
-- **Trigger deployment**: Add a step to trigger Vercel/Netlify deployment
-
-You can implement this workflow after setting up your Obsidian vault structure to match your content collections.
-
-## 🚢 Deployment
-
-TODO
-
-## 📄 License
-
-MIT License - feel free to use this template for your own personal site!
-
-## 🙏 Acknowledgments
-
-- Built with [Astro](https://astro.build)
-- Styled with [Tailwind CSS](https://tailwindcss.com)
-- Search powered by [Pagefind](https://pagefind.app)
-- Inspired by the [IndieWeb](https://indieweb.org/) movement
+👉 **Revisa el repositorio en GitHub**  
+[github.com/ansango/ansango.dev](https://github.com/ansango/ansango.dev)

@@ -1,11 +1,9 @@
 ---
 title: Docker Compose
-description: "description"
-draft: false
+description: "Docker Compose: instalación, configuración y gestión de aplicaciones multicontenedor con archivos YAML"
 date: 2025-07-30
-mod: 2025-08-28
+mod: 2025-10-25
 published: true
-order: 0
 tags: [tag]
 ---
 
@@ -36,5 +34,3 @@ Cuando tengamos un archivo `docker-compose.yml`, lo levantamos con:
 ```bash
 docker-compose up -d
 ```
-
-## **Para detenerlo:**

@@ -1,11 +1,9 @@
 ---
 title: Instalar docker en mac
-description: "description"
-draft: false
+description: "Instalar Docker en Mac: Docker Desktop, configuración y verificación para desarrollo en macOS"
 date: 2024-12-17
-mod: 2025-08-28
+mod: 2025-10-25
 published: true
-order: 0
 tags: [apple, docker, mac, sysadmin]
 ---
 

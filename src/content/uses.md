@@ -1,66 +1,38 @@
 ---
-title: "Uses - Tools and Technologies"
-description: "Las herramientas y tecnologías que utilizo."
-index: true
+title: Uses
+description: Mi setup, hardware y software, incluyendo PC de escritorio, portátil, periféricos y herramientas clave.
 date: 2025-06-18
+mod: 2025-10-18
 published: true
+tags: [3d-printer, desktop, display, keyboards, laptop, mouse, personal, setup, software, uses]
+index: true
 ---
 
 # Uses
 
-Esta página describe mi setup: hardware, software, flujo de trabajo, accesos y dotfiles. Está pensada para quien quiera reproducir mi entorno o sacar ideas prácticas. Uso lo que me hace más productivo y lo que me permite iterar rápido en proyectos personales y profesionales.
+Esta es mi configuración de trabajo y desarrollo actual. Incluye mi ordenador principal de sobremesa, un portátil de trabajo, periféricos, un servidor de laboratorio en casa y herramientas de software que utilizo a diario para desarrollo, productividad y gestión de proyectos. He ido adaptando poco a poco mi espacio de trabajo, pero bueno digamos que es un proyecto, como siempre, en crecimiento.
 
 ---
 
-## Hardware
-
-- Portátil: Lenovo ThinkPad (X1 Carbon / X13 o similar). Prioridad en teclado, robustez y batería.
-- Monitor principal: Dell UltraSharp 27" 4K (o 1440p) — trabajo con espacio suficiente para editores y terminales.
-- Monitor secundario: pantalla más pequeña para documentación, chat o video.
-- Teclado: Keychron / mechanical compact — uso esquema TKL o 75% según ergonomía.
-- Ratón: Logitech MX Master — botones programables y buena ergonomía.
-- Almacenamiento: NVMe SSD (1TB) para sistema y proyectos; backup en NAS/Cloud.
-- Audio: auriculares con micrófono de buena calidad para llamadas (Shure / Sony / Sennheiser).
-
-## Sistema operativo y entorno base
-
-- GNU/Linux (distribución basada en Debian/Ubuntu o Arch según preferencia). Uso zsh como shell con Oh My Zsh / dotfiles personalizados.
-- Gestor de ventanas/entorno: GNOME o i3/Hyprland para setups tiling — depende del foco (productividad vs. estética).
-- Virtualización/containers: Docker para entornos reproducibles; Multipass/LXD para VMs livianas cuando lo necesito.
-
-## Desarrollo y herramientas principales
-
-- Editor: VS Code (con configuraciones y extensiones mínimas) o Neovim para edición ligera y scripting.
-- Node.js (LTS) y npm/pnpm para proyectos web; uso pnpm cuando busco instalaciones más rápidas y monorepos.
-- Python 3.11+ con pyenv/venv para entornos aislados; uso poetry para gestión de paquetes en proyectos más formales.
-- Git: flujo trunk-based o feature-branches según el equipo; uso GitHub (o GitLab) para repos remotos.
-- Terminal: Alacritty / Kitty con tmux para sesiones persistentes y multiplexación.
-
-## Notas sobre web / frontend
-
-- Frameworks: Astro para sitios estáticos (este sitio está construido con Astro), React para UIs interactivas cuando hace falta.
-- CSS: Tailwind para prototipado rápido y utilidades; añado variables y clases reutilizables cuando el proyecto crece.
-- Testing: Jest / Vitest para unitarios; Playwright para end-to-end.
-
-## Flujo de trabajo diario
-
-1. Revisar tareas y prioridades en mi board (GitHub Projects / Notion).
-2. Crear una rama por tarea/feature usando convenciones claras (feature/<descripción>).
-3. Desarrollar en small increments, commits pequeños y descriptivos.
-4. PRs con descripción, checklist y capturas si aplican; pedir revisión antes de merge.
-5. Deploys automáticos con CI/CD (GitHub Actions / other) y monitorización básica.
-
-## Accesos y seguridad
-
-- Autenticación: 2FA en cuentas críticas (GitHub, correo, plataformas en la nube).
-- Gestión de secretos: usar vaults o secrets de CI; nunca poner credenciales en repositorios.
-- Backups: copias periódicas del home y del directorio de proyectos importantes en un NAS y en un servicio cloud.
-
-## Dotfiles y configuración
-
-Puedes ver mis dotfiles y configuraciones en los siguientes enlaces (ejemplos):
-
-- Dotfiles (zsh, vim, tmux, gitconfig): https://github.com/tu-usuario/dotfiles
-- Config de VS Code / extensiones: https://github.com/tu-usuario/vscode-settings
-
-Sustituye "tu-usuario" por el nombre de usuario correspondiente o enlaza tus repositorios reales.
+| Categoría                   | Componente / Modelo                                            |
+| --------------------------- | -------------------------------------------------------------- |
+| **Desktop**                 | CPU: Intel i5 12th Gen                                         |
+|                             | GPU: NVIDIA GTX 1060 6GB                                       |
+|                             | RAM: 64 GB DDR4                                                |
+| **Laptop**                  | MacBook Air 13" (M1)                                           |
+| **Periféricos**             | Teclados: **Keychron K6** / GMK67 White                        |
+|                             | Ratón: Logitech G Pro                                          |
+|                             | Auriculares: JBL 355BT                                         |
+| **Audio**                   | Altavoces: Presonus Eris 3.5                                   |
+| **Pantallas**               | 2 × 27" Logitech 4K (27US500-W)                                |
+| **Home Lab / Servidor**     | ASUS Prime N100I-D D4 + 32 GB RAM                              |
+| **Maker Gear**              | Impresora 3D: **Bambulab A1**                                  |
+| **Setup**                   | Mesa: Flexispot elevable con tablero IKEA SÄLJAN (186 cm)      |
+|                             | Silla: IKEA JÄRVFJÄLLET                                        |
+| **Software & Herramientas** | Sistemas Operativos: **Debian** (Desktop) / **macOS** (Laptop) |
+|                             | Terminal: **zsh** + GNOME Shell                                |
+|                             | Editor: **VSCode** Insiders                                    |
+|                             | Notas: **Obsidian**                                            |
+|                             | Control de Versiones: **GitHub**                               |
+|                             | Asistente IA: **GitHub Copilot**                               |
+|                             | 3D: Bambulab Studio/Orca Slicer/Fusion 360                     |

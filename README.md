@@ -413,19 +413,16 @@ The integration provides two data fetching strategies:
 │   │   ├── organisms/     # Complex sections (Archive, Bookmarks, Music, etc.)
 │   │   ├── templates/     # Page templates for collections
 │   │   ├── icons/         # SVG icon components
-```env
-# Raindrop.io Integration (for bookmarks and reading)
-RAINDROP_ACCESS_TOKEN=your_raindrop_access_token_here
-
-# Last.fm Integration (for music)
-PUBLIC_LASTFM_API_KEY=your_api_key_here
-PUBLIC_LASTFM_APPNAME=ansango.dev
-PUBLIC_LASTFM_API_BASE_URL=https://ws.audioscrobbler.com/2.0
-LASTFM_SHARED_SECRET=your_shared_secret_here
-
-# GoatCounter Analytics (optional)
-PUBLIC_GOATCOUNTER_CODE=your-site-code
-``` │   └── uses.md
+│   │   └── layout/        # Layout wrapper components
+│   ├── content/           # Content collections
+│   │   ├── blog/
+│   │   ├── wiki/
+│   │   ├── projects/
+│   │   ├── bookmarks/     # (Note: now powered by Raindrop.io)
+│   │   ├── about.md
+│   │   ├── blogroll.md
+│   │   ├── now.md
+│   │   └── uses.md
 │   ├── layout/            # Page layouts
 │   │   ├── default.astro
 │   │   └── elements/      # Layout sub-components

@@ -19,12 +19,15 @@
   /* Transiciones suaves entre temas */
   :root.theme-transitioning,
   :root.theme-transitioning * {
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+    transition:
+      background-color 0.3s,
+      color 0.3s,
+      border-color 0.3s;
   }
 
   /* Evitar transiciones en elementos que no deben animarse */
   :root.theme-transitioning *:where(img, video, iframe, canvas) {
-    transition: none !important;
+    transition: none;
   }
   :root {
     --body: theme(colors.white);

@@ -755,329 +755,199 @@ Document your tools and setup in `src/content/uses.md`.
 
 Share your music taste with real-time Last.fm integration showing what you're currently listening to and your listening history.
 
-## 📋 Obsidian Integration via GitHub Actions
+## 📋 Obsidian Integration & Deployment
 
-Content for this site is managed in a separate Obsidian vault repository and automatically synced via GitHub Actions. The workflow converts Obsidian markdown to Astro-compatible format using `obsidian-export`.
+This site is managed as an Obsidian vault with content stored in `src/content/`. The deployment pipeline uses GitHub Actions to convert Obsidian markdown to Astro-compatible format using `obsidian-export` and deploy directly to Cloudflare Pages.
 
-### Architecture
+### Obsidian Configuration
 
-- **Content Repo**: `ansango/vault.base` - Obsidian vault with all content
-- **Template Repo**: `ansango/ansango.dev` - This Astro site
-- **Build Tool**: `obsidian-export` v22.11.0 converts Obsidian → Markdown
+The repository includes an `.obsidian/` folder with recommended plugins and settings for an optimized writing experience:
+
+#### Community Plugins
+
+The following plugins are configured to automate content management tasks:
+
+- **obsidian-git**: Automatic git commits and syncing with GitHub
+- **obsidian-linter**: Automatically formats and validates markdown files
+- **obsidian-local-images-plus**: Downloads and converts external images to local WebP format
+- **obsidian-metadata-links**: Manages frontmatter and metadata
+- **file-explorer-plus**: Enhanced file organization
+
+#### Plugin Benefits
+
+- **Automatic Frontmatter**: Linter auto-generates required frontmatter fields (date, mod, published)
+- **Image Optimization**: Local Images Plus converts images to WebP and stores them in `src/assets/`
+- **Git Automation**: Obsidian Git handles commits and pushes on file save
+- **Content Validation**: Linter ensures markdown follows project conventions
+
+#### Setup in Obsidian
+
+1. Open this repository as an Obsidian vault
+2. Install community plugins when prompted (or manually enable them in Settings → Community Plugins)
+3. Configure Obsidian Git with your credentials (Settings → Obsidian Git)
+4. Adjust Linter rules if needed (Settings → Linter)
+
+### Deployment Pipeline
+
+The site deploys automatically via GitHub Actions when content changes are pushed.
+
+#### Architecture
+
+- **Repository**: `ansango/ansango.dev` - Single repository for content and code
+- **Build Tool**: `obsidian-export` v22.11.0 converts Obsidian markdown → Astro-compatible markdown
 - **Deployment**: Cloudflare Pages via Wrangler CLI
-- **Schedule**: Automatic rebuilds every 2 days at 9 AM UTC
+- **Schedule**: Automatic rebuilds every 2 days at 9 AM UTC (for dynamic content updates)
 
-### Workflow Overview
+#### Workflow Triggers
 
 ```yaml
-name: ansango.com
-
 on:
   workflow_dispatch:           # Manual trigger
   push:
     branches: [main]
     paths:
-      - "sites/ansango.com/content/**"
+      - "src/content/**"      # Auto-deploy on content changes
   schedule:
     - cron: "0 9 */2 * *"     # Every 2 days at 9 AM UTC
-
-jobs:
-  publish:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
 ```
 
-### Key Features
+#### Pipeline Steps
 
-1. **Concurrency Control**: Cancels in-progress builds when new push occurs
-2. **Timeout Safety**: 15-minute timeout prevents hanging builds
-3. **Dependency Caching**: 
-   - Bun dependencies (`~/.bun/install/cache`)
-   - obsidian-export binary (v22.11.0)
-4. **Environment Variables**: Hardcoded public vars for consistency
-5. **Build Summaries**: Success/failure notifications in GitHub Actions UI
+1. **Checkout Repository**: Fetches the latest code
+2. **Prepare Content**: Copies `src/content/` and `public/assets/` for conversion
+3. **Convert with obsidian-export**: Processes Obsidian markdown to standard markdown
+4. **Replace Content**: Overwrites `src/content/` and `src/assets/` with converted files
+5. **Build Site**: Builds Astro site with Bun (includes API data fetching)
+6. **Deploy**: Pushes `dist/` to Cloudflare Pages
 
-### Setup Instructions
+#### Key Features
 
-#### 1. Create Obsidian Vault Repository
+- ✅ **Concurrency Control**: Cancels in-progress builds when new push occurs
+- ✅ **Timeout Safety**: 15-minute timeout prevents hanging builds
+- ✅ **Dependency Caching**: Caches Bun dependencies and obsidian-export binary
+- ✅ **Environment Variables**: Secure API credentials via GitHub Secrets
+- ✅ **Build Summaries**: Success/failure notifications in GitHub Actions UI
 
-```bash
-# Create new repo for your vault
-mkdir obsidian-vault && cd obsidian-vault
-git init
-git remote add origin https://github.com/yourusername/vault.git
+### Required GitHub Secrets
 
-# Structure your vault
-mkdir -p sites/yoursite.com/content
-mkdir -p system/assets
+Configure these in repository settings: `Settings → Secrets and variables → Actions`
 
-# Add content matching Astro collections
-sites/yoursite.com/content/
-├── blog/
-├── wiki/
-├── projects/
-├── about.md
-├── uses.md
-└── now.md
-```
-
-#### 2. Set Up Repository Secrets
-
-In your **template repository** (ansango.dev), add these secrets:
-
-```
-Settings → Secrets and variables → Actions → New repository secret
-```
-
-**Required Secrets**:
-- `PAT`: Personal Access Token with `repo` scope (to access vault repo)
+**Required**:
 - `CLOUDFLARE_API_TOKEN`: Cloudflare API token for Pages deployment
 - `CLOUDFLARE_ACCOUNT_ID`: Your Cloudflare account ID
-- `RAINDROP_ACCESS_TOKEN`: Raindrop.io API token (optional)
-- `PUBLIC_LASTFM_API_KEY`: Last.fm API key (optional)
-- `LASTFM_SHARED_SECRET`: Last.fm shared secret (optional)
-- `PUBLIC_GOATCOUNTER_CODE`: GoatCounter site code (optional)
 
-#### 3. Create Workflow File
+**Optional** (for integrations):
+- `RAINDROP_ACCESS_TOKEN`: Raindrop.io API token for bookmarks/reading
+- `PUBLIC_LASTFM_API_KEY`: Last.fm API key for music integration
+- `LASTFM_SHARED_SECRET`: Last.fm shared secret
+- `PUBLIC_GOATCOUNTER_CODE`: GoatCounter analytics site code
 
-In your **vault repository**, create `.github/workflows/deploy.yml`:
+### Content Structure
 
-```yaml
-name: yoursite.com
-env:
-  TEMPLATE_REPO: yourusername/yoursite.dev
-  CONTENT_DIR: sites/yoursite.com/content
-  ASSETS_DIR: system/assets
+```
+src/content/
+├── blog/              # Blog posts
+│   └── my-post.md
+├── wiki/              # Hierarchical wiki
+│   └── development/
+│       └── astro.md
+├── projects/          # Project showcases
+│   └── my-project.md
+├── about.md           # About page
+├── uses.md            # Uses page
+├── now.md             # Now page
+├── blogroll.md        # Blogroll
+└── bookmarks/         # Placeholder (backed by Raindrop)
+    └── daily.md
 
-on:
-  workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - "sites/yoursite.com/content/**"
-  schedule:
-    - cron: "0 9 */2 * *"
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
-jobs:
-  publish:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    
-    steps:
-      # Checkout repositories
-      - name: 📥 Checkout content repository
-        uses: actions/checkout@v4
-        with:
-          path: temp_md
-          
-      - name: 📥 Checkout blog template
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ env.TEMPLATE_REPO }}
-          token: ${{ secrets.PAT }}
-          path: template_blog
-      
-      # Prepare content
-      - name: 📝 Prepare content and assets for export
-        run: |
-          mkdir -p temp_md/publish
-          cp -r temp_md/${{ env.CONTENT_DIR }} temp_md/publish
-          cp -r temp_md/${{ env.ASSETS_DIR }} temp_md/publish
-      
-      # Obsidian conversion
-      - name: 💾 Cache obsidian-export binary
-        uses: actions/cache@v4
-        id: obsidian-cache
-        with:
-          path: obsidian-export_Linux-x86_64.bin
-          key: obsidian-export-v22.11.0
-          
-      - name: 📥 Download obsidian-export
-        if: steps.obsidian-cache.outputs.cache-hit != 'true'
-        run: |
-          wget https://github.com/zoni/obsidian-export/releases/download/v22.11.0/obsidian-export_Linux-x86_64.bin
-          chmod +x obsidian-export_Linux-x86_64.bin
-          
-      - name: 🔄 Convert Obsidian to Markdown
-        run: |
-          find template_blog/src/content -mindepth 1 -maxdepth 1 -type d -exec rm -rf {} \;
-          ./obsidian-export_Linux-x86_64.bin ./temp_md/publish template_blog/src
-          
-      - name: 📦 Move converted files to working directory
-        run: |
-          cp -r template_blog/. .
-          rm -rf template_blog
-          rm -rf temp_md
-      
-      # Build with Bun
-      - name: 🥟 Setup Bun
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: 'latest'
-          
-      - name: 💾 Cache Bun dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.bun/install/cache
-          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
-          restore-keys: |
-            ${{ runner.os }}-bun-
-            
-      - name: 🔨 Build site
-        env:
-          RAINDROP_ACCESS_TOKEN: ${{ secrets.RAINDROP_ACCESS_TOKEN }}
-          LASTFM_SHARED_SECRET: ${{ secrets.LASTFM_SHARED_SECRET }}
-          PUBLIC_LASTFM_API_KEY: ${{ secrets.PUBLIC_LASTFM_API_KEY }}
-          PUBLIC_LASTFM_APPNAME: yoursite.dev
-          PUBLIC_LASTFM_API_BASE_URL: https://ws.audioscrobbler.com/2.0
-          PUBLIC_GOATCOUNTER_CODE: ${{ secrets.PUBLIC_GOATCOUNTER_CODE }}
-        run: bun install && bun run build
-      
-      # Deploy to Cloudflare Pages
-      - name: 🚀 Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=yoursite-dev --commit-dirty=true
-      
-      # Build summaries
-      - name: 📊 Build summary (success)
-        if: success()
-        run: |
-          echo "### ✅ Deployment Successful! 🎉" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Triggered by:** ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Branch:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Deployed at:** $(date -u +'%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
-          
-      - name: 💬 Build summary (failure)
-        if: failure()
-        run: |
-          echo "### ❌ Deployment Failed" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Check the logs above for details." >> $GITHUB_STEP_SUMMARY
-          echo "**Failed at:** $(date -u +'%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+public/assets/         # Images referenced in content
+└── images/
+    └── photo.webp
 ```
 
-### Customization
+**Note**: Images are moved to `src/assets/` during build for Astro optimization.
 
-**Environment Variables** (adjust in workflow):
-```yaml
-env:
-  TEMPLATE_REPO: yourusername/yoursite.dev  # Your template repo
-  CONTENT_DIR: sites/yoursite.com/content   # Path to content in vault
-  ASSETS_DIR: system/assets                 # Path to images/assets
+### Obsidian → Astro Conversion
+
+`obsidian-export` handles:
+
+- **Wikilinks**: `[[note]]` → `[note](./note.md)`
+- **Image paths**: Preserves relative paths for Astro processing
+- **Frontmatter**: Maintains YAML frontmatter structure
+- **Nested folders**: Preserves folder hierarchy for wiki navigation
+
+### Local Testing
+
+Test the conversion pipeline locally before deploying:
+
+```bash
+# Run the test script
+bun run obsidian
+
+# This will:
+# 1. Create obsidian_test/ directory
+# 2. Copy content and assets
+# 3. Run obsidian-export conversion
+# 4. Show before/after comparison
+# 5. Clean up temporary files
 ```
 
-**Public Variables** (hardcoded in build step):
-```yaml
-PUBLIC_LASTFM_APPNAME: yoursite.dev              # Your site name
-PUBLIC_LASTFM_API_BASE_URL: https://ws.audioscrobbler.com/2.0
+Script commands:
+```bash
+bun run obsidian:test           # Run conversion test
+bun run obsidian:clean          # Clean test directory
+bun run obsidian:clean:export   # Remove obsidian-export binary
 ```
 
-**Schedule** (adjust cron):
-```yaml
-schedule:
-  - cron: "0 9 */2 * *"  # Every 2 days at 9 AM UTC
-  # Examples:
-  # - cron: "0 0 * * *"   # Daily at midnight
-  # - cron: "0 9 * * 1"   # Every Monday at 9 AM
-  # - cron: "0 9 1 * *"   # First day of month at 9 AM
-```
+### Cloudflare Pages Configuration
+
+**Important**: Disable automatic Git deployments in Cloudflare Pages settings to prevent duplicate builds.
+
+1. Go to Cloudflare Pages → Your project → Settings → Builds & deployments
+2. **Disable** "Automatic deployments" (we deploy via GitHub Actions instead)
+3. Keep "Production branch" set to `main` (for manual deployments if needed)
+
+This ensures:
+- Only GitHub Actions triggers deploys (for proper content conversion)
+- No conflicts between Cloudflare's auto-deploy and workflow deploys
+- Faster deployments (Cloudflare doesn't waste time on failed direct builds)
+
+### Deployment Workflow
+
+Typical content update flow:
+
+1. **Write in Obsidian**: Create/edit markdown files in `src/content/`
+2. **Auto-format**: Linter adds frontmatter, formats content
+3. **Optimize images**: Local Images Plus converts to WebP
+4. **Git sync**: Obsidian Git commits and pushes changes
+5. **Auto-deploy**: GitHub Actions converts content and deploys
+6. **Live site**: Changes appear on Cloudflare Pages (~2-3 minutes)
 
 ### Performance Optimizations
 
-The workflow includes several optimizations:
-
 - **~60% faster builds** with Bun dependency caching
 - **Instant obsidian-export** with binary caching (no redownload)
-- **Parallel operations** where possible
 - **Cancel-in-progress** prevents wasted compute on obsolete builds
 - **15-minute timeout** prevents hanging builds
-
-### Obsidian Vault Structure
-
-Recommended structure for your vault:
-
-```
-obsidian-vault/
-├── .github/
-│   └── workflows/
-│       └── deploy.yml
-├── sites/
-│   └── yoursite.com/
-│       └── content/
-│           ├── blog/
-│           │   └── my-post.md
-│           ├── wiki/
-│           │   └── development/
-│           │       └── astro.md
-│           ├── projects/
-│           │   └── my-project.md
-│           ├── about.md
-│           ├── uses.md
-│           └── now.md
-└── system/
-    └── assets/
-        └── images/
-            └── photo.jpg
-```
-
-### Advanced Features
-
-#### Image Handling
-
-Images from `system/assets` are automatically copied to `src/` and processed by obsidian-export. Use relative paths in your markdown:
-
-```markdown
-![Description](../system/assets/images/photo.jpg)
-```
-
-#### Wikilinks Conversion
-
-obsidian-export automatically converts Obsidian wikilinks to markdown:
-
-```markdown
-# Obsidian format
-[[my-other-note]]
-
-# Converted to
-[my-other-note](./my-other-note.md)
-```
-
-#### Frontmatter Validation
-
-Add custom validation before build (optional):
-
-```yaml
-- name: 🔍 Validate frontmatter
-  run: |
-    bun run validate-frontmatter  # Create custom script
-```
+- **Scheduled rebuilds** keep dynamic content (music, bookmarks) fresh
 
 ### Troubleshooting
 
 **Build Failures**:
-- Check environment variables are set correctly
-- Verify PAT has `repo` scope and hasn't expired
-- Ensure content structure matches Astro collections
+- Check GitHub Actions logs for conversion errors
+- Verify environment variables are set correctly
+- Ensure frontmatter includes `published: true`
 - Check obsidian-export conversion logs
 
-**Empty Collections**:
-- Verify `CONTENT_DIR` path matches vault structure
-- Check obsidian-export output directory is correct
-- Ensure frontmatter includes `published: true`
+**Image Issues**:
+- Ensure images are in `public/assets/` before build
+- Verify image paths are relative (e.g., `../../assets/image.webp`)
+- Check Astro build logs for image optimization errors
 
-**Slow Builds**:
-- Verify caching is working (check workflow logs)
-- Consider reducing rebuild frequency
-- Optimize image sizes before committing
+**Deployment Issues**:
+- Verify Cloudflare API token hasn't expired
+- Check Cloudflare Pages project name matches workflow
+- Ensure automatic Git deployments are disabled in Cloudflare
 
 **Cache Issues**:
 ```bash
@@ -1085,26 +955,23 @@ Add custom validation before build (optional):
 # Go to: Actions → Caches → Delete cache entries
 ```
 
-### Migration from Single Repo
+### Migration Notes
 
-If migrating from a single-repo setup:
+This project uses a **single repository** approach (content + code together). If you prefer separation:
 
-1. Create new vault repository
-2. Move `src/content/` to vault repo structure
-3. Add workflow to vault repo
-4. Set up secrets in template repo
-5. Test with manual trigger (`workflow_dispatch`)
-6. Update content in vault repo, verify auto-deployment
+1. Move `src/content/` to a separate vault repository
+2. Update workflow to checkout both repos
+3. Follow the two-repo pattern from previous versions
 
 ### Benefits
 
-✅ **Separation of Concerns**: Content and code in separate repos  
 ✅ **Obsidian Native**: Write with full Obsidian features (backlinks, graph, plugins)  
-✅ **Automatic Deployment**: Push to vault → auto-build → live site  
+✅ **Automatic Deployment**: Push → auto-convert → live site  
 ✅ **Version Control**: Full git history for content changes  
-✅ **Scheduled Rebuilds**: Keep dynamic content fresh (music, bookmarks)  
-✅ **Fast Builds**: Caching reduces build time by ~60%  
-✅ **Safety**: Timeout and concurrency control prevent issues
+✅ **Automated Formatting**: Linter handles frontmatter and markdown  
+✅ **Image Optimization**: Auto-convert images to WebP  
+✅ **Fast Builds**: Caching reduces build time significantly  
+✅ **Scheduled Rebuilds**: Keep dynamic content fresh
 
 ## 🚢 Deployment
 

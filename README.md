@@ -1,11 +1,9 @@
 
-# ansango.template
+# ansango.dev
 
 ## 🌐 Personal Blog & Wiki Template
 
 A modern, content-first personal website built with [Astro](https://astro.build), designed for technology articles, wikis, projects, and indie web principles. Write in [Obsidian](https://obsidian.md), publish with ease.
-
-See [live demo →](https://ansango.com) | [GitHub Repository →](https://github.com/ansango/ansango.dev)
 
 ## ✨ Features
 
@@ -180,6 +178,7 @@ Built with:
 - [Svelte 5](https://svelte.dev) - Interactive components
 - [Tailwind CSS v4](https://tailwindcss.com) - Styling
 - [TanStack Query](https://tanstack.com/query) - Data fetching
+
 
 Inspired by the [IndieWeb](https://indieweb.org/) movement.
 

@@ -1,15 +1,15 @@
 ---
 /**
  * 🌳 TreeNode Component
- * 
+ *
  * @description Recursive tree navigation component for hierarchical content.
  * Renders folders as expandable details and files as links with appropriate icons.
- * 
+ *
  * @usage
  * ```astro
  * <TreeNode node={wikiTree} level={0} />
  * ```
- * 
+ *
  * @compatible
  * - 📁 Uses FolderIcon for directories
  * - 📄 Uses FileIcon for documents
@@ -24,9 +24,10 @@ import { ChevronIcon, FolderIcon, FileIcon } from "@/components/icons";
 interface Props {
   node: NodeItem;
   level?: number;
+  open?: boolean;
 }
 
-const { node, level = 0 } = Astro.props;
+const { node, level = 0, open = false } = Astro.props;
 const isFolder = node.type === "folder";
 const hasChildren = node.children && node.children.length > 0;
 const paddingLeft = level * 12 + 8;
@@ -34,7 +35,7 @@ const paddingLeft = level * 12 + 8;
 
 {
   isFolder && hasChildren ? (
-    <details open={level === 0 || level === 1}>
+    <details open={open ? level === 0 || level === 1 : false}>
       <summary
         class="flex cursor-pointer list-none items-center gap-1.5 rounded px-2 py-1 text-sm font-semibold transition-colors"
         style={`padding-left: ${paddingLeft}px`}

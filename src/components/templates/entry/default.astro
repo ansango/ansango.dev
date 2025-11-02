@@ -23,7 +23,7 @@ import { getEntry, render } from "astro:content";
 
 import { LayoutDefault } from "@/components/layout";
 import { getReadingTime } from "@/lib/utils";
-import { EntryHeading, Share } from "@/components/molecules";
+import { Comments, EntryHeading, Share } from "@/components/molecules";
 import { getBreadcrumbs } from "@/lib/breadcrumbs";
 import { site } from "@/constants";
 
@@ -73,5 +73,6 @@ const shareUrl = `${site.url}${Astro.url.pathname}`;
 <LayoutDefault {...layoutProps} type="article">
   <EntryHeading {...headingProps} />
   <Content />
+  <Comments />
   {showShare && <Share url={shareUrl} />}
 </LayoutDefault>

@@ -48,6 +48,8 @@
         document.documentElement.classList.remove("theme-transitioning");
       }, 100);
     }
+
+    setGiscusTheme();
   }
 
   function preloadTheme() {
@@ -58,6 +60,16 @@
       toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
     }
   }
+
+  const setGiscusTheme = () => {
+    const giscus = document.querySelector(".giscus-frame");
+    const isDark = document.documentElement.classList.contains("dark");
+    if (giscus) {
+      const url = new URL(giscus.src);
+      url.searchParams.set("theme", isDark ? "transparent_dark" : "light");
+      giscus.src = url.toString();
+    }
+  };
 
   document.addEventListener("DOMContentLoaded", () => init());
   document.addEventListener("astro:after-swap", () => init());

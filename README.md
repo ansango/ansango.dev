@@ -8,7 +8,7 @@
 [![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat)](LICENSE)
 [![Deploy](https://img.shields.io/badge/Deploy-Cloudflare-F38020?style=flat&logo=cloudflare&logoColor=white)](https://pages.cloudflare.com)
 
-## 🌐 Personal Blog & Wiki Template
+## 🌐 Personal Blog & Wiki
 
 A modern, content-first personal website built with [Astro](https://astro.build), designed for technology articles, wikis, projects, and indie web principles. Write in [Obsidian](https://obsidian.md), publish with ease.
 
@@ -16,7 +16,7 @@ See [live demo →](https://ansango.com) | [GitHub Template Repository →](http
 
 ## ✨ Features
 
-Modern template for bloggers, developers, and indie web enthusiasts with:
+Modern template for bloggers, developers, and *indie web* enthusiasts with:
 
 - 📝 **Content Collections**: Blog, Wiki, Projects, and standalone pages
 - 🔍 **Full-text Search**: Powered by Pagefind with keyboard shortcuts

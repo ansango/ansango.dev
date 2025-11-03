@@ -18,7 +18,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  publish:
+  LAUNCH-DEPLOYMENT:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     

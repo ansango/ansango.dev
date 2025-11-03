@@ -40,5 +40,9 @@ export default defineConfig({
   },
   vite: {
     plugins: [tailwindcss()],
+    build:{
+      assetsInlineLimit: 14336, // 14kb
+      cssMinify: 'lightningcss'
+    }
   },
 });

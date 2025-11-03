@@ -14,7 +14,10 @@ import svelte from "@astrojs/svelte";
 // https://astro.build/config
 export default defineConfig({
   site: site.url,
-  prefetch: true,
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'load'
+  },
   integrations: [
     pagefind(),
     sitemap({

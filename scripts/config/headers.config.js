@@ -68,6 +68,7 @@ export default {
       'script-src': [
         "'self'",
         "'unsafe-inline'", // Necesario si inlineHashes está deshabilitado
+        "'wasm-unsafe-eval'", // Necesario para Pagefind (WebAssembly)
         'https://giscus.app',
         'https://pagefind.app',
         'https://gc.zgo.at',

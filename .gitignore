@@ -25,4 +25,5 @@ pnpm-debug.log*
 
 obsidian_test/
 obsidian-export_Linux-x86_64.bin
-publi/_headers
+public/_headers
+public/_headers.backup

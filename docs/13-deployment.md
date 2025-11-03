@@ -171,7 +171,7 @@ Create `public/_headers`:
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: interest-cohort=()
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
 
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable

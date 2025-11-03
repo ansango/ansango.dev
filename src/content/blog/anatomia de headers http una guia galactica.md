@@ -13,9 +13,9 @@ Es domingo, tarde…, otra nocha más aquí en el ordenador. Hoy he profundizado
 
 ---
 
-> *Cuando las políticas de seguridad y el rendimiento se encuentran en un archivo de configuración a las 12.39 de un domingo-lunes*
-
 ![[0676f5e04bd367a0b586c23a559e17a8_MD5.webp]]
+
+> *Cuando las políticas de seguridad y el rendimiento se encuentran en un archivo de configuración a las 12.39 de un domingo-lunes*
 
 ## Prólogo: El Arte de los Headers Invisibles
 

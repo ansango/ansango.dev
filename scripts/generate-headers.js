@@ -268,7 +268,7 @@ async function main() {
     
     // Cargar configuración
     log.info('Cargando configuración...');
-    const configPath = path.join(projectRoot, 'config', 'headers.config.js');
+    const configPath = path.join(projectRoot, 'scripts', 'config', 'headers.config.js');
     const { default: config } = await import(configPath);
     log.success('Configuración cargada');
     

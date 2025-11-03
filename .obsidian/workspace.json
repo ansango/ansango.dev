@@ -185,17 +185,17 @@
   },
   "active": "49e2fa3886ffede9",
   "lastOpenFiles": [
+    "public/_headers.backup",
     "dist/sitemap-0.xml",
     "dist/sitemap-index.xml",
-    "dist/pagefind/pagefind-entry.json",
     "dist/pagefind/wasm.unknown.pagefind",
     "dist/pagefind/pagefind-modular-ui.css",
     "dist/pagefind/pagefind-modular-ui.js",
-    "dist/pagefind/pagefind-highlight.js",
     "dist/pagefind/pagefind-ui.css",
-    "dist/pagefind/pagefind.js",
     "dist/pagefind/pagefind-ui.js",
-    "dist/pagefind/fragment/es_cac1dd8.pf_fragment",
+    "dist/pagefind/pagefind-highlight.js",
+    "dist/pagefind/pagefind.js",
+    "dist/pagefind/pagefind-entry.json",
     "dist/og-default.jpg",
     "dist/mstile-150x150.png",
     "dist/favicon-32x32.png",
@@ -206,6 +206,7 @@
     "dist/assets/cadf2e1061bac5f9d411e86d652d5722_MD5.jpeg",
     "dist/assets/b6443e6f224752aaa3ac468ae891bf6b_MD5.jpg",
     "dist/assets/b549a3ff32be771a21148ac6b2ae51aa_MD5.jpeg",
+    "scripts/config/README-es.md",
     "src/content/blog/anatomia de headers http una guia galactica.md",
     "src/content/blogroll.md",
     "docs/csp-automated-system-es.md",
@@ -229,7 +230,6 @@
     "src/content/uses.md",
     "roadmap.md",
     "src/content/blog/vue 3 y tanstack query.md",
-    "src/content/blog/proteger node.js en prod.md",
-    "src/content/blog/hello world.md"
+    "src/content/blog/proteger node.js en prod.md"
   ]
 }

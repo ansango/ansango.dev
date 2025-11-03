@@ -18,9 +18,10 @@ npm run build
 
 ## 🏗️ Arquitectura del Sistema
 
-### 1. Configuración Central (`config/headers.config.js`)
+### 1. Configuración Central (`scripts/config/headers.config.js`)
 
 Archivo único donde defines:
+- **Features habilitados/deshabilitados** (CSP, cache, security headers)
 - **Scripts inline** a hashear (rutas de archivos)
 - **Dominios whitelistados** por directiva CSP
 - **Políticas de cache** por tipo de recurso
@@ -34,6 +35,7 @@ Script Node.js que:
 - Calcula hashes SHA-256 automáticamente
 - Genera `public/_headers` completo
 - Crea backup del archivo anterior
+- Respeta flags de habilitación/deshabilitación
 
 ### 3. Integración en Build
 
@@ -45,9 +47,25 @@ El comando `npm run build` ejecuta automáticamente:
 
 ## 📝 Cómo Modificar la Configuración
 
+### Habilitar/Deshabilitar Features
+
+Edita `scripts/config/headers.config.js`:
+```javascript
+csp: {
+  directives: {
+    'script-src': [
+      "'self'",
+      "'unsafe-inline'",  // Si lo necesitas
+      'https://giscus.app',
+      'https://nuevo-dominio.com', // ← Añadir aquí
+    ],
+  },
+}
+```
+
 ### Añadir un Script Inline Nuevo
 
-Edita `config/headers.config.js`:
+Solo si `features.inlineHashes: true`:
 
 ```javascript
 csp: {
@@ -56,12 +74,43 @@ csp: {
     {
       file: 'src/components/tu-nuevo-script.astro',
       description: 'Descripción del script',
+      enabled: true,
     },
   ],
 }
 ```
 
-Luego ejecuta:
+### Añadir Dominio Externo
+
+```javascript
+csp: {
+  inlineScripts: [
+Para otros tipos de recursos:
+- `style-src` - Estilos CSS
+- `img-src` - Imágenes
+- `connect-src` - APIs/WebSockets
+- `frame-src` - iFrames
+- `font-src` - Fuentes
+
+### Deshabilitar Reglas de Cache Específicas
+
+```javascript
+cache: {
+```javascript
+cache: {
+  images: {
+    enabled: true,
+    maxAge: 604800, // 1 semana en segundos
+    staleWhileRevalidate: 86400, // 1 día
+    directive: 'public, max-age=604800, stale-while-revalidate=86400',
+    patterns: ['/images/*'],
+  },
+}
+```
+
+### Ajustar Políticas de Cache
+
+Modifica tiempos en segundos:
 ```bash
 npm run generate:headers
 ```
@@ -78,66 +127,63 @@ csp: {
     'script-src': [
       "'self'",
       'https://giscus.app',
-      'https://nuevo-dominio.com', // ← Añadir aquí
-    ],
-  },
-}
-```
-
-Para otros tipos de recursos:
-- `style-src` - Estilos CSS
-- `img-src` - Imágenes
-- `connect-src` - APIs/WebSockets
-- `frame-src` - iFrames
-- `font-src` - Fuentes
-
-### Ajustar Políticas de Cache
-
-Modifica tiempos en segundos:
-
-```javascript
-cache: {
-  images: {
-    maxAge: 604800, // 1 semana en segundos
-    staleWhileRevalidate: 86400, // 1 día
-    directive: 'public, max-age=604800, stale-while-revalidate=86400',
-    patterns: ['/images/*'],
-  },
-}
-```
-
-Referencia de tiempos:
-- `3600` = 1 hora
-- `86400` = 1 día
-- `604800` = 1 semana
-- `2592000` = 30 días
-- `31536000` = 1 año
-
-### Modificar Headers de Seguridad
-
-```javascript
-security: {
-  'X-Frame-Options': 'DENY',           // DENY, SAMEORIGIN, ALLOW-FROM
-  'X-Content-Type-Options': 'nosniff',
-  'Referrer-Policy': 'strict-origin-when-cross-origin',
-  'Permissions-Policy': 'geolocation=(), microphone=(), camera=()',
-}
-```
-
----
-
 ## 🔧 Scripts Disponibles
 
 ### `npm run generate:headers`
 Regenera `public/_headers` basado en la configuración.
 
 **Cuándo usar:**
-- Modificaste un script inline
-- Cambiaste configuración de CSP
-- Añadiste/quitaste dominios
+- Modificaste configuración de features
+- Cambiaste CSP o dominios
 - Ajustaste políticas de cache
+- Modificaste security headers
 
 ### `npm run build`
+Build completo (regenera headers automáticamente).
+
+---
+
+## 🌐 Configuración Actual (ansango.dev)
+
+### Features Habilitados
+- ✅ **CSP:** Habilitado con `'unsafe-inline'`
+- ✅ **Security Headers:** Todos habilitados
+- ✅ **Cache Control:** Habilitado
+- ⚠️ **Inline Hashes:** Deshabilitado (usamos `'unsafe-inline'`)
+- ✅ **Report URI:** Habilitado
+
+### Dominios Whitelistados
+
+#### Scripts (`script-src`)
+- `'self'` - Scripts del mismo origen
+- `'unsafe-inline'` - Scripts inline permitidos
+- `https://giscus.app` - Comentarios
+- `https://pagefind.app` - Búsqueda
+- `https://gc.zgo.at` - GoatCounter analytics
+- `https://*.goatcounter.com` - GoatCounter dominio
+- `https://static.cloudflareinsights.com` - Cloudflare Web Analytics
+
+#### Estilos (`style-src`)
+- `'self'` - Estilos propios
+- `'unsafe-inline'` - Necesario para Tailwind CSS
+- `https://giscus.app` - Estilos de Giscus
+
+#### Imágenes (`img-src`)
+- `'self'` - Imágenes propias
+- `data:` - Data URIs
+- `https:` - Cualquier imagen HTTPS (covers Last.fm, avatares, etc.)
+- `blob:` - Blob URLs
+
+#### Conexiones (`connect-src`)
+- `'self'` - Mismo origen
+- `https://ws.audioscrobbler.com` - Last.fm API
+- `https://api.raindrop.io` - Raindrop API
+- `https://giscus.app` - Giscus API
+- `https://*.goatcounter.com` - GoatCounter tracking
+- `https://cloudflareinsights.com` - Cloudflare Web Analytics
+
+#### Frames (`frame-src`)
+- `https://giscus.app` - iFrame de comentarios
 Build completo (regenera headers automáticamente).
 
 ### `npm run csp:generate` (DEPRECADO)
@@ -162,51 +208,6 @@ El sistema trackea automáticamente estos scripts:
 
 ## 🌐 Dominios Whitelistados
 
-### Scripts (`script-src`)
-- `'self'` - Scripts del mismo origen
-- `https://giscus.app` - Comentarios
-- `https://pagefind.app` - Búsqueda
-
-### Estilos (`style-src`)
-- `'self'` - Estilos propios
-- `'unsafe-inline'` - Necesario para Tailwind CSS
-- `https://giscus.app` - Estilos de Giscus
-
-### Imágenes (`img-src`)
-- `'self'` - Imágenes propias
-- `data:` - Data URIs
-- `https:` - Cualquier imagen HTTPS
-- `blob:` - Blob URLs
-
-### Conexiones (`connect-src`)
-- `'self'` - Mismo origen
-- `https://ws.audioscrobbler.com` - Last.fm API
-- `https://api.raindrop.io` - Raindrop API
-- `https://giscus.app` - Giscus API
-
-### Frames (`frame-src`)
-- `https://giscus.app` - iFrame de comentarios
-
----
-
-## 🧪 Testing y Validación
-
-### Pre-Deploy
-
-```bash
-# 1. Regenerar headers
-npm run generate:headers
-
-# 2. Build local
-npm run build
-
-# 3. Preview
-npm run preview
-
-# 4. Abrir http://localhost:4321
-# 5. DevTools → Console (no debe haber errores CSP)
-```
-
 ### Verificar Headers Generados
 
 ```bash
@@ -215,9 +216,137 @@ cat public/_headers
 
 # Ver solo CSP
 grep "Content-Security-Policy" public/_headers
+
+# Ver features habilitados (desde el script)
+npm run generate:headers
 ```
 
-### Producción
+### Producción - Herramientas Online
+
+#### **1. Security Headers** ⭐ (Recomendado)
+**URL:** https://securityheaders.com/
+
+- Analiza todos los headers HTTP de seguridad
+- Calificación: A+, A, B, C, D, F
+- Explica qué falta y por qué es importante
+## 🐛 Troubleshooting
+
+### "Feature X está deshabilitado"
+
+**Causa:** El feature está en `false` en `features` de la config.
+
+**Solución:**
+```javascript
+features: {
+  csp: true,  // ← Cambiar a true
+}
+```
+
+### "CSP bloquea scripts inline"
+
+**Causa:** Usas `inlineHashes: true` pero falta un hash.
+
+**Solución:**
+1. Añade el script a `inlineScripts` en config
+2. Regenera: `npm run generate:headers`
+
+**O usa `'unsafe-inline'`:**
+```javascript
+features: {
+  inlineHashes: false,  // Deshabilitar hashes
+}
+directives: {
+  'script-src': [
+    "'self'",
+    "'unsafe-inline'",  // Permitir todos los inline
+  ],
+}
+```
+
+### "CSP bloquea un script externo"
+
+**Causa:** El dominio no está whitelistado.
+
+**Solución:**
+1. Añade el dominio a `directives` → `script-src`
+2. Regenera: `npm run generate:headers`
+
+### "Headers no se actualizan en producción"
+## 🔐 Seguridad Best Practices
+
+### ✅ Hacer
+
+- Usar el sistema automatizado
+- Definir dominios específicos cuando sea posible
+- Revisar reportes CSP en `/api/csp-report`
+- Usar `'unsafe-inline'` solo si es necesario (sitios estáticos SSG suele ser aceptable)
+- Documentar nuevos dominios en config
+- Probar con herramientas online regularmente
+
+### ❌ Evitar
+
+- Editar `public/_headers` manualmente
+- Usar `'unsafe-eval'` (nunca)
+- Permitir `*` en dominios
+- Añadir dominios sin verificar qué cargan
+- Ignorar warnings del generador
+- Deshabilitar todos los headers de seguridad
+
+### 📊 Calificación Objetivo
+
+- **Security Headers:** A o A+
+- **Mozilla Observatory:** 90+ puntos
+- **SSL Labs:** A+
+- **CSP Evaluator:** Sin high-severity issues
+
+---
+
+## 📚 Referencias
+
+### Documentación Oficial
+- [MDN - Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
+- [Cloudflare Pages Headers](https://developers.cloudflare.com/pages/platform/headers/)
+- [OWASP Secure Headers Project](https://owasp.org/www-project-secure-headers/)
+
+### Herramientas de Testing
+- [Security Headers](https://securityheaders.com/) - Análisis completo
+- [Mozilla Observatory](https://observatory.mozilla.org/) - Security scan
+- [CSP Evaluator](https://csp-evaluator.withgoogle.com/) - CSP específico
+- [SSL Labs](https://www.ssllabs.com/ssltest/) - SSL/TLS testing
+- [Report URI Hash Generator](https://report-uri.com/home/hash) - Generar hashes manualmente
+
+### Archivos del Proyecto
+- `scripts/config/headers.config.js` - Configuración central
+- `scripts/generate-headers.js` - Generador automático
+- `public/_headers` - Archivo generado (no editar)
+- `src/pages/api/csp-report.ts` - Endpoint de reportes CSP
+
+---
+
+## 🔄 Changelog del Sistema
+
+### v3.0 - Sistema Configurable (Actual)
+- ✅ Features habilitables/deshabilitables
+- ✅ Hashes externos configurables
+- ✅ Scripts inline individuales habilitables
+- ✅ Cache rules individuales habilitables
+- ✅ Modo verbose mejorado
+- ✅ Soporte para `'unsafe-inline'`
+
+### v2.0 - Sistema Automatizado
+- ✅ Generación automática de hashes
+- ✅ Configuración centralizada
+- ✅ Integración en build process
+- ✅ Backup automático
+
+### v1.0 - Manual (Deprecado)
+- ❌ Hashes calculados manualmente
+- ❌ `_headers` editado a mano
+- ❌ Propenso a errores
+
+---
+
+**Última actualización:** 3 de noviembre, 2025
 
 Después del deploy a Cloudflare Pages:
 

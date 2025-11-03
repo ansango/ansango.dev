@@ -95,13 +95,6 @@
         "type": "DIRECTORIES",
         "pattern": "scripts",
         "patternType": "STRICT"
-      },
-      {
-        "name": "",
-        "active": true,
-        "type": "DIRECTORIES",
-        "pattern": "config",
-        "patternType": "STRICT"
       }
     ],
     "frontMatter": [

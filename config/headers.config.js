@@ -8,90 +8,90 @@
  */
 
 export default {
-  /**
-   * Content Security Policy (CSP)
-   * Define qué recursos pueden cargarse y ejecutarse
-   */
-  csp: {
-    // Scripts inline que necesitan hash SHA-256
-    // El generador calculará automáticamente los hashes
-    inlineScripts: [
-      {
-        file: "src/components/layout/elements/theme.script.astro",
-        description: "Theme toggle script",
-      },
-      {
-        file: "src/components/layout/elements/clipboard.script.astro",
-        description: "Clipboard copy script",
-      },
-      {
-        file: "src/components/molecules/searcher.script.astro",
-        description: "Search dialog script",
-      },
-      {
-        file: "src/components/layout/elements/head.astro",
-        description: "SVG animations script",
-        // Para scripts dentro de archivos más grandes
-        extract: true,
-      },
-    ],
+  // /**
+  //  * Content Security Policy (CSP)
+  //  * Define qué recursos pueden cargarse y ejecutarse
+  //  */
+  // csp: {
+  //   // Scripts inline que necesitan hash SHA-256
+  //   // El generador calculará automáticamente los hashes
+  //   inlineScripts: [
+  //     {
+  //       file: "src/components/layout/elements/theme.script.astro",
+  //       description: "Theme toggle script",
+  //     },
+  //     {
+  //       file: "src/components/layout/elements/clipboard.script.astro",
+  //       description: "Clipboard copy script",
+  //     },
+  //     {
+  //       file: "src/components/molecules/searcher.script.astro",
+  //       description: "Search dialog script",
+  //     },
+  //     {
+  //       file: "src/components/layout/elements/head.astro",
+  //       description: "SVG animations script",
+  //       // Para scripts dentro de archivos más grandes
+  //       extract: true,
+  //     },
+  //   ],
 
-    // Dominios permitidos por directiva
-    directives: {
-      "default-src": ["'self'"],
+  //   // Dominios permitidos por directiva
+  //   directives: {
+  //     "default-src": ["'self'"],
 
-      "script-src": [
-        "'self'",
-        // Hashes de Pagefind inline scripts (generados por astro-pagefind)
-        "'sha256-sLUM3D2afZi+A9y4srA8GdLMNRz3COxjYKDK20Wj7/w='",
-        "'sha256-QzWFZi+FLIx23tnm9SBU4aEgx4x8DsuASP07mfqol/c='",
-        "'sha256-U7a72oKuFFz8D7GUHLA1NZ0ciymHmDOc9T9aVDg2rWU='",
-        // Hashes se inyectarán automáticamente aquí
-        "https://giscus.app",
-        "https://pagefind.app",
-        "https://gc.zgo.at", // GoatCounter script
-        "https://*.goatcounter.com", // GoatCounter domain
-        "https://static.cloudflareinsights.com", // Cloudflare Web Analytics
-      ],
+  //     "script-src": [
+  //       "'self'",
+  //       // Hashes de Pagefind inline scripts (generados por astro-pagefind)
+  //       "'sha256-sLUM3D2afZi+A9y4srA8GdLMNRz3COxjYKDK20Wj7/w='",
+  //       "'sha256-QzWFZi+FLIx23tnm9SBU4aEgx4x8DsuASP07mfqol/c='",
+  //       "'sha256-U7a72oKuFFz8D7GUHLA1NZ0ciymHmDOc9T9aVDg2rWU='",
+  //       // Hashes se inyectarán automáticamente aquí
+  //       "https://giscus.app",
+  //       "https://pagefind.app",
+  //       "https://gc.zgo.at", // GoatCounter script
+  //       "https://*.goatcounter.com", // GoatCounter domain
+  //       "https://static.cloudflareinsights.com", // Cloudflare Web Analytics
+  //     ],
 
-      "style-src": [
-        "'self'",
-        "'unsafe-inline'", // Necesario para Tailwind CSS
-        "https://giscus.app",
-      ],
+  //     "style-src": [
+  //       "'self'",
+  //       "'unsafe-inline'", // Necesario para Tailwind CSS
+  //       "https://giscus.app",
+  //     ],
 
-      "img-src": [
-        "'self'",
-        "data:",
-        "https:", // Covers de Last.fm, avatares, etc.
-        "blob:",
-      ],
+  //     "img-src": [
+  //       "'self'",
+  //       "data:",
+  //       "https:", // Covers de Last.fm, avatares, etc.
+  //       "blob:",
+  //     ],
 
-      "font-src": ["'self'", "data:"],
+  //     "font-src": ["'self'", "data:"],
 
-      "connect-src": [
-        "'self'",
-        "https://ws.audioscrobbler.com", // Last.fm API
-        "https://api.raindrop.io", // Raindrop API
-        "https://giscus.app", // Giscus comments
-        "https://*.goatcounter.com", // GoatCounter tracking
-        "https://cloudflareinsights.com", // Cloudflare Web Analytics
-      ],
+  //     "connect-src": [
+  //       "'self'",
+  //       "https://ws.audioscrobbler.com", // Last.fm API
+  //       "https://api.raindrop.io", // Raindrop API
+  //       "https://giscus.app", // Giscus comments
+  //       "https://*.goatcounter.com", // GoatCounter tracking
+  //       "https://cloudflareinsights.com", // Cloudflare Web Analytics
+  //     ],
 
-      "frame-src": [
-        "https://giscus.app", // iFrame de comentarios
-      ],
+  //     "frame-src": [
+  //       "https://giscus.app", // iFrame de comentarios
+  //     ],
 
-      "object-src": ["'none'"],
-      "base-uri": ["'self'"],
-      "form-action": ["'self'"],
-      "frame-ancestors": ["'none'"],
-      "upgrade-insecure-requests": [],
-    },
+  //     "object-src": ["'none'"],
+  //     "base-uri": ["'self'"],
+  //     "form-action": ["'self'"],
+  //     "frame-ancestors": ["'none'"],
+  //     "upgrade-insecure-requests": [],
+  //   },
 
-    // URI para reportes de violaciones CSP
-    reportUri: "/api/csp-report",
-  },
+  //   // URI para reportes de violaciones CSP
+  //   reportUri: "/api/csp-report",
+  // },
 
   /**
    * Security Headers adicionales

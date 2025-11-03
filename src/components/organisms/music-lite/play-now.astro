@@ -1,17 +1,15 @@
 ---
-import { NoListenIcon, PlayIcon } from '@/components/icons'
+import { NoListenIcon, PlayIcon } from "@/components/icons";
 import PlayNowComponent from "@/components/molecules/playnow.svelte";
-
 ---
 
-  <section class="space-y-4">
-    <PlayNowComponent client:load
-      >\
-      <svelte:fragment slot="play">
-        Escuchando ahora <PlayIcon className="inline-flex size-4" />
-      </svelte:fragment>
-      <svelte:fragment slot="noplay">
-        Última reproducción <NoListenIcon className="inline-flex size-4" />
-      </svelte:fragment>
-    </PlayNowComponent>
-  </section>
+<section class="space-y-4">
+  <PlayNowComponent client:load>
+    <svelte:fragment slot="play">
+      Escuchando ahora <PlayIcon className="inline-flex size-4" />
+    </svelte:fragment>
+    <svelte:fragment slot="noplay">
+      Última reproducción <NoListenIcon className="inline-flex size-4" />
+    </svelte:fragment>
+  </PlayNowComponent>
+</section>

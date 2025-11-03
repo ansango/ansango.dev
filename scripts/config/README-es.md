@@ -19,16 +19,15 @@ npm run build
 
 ```
 ansango.dev/
-├── config/
-│   └── headers.config.js       # ⚙️ Configuración central (EDITAR AQUÍ)
+├── 
 ├── scripts/
-│   ├── generate-headers.js     # 🤖 Generador automático
-│   └── generate-csp-hashes.sh  # 🔧 Legacy (deprecado)
-├── public/
-│   └── _headers                # 📄 Generado automáticamente (NO EDITAR)
+│   ├── config/
+│   │   └── headers.config.js       # ⚙️ Configuración central (EDITAR AQUÍ)
+│   │   └── generate-headers.js     # 🤖 Generador automático
+│   public/
+│       └── _headers                # 📄 Generado automáticamente (NO EDITAR)
 └── docs/
-    ├── csp-automated-system.md # 📖 Documentación completa
-    └── csp-testing-checklist.md # ✅ Testing guide
+    └── csp-automated-system.md # 📖 Documentación completa
 ```
 
 ## 🔄 Workflow

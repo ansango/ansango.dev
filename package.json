@@ -25,6 +25,7 @@
     "astro": "^5.14.1",
     "astro-pagefind": "^1.8.5",
     "astro-rehype-relative-markdown-links": "^0.18.1",
+    "lastfm-client-ts": "^2.1.0",
     "rehype-external-links": "^3.0.0",
     "svelte": "^5.41.0",
     "tailwindcss": "^4.1.13",

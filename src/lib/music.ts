@@ -1,11 +1,11 @@
 /**
  * 🎵 Last.fm Music Data Integration
- * 
+ *
  * @description Fetches and caches music data from Last.fm API.
  * Retrieves recent tracks, top artists, and top albums for display.
- * 
+ *
  * @module lib/music
- * 
+ *
  * @compatible
  * - 🎶 Powers PlayNow and music pages
  * - ⏱️ Caches data to minimize API calls
@@ -13,14 +13,8 @@
  * - 📈 Shows top artists and albums statistics
  */
 
-import {
-  userApiMethods,
-  type RecentTracks,
-  type TopAlbums,
-  type TopArtists,
-} from "./lastfm/services";
-
-const { getRecentTracks, getTopArtists, getTopAlbums } = userApiMethods;
+import type { RecentTracks, TopAlbums, TopArtists } from "lastfm-client-ts";
+import { client } from "./lastfm";
 
 /**
  * Represents cached Last.fm data including recent tracks, top artists, and top albums.
@@ -62,20 +56,20 @@ export const getLastfmData = async () => {
     return cacheLastfmData;
   }
 
-  const { recenttracks } = await getRecentTracks({
+  const { recenttracks } = await client.user.getRecentTracks({
     user: "ansango",
     limit: 11,
   });
   const {
     topartists: { artist: artists },
-  } = await getTopArtists({
+  } = await client.user.getTopArtists({
     user: "ansango",
     limit: 10,
     period: "7day",
   });
   const {
     topalbums: { album: albums },
-  } = await getTopAlbums({
+  } = await client.user.getTopAlbums({
     user: "ansango",
     limit: 12,
     period: "1month",

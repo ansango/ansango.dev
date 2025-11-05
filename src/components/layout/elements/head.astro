@@ -30,7 +30,7 @@ import { site } from "@/constants";
 import { ClientRouter } from "astro:transitions";
 import type { BreadcrumbItem } from "@/lib/breadcrumbs";
 import { getBreadcrumbsJsonLd } from "@/lib/breadcrumbs";
-
+import umami from "@/lib/umami";
 interface Props {
   title?: string;
   description?: string;
@@ -186,18 +186,19 @@ const breadcrumbsJsonLd = breadcrumbs
       <script
         data-goatcounter={`https://${import.meta.env.PUBLIC_GOATCOUNTER_CODE}.goatcounter.com/count`}
         async
-        src="//gc.zgo.at/count.js"
+        src="/js/gc.js"
       />
     )
   }
   <!-- Umami Analytics -->
   {
     import.meta.env.PUBLIC_UMAMI_WEBSITE_ID && (
-      <script
-        defer
-        src="https://cloud.umami.is/script.js"
+
+      <script 
+        defer 
+        src="/js/um.js" 
         data-website-id={import.meta.env.PUBLIC_UMAMI_WEBSITE_ID}
-      />
+    ></script>
     )
   }
 </head>

@@ -184,6 +184,7 @@ const breadcrumbsJsonLd = breadcrumbs
   {
     import.meta.env.PUBLIC_GOATCOUNTER_CODE && (
       <script
+        is:inline
         data-goatcounter={`https://${import.meta.env.PUBLIC_GOATCOUNTER_CODE}.goatcounter.com/count`}
         async
         src="/js/gc.js"
@@ -193,12 +194,12 @@ const breadcrumbsJsonLd = breadcrumbs
   <!-- Umami Analytics -->
   {
     import.meta.env.PUBLIC_UMAMI_WEBSITE_ID && (
-
-      <script 
-        defer 
-        src="/js/um.js" 
+      <script
+        is:inline
+        defer
+        src="/js/um.js"
         data-website-id={import.meta.env.PUBLIC_UMAMI_WEBSITE_ID}
-    ></script>
+      />
     )
   }
 </head>

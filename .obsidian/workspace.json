@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/wiki/sistemas/proxmox/Untitled.md",
+                "file": "src/content/wiki/sistemas/proxmox/proxmox lxc networking.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Untitled"
+              "title": "proxmox lxc networking"
             }
           }
         ]
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "src/content/wiki/sistemas/proxmox/Untitled.md",
+                "file": "src/content/wiki/sistemas/proxmox/proxmox lxc networking.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Untitled"
+              "title": "Outline of proxmox lxc networking"
             }
           },
           {
@@ -185,8 +185,12 @@
   },
   "active": "5ef19e6edc2375a3",
   "lastOpenFiles": [
+    "conflict-files-obsidian-git.md",
+    "src/content/wiki/sistemas/proxmox/proxmox lxc networking.md",
+    "src/content/wiki/sistemas/debian/diagnostico de problemas de red.md",
+    "src/content/wiki/sistemas/debian/cheat diagnostico network.md",
+    "src/content/wiki/sistemas/debian",
     "src/content/wiki/web/automatizacion de headers csp y cache control.md",
-    "src/content/wiki/sistemas/proxmox/Untitled.md",
     "src/content/blog/anatomia de headers http una guia galactica.md",
     "Unconfirmed 539624.crdownload",
     "Unconfirmed 497948.crdownload",
@@ -197,7 +201,6 @@
     "dist/pagefind/pagefind-modular-ui.css",
     "dist/pagefind/pagefind-modular-ui.js",
     "dist/pagefind/pagefind-ui.css",
-    "dist/pagefind/pagefind-ui.js",
     "dist/og-default.jpg",
     "dist/mstile-150x150.png",
     "dist/favicon-32x32.png",
@@ -227,9 +230,6 @@
     "csp-hashes-ref-en.md",
     "docs/csp-hashes-reference.md",
     "src/content/now.md",
-    "src/content/about.md",
-    "src/content/uses.md",
-    "roadmap.md",
-    "src/content/blog/vue 3 y tanstack query.md"
+    "src/content/about.md"
   ]
 }

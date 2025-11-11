@@ -1,8 +1,8 @@
 ---
 title: Resumen de Javascript
 description: "Resumen completo de JavaScript: sintaxis, tipos de datos, arrays, objetos, funciones, clases y programación asíncrona"
-date: 2024-05-02
-mod: 2025-10-25
+date: 2022-05-02
+mod: 2025-11-11
 published: true
 tags: [javascript]
 ---

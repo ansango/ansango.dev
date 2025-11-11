@@ -2,7 +2,7 @@
 title: Cómo limpiar tu mac
 description: "description"
 date: 2024-12-18
-mod: 2025-10-25
+mod: 2025-11-11
 published: true
 tags: [apple, mac, management]
 ---

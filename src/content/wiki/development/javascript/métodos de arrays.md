@@ -1,8 +1,8 @@
 ---
 title: Métodos de arrays
 description: "Guía completa de métodos de arrays en JavaScript: push, pop, map, filter, reduce y más con ejemplos prácticos"
-date: 2025-10-14
-mod: 2025-10-25
+date: 2021-10-14
+mod: 2025-11-11
 published: true
 tags: [arrays, javascript]
 ---

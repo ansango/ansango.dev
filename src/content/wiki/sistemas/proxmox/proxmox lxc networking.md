@@ -1,5 +1,5 @@
 ---
-title: Proxmox LXC Networking–Guía Completa
+title: Proxmox LXC Networking
 description: Configurar correctamente la red en un contenedor LXC de Proxmox
 date: 2025-11-11
 mod: 2025-11-11
@@ -7,7 +7,7 @@ published: true
 tags: [containers, debian, linux, lxc, networking, proxmox]
 ---
 
-# Proxmox LXC Networking–Guía Completa
+# Proxmox LXC Networking
 
 ## ✅ Objetivo
 

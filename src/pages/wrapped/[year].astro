@@ -1,0 +1,65 @@
+---
+import { LayoutDefault } from "@/components/layout";
+import { site } from "@/constants";
+import { getWrappedData, generateWrappedForYear } from "@/lib/wrapped";
+import {
+  WrappedHero,
+  WrappedTopTracks,
+  WrappedTopArtists,
+  WrappedTopAlbums,
+  WrappedStats,
+} from "@/components/organisms/wrapped";
+
+export async function getStaticPaths() {
+  const { validYears, scrobblesByYear, threshold } = await getWrappedData();
+
+  return validYears.map((year) => ({
+    params: { year: year.toString() },
+    props: { year, scrobbles: scrobblesByYear[year], threshold },
+  }));
+}
+
+const { year, scrobbles, threshold } = Astro.props;
+
+// Generate wrapped data for this year
+const wrapped = await generateWrappedForYear(year, scrobbles, threshold, []);
+
+const meta = {
+  ...site.pages.wrapped,
+  title: `Wrapped ${year}`,
+  description: `Resumen musical de ${year} - ${wrapped.summary.totalScrobbles.toLocaleString("es-ES")} scrobbles`,
+};
+---
+
+<LayoutDefault {...meta} type="main">
+  <WrappedHero
+    year={year}
+    totalScrobbles={wrapped.summary.totalScrobbles}
+    listeningHours={wrapped.summary.listeningHours}
+    uniqueArtists={wrapped.summary.uniqueArtists}
+  />
+
+  <WrappedTopTracks tracks={wrapped.top.tracks} limit={20} />
+  <WrappedTopArtists artists={wrapped.top.artists} limit={15} />
+  <WrappedTopAlbums albums={wrapped.top.albums} limit={15} />
+
+  <WrappedStats title="Patrones de Escucha" data={wrapped.patterns} />
+  <WrappedStats title="Diversidad Musical" data={wrapped.diversity} />
+  <WrappedStats title="Descubrimientos" data={wrapped.discoveries} />
+  <WrappedStats title="Obsesiones" data={wrapped.obsessions} />
+  
+  {wrapped.comparisons && Object.keys(wrapped.comparisons).length > 0 && (
+    <WrappedStats title="Comparaciones" data={wrapped.comparisons} />
+  )}
+  
+  <WrappedStats title="Curiosidades" data={wrapped.curiosities} />
+
+  {wrapped.newTags && wrapped.newTags.length > 0 && (
+    <section class="space-y-4">
+      <h2>Tags Nuevos</h2>
+      <p class="text-muted text-sm">
+        {wrapped.newTags.join(", ")}
+      </p>
+    </section>
+  )}
+</LayoutDefault>

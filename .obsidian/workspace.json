@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/wiki/web/automatizacion de headers csp y cache control.md",
+                "file": "src/content/wiki/sistemas/proxmox/Untitled.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "automatizacion de headers csp y cache control"
+              "title": "Untitled"
             }
           }
         ]
@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 480.5
   },
   "right": {
     "id": "3185a5eb3dce3daa",
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "src/content/wiki/web/automatizacion de headers csp y cache control.md",
+                "file": "src/content/wiki/sistemas/proxmox/Untitled.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of automatizacion de headers csp y cache control"
+              "title": "Outline of Untitled"
             }
           },
           {
@@ -185,8 +185,9 @@
   },
   "active": "5ef19e6edc2375a3",
   "lastOpenFiles": [
-    "src/content/blog/anatomia de headers http una guia galactica.md",
     "src/content/wiki/web/automatizacion de headers csp y cache control.md",
+    "src/content/wiki/sistemas/proxmox/Untitled.md",
+    "src/content/blog/anatomia de headers http una guia galactica.md",
     "Unconfirmed 539624.crdownload",
     "Unconfirmed 497948.crdownload",
     "public/_headers.backup",

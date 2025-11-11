@@ -2,14 +2,9 @@
 title: "Automatización de HTTP Headers: CSP y Cache Control"
 description: Diseño e implementación de un sistema automatizado de generación de headers HTTP
 date: 2025-11-03
-mod: 2025-11-03
+mod: 2025-11-11
 published: true
-tags:
-  - cache
-  - csp
-  - https
-  - headers
-  - automate
+tags: [automate, cache, csp, headers, https]
 ---
 
 # Automatización de HTTP Headers: CSP y Cache Control

@@ -4,17 +4,10 @@ description: descripcion
 date: 2025-11-11
 mod: 2025-11-11
 published: true
-tags:
-  - debian
-  - fix
-  - linux
-  - network
-  - proxmox
+tags: [debian, fix, linux, network, proxmox]
 ---
 
 # Diagnóstico y solución de problemas de red
-
----
 
 ## Introducción
 

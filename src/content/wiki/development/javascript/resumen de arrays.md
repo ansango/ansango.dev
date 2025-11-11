@@ -1,8 +1,8 @@
 ---
 title: Resumen de arrays
 description: Chuleta de métodos de arrays en JavaScript con ejemplos prácticos y emojis para facilitar el aprendizaje
-date: 2025-10-14
-mod: 2025-10-25
+date: 2021-10-14
+mod: 2025-11-11
 published: true
 tags: [array, javascript]
 ---

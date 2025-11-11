@@ -1,8 +1,8 @@
 ---
 title: Trucos con spread
 description: "Trucos prácticos con el operador spread en JavaScript: copiar arrays, eliminar duplicados, pasar argumentos y más"
-date: 2024-05-02
-mod: 2025-10-25
+date: 2021-05-02
+mod: 2025-11-11
 published: true
 tags: [array, javascript, spread]
 ---

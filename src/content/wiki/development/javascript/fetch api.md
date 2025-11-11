@@ -1,8 +1,8 @@
 ---
 title: Fetch API
 description: "Guía completa de Fetch API en JavaScript: peticiones HTTP, headers, manejo de respuestas JSON y envío de datos"
-date: 2025-10-14
-mod: 2025-10-25
+date: 2021-10-14
+mod: 2025-11-11
 published: true
 tags: [async, fetch, javascript, promise]
 ---

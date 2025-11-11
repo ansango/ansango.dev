@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/wiki/sistemas/debian/diagnostico de problemas de red.md",
+                "file": "src/content/wiki/development/javascript/usando ajax con async await.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "diagnostico de problemas de red"
+              "title": "usando ajax con async await"
             }
           }
         ]
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "src/content/wiki/sistemas/debian/diagnostico de problemas de red.md",
+                "file": "src/content/wiki/development/javascript/usando ajax con async await.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of diagnostico de problemas de red"
+              "title": "Outline of usando ajax con async await"
             }
           },
           {
@@ -185,8 +185,17 @@
   },
   "active": "5ef19e6edc2375a3",
   "lastOpenFiles": [
-    "src/content/wiki/sistemas/debian/cheat diagnostico network.md",
+    "src/content/wiki/development/javascript/trucos con spread.md",
+    "src/content/wiki/development/javascript/resumen de Javascript.md",
+    "src/content/wiki/development/javascript/resumen de arrays.md",
+    "src/content/wiki/development/javascript/métodos de arrays.md",
+    "src/content/wiki/development/javascript/libros.md",
+    "src/content/wiki/development/javascript/librerias.md",
+    "src/content/wiki/development/javascript/javascript.md",
+    "src/content/wiki/development/javascript/fetch api.md",
+    "src/content/wiki/development/javascript/explicando array reduce.md",
     "src/content/wiki/sistemas/debian/diagnostico de problemas de red.md",
+    "src/content/wiki/sistemas/debian/cheat diagnostico network.md",
     "src/content/wiki/sistemas/mac/como limpiar tu mac.md",
     "src/content/wiki/web/automatizacion de headers csp y cache control.md",
     "src/content/wiki/sistemas/debian",
@@ -221,15 +230,6 @@
     "docs/csp-automated-system.md",
     "scripts/README.md",
     "scripts/scripts-readme.md",
-    "scripts/scripts-readme-en.md",
-    "scripts-readme-en.md",
-    "docs/csp-testing-checklist.md",
-    "docs/csp-testing-checklist-en.md",
-    "csp-testing-checklist-en.md",
-    "csp-hashes-ref-en.md",
-    "docs/csp-hashes-reference.md",
-    "src/content/now.md",
-    "src/content/about.md",
-    "src/content/uses.md"
+    "scripts/scripts-readme-en.md"
   ]
 }

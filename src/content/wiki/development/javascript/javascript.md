@@ -2,7 +2,7 @@
 title: Javascript
 description: "Guía completa de JavaScript con enlaces a recursos, frameworks y herramientas para desarrollo web moderno"
 date: 2024-05-04
-mod: 2025-10-25
+mod: 2025-11-11
 published: false
 tags: []
 ---

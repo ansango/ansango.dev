@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/wiki/sistemas/debian/cheat diagnostico network.md",
+                "file": "src/content/wiki/sistemas/debian/diagnostico de problemas de red.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "cheat diagnostico network"
+              "title": "diagnostico de problemas de red"
             }
           }
         ]
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "src/content/wiki/sistemas/debian/cheat diagnostico network.md",
+                "file": "src/content/wiki/sistemas/debian/diagnostico de problemas de red.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of cheat diagnostico network"
+              "title": "Outline of diagnostico de problemas de red"
             }
           },
           {
@@ -185,8 +185,8 @@
   },
   "active": "5ef19e6edc2375a3",
   "lastOpenFiles": [
-    "src/content/wiki/sistemas/debian/diagnostico de problemas de red.md",
     "src/content/wiki/sistemas/debian/cheat diagnostico network.md",
+    "src/content/wiki/sistemas/debian/diagnostico de problemas de red.md",
     "src/content/wiki/sistemas/mac/como limpiar tu mac.md",
     "src/content/wiki/web/automatizacion de headers csp y cache control.md",
     "src/content/wiki/sistemas/debian",

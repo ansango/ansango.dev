@@ -74,6 +74,7 @@ export default {
         'https://gc.zgo.at',
         'https://*.goatcounter.com',
         'https://static.cloudflareinsights.com',
+        
       ],
       
       'style-src': [
@@ -96,7 +97,7 @@ export default {
       
       'connect-src': [
         "'self'",
-        'https://ws.audioscrobbler.com',
+        'https://oh.ansango.com',
         'https://api.raindrop.io',
         'https://giscus.app',
         'https://*.goatcounter.com',

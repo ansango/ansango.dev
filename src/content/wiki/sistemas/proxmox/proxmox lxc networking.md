@@ -48,8 +48,6 @@ net0: name=eth0,bridge=vmbr0,firewall=1,hwaddr=BC:24:11:2B:DD:96,type=veth
 
 ---
 
----
-
 ## ⚙️ 2. Asignar red al contenedor
 
 ### 📡 Opción A: DHCP (recomendado si tu router asigna IPs automáticamente)
@@ -73,8 +71,6 @@ Ejemplo para:
 pct set 100 -net0 name=eth0,bridge=vmbr0,firewall=1,type=veth,ip=192.168.0.19/24,gw=192.168.0.1
 pct restart 100
 ```
-
----
 
 ---
 

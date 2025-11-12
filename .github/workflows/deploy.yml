@@ -96,12 +96,10 @@ jobs:
         env:
           # API credentials
           RAINDROP_ACCESS_TOKEN: ${{ secrets.RAINDROP_ACCESS_TOKEN }}
-          LASTFM_SHARED_SECRET: ${{ secrets.LASTFM_SHARED_SECRET }}
+          SERVICE_URL: ${{ secrets.SERVICE_URL }}
+          SERVICE_API_KEY: ${{ secrets.SERVICE_API_KEY }}
           
           # Public environment variables
-          PUBLIC_LASTFM_API_KEY: ${{ secrets.PUBLIC_LASTFM_API_KEY }}
-          PUBLIC_LASTFM_APPNAME: ansango.dev
-          PUBLIC_LASTFM_API_BASE_URL: https://ws.audioscrobbler.com/2.0
           PUBLIC_GOATCOUNTER_CODE: ${{ secrets.PUBLIC_GOATCOUNTER_CODE }}
         run: bun install && bun run build
       

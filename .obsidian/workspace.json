@@ -166,7 +166,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 304.5
+    "width": 304.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -185,22 +186,25 @@
   },
   "active": "5ef19e6edc2375a3",
   "lastOpenFiles": [
-    "conflict-files-obsidian-git.md",
+    "src/pages/wrapped/index.astro",
+    "src/pages/wrapped/[year].astro",
+    "src/pages/wrapped",
+    "src/pages/music-lite.astro",
+    "src/lib/wrapped/utils.ts",
+    "src/lib/wrapped/top-items.ts",
+    "src/lib/wrapped/patterns.ts",
+    "src/lib/wrapped/obsessions.ts",
+    "src/lib/wrapped/index.ts",
+    "src/lib/wrapped/generator.ts",
+    "src/lib/wrapped/diversity.ts",
+    "src/lib/wrapped/README.md",
+    "src/content/blog/Untitled.md",
     "src/content/wiki/sistemas/proxmox/proxmox lxc networking.md",
+    "conflict-files-obsidian-git.md",
     "src/content/wiki/sistemas/debian/diagnostico de problemas de red.md",
     "src/content/wiki/sistemas/debian/cheat diagnostico network.md",
-    "src/content/wiki/sistemas/debian",
     "src/content/wiki/web/automatizacion de headers csp y cache control.md",
     "src/content/blog/anatomia de headers http una guia galactica.md",
-    "Unconfirmed 539624.crdownload",
-    "Unconfirmed 497948.crdownload",
-    "public/_headers.backup",
-    "dist/sitemap-0.xml",
-    "dist/sitemap-index.xml",
-    "dist/pagefind/wasm.unknown.pagefind",
-    "dist/pagefind/pagefind-modular-ui.css",
-    "dist/pagefind/pagefind-modular-ui.js",
-    "dist/pagefind/pagefind-ui.css",
     "dist/og-default.jpg",
     "dist/mstile-150x150.png",
     "dist/favicon-32x32.png",
@@ -227,9 +231,6 @@
     "docs/csp-testing-checklist.md",
     "docs/csp-testing-checklist-en.md",
     "csp-testing-checklist-en.md",
-    "csp-hashes-ref-en.md",
-    "docs/csp-hashes-reference.md",
-    "src/content/now.md",
-    "src/content/about.md"
+    "csp-hashes-ref-en.md"
   ]
 }

@@ -15,7 +15,8 @@
 
 import { createQuery } from "@tanstack/svelte-query";
 import { queryClient } from "./client";
-import { client } from "../lastfm";
+import { fetcher } from "../utils";
+import type { RecentTrack } from "../music";
 
 const FIVE_MINUTES = 5 * 60 * 1000;
 
@@ -23,8 +24,13 @@ export const useGetCurrentTrack = () => {
   return createQuery(
     () => ({
       queryKey: ["recent-tracks"],
-      queryFn: () => client.user.getRecentTracks({ user: "ansango", limit: 1 }),
-      select: ({ recenttracks: { track } }) => track.at(0),
+      queryFn: async () => {
+        const { tracks } = await fetcher<{ tracks: RecentTrack[] }>(
+          "/api/current-track",
+        );
+        return tracks;
+      },
+      select: (tracks) => tracks.at(0),
       refetchInterval: FIVE_MINUTES,
       refetchIntervalInBackground: true,
       staleTime: FIVE_MINUTES,

@@ -13,8 +13,35 @@
  * - 📈 Shows top artists and albums statistics
  */
 
-import type { RecentTracks, TopAlbums, TopArtists } from "lastfm-client-ts";
-import { client } from "./lastfm";
+import { fetcher } from "./utils";
+
+export type Album = {
+  position: number;
+  name: string;
+  artist: string;
+  url: string;
+  playcount: number;
+  image: string | null;
+};
+
+export type Artist = {
+  position: number;
+  name: string;
+  url: string;
+  playcount: number;
+  image: string | null;
+};
+
+export type RecentTrack = {
+  position: number;
+  name: string;
+  artist: string;
+  album: string;
+  timestamp: string | null;
+  url: string;
+  nowPlaying: boolean;
+  image: string | null;
+};
 
 /**
  * Represents cached Last.fm data including recent tracks, top artists, and top albums.
@@ -24,9 +51,9 @@ import { client } from "./lastfm";
  * @property albums - An array of top album objects from Last.fm.
  */
 export type CacheLastfmData = {
-  tracks: RecentTracks["track"];
-  artists: TopArtists["artist"];
-  albums: TopAlbums["album"];
+  tracks: RecentTrack[];
+  artists: Artist[];
+  albums: Album[];
 };
 
 /**
@@ -56,31 +83,32 @@ export const getLastfmData = async () => {
     return cacheLastfmData;
   }
 
-  const { recenttracks } = await client.user.getRecentTracks({
-    user: "ansango",
-    limit: 11,
-  });
-  const {
-    topartists: { artist: artists },
-  } = await client.user.getTopArtists({
-    user: "ansango",
-    limit: 10,
-    period: "7day",
-  });
-  const {
-    topalbums: { album: albums },
-  } = await client.user.getTopAlbums({
-    user: "ansango",
-    limit: 12,
-    period: "1month",
+  const { tracks } = await fetcher<{
+    tracks: RecentTrack[];
+  }>(`${import.meta.env.SERVICE_URL}/music/ansango/tracks/recent?limit=11`, {
+    headers: {
+      Authorization: `Bearer ${import.meta.env.SERVICE_API_KEY}`,
+    },
   });
 
-  const tracks = recenttracks.track
-    .filter((track) => !track["@attr"]?.nowplaying)
-    .slice(0, 10);
+  const { artists } = await fetcher<{
+    artists: Artist[];
+  }>(`${import.meta.env.SERVICE_URL}/music/ansango/artists/weekly?limit=10`, {
+    headers: {
+      Authorization: `Bearer ${import.meta.env.SERVICE_API_KEY}`,
+    },
+  });
+
+  const { albums } = await fetcher<{
+    albums: Album[];
+  }>(`${import.meta.env.SERVICE_URL}/music/ansango/albums/monthly?limit=12`, {
+    headers: {
+      Authorization: `Bearer ${import.meta.env.SERVICE_API_KEY}`,
+    },
+  });
 
   cacheLastfmData = {
-    tracks,
+    tracks: tracks.filter((track) => !track.nowPlaying).slice(0, 10),
     artists,
     albums,
   };

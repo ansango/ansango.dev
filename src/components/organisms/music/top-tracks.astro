@@ -17,24 +17,18 @@ const { tracks } = Astro.props;
   </h2>
   <ul class="space-y-2">
     {
-      tracks.map(({ date, name, artist, url }) => (
+      tracks.map(({ timestamp, name, artist, url }) => (
         <li class="list-none">
           <Link href={url} className="flex items-baseline" blank>
-            {date && (
+            {timestamp && (
               <time
                 class="text-muted min-w-20 text-sm whitespace-nowrap"
-                datetime={getFormatDate(
-                  new Date(Number.parseInt(date.uts) * 1000),
-                )}
+                datetime={getFormatDate(new Date(timestamp))}
               >
-                {getFormatDate(
-                  new Date(Number.parseInt(date.uts) * 1000),
-                  "es-ES",
-                  {
-                    year: "numeric",
-                    month: "2-digit",
-                  },
-                )
+                {getFormatDate(new Date(timestamp), "es-ES", {
+                  year: "numeric",
+                  month: "2-digit",
+                })
                   .split("/")
                   .reverse()
                   .join(" · ")}
@@ -44,7 +38,7 @@ const { tracks } = Astro.props;
               <span class="line-clamp-1 max-w-2xs">{name}</span>
               <span class="text-muted line-clamp-1 text-sm">
                 <span class="hidden text-base sm:inline-flex">{" · "}</span>
-                {artist["#text"]}
+                {artist}
               </span>
             </u>
           </Link>

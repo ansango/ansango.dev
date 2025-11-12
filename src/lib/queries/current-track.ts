@@ -20,14 +20,19 @@ import type { RecentTrack } from "../music";
 
 const FIVE_MINUTES = 5 * 60 * 1000;
 
-export const useGetCurrentTrack = () => {
+export const useGetCurrentTrack = (url: string, apiKey: string) => {
   return createQuery(
     () => ({
       queryKey: ["recent-tracks"],
       queryFn: async () => {
-        const { tracks } = await fetcher<{ tracks: RecentTrack[] }>(
-          "/api/current-track",
-        );
+        const { tracks } = await fetcher<{
+          tracks: RecentTrack[];
+        }>(`${url}/music/ansango/tracks/recent?limit=1`, {
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+          },
+        });
+
         return tracks;
       },
       select: (tracks) => tracks.at(0),

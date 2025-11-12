@@ -78,42 +78,38 @@ let cacheLastfmData: CacheLastfmData | null = null;
  *   An object containing arrays of recent tracks, top artists, and top albums.
  */
 export const getLastfmData = async () => {
-  if (cacheLastfmData) {
-    console.info("Returning cached Last.fm data");
-    return cacheLastfmData;
-  }
+  const serviceUrl = import.meta.env.SERVICE_URL;
+  const apiKey = import.meta.env.SERVICE_API_KEY;
 
   const { tracks } = await fetcher<{
     tracks: RecentTrack[];
-  }>(`${import.meta.env.SERVICE_URL}/music/ansango/tracks/recent?limit=11`, {
+  }>(`${serviceUrl}/music/ansango/tracks/recent?limit=50`, {
     headers: {
-      Authorization: `Bearer ${import.meta.env.SERVICE_API_KEY}`,
+      Authorization: `Bearer ${apiKey}`,
     },
   });
 
   const { artists } = await fetcher<{
     artists: Artist[];
-  }>(`${import.meta.env.SERVICE_URL}/music/ansango/artists/weekly?limit=10`, {
+  }>(`${serviceUrl}/music/ansango/artists/weekly?limit=10`, {
     headers: {
-      Authorization: `Bearer ${import.meta.env.SERVICE_API_KEY}`,
+      Authorization: `Bearer ${apiKey}`,
     },
   });
 
   const { albums } = await fetcher<{
     albums: Album[];
-  }>(`${import.meta.env.SERVICE_URL}/music/ansango/albums/monthly?limit=12`, {
+  }>(`${serviceUrl}/music/ansango/albums/monthly?limit=12`, {
     headers: {
-      Authorization: `Bearer ${import.meta.env.SERVICE_API_KEY}`,
+      Authorization: `Bearer ${apiKey}`,
     },
   });
 
-  cacheLastfmData = {
+  return {
     tracks: tracks.filter((track) => !track.nowPlaying).slice(0, 10),
     artists,
     albums,
   };
-
-  return cacheLastfmData;
 };
 
 export type Tracks = Awaited<ReturnType<typeof getLastfmData>>["tracks"];

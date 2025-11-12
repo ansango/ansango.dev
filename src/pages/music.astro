@@ -10,7 +10,8 @@ import {
 } from "@/components/organisms/music";
 import { site } from "@/constants";
 
-const { tracks, artists, albums } = await getLastfmData();
+const { artists, albums, tracks } = await getLastfmData();
+
 const meta = site.pages.music;
 ---
 

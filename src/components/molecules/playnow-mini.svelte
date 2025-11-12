@@ -1,34 +1,45 @@
 <script lang="ts">
-/**
- * 🎶 PlayNowMini Component
- * 
- * @description Compact inline display of currently playing track.
- * Shows small album cover, track name, and artist in a single line.
- * 
- * @usage
- * ```astro
- * <PlayNowMini>
- *   {#snippet play()}<PlayIcon />{/snippet}
- *   {#snippet noplay()}<span>Not playing</span>{/snippet}
- *   {#snippet nocover()}<PlaceholderIcon />{/snippet}
- * </PlayNowMini>
- * ```
- * 
- * @compatible
- * - 🎵 Lighter version of PlayNow component
- * - 🔊 Last.fm integration with TanStack Query
- * - 📱 Optimized for inline/header placement
- */
+  /**
+   * 🎶 PlayNowMini Component
+   *
+   * @description Compact inline display of currently playing track.
+   * Shows small album cover, track name, and artist in a single line.
+   *
+   * @usage
+   * ```astro
+   * <PlayNowMini>
+   *   {#snippet play()}<PlayIcon />{/snippet}
+   *   {#snippet noplay()}<span>Not playing</span>{/snippet}
+   *   {#snippet nocover()}<PlaceholderIcon />{/snippet}
+   * </PlayNowMini>
+   * ```
+   *
+   * @compatible
+   * - 🎵 Lighter version of PlayNow component
+   * - 🔊 Last.fm integration with TanStack Query
+   * - 📱 Optimized for inline/header placement
+   */
   import { useGetCurrentTrack } from "@/lib/queries";
+  import type { Snippet } from "svelte";
 
-  let { play, noplay, nocover } = $props();
+  let {
+    play,
+    noplay,
+    nocover,
+    apiKey,
+    url,
+  }: {
+    play?: Snippet;
+    noplay?: Snippet;
+    nocover?: Snippet;
+    url: string;
+    apiKey: string;
+  } = $props();
 
-  const query = useGetCurrentTrack();
+  const query = useGetCurrentTrack(url, apiKey);
   let track = $derived(query.data);
-  let currentTrack = $derived(track?.["@attr"]?.nowplaying ? query.data : null);
-  let currentImg = $derived(
-    currentTrack?.image?.find((img) => img.size === "large")?.["#text"],
-  );
+  let currentTrack = $derived(track?.nowPlaying ? query.data : null);
+  let currentImg = $derived(currentTrack?.image);
 </script>
 
 {#if currentTrack}
@@ -36,7 +47,7 @@
     {#if currentImg}
       <img
         src={currentImg}
-        alt={currentTrack.album["#text"]}
+        alt={currentTrack.album}
         class="inline-block size-6 mx-1 rounded object-cover align-middle"
         loading="eager"
         width={24}
@@ -50,7 +61,7 @@
       </span>
     {/if}
     {currentTrack.name}
-    <span class="text-muted mr-1">de {currentTrack.artist["#text"]}</span>
+    <span class="text-muted mr-1">de {currentTrack.artist}</span>
     {@render play?.()}
   </p>
 {:else if query.isLoading}

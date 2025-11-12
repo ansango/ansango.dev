@@ -19,9 +19,20 @@
    * - 🖼️ Shows album artwork with fallback
    */
   import { useGetCurrentTrack } from "@/lib/queries";
+  import type { Snippet } from "svelte";
 
-  let { play, noplay } = $props();
-  const query = useGetCurrentTrack();
+  let {
+    play,
+    noplay,
+    url,
+    apiKey,
+  }: {
+    play?: Snippet;
+    noplay?: Snippet;
+    url: string;
+    apiKey: string;
+  } = $props();
+  const query = useGetCurrentTrack(url, apiKey);
   let track = $derived(query.data);
   let currentTrack = $derived(track?.nowPlaying ? track : null);
   let imageUrl = $derived(currentTrack?.image);

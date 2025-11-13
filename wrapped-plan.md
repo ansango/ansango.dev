@@ -308,6 +308,7 @@ Generar archivos JSON estáticos con estadísticas musicales anuales de Last.fm,
     - Milestones del año
     - Tracks/artistas/álbumes más raros
     - Tags nuevos descubiertos
+
 - Componentes reutilizables:
   - `TrackCard.astro` - Card de canción con imagen, título, artista, plays
   - `ArtistCard.astro` - Card de artista con imagen, nombre, plays, tags

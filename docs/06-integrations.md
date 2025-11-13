@@ -211,7 +211,7 @@ Located in `src/components/layout/elements/head.astro`:
       async
       src="//gc.zgo.at/count.js"
       data-goatcounter={`https://${import.meta.env.PUBLIC_GOATCOUNTER_CODE}.goatcounter.com/count`}
-    ></script>
+    />
   )
 }
 ```

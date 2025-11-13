@@ -359,11 +359,11 @@
 
 ### Series/Multi-part Posts
 
-- [ ] Esquema para series en frontmatter
-- [ ] Navegación entre partes de serie
-- [ ] Índice de serie completa
-- [ ] Auto-linking de posts relacionados
-- [ ] Badge visual de "Serie"
+- [x] Esquema para series en frontmatter
+- [x] Navegación entre partes de serie
+- [x] Índice de serie completa
+- [x] Auto-linking de posts relacionados
+- [x] Badge visual de "Serie"
 
 ### Table of Contents
 
@@ -523,4 +523,4 @@ Si quieres contribuir a alguna de estas features:
 
 ---
 
-**Última actualización:** 2 de noviembre, 2025
+**Última actualización:** 13 de noviembre, 2025

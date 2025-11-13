@@ -68,15 +68,6 @@ const music: Meta = {
   published: true,
 };
 
-const wrapped: Meta = {
-  title: "Wrapped",
-  description:
-    "Resumen anual de mi música en Last.fm: estadísticas, tops y descubrimientos por año.",
-  entriesPerPage: 0,
-  url: "/wrapped",
-  published: true,
-};
-
 const contentCollections: Record<CollectionName, Meta> = {
   blog: {
     title: "Blog",
@@ -137,7 +128,6 @@ const pages = {
   reading,
   bookmarks,
   music,
-  wrapped,
   ...contentCollections,
 };
 

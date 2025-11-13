@@ -2,16 +2,9 @@
 title: Proxmox LXC Networking
 description: Configurar correctamente la red en un contenedor LXC de Proxmox
 date: 2025-11-12
-mod: 2025-11-12
+mod: 2025-11-13
 published: true
-tags:
-  - containers
-  - debian
-  - linux
-  - lxc
-  - network
-  - networking
-  - proxmox
+tags: [containers, debian, linux, lxc, network, networking, proxmox]
 ---
 
 # Proxmox LXC Networking

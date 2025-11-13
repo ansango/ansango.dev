@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "3cc7988fbe26f4b6",
+        "id": "518bdb8448487d71",
         "type": "tabs",
         "children": [
           {
-            "id": "5ef19e6edc2375a3",
+            "id": "b55916064cc229d6",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/wiki/sistemas/proxmox/proxmox lxc networking.md",
+                "file": "src/content/wiki/web/cloudflare tunnels.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "proxmox lxc networking"
+              "title": "cloudflare tunnels"
             }
           }
         ]
@@ -184,9 +184,10 @@
       "obsidian-metadata-links:Undo Metadata links": false
     }
   },
-  "active": "5ef19e6edc2375a3",
+  "active": "b55916064cc229d6",
   "lastOpenFiles": [
     "src/content/blog/empezando con go.md",
+    "src/content/wiki/web/cloudflare tunnels.md",
     "src/content/wiki/sistemas/proxmox/proxmox lxc networking.md",
     "src/pages/wrapped/index.astro",
     "src/pages/wrapped/[year].astro",

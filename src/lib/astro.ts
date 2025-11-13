@@ -28,6 +28,7 @@ import {
   getCollectionsExcludingReading,
   getRaindropData,
 } from "@/lib/raindrop";
+import { getAllSeries } from "./series";
 
 /**
  * Generates an array of static path objects for each collection name.
@@ -60,7 +61,7 @@ export const getCollectionStaticPathsSlug = async () => {
   const pagesPaths = await getAllNumberPaths();
   const contentResult = content
     .map((entry) => {
-      if (entry.data.index) {
+      if ("index" in entry.data && entry.data.index) {
         return null;
       }
       return {
@@ -243,4 +244,14 @@ export const getBookmarksStaticPathsPage = async () => {
       };
     });
   });
+};
+
+export const getSeriesStaticPaths = async () => {
+  const allEntries = await getAllCollections();
+  const allSeries = getAllSeries(allEntries);
+
+  return allSeries.map((series) => ({
+    params: { serieId: series.id },
+    props: { serieInfo: series },
+  }));
 };

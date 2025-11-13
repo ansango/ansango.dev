@@ -97,6 +97,7 @@
     @apply text-info border-l-4 pl-4 text-sm;
   }
 
+
   details[open] > summary > svg.chevron-right {
     @apply rotate-90;
   }

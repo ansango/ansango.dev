@@ -78,10 +78,10 @@
 
 ### Security Headers
 
-- [ ] X-Frame-Options
-- [ ] X-Content-Type-Options
-- [ ] Referrer-Policy
-- [ ] Permissions-Policy
+- [x] X-Frame-Options
+- [x] X-Content-Type-Options
+- [x] Referrer-Policy
+- [x] Permissions-Policy
 
 ---
 

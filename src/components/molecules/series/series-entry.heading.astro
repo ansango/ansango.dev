@@ -1,31 +1,35 @@
 ---
 /**
- * 📌 EntryHeading Component
+ * 📚 Series Entry Heading Component
  *
- * @description Full entry header with title, metadata, tags, and outdated warning.
- * Displays publication/modification date, reading time, description, and tag list.
+ * @description Header for series entries with title, metadata, tags, series badge, and outdated warning.
+ * Displays publication/modification date, reading time, description, series information, and tag list.
  *
  * @usage
  * ```astro
- * <EntryHeading
- *   title="My Post"
+ * <SeriesEntryHeading
+ *   title="My Series Post"
  *   date={new Date()}
  *   readingTime={5}
- *   tags={['astro', 'web']}
+ *   tags={['docker', 'devops']}
  *   collection="blog"
+ *   seriesMetadata={{ order: 1, total: 5 }}
  * />
  * ```
  *
  * @compatible
  * - 🏷️ Uses Tag component for tag links
+ * - 📚 Shows SeriesBadge for part indicator
  * - ℹ️ Shows InfoIcon for outdated content (>1 year)
  * - 📅 Formatted dates with mod indicator
- * - 📝 Used in entry detail pages
+ * - 📝 Used in series entry detail pages
  */
 import { getFormatDate } from "@/lib/utils";
-import { Tag } from "@/components/atoms";
-import { InfoIcon, WarningIcon } from "@/components/icons";
+import { Tag, SeriesBadge } from "@/components/atoms";
+import { InfoIcon } from "@/components/icons";
 import type { CollectionName } from "@/content.config";
+import type { serieInfo } from "@/lib/series";
+import SeriesWarning from "./series-warning.astro";
 
 interface Props {
   title: string;
@@ -35,14 +39,24 @@ interface Props {
   tags?: string[];
   readingTime: number;
   collection: CollectionName;
+  serieInfo: {
+    title: string;
+    order: number;
+    total: number;
+    missingParts?: serieInfo["missingParts"];
+  };
 }
 
-const { title, date, mod, description, tags, readingTime } = Astro.props;
+const { title, date, mod, description, tags, readingTime, serieInfo } =
+  Astro.props;
+const { missingParts } = serieInfo;
 const parsedDate = new Date(mod ?? date ?? "");
 const now = new Date();
 const oneYear = 1000 * 60 * 60 * 24 * 365;
 const isOutdated = parsedDate && now.getTime() - parsedDate.getTime() > oneYear;
 const isTLDR = readingTime > 8;
+const isComplete =
+  missingParts && missingParts.ranges ? missingParts.ranges.length === 0 : true;
 ---
 
 <div class="border-divider mb-4 border-b-[1px]">
@@ -62,6 +76,7 @@ const isTLDR = readingTime > 8;
       </span>
     )
   }
+
   <h1 class="my-2">
     {title}
   </h1>
@@ -91,9 +106,20 @@ const isTLDR = readingTime > 8;
   {
     isOutdated && (
       <p class="warning flex items-center gap-2">
-        <WarningIcon />
+        <InfoIcon />
         Este contenido tiene más de un año y puede estar desactualizado.
       </p>
+    )
+  }
+
+  <SeriesBadge
+    title={serieInfo.title}
+    order={serieInfo.order}
+    total={serieInfo.total}
+  />
+  {
+    !isComplete && missingParts && (
+      <SeriesWarning ranges={missingParts.ranges} />
     )
   }
 </div>

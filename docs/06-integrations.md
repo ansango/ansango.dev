@@ -186,7 +186,7 @@ Privacy-focused, lightweight analytics with zero cookies.
 2. Choose your site code (e.g., `yoursite`)
 3. Add to `.env`:
 
-```env
+```
 PUBLIC_GOATCOUNTER_CODE=yoursite
 ```
 
@@ -242,7 +242,7 @@ Dynamic bookmarks and reading lists powered by Raindrop.io.
 1. Create access token at [raindrop.io/settings/integrations](https://raindrop.io/settings/integrations)
 2. Add to `.env`:
 
-```env
+```
 RAINDROP_ACCESS_TOKEN=your_token_here
 ```
 
@@ -307,7 +307,7 @@ Live music integration showing current playing track and listening history.
 1. Create API account at [last.fm/api/account/create](https://www.last.fm/api/account/create)
 2. Add to `.env`:
 
-```env
+```
 PUBLIC_LASTFM_API_KEY=your_api_key_here
 PUBLIC_LASTFM_APPNAME=ansango.dev
 PUBLIC_LASTFM_API_BASE_URL=https://ws.audioscrobbler.com/2.0

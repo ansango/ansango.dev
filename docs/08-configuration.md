@@ -16,7 +16,7 @@ cp .env.sample .env
 
 ### Available Variables
 
-```env
+```
 # Raindrop.io Integration (for bookmarks and reading)
 RAINDROP_ACCESS_TOKEN=your_raindrop_access_token_here
 

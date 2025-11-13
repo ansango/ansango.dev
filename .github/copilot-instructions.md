@@ -96,7 +96,7 @@ This guide helps AI coding agents work productively in the `ansango.dev` codebas
 
 Required for full functionality (copy from `.env.sample`):
 
-```env
+```
 # Raindrop.io (for bookmarks and reading)
 RAINDROP_ACCESS_TOKEN=your_token_here
 

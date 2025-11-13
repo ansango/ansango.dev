@@ -2,7 +2,7 @@
  * 🧭 Entry Navigation Helper
  *
  * @description Provides prev/next navigation logic for blog, projects, and wiki entries.
- * Handles different sorting strategies per collection type.
+ * Handles different sorting strategies per collection type and series navigation.
  *
  * @module lib/entry-navigation
  *
@@ -10,10 +10,12 @@
  * - 📝 Blog: Chronological order (newest first)
  * - 📦 Projects: Chronological order (newest first)
  * - 📚 Wiki: Depth-first pre-order tree traversal with alphabetical fallback
+ * - 📚 Series: Order-based navigation within series parts
  */
 
 import type { Entry, Entries } from "@/lib/collections";
 import { getTreeNode, type NodeItem } from "@/lib/tree-node";
+import { getSeriesEntries, getSeriesNavigation } from "@/lib/series";
 
 /**
  * Represents a navigation entry with title and path.
@@ -104,6 +106,7 @@ function getOrderedWikiEntries(entries: Entries): Entry[] {
 
 /**
  * Get prev/next navigation entries for the current entry.
+ * Detects if entry is part of a series and uses series-specific navigation.
  *
  * @param currentEntry The current entry being viewed
  * @param allEntries All published entries from all collections
@@ -113,6 +116,30 @@ export function getEntryNavigation(
   currentEntry: Entry,
   allEntries: Entries,
 ): EntryNavigation {
+  // ✨ Check if entry is part of a series
+  if (currentEntry.data.serieId) {
+    const serieId = currentEntry.data.serieId;
+    const seriesEntries = getSeriesEntries(serieId, allEntries);
+    const seriesNav = getSeriesNavigation(currentEntry, seriesEntries);
+
+    // Format navigation titles to show "Parte X: Title"
+    return {
+      prev: seriesNav.prev
+        ? {
+            title: `Parte ${seriesNav.prev.data.serieOrder}: ${seriesNav.prev.data.title}`,
+            path: `/${seriesNav.prev.collection}/${seriesNav.prev.id}`,
+          }
+        : null,
+      next: seriesNav.next
+        ? {
+            title: `Parte ${seriesNav.next.data.serieOrder}: ${seriesNav.next.data.title}`,
+            path: `/${seriesNav.next.collection}/${seriesNav.next.id}`,
+          }
+        : null,
+    };
+  }
+
+  // 📂 Collection-based navigation (existing logic)
   const collection = currentEntry.collection;
   let orderedEntries: Entry[];
 

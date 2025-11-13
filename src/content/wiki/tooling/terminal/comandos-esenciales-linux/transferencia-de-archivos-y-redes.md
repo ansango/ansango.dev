@@ -1,13 +1,16 @@
 ---
-title: 07. Transferencia de Archivos y Redes
+title: Transferencia de Archivos y Redes
 description: "Transferencia de archivos y redes en Linux: scp, rsync, wget, curl, SSH y sincronización remota"
 date: 2025-01-29
-mod: 2025-10-25
+mod: 2025-11-13
 published: true
 tags: [commands, curl, linux, network, rsync, scp, shell, ssh, terminal, transfer, wget]
+serieId: linux-essential-commands
+serieTitle: Comandos esenciales en Linux
+serieOrder: 7
 ---
 
-# 07. Transferencia de Archivos y Redes
+# Transferencia de Archivos y Redes
 
 - `scp`: Copia archivos de forma segura entre hosts.
 - `rsync`: Utilidad de sincronización de archivos remotos.

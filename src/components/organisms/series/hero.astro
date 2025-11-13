@@ -1,0 +1,16 @@
+---
+import { site } from "@/constants";
+
+const { seriesCount } = Astro.props;
+---
+
+<div class="border-divider border-b-[1px]">
+  <h1>Series</h1>
+  <p class="text-muted">
+    {site.pages.series.description} Hay un total de <span class="font-medium"
+      >{seriesCount}</span
+    > serie{seriesCount === 1 ? "" : "s"} publicada{
+      seriesCount === 1 ? "" : "s"
+    }.
+  </p>
+</div>

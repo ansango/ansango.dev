@@ -1,0 +1,67 @@
+---
+import { getFormatDate } from "@/lib/utils";
+import { Link } from "@/components/atoms";
+import type { serieInfo } from "@/lib/series";
+interface Props {
+  serieInfo: serieInfo;
+}
+const { serieInfo } = Astro.props;
+const { total, entries } = serieInfo;
+---
+
+<section>
+  <ul class="space-y-6">
+    {
+      Array.from({ length: total }, (_, i) => {
+        const partNumber = i + 1;
+        const entry = entries.find((e) => e.data.serieOrder === partNumber);
+
+        if (!entry) {
+          return (
+            <li class="group text-muted flex list-none items-center gap-4">
+              <span class="border-divider flex size-6 items-center justify-center rounded-full border-[1.5px] text-xs">
+                <span class="mt-0.5">{partNumber}</span>
+              </span>
+              <p class="mb-0 text-sm italic">Parte no disponible</p>
+            </li>
+          );
+        }
+
+        return (
+          <li class="list-none">
+            <Link
+              href={`/${entry.collection}/${entry.id}`}
+              className="group border-divider rounded-md flex items-start gap-4"
+            >
+              <span class="border-muted group-hover:text-link group-hover:border-link mt-0.5 flex size-6 items-center justify-center rounded-full border-[1.5px] text-xs">
+                <span class="mt-0.5">{partNumber}</span>
+              </span>
+              <div class="flex-1">
+                <h3 class="group-hover:text-link mb-0 line-clamp-1">
+                  {entry.data.title}
+                </h3>
+                {entry.data.date && (
+                  <time
+                    class="text-xs font-normal"
+                    datetime={getFormatDate(new Date(entry.data.date))}
+                  >
+                    {getFormatDate(new Date(entry.data.date))}
+                  </time>
+                )}
+                {entry.data.description && (
+                  <p class="text-muted line-clamp-2">
+                    {entry.data.description}
+                  </p>
+                )}
+                <span class="text-muted group-hover:text-link block text-sm">
+                  {" "}
+                  Leer más →{" "}
+                </span>
+              </div>
+            </Link>
+          </li>
+        );
+      })
+    }
+  </ul>
+</section>

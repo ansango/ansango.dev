@@ -124,14 +124,14 @@ Configure in: `Settings → Secrets and variables → Actions`
 
 ### Required Secrets
 
-```env
+```
 CLOUDFLARE_API_TOKEN=your_cloudflare_api_token
 CLOUDFLARE_ACCOUNT_ID=your_cloudflare_account_id
 ```
 
 ### Optional Secrets (for integrations)
 
-```env
+```
 RAINDROP_ACCESS_TOKEN=your_raindrop_token
 PUBLIC_LASTFM_API_KEY=your_lastfm_key
 LASTFM_SHARED_SECRET=your_lastfm_secret

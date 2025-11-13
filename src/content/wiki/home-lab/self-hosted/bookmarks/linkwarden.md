@@ -64,7 +64,7 @@ services:
 
 Crea un archivo `.env` en el mismo directorio que el `docker-compose.yml` y define las siguientes variables. Es **crítico** usar valores aleatorios y seguros.
 
-```env
+```
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=your_strong_password
 MEILI_MASTER_KEY=your_strong_meili_key

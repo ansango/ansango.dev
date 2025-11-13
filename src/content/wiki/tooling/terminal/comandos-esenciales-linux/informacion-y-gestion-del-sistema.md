@@ -1,13 +1,16 @@
 ---
-title: 03. Información y Gestión del Sistema
+title: Información y Gestión del Sistema
 description: "Gestión del sistema Linux: procesos, memoria, red, SSH y monitoreo de recursos del sistema"
 date: 2025-01-29
-mod: 2025-10-25
+mod: 2025-11-13
 published: true
 tags: [commands, linux, memory, monitoring, network, processes, shell, ssh, system, terminal]
+serieId: linux-essential-commands
+serieTitle: Comandos esenciales en Linux
+serieOrder: 3
 ---
 
-# 03. Información y Gestión del Sistema
+# Información y Gestión del Sistema
 
 - `top`: Muestra y actualiza información ordenada sobre los procesos.
 - `ps`: Informa de una instantánea de los procesos actuales.

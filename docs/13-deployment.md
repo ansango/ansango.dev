@@ -50,7 +50,7 @@ Set these in your hosting provider's dashboard:
 
 #### Raindrop.io
 
-```env
+```
 RAINDROP_ACCESS_TOKEN=your_token_here
 ```
 
@@ -58,7 +58,7 @@ RAINDROP_ACCESS_TOKEN=your_token_here
 
 #### Last.fm
 
-```env
+```
 PUBLIC_LASTFM_API_KEY=your_api_key_here
 PUBLIC_LASTFM_APPNAME=ansango.dev
 PUBLIC_LASTFM_API_BASE_URL=https://ws.audioscrobbler.com/2.0
@@ -69,7 +69,7 @@ LASTFM_SHARED_SECRET=your_secret_here
 
 #### GoatCounter Analytics (Optional)
 
-```env
+```
 PUBLIC_GOATCOUNTER_CODE=yoursite
 ```
 
@@ -77,7 +77,7 @@ PUBLIC_GOATCOUNTER_CODE=yoursite
 
 #### Cloudflare Pages (For GitHub Actions)
 
-```env
+```
 CLOUDFLARE_API_TOKEN=your_token
 CLOUDFLARE_ACCOUNT_ID=your_account_id
 ```

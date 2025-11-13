@@ -1,0 +1,33 @@
+---
+import { BookOpenIcon } from "../icons";
+
+/**
+ * 🏷️ Series Badge Component
+ *
+ * @description Displays a badge showing "Parte X de Y" for entries that belong to a series.
+ * Shows the current part number and total parts in the series.
+ *
+ * @module components/atoms/series-badge
+ *
+ * @props
+ * - order: Current part number in the series
+ * - total: Total number of parts in the series
+ */
+
+interface Props {
+  title: string;
+  order: number;
+  total: number;
+}
+
+const { title, order, total } = Astro.props;
+---
+
+<p
+  class="info inline-flex items-center gap-2"
+  aria-label={`Parte ${order} de ${total} en la serie`}
+>
+  <BookOpenIcon />
+  <span>{title}.</span>
+  <span class="font-medium">Parte {order} de {total}</span>
+</p>

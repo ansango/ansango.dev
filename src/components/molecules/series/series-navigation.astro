@@ -1,0 +1,120 @@
+---
+/**
+ * 📚 Series Navigation Component
+ *
+ * @description Displays a complete list of all parts in a series with links.
+ * Highlights the current part and shows which parts are available/missing.
+ *
+ * @module components/molecules/series-navigation
+ *
+ * @props
+ * - serieId: ID of the series
+ * - serieTitle: Title of the series
+ * - currentOrder: Current part number
+ * - total: Total number of parts in the series
+ * - entries: All entries in the series
+ */
+
+import type { Entry } from "@/lib/collections";
+import { Link } from "@/components/atoms";
+import { BookOpenIcon, ChevronIcon } from "@/components/icons";
+
+interface Props {
+  serieId: string;
+  serieTitle: string;
+  currentOrder: number;
+  total: number;
+  entries: Entry[];
+}
+
+const { serieId, serieTitle, currentOrder, total, entries } = Astro.props;
+
+// Create array of all parts (1 to total)
+const allParts = Array.from({ length: total }, (_, i) => {
+  const partNumber = i + 1;
+  const entry = entries.find((e) => e.data.serieOrder === partNumber);
+  return { partNumber, entry };
+});
+---
+
+<section class="border-0">
+  <nav
+    class="border-divider rounded-lg border p-3.5"
+    aria-label={`Navegación de la serie ${serieTitle}`}
+  >
+    <div>
+      <h3>Serie: {serieTitle}</h3>
+      <p class="text-muted text-sm">
+        {entries.length} de {total}
+        {total === 1 ? "parte publicada" : "partes publicadas"}
+      </p>
+    </div>
+
+    <ul class="space-y-2">
+      {
+        allParts.map(({ partNumber, entry }) => {
+          const isCurrent = partNumber === currentOrder;
+          const isAvailable = !!entry;
+
+          if (!isAvailable) {
+            return (
+              
+              <li class="flex list-none items-center gap-3 rounded-md p-1 px-[0.275rem] opacity-60">
+                <span class="border-muted group-hover:text-link group-hover:border-link mt-0.5 flex size-5 items-center justify-center rounded-full border-[1.5px] text-xs">
+                  <span class="mt-0.5">{partNumber}</span>
+                </span>
+                <span class="text-base-content/50 flex-1 text-sm italic">
+                  Parte {partNumber} - Próximamente
+                </span>
+              </li>
+            );
+          }
+
+          if (isCurrent) {
+            return (
+              <li
+                class="ring-divider bg-divider flex list-none items-center gap-3 rounded-md p-1 ring"
+                aria-current="page"
+              >
+                <span class="border-muted group-hover:text-link mt-0.5 flex size-5 items-center justify-center rounded-full border-[1.5px] text-xs">
+                  <span class="mt-0.5">{partNumber}</span>
+                </span>
+                <div class="flex-1">
+                  <span class="text-sm font-medium">{entry.data.title}</span>
+                  <span class="text-xs">(Estás aquí)</span>
+                </div>
+              </li>
+            );
+          }
+
+          return (
+            <li class="group list-none rounded-md transition-colors">
+              <Link
+                href={`/${entry.collection}/${entry.id}`}
+                className="flex items-center gap-3 p-1 px-[0.275rem]"
+              >
+                <span class="border-muted group-hover:text-link group-hover:border-link mt-0.5 flex size-5 items-center justify-center rounded-full border-[1.5px] text-xs">
+                  <span class="mt-0.5">{partNumber}</span>
+                </span>
+                <span class="group-hover:text-primary flex-1 text-sm font-medium">
+                  {entry.data.title}
+                </span>
+                <ChevronIcon />
+              </Link>
+            </li>
+          );
+        })
+      }
+    </ul>
+
+    <div class="border-divider mt-4 border-t px-1.5 pt-3">
+      <Link
+        href={`/series/${serieId}`}
+        className="text-primary inline-flex items-center gap-2 text-sm hover:underline"
+      >
+        <BookOpenIcon />
+        Ver índice completo de la serie
+      </Link>
+    </div>
+  </nav>
+</section>

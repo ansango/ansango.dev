@@ -1,13 +1,16 @@
 ---
-title: 04. Gestión de Procesos
+title: Gestión de Procesos
 description: "Gestión de procesos en Linux: jobs, background, screen, tmux y ejecución de tareas en segundo plano"
 date: 2025-01-29
-mod: 2025-10-25
+mod: 2025-11-13
 published: true
 tags: [background, commands, jobs, linux, processes, screen, shell, terminal, tmux]
+serieId: linux-essential-commands
+serieTitle: Comandos esenciales en Linux
+serieOrder: 4
 ---
 
-# 04. Gestión de Procesos
+# Gestión de Procesos
 
 - `bg`: Ejecuta trabajos en segundo plano.
 - `fg`: Trae trabajos al primer plano.

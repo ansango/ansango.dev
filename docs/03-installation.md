@@ -44,7 +44,7 @@ cp .env.sample .env
 
 Edit `.env` and add your API keys (optional but recommended):
 
-```env
+```
 # Raindrop.io (for bookmarks and reading)
 RAINDROP_ACCESS_TOKEN=your_raindrop_access_token_here
 

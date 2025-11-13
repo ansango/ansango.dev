@@ -1,13 +1,16 @@
 ---
-title: 02. Edición y Manipulación de Texto
+title: Edición y Manipulación de Texto
 description: "Editores y manipulación de texto en Linux: nano, vim, sed, awk, cut, sort y herramientas de procesamiento"
 date: 2025-01-29
-mod: 2025-10-25
+mod: 2025-11-13
 published: true
 tags: [awk, commands, editing, linux, nano, processing, sed, shell, terminal, text, vim]
+serieId: linux-essential-commands
+serieTitle: Comandos esenciales en Linux
+serieOrder: 2
 ---
 
-# 02. Edición y Manipulación de Texto
+# Edición y Manipulación de Texto
 
 - `nano`: Editor de texto básico.
 - `vim`: Editor de texto avanzado.

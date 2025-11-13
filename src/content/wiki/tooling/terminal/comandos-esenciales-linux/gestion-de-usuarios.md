@@ -1,13 +1,16 @@
 ---
-title: 06. Gestión de Usuarios
+title: Gestión de Usuarios
 description: "Gestión de usuarios en Linux: sudo, su, useradd, usermod, passwd y administración de cuentas"
 date: 2025-01-29
-mod: 2025-10-25
+mod: 2025-11-13
 published: true
 tags: [commands, linux, passwd, shell, su, sudo, terminal, useradd, usermod, users]
+serieId: linux-essential-commands
+serieTitle: Comandos esenciales en Linux
+serieOrder: 6
 ---
 
-# 06. Gestión de Usuarios
+# Gestión de Usuarios
 
 - `sudo`: Ejecuta un comando como otro usuario, normalmente el superusuario.
 - `su`: Sustituye la identidad del usuario para convertirse en superusuario o en otro usuario.

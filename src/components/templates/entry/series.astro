@@ -1,0 +1,112 @@
+---
+/**
+ * 📚 EntrySeries Template
+ *
+ * @description Template for series entries with complete series navigation.
+ * Shows series badge, warnings for missing parts, and full series navigation.
+ *
+ * @usage
+ * ```astro
+ * <EntrySeries entry={seriesEntry} />
+ * ```
+ *
+ * @compatible
+ * - 📚 SeriesBadge for part indicator
+ * - ⚠️ SeriesWarning for incomplete series
+ * - 🧭 SeriesNavigation for full part list
+ * - 📝 All standard entry features
+ */
+import type { Entry } from "@/lib/collections";
+import { getEntry, render } from "astro:content";
+
+import { LayoutDefault } from "@/components/layout";
+import { getReadingTime } from "@/lib/utils";
+import { Comments, Share, SeriesNavigation } from "@/components/molecules";
+import { SeriesEntryHeading } from "@/components/molecules/series";
+import { getBreadcrumbs } from "@/lib/breadcrumbs";
+import { site } from "@/constants";
+import { getAllCollections } from "@/lib/collections";
+import { getSeriesEntries, detectMissingParts } from "@/lib/series";
+
+const { collection, id } = Astro.props as Entry;
+
+const entry = (await getEntry(collection, id)) as Entry | undefined;
+
+if (!entry) {
+  throw new Error(`Entry not found: ${collection}/${id}`);
+}
+
+const { Content } = await render(entry);
+const { title, date, mod, description, tags } = entry.data;
+const readingTime = getReadingTime(entry.body || "");
+
+// Get all entries for series calculation
+const allEntries = await getAllCollections();
+
+// Calculate series metadata
+const seriesEntries = getSeriesEntries(entry.data.serieId!, allEntries);
+const missingParts = detectMissingParts(seriesEntries);
+
+const maxOrder = Math.max(...seriesEntries.map((e) => e.data.serieOrder || 0));
+
+const seriesInfo = {
+  title: entry.data.serieTitle ?? entry.data.serieId!,
+  order: entry.data.serieOrder || 0,
+  total: maxOrder,
+  missingParts,
+};
+
+const seriesNavigationProps = {
+  serieId: entry.data.serieId!,
+  serieTitle: entry.data.serieTitle || entry.data.serieId!,
+  currentOrder: entry.data.serieOrder || 0,
+  total: maxOrder,
+  entries: seriesEntries,
+};
+
+const seriesWarning =
+  missingParts && missingParts.ranges && missingParts.ranges.length > 0
+    ? {
+        title: entry.data.serieTitle || entry.data.serieId!,
+        ranges: missingParts.ranges,
+      }
+    : undefined;
+
+const headingProps = {
+  title,
+  date,
+  mod,
+  description,
+  tags,
+  readingTime,
+  collection,
+  serieInfo: seriesInfo,
+};
+
+const pathSegments = Astro.url.pathname.split("/").filter(Boolean);
+const isNestedContent = pathSegments.length > 2;
+const breadcrumbs = isNestedContent
+  ? getBreadcrumbs(Astro.url.pathname, title)
+  : undefined;
+
+const layoutProps = {
+  title,
+  description,
+  ogType: "article" as const,
+  publishedTime: date?.toISOString(),
+  modifiedTime: mod?.toISOString(),
+  tags,
+  breadcrumbs,
+};
+
+const showShare = ["blog", "wiki", "projects"].includes(collection);
+const shareUrl = `${site.url}${Astro.url.pathname}`;
+---
+
+<LayoutDefault {...layoutProps} type="article">
+  <SeriesEntryHeading {...headingProps} />
+  <Content />
+  <SeriesNavigation {...seriesNavigationProps} />
+  <Comments />
+  {showShare && <Share url={shareUrl} />}
+</LayoutDefault>

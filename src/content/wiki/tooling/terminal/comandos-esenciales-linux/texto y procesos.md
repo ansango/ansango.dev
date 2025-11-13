@@ -1,16 +1,18 @@
 ---
-title: Edición y Manipulación de Texto
-description: "Editores y manipulación de texto en Linux: nano, vim, sed, awk, cut, sort y herramientas de procesamiento"
+title: Edición de texto y gestión de procesos
+description: Editores y manipulación de texto y gestión de procesos en Linux
 date: 2025-01-29
 mod: 2025-11-13
 published: true
-tags: [awk, commands, editing, linux, nano, processing, sed, shell, terminal, text, vim]
+tags: [background, commands, jobs, linux, processes, screen, shell, terminal, tmux]
 serieId: linux-essential-commands
 serieTitle: Comandos esenciales en Linux
-serieOrder: 2
+serieOrder: 4
 ---
 
-# Edición y Manipulación de Texto
+# Edición de texto y gestión de procesos
+
+## Edición y Manipulación de Texto
 
 - `nano`: Editor de texto básico.
 - `vim`: Editor de texto avanzado.
@@ -23,3 +25,12 @@ serieOrder: 2
 - `uniq`: Informa o filtra las líneas repetidas en un archivo.
 - `tr`: Traduce o elimina caracteres.
 - `tee`: Lee de la entrada estándar y escribe en la salida estándar y en archivos simultáneamente.
+
+## Gestión de Procesos
+
+- `bg`: Ejecuta trabajos en segundo plano.
+- `fg`: Trae trabajos al primer plano.
+- `jobs`: Muestra los trabajos actuales.
+- `nohup`: Ejecuta un comando inmune a los hangups.
+- `screen`: Multiplexor de terminal con capacidades de desvinculación y revinculación.
+- `tmux`: Multiplexor de terminal similar a screen.

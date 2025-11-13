@@ -7,7 +7,7 @@ published: true
 tags: [commands, linux, memory, monitoring, network, processes, shell, ssh, system, terminal]
 serieId: linux-essential-commands
 serieTitle: Comandos esenciales en Linux
-serieOrder: 3
+serieOrder: 2
 ---
 
 # Información y Gestión del Sistema

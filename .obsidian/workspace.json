@@ -201,6 +201,7 @@
   },
   "active": "ad66822db6b031c9",
   "lastOpenFiles": [
+    "src/components/molecules/entries/entry-navigation.astro",
     "src/content/wiki/tooling/terminal/comandos-esenciales-linux/miscelaneos.md",
     "src/content/wiki/tooling/terminal/comandos-esenciales-linux/transferencia-de-archivos-y-redes.md",
     "src/content/wiki/tooling/terminal/comandos-esenciales-linux/gestion-de-usuarios.md",
@@ -245,7 +246,6 @@
     "src/content/blogroll.md",
     "docs/csp-automated-system-es.md",
     "scripts/README-es.md",
-    "config/README-es.md",
-    "config/README-ES.md"
+    "config/README-es.md"
   ]
 }

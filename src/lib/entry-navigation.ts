@@ -1,21 +1,18 @@
 /**
  * 🧭 Entry Navigation Helper
  *
- * @description Provides prev/next navigation logic for blog, projects, and wiki entries.
- * Handles different sorting strategies per collection type and series navigation.
+ * @description Provides global prev/next navigation logic across all entries.
+ * Simple chronological navigation (newest first) that works across all collections.
  *
  * @module lib/entry-navigation
  *
  * @compatible
- * - 📝 Blog: Chronological order (newest first)
- * - 📦 Projects: Chronological order (newest first)
- * - 📚 Wiki: Depth-first pre-order tree traversal with alphabetical fallback
- * - 📚 Series: Order-based navigation within series parts
+ * - 📝 Global navigation across blog, projects, and wiki
+ * - 📅 Chronological order (newest first)
+ * - 🔄 Works seamlessly with all entry types
  */
 
 import type { Entry, Entries } from "@/lib/collections";
-import { getTreeNode, type NodeItem } from "@/lib/tree-node";
-import { getSeriesEntries, getSeriesNavigation } from "@/lib/series";
 
 /**
  * Represents a navigation entry with title and path.
@@ -24,6 +21,7 @@ import { getSeriesEntries, getSeriesNavigation } from "@/lib/series";
 export type NavigationEntry = {
   title: string;
   path: string;
+  collection: string;
 } | null;
 
 /**
@@ -35,78 +33,9 @@ export type EntryNavigation = {
 };
 
 /**
- * Flatten a tree structure into a depth-first pre-order array of file nodes.
- * Pre-order: parent → children → siblings
- *
- * @param nodes Tree structure to flatten
- * @param result Accumulator for flattened nodes
- * @returns Flattened array of file nodes in traversal order
- */
-function flattenTreePreOrder(
-  nodes: NodeItem[],
-  result: NodeItem[] = [],
-): NodeItem[] {
-  for (const node of nodes) {
-    if (node.type === "file") {
-      result.push(node);
-    }
-    if (node.children && node.children.length > 0) {
-      flattenTreePreOrder(node.children, result);
-    }
-  }
-  return result;
-}
-
-/**
- * Get ordered entries for wiki collection using tree traversal.
- * Falls back to alphabetical sorting for orphaned entries.
- *
- * @param entries All entries from all collections
- * @returns Ordered wiki entries
- */
-function getOrderedWikiEntries(entries: Entries): Entry[] {
-  const wikiEntries = entries.filter((e) => e.collection === "wiki");
-
-  if (wikiEntries.length === 0) {
-    return [];
-  }
-
-  // Build tree structure
-  const tree = getTreeNode(entries, "wiki");
-
-  // Flatten tree in pre-order traversal
-  const treeNodes = flattenTreePreOrder(tree);
-
-  // Create a map of paths to entries for quick lookup
-  const entryMap = new Map<string, Entry>();
-  wikiEntries.forEach((entry) => {
-    const path = `/${entry.collection}/${entry.id}`;
-    entryMap.set(path, entry);
-  });
-
-  // Map tree nodes to entries
-  const orderedEntries: Entry[] = [];
-  const usedIds = new Set<string>();
-
-  treeNodes.forEach((node) => {
-    const entry = entryMap.get(node.path);
-    if (entry) {
-      orderedEntries.push(entry);
-      usedIds.add(entry.id);
-    }
-  });
-
-  // Add orphaned entries (not in tree) alphabetically at the end
-  const orphanedEntries = wikiEntries
-    .filter((entry) => !usedIds.has(entry.id))
-    .sort((a, b) => a.data.title.localeCompare(b.data.title));
-
-  return [...orderedEntries, ...orphanedEntries];
-}
-
-/**
  * Get prev/next navigation entries for the current entry.
- * Detects if entry is part of a series and uses series-specific navigation.
+ * Global navigation across all collections in chronological order.
+ * Excludes single-page entries (where index: true in frontmatter).
  *
  * @param currentEntry The current entry being viewed
  * @param allEntries All published entries from all collections
@@ -116,50 +45,18 @@ export function getEntryNavigation(
   currentEntry: Entry,
   allEntries: Entries,
 ): EntryNavigation {
-  // ✨ Check if entry is part of a series
-  if (currentEntry.data.serieId) {
-    const serieId = currentEntry.data.serieId;
-    const seriesEntries = getSeriesEntries(serieId, allEntries);
-    const seriesNav = getSeriesNavigation(currentEntry, seriesEntries);
-
-    // Format navigation titles to show "Parte X: Title"
-    return {
-      prev: seriesNav.prev
-        ? {
-            title: `Parte ${seriesNav.prev.data.serieOrder}: ${seriesNav.prev.data.title}`,
-            path: `/${seriesNav.prev.collection}/${seriesNav.prev.id}`,
-          }
-        : null,
-      next: seriesNav.next
-        ? {
-            title: `Parte ${seriesNav.next.data.serieOrder}: ${seriesNav.next.data.title}`,
-            path: `/${seriesNav.next.collection}/${seriesNav.next.id}`,
-          }
-        : null,
-    };
-  }
-
-  // 📂 Collection-based navigation (existing logic)
-  const collection = currentEntry.collection;
-  let orderedEntries: Entry[];
-
-  if (collection === "wiki") {
-    // Wiki: depth-first pre-order tree traversal with alphabetical fallback
-    orderedEntries = getOrderedWikiEntries(allEntries);
-  } else {
-    // Blog and projects: chronological (newest first)
-    orderedEntries = allEntries
-      .filter((e) => e.collection === collection)
-      .sort((a, b) => {
-        const dateA = new Date(a.data.date || 0).getTime();
-        const dateB = new Date(b.data.date || 0).getTime();
-        return dateB - dateA; // Newest first
-      });
-  }
+  // Filter entries with dates and exclude single-page entries (index: true)
+  const orderedEntries = allEntries
+    .filter((e) => e.data.date && !("index" in e.data && e.data.index))
+    .sort((a, b) => {
+      const dateA = new Date(a.data.date || 0).getTime();
+      const dateB = new Date(b.data.date || 0).getTime();
+      return dateB - dateA; // Newest first
+    });
 
   // Find current entry index
   const currentIndex = orderedEntries.findIndex(
-    (e) => e.id === currentEntry.id,
+    (e) => e.id === currentEntry.id && e.collection === currentEntry.collection,
   );
 
   if (currentIndex === -1) {
@@ -167,10 +64,10 @@ export function getEntryNavigation(
     return { prev: null, next: null };
   }
 
-  // Get prev (older for blog/projects, previous in tree for wiki)
+  // Get prev (older entry)
   const prevEntry = orderedEntries[currentIndex + 1] || null;
 
-  // Get next (newer for blog/projects, next in tree for wiki)
+  // Get next (newer entry)
   const nextEntry = orderedEntries[currentIndex - 1] || null;
 
   return {
@@ -178,12 +75,14 @@ export function getEntryNavigation(
       ? {
           title: prevEntry.data.title,
           path: `/${prevEntry.collection}/${prevEntry.id}`,
+          collection: prevEntry.collection,
         }
       : null,
     next: nextEntry
       ? {
           title: nextEntry.data.title,
           path: `/${nextEntry.collection}/${nextEntry.id}`,
+          collection: nextEntry.collection,
         }
       : null,
   };

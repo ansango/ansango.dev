@@ -21,12 +21,13 @@ import { getEntry, render } from "astro:content";
 
 import { LayoutDefault } from "@/components/layout";
 import { getReadingTime } from "@/lib/utils";
-import { Comments, Share, SeriesNavigation } from "@/components/molecules";
+import { Comments, Share, SeriesNavigation, EntryNavigation } from "@/components/molecules";
 import { SeriesEntryHeading } from "@/components/molecules/series";
 import { getBreadcrumbs } from "@/lib/breadcrumbs";
 import { site } from "@/constants";
 import { getAllCollections } from "@/lib/collections";
 import { getSeriesEntries, detectMissingParts } from "@/lib/series";
+import { getEntryNavigation } from "@/lib/entry-navigation";
 
 const { collection, id } = Astro.props as Entry;
 
@@ -64,13 +65,7 @@ const seriesNavigationProps = {
   entries: seriesEntries,
 };
 
-const seriesWarning =
-  missingParts && missingParts.ranges && missingParts.ranges.length > 0
-    ? {
-        title: entry.data.serieTitle || entry.data.serieId!,
-        ranges: missingParts.ranges,
-      }
-    : undefined;
+
 
 const headingProps = {
   title,
@@ -101,12 +96,15 @@ const layoutProps = {
 
 const showShare = ["blog", "wiki", "projects"].includes(collection);
 const shareUrl = `${site.url}${Astro.url.pathname}`;
+
+const navigation = getEntryNavigation(entry, allEntries);
 ---
 
 <LayoutDefault {...layoutProps} type="article">
   <SeriesEntryHeading {...headingProps} />
   <Content />
   <SeriesNavigation {...seriesNavigationProps} />
+  <EntryNavigation navigation={navigation} />
   <Comments />
   {showShare && <Share url={shareUrl} />}
 </LayoutDefault>

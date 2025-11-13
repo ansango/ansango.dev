@@ -1,4 +1,3 @@
-
 # ansango.dev
 
 [![Astro](https://img.shields.io/badge/Astro-5.14-FF5D01?style=flat&logo=astro&logoColor=white)](https://astro.build)
@@ -16,7 +15,7 @@ See [live demo →](https://ansango.com) | [GitHub Template Repository →](http
 
 ## ✨ Features
 
-Modern template for bloggers, developers, and *indie web* enthusiasts with:
+Modern template for bloggers, developers, and _indie web_ enthusiasts with:
 
 - 📝 **Content Collections**: Blog, Wiki, Projects, and standalone pages
 - 🔍 **Full-text Search**: Powered by Pagefind with keyboard shortcuts
@@ -71,7 +70,7 @@ cd ansango.dev
 # Install dependencies
 npm install
 
-# Configure environment (optional), 
+# Configure environment (optional),
 # Edit .env with your API keys for integrations
 cp .env.sample .env
 
@@ -111,14 +110,14 @@ See [Obsidian integration →](12-obsidian-deployment.md) | [Content management 
 
 All commands run from the project root:
 
-| Command | Action |
-|---------|--------|
-| \`npm install\` | Install dependencies |
-| \`npm run dev\` | Start dev server at \`localhost:4321\` |
-| \`npm run build\` | Build production site to \`./dist/\` |
-| \`npm run preview\` | Preview production build locally |
-| \`npm run format\` | Format code with Prettier |
-| \`npm run astro\` | Run Astro CLI commands |
+| Command             | Action                                 |
+| ------------------- | -------------------------------------- |
+| \`npm install\`     | Install dependencies                   |
+| \`npm run dev\`     | Start dev server at \`localhost:4321\` |
+| \`npm run build\`   | Build production site to \`./dist/\`   |
+| \`npm run preview\` | Preview production build locally       |
+| \`npm run format\`  | Format code with Prettier              |
+| \`npm run astro\`   | Run Astro CLI commands                 |
 
 ## 📚 Documentation
 
@@ -143,10 +142,12 @@ Complete documentation available in the \`/docs\` directory:
 - [SEO](./docs/09-seo.md) - Search engine optimization
 - [Search](./docs/10-search.md) - Full-text search implementation
 - [RSS Feed](./docs/11-rss.md) - RSS configuration and usage
+
 ### Deployment
 
 - [Obsidian & Deployment](12-obsidian-deployment.md) - Obsidian workflow and GitHub Actions
 - [Deployment](13-deployment.md) - Hosting on Cloudflare Pages, Vercel, Netlify
+
 ### Contributing
 
 - [Contributing](14-contributing.md) - How to contribute to this project
@@ -187,7 +188,6 @@ Built with:
 - [Svelte 5](https://svelte.dev) - Interactive components
 - [Tailwind CSS v4](https://tailwindcss.com) - Styling
 - [TanStack Query](https://tanstack.com/query) - Data fetching
-
 
 Inspired by the [IndieWeb](https://indieweb.org/) movement.
 

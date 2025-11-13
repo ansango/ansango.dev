@@ -11,6 +11,7 @@ This guide helps AI coding agents work productively in the `ansango.dev` codebas
 - **Site Metadata:** Centralized in `src/site.json` and `src/constants.ts`.
 - **Layouts:** Modular layouts in `src/layout/` with reusable elements (head, header, footer, theme).
 - **Components:** Organized by atomic design (atoms, molecules, organisms, templates). Mix of Astro and Svelte 5 components.
+
 ## 🚦 Developer Workflows
 
 - **Install:** `npm install`
@@ -26,6 +27,7 @@ This guide helps AI coding agents work productively in the `ansango.dev` codebas
 - **Add Collection:**
   1. Define schema in `src/content.config.ts` with glob loader
   2. Add metadata in `src/constants.ts` (contentCollections object)
+
 ## 📝 Project Conventions
 
 - **Frontmatter:** Each content type has strict frontmatter requirements using Zod schemas (see `src/content.config.ts`).
@@ -35,6 +37,7 @@ This guide helps AI coding agents work productively in the `ansango.dev` codebas
 - **Pagination:** Controlled in `src/constants.ts` per collection via `entriesPerPage`. Set to 0 for no pagination.
 - **Tagging:** Tags are slugified and aggregated automatically.
 - **Component Organization:** Atomic design (atoms → molecules → organisms → templates).
+
 ## 🔌 Integrations & Plugins
 
 - **Astro Integrations:**
@@ -43,6 +46,7 @@ This guide helps AI coding agents work productively in the `ansango.dev` codebas
   - `@astrojs/svelte` for Svelte 5 components
   - `@astrojs/rss` for RSS feed
 - **Svelte & Data:**
+
 ## 🛠️ Key Files & Directories
 
 - `src/content.config.ts`: Collection schemas with Zod and glob loaders
@@ -54,6 +58,7 @@ This guide helps AI coding agents work productively in the `ansango.dev` codebas
   - `atoms/`: Container, Link, Tag, Image, etc.
   - `molecules/`: Pagination, Searcher, PlayNow, Tree-node
   - `organisms/`: Archive, Bookmarks, Music, Reading, Wiki, Tags
+
 ## 🧩 Patterns & Examples
 
 - **Layout Usage:**
@@ -116,49 +121,52 @@ LASTFM_SHARED_SECRET=your_secret_here
 ---
 
 If any section is unclear or missing, please provide feedback to improve these instructions.
-    newCollection,
-  };
+newCollection,
+};
 
-  // 2. In src/constants.ts
-  const contentCollections: Record<CollectionName, Meta> = {
-    // ...existing
-    newCollection: {
-      title: "New Collection",
-      description: "Description here",
-      entriesPerPage: 10,
-      url: "/new-collection",
-      published: true,
-    },
-  };
+// 2. In src/constants.ts
+const contentCollections: Record<CollectionName, Meta> = {
+// ...existing
+newCollection: {
+title: "New Collection",
+description: "Description here",
+entriesPerPage: 10,
+url: "/new-collection",
+published: true,
+},
+};
 
-  // 3. Create folder
-  // mkdir src/content/new-collection
-  ```
+// 3. Create folder
+// mkdir src/content/new-collection
+
+````
 
 - **Svelte Component Example:**
-  ```svelte
-  <script lang="ts">
-    import { useQuery } from '@tanstack/svelte-query';
-    
-    let { data } = $props();
-    let count = $state(0);
-    let doubled = $derived(count * 2);
-  </script>
-  ```
+```svelte
+<script lang="ts">
+  import { useQuery } from '@tanstack/svelte-query';
+
+  let { data } = $props();
+  let count = $state(0);
+  let doubled = $derived(count * 2);
+</script>
+````
 
 - **API Client Usage:**
+
   ```typescript
   // Server-side (build time)
-  import { getRaindropData } from '@/lib/raindrop';
-  import { getLastfmData } from '@/lib/music';
-  
+  import { getRaindropData } from "@/lib/raindrop";
+  import { getLastfmData } from "@/lib/music";
+
   const { bookmarks, collections } = await getRaindropData();
   const { tracks, artists, albums } = await getLastfmData();
-  
+
   // Client-side (runtime)
-  import { useGetCurrentTrack } from '@/lib/queries';
+  import { useGetCurrentTrack } from "@/lib/queries";
   const query = useGetCurrentTrack();
   ```
+
 ## 🛠️ Key Files & Directories
 
 - `src/content.config.ts`: Collection schemas

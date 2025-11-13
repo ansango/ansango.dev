@@ -1,4 +1,3 @@
-
 # 🔍 Search
 
 Full-text search powered by Pagefind with zero-config setup.
@@ -22,8 +21,8 @@ Search is powered by `astro-pagefind` integration.
 **Configuration** in `astro.config.ts`:
 
 ```typescript
-import { defineConfig } from 'astro/config';
-import pagefind from 'astro-pagefind';
+import { defineConfig } from "astro/config";
+import pagefind from "astro-pagefind";
 
 export default defineConfig({
   integrations: [
@@ -53,14 +52,14 @@ Logic in `src/components/molecules/searcher.script.astro`:
 
 ```typescript
 // Initialize Pagefind UI
-const pagefind = await import('/pagefind/pagefind.js');
+const pagefind = await import("/pagefind/pagefind.js");
 await pagefind.options({
   excerptLength: 15,
 });
 
 // Keyboard shortcut
-document.addEventListener('keydown', (e) => {
-  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+document.addEventListener("keydown", (e) => {
+  if ((e.metaKey || e.ctrlKey) && e.key === "k") {
     e.preventDefault();
     dialog.showModal();
   }
@@ -71,9 +70,10 @@ document.addEventListener('keydown', (e) => {
 
 ### Opening Search
 
-**Keyboard**: Press `/` 
+**Keyboard**: Press `/`
 
 **Click**: Click the search icon in the site header
+
 ### Searching
 
 1. Type your search query
@@ -118,17 +118,13 @@ Not indexed by Pagefind:
 Mark content as non-searchable with `data-pagefind-ignore`:
 
 ```html
-<div data-pagefind-ignore>
-  This content won't be indexed
-</div>
+<div data-pagefind-ignore>This content won't be indexed</div>
 ```
 
 Include specific content with `data-pagefind-body`:
 
 ```html
-<div data-pagefind-body>
-  This content will be indexed
-</div>
+<div data-pagefind-body>This content will be indexed</div>
 ```
 
 ## Customization
@@ -174,14 +170,14 @@ Configure search behavior in `searcher.script.astro`:
 
 ```typescript
 await pagefind.options({
-  excerptLength: 15,           // Length of result excerpt
-  showSubResults: true,        // Show multiple results per page
-  showImages: false,           // Show images in results
-  highlightParam: 'highlight', // URL param for highlighting
+  excerptLength: 15, // Length of result excerpt
+  showSubResults: true, // Show multiple results per page
+  showImages: false, // Show images in results
+  highlightParam: "highlight", // URL param for highlighting
   ranking: {
-    pageLength: 0.5,           // Weight for page length
-    termFrequency: 1.0,        // Weight for term frequency
-    termSaturation: 1.2,       // Weight for term saturation
+    pageLength: 0.5, // Weight for page length
+    termFrequency: 1.0, // Weight for term frequency
+    termSaturation: 1.2, // Weight for term saturation
   },
 });
 ```
@@ -201,12 +197,11 @@ Filter results by collection or tag:
 ```typescript
 await pagefind.options({
   filters: {
-    collection: 'blog',  // Only show blog results
-    tag: 'tutorial',     // Only show tutorial posts
+    collection: "blog", // Only show blog results
+    tag: "tutorial", // Only show tutorial posts
   },
 });
 ```
-
 
 ## Build Integration
 

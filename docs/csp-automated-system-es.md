@@ -21,6 +21,7 @@ npm run build
 ### 1. Configuración Central (`scripts/config/headers.config.js`)
 
 Archivo único donde defines:
+
 - **Features habilitados/deshabilitados** (CSP, cache, security headers)
 - **Scripts inline** a hashear (rutas de archivos)
 - **Dominios whitelistados** por directiva CSP
@@ -30,6 +31,7 @@ Archivo único donde defines:
 ### 2. Generador Automático (`scripts/generate-headers.js`)
 
 Script Node.js que:
+
 - Lee la configuración
 - Extrae contenido de scripts inline
 - Calcula hashes SHA-256 automáticamente
@@ -40,6 +42,7 @@ Script Node.js que:
 ### 3. Integración en Build
 
 El comando `npm run build` ejecuta automáticamente:
+
 1. `npm run generate:headers` - Regenera headers
 2. `astro build` - Build del sitio
 
@@ -50,6 +53,7 @@ El comando `npm run build` ejecuta automáticamente:
 ### Habilitar/Deshabilitar Features
 
 Edita `scripts/config/headers.config.js`:
+
 ```javascript
 csp: {
   directives: {
@@ -82,7 +86,7 @@ csp: {
 
 ### Añadir Dominio Externo
 
-```javascript
+````javascript
 csp: {
   inlineScripts: [
 Para otros tipos de recursos:
@@ -106,11 +110,12 @@ cache: {
     patterns: ['/images/*'],
   },
 }
-```
+````
 
 ### Ajustar Políticas de Cache
 
 Modifica tiempos en segundos:
+
 ```bash
 npm run generate:headers
 ```
@@ -121,7 +126,7 @@ El hash se calcula automáticamente. ✨
 
 Para permitir scripts de un nuevo dominio:
 
-```javascript
+````javascript
 csp: {
   directives: {
     'script-src': [
@@ -219,16 +224,18 @@ grep "Content-Security-Policy" public/_headers
 
 # Ver features habilitados (desde el script)
 npm run generate:headers
-```
+````
 
 ### Producción - Herramientas Online
 
 #### **1. Security Headers** ⭐ (Recomendado)
+
 **URL:** https://securityheaders.com/
 
 - Analiza todos los headers HTTP de seguridad
 - Calificación: A+, A, B, C, D, F
 - Explica qué falta y por qué es importante
+
 ## 🐛 Troubleshooting
 
 ### "Feature X está deshabilitado"
@@ -236,6 +243,7 @@ npm run generate:headers
 **Causa:** El feature está en `false` en `features` de la config.
 
 **Solución:**
+
 ```javascript
 features: {
   csp: true,  // ← Cambiar a true
@@ -247,10 +255,12 @@ features: {
 **Causa:** Usas `inlineHashes: true` pero falta un hash.
 
 **Solución:**
+
 1. Añade el script a `inlineScripts` en config
 2. Regenera: `npm run generate:headers`
 
 **O usa `'unsafe-inline'`:**
+
 ```javascript
 features: {
   inlineHashes: false,  // Deshabilitar hashes
@@ -268,10 +278,12 @@ directives: {
 **Causa:** El dominio no está whitelistado.
 
 **Solución:**
+
 1. Añade el dominio a `directives` → `script-src`
 2. Regenera: `npm run generate:headers`
 
 ### "Headers no se actualizan en producción"
+
 ## 🔐 Seguridad Best Practices
 
 ### ✅ Hacer
@@ -304,11 +316,13 @@ directives: {
 ## 📚 Referencias
 
 ### Documentación Oficial
+
 - [MDN - Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
 - [Cloudflare Pages Headers](https://developers.cloudflare.com/pages/platform/headers/)
 - [OWASP Secure Headers Project](https://owasp.org/www-project-secure-headers/)
 
 ### Herramientas de Testing
+
 - [Security Headers](https://securityheaders.com/) - Análisis completo
 - [Mozilla Observatory](https://observatory.mozilla.org/) - Security scan
 - [CSP Evaluator](https://csp-evaluator.withgoogle.com/) - CSP específico
@@ -316,6 +330,7 @@ directives: {
 - [Report URI Hash Generator](https://report-uri.com/home/hash) - Generar hashes manualmente
 
 ### Archivos del Proyecto
+
 - `scripts/config/headers.config.js` - Configuración central
 - `scripts/generate-headers.js` - Generador automático
 - `public/_headers` - Archivo generado (no editar)
@@ -326,6 +341,7 @@ directives: {
 ## 🔄 Changelog del Sistema
 
 ### v3.0 - Sistema Configurable (Actual)
+
 - ✅ Features habilitables/deshabilitables
 - ✅ Hashes externos configurables
 - ✅ Scripts inline individuales habilitables
@@ -334,12 +350,14 @@ directives: {
 - ✅ Soporte para `'unsafe-inline'`
 
 ### v2.0 - Sistema Automatizado
+
 - ✅ Generación automática de hashes
 - ✅ Configuración centralizada
 - ✅ Integración en build process
 - ✅ Backup automático
 
 ### v1.0 - Manual (Deprecado)
+
 - ❌ Hashes calculados manualmente
 - ❌ `_headers` editado a mano
 - ❌ Propenso a errores
@@ -364,6 +382,7 @@ curl -I https://ansango.dev | grep -i "content-security"
 **Causa:** El archivo no tiene etiquetas `<script>` o la ruta es incorrecta.
 
 **Solución:**
+
 1. Verifica que la ruta en `config/headers.config.js` sea correcta
 2. Verifica que el archivo tenga `<script is:inline>`
 
@@ -372,6 +391,7 @@ curl -I https://ansango.dev | grep -i "content-security"
 **Causa:** Olvidaste regenerar headers.
 
 **Solución:**
+
 ```bash
 npm run generate:headers
 ```
@@ -383,14 +403,16 @@ El build también lo hace automáticamente, pero puedes forzarlo manualmente.
 **Causa:** El dominio no está whitelistado.
 
 **Solución:**
+
 1. Añade el dominio a `config/headers.config.js` en la directiva apropiada
 2. Regenera: `npm run generate:headers`
 
-### "Archivo _headers no se actualiza"
+### "Archivo \_headers no se actualiza"
 
 **Causa:** Error en el generador o configuración inválida.
 
 **Solución:**
+
 ```bash
 # Ver output detallado
 npm run generate:headers
@@ -423,15 +445,18 @@ npm run generate:headers
 ## 📚 Referencias
 
 ### Documentación Oficial
+
 - [MDN - Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
 - [Cloudflare Pages Headers](https://developers.cloudflare.com/pages/platform/headers/)
 
 ### Herramientas
+
 - [CSP Evaluator](https://csp-evaluator.withgoogle.com/) - Valida tu CSP
 - [Security Headers](https://securityheaders.com/) - Analiza todos los headers
 - [Report URI Hash Generator](https://report-uri.com/home/hash) - Generar hashes manualmente
 
 ### Archivos del Proyecto
+
 - `config/headers.config.js` - Configuración central
 - `scripts/generate-headers.js` - Generador automático
 - `public/_headers` - Archivo generado (no editar)
@@ -442,6 +467,7 @@ npm run generate:headers
 ## 🔄 Changelog del Sistema
 
 ### v2.0 - Sistema Automatizado (Actual)
+
 - ✅ Generación automática de hashes
 - ✅ Configuración centralizada en `config/headers.config.js`
 - ✅ Integración en build process
@@ -449,6 +475,7 @@ npm run generate:headers
 - ✅ Validación y logs detallados
 
 ### v1.0 - Manual (Deprecado)
+
 - ❌ Hashes calculados manualmente
 - ❌ `_headers` editado a mano
 - ❌ Propenso a errores

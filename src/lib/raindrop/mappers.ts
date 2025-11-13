@@ -1,11 +1,11 @@
 /**
  * 🗂️ Raindrop Data Mappers
- * 
+ *
  * @description Transforms Raindrop.io API responses into normalized formats.
  * Filters, maps, and sanitizes bookmark and collection data.
- * 
+ *
  * @module lib/raindrop/mappers
- * 
+ *
  * @compatible
  * - 🧹 Normalizes API data structures
  * - 🔒 HTTPS enforcement for covers

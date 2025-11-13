@@ -1,4 +1,3 @@
-
 # 🔌 Integrations
 
 This template integrates seamlessly with third-party services and tools.
@@ -15,8 +14,8 @@ Automatic XML sitemap generation with custom priorities and change frequencies.
 sitemap({
   serialize(item) {
     // Custom priority and change frequency logic
-  }
-})
+  },
+});
 ```
 
 **Output**: `/sitemap.xml`
@@ -28,6 +27,7 @@ See [SEO Documentation](./09-seo.md) for priority settings.
 Full-text search indexing with zero-config setup.
 
 **Features**:
+
 - Automatic indexing during build
 - Fuzzy matching support
 - Lightweight (~10kb gzipped)
@@ -68,6 +68,7 @@ See [RSS Documentation](./11-rss.md) for feed structure.
 ## Svelte 5 Components
 
 Interactive features powered by Svelte 5 with modern reactivity.
+
 ### Features
 
 - **Runes**: `$state`, `$derived`, `$effect` for reactive state
@@ -84,6 +85,7 @@ Real-time Last.fm current track display with auto-refresh.
 **File**: `src/components/molecules/playnow.svelte`
 
 **Features**:
+
 - 5-minute polling interval
 - Automatic refresh when track changes
 - Album art display
@@ -102,7 +104,7 @@ Client-side data fetching with smart caching.
 **Setup**: `src/lib/queries/client.ts`
 
 ```typescript
-import { QueryClient } from '@tanstack/svelte-query';
+import { QueryClient } from "@tanstack/svelte-query";
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -118,7 +120,7 @@ export const queryClient = new QueryClient({
 ```typescript
 export function useGetCurrentTrack() {
   return createQuery({
-    queryKey: ['currentTrack'],
+    queryKey: ["currentTrack"],
     queryFn: getCurrentTrack,
     refetchInterval: 5 * 60 * 1000,
   });
@@ -169,6 +171,7 @@ Converts relative markdown links to proper Astro routes.
 Enhanced external link handling.
 
 **Features**:
+
 - `target="_blank"` for external links
 - `rel="noopener noreferrer"` for security
 - Automatic external link detection
@@ -202,11 +205,15 @@ PUBLIC_GOATCOUNTER_CODE=yoursite
 Located in `src/components/layout/elements/head.astro`:
 
 ```astro
-{import.meta.env.PUBLIC_GOATCOUNTER_CODE && (
-  <script async src="//gc.zgo.at/count.js"
-    data-goatcounter={`https://${import.meta.env.PUBLIC_GOATCOUNTER_CODE}.goatcounter.com/count`}>
-  </script>
-)}
+{
+  import.meta.env.PUBLIC_GOATCOUNTER_CODE && (
+    <script
+      async
+      src="//gc.zgo.at/count.js"
+      data-goatcounter={`https://${import.meta.env.PUBLIC_GOATCOUNTER_CODE}.goatcounter.com/count`}
+    ></script>
+  )
+}
 ```
 
 ### Dashboard Access
@@ -252,6 +259,7 @@ raindrop/
 ```
 
 **Features**:
+
 - Build-time data fetching
 - In-memory caching
 - Automatic collection filtering
@@ -262,6 +270,7 @@ raindrop/
 Collections should follow the pattern: `sitename.category`
 
 **Example**:
+
 - `ansango.work` → Displayed as "Work"
 - `ansango.daily` → Displayed as "Daily"
 - `reading` → Reading list (no prefix)
@@ -325,7 +334,7 @@ lastfm/
 #### Build-time (Server-side)
 
 ```typescript
-import { getLastfmData } from '@/lib/music';
+import { getLastfmData } from "@/lib/music";
 
 const { tracks, artists, albums } = await getLastfmData();
 ```
@@ -333,7 +342,7 @@ const { tracks, artists, albums } = await getLastfmData();
 #### Client-side (Runtime)
 
 ```typescript
-import { useGetCurrentTrack } from '@/lib/queries';
+import { useGetCurrentTrack } from "@/lib/queries";
 
 const query = useGetCurrentTrack();
 ```
@@ -376,7 +385,7 @@ Only current track polls in real-time:
 
 ```typescript
 // Refetches every 5 minutes
-refetchInterval: 5 * 60 * 1000
+refetchInterval: 5 * 60 * 1000;
 ```
 
 ### Error Handling

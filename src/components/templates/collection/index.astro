@@ -1,10 +1,10 @@
 ---
 /**
  * 🗂️ CollectionIndex Template Router
- * 
+ *
  * @description Template router that selects appropriate collection template.
  * Routes wiki collection to WikiTemplate, others to DefaultTemplate.
- * 
+ *
  * @usage
  * ```astro
  * <CollectionIndex
@@ -14,7 +14,7 @@
  *   isIndex={true}
  * />
  * ```
- * 
+ *
  * @compatible
  * - 🌳 Routes wiki to specialized WikiTemplate
  * - 📄 Routes others to DefaultTemplate
@@ -22,8 +22,8 @@
  * - 🎯 Extensible template system
  */
 import type { CollectionName } from "@/content.config";
-import WikiTemplate from "./wiki.astro"
-import DefaultTemplate from "./default.astro"
+import WikiTemplate from "./wiki.astro";
+import DefaultTemplate from "./default.astro";
 import { type Entries } from "@/lib/collections";
 import { site } from "@/constants";
 

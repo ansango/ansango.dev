@@ -1,11 +1,11 @@
 /**
  * 🗂️ Astro Static Path Generators
- * 
+ *
  * @description Collection of functions to generate static paths for Astro SSG.
  * Handles routing for collections, archives, tags, bookmarks, and pagination.
- * 
+ *
  * @module lib/astro
- * 
+ *
  * @compatible
  * - 📄 Used in [...slug].astro and [page].astro routes
  * - 🔢 Handles pagination for all content types

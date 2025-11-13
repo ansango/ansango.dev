@@ -1,4 +1,3 @@
-
 # 📦 Project Structure
 
 Understanding the project structure helps you navigate and extend the codebase effectively.
@@ -91,6 +90,7 @@ src/components/
 ```
 
 **Atomic Design Principles**:
+
 - **Atoms**: Single-purpose, reusable
 - **Molecules**: Combination of atoms
 - **Organisms**: Feature-complete sections
@@ -123,6 +123,7 @@ src/content/
 ```
 
 **Collection Types**:
+
 - Dynamic collections: Blog, Wiki, Projects
 - Static pages: About, Uses, Now, Blogroll
 - External data: Bookmarks, Reading (Raindrop.io)
@@ -186,6 +187,7 @@ src/lib/
 ```
 
 **Key Files**:
+
 - **collections.ts**: Content fetching, pagination, filtering
 - **tree-node.ts**: Wiki navigation tree builder
 - **music.ts**: Last.fm integration facade
@@ -222,6 +224,7 @@ src/pages/
 ```
 
 **Route Patterns**:
+
 - Static: `/about`, `/music`
 - Dynamic: `/blog`, `/wiki`, `/projects`
 - Nested: `/blog/post-slug`
@@ -243,6 +246,7 @@ src/styles/
 ```
 
 **Import Order** (in `global.css`):
+
 1. Font imports
 2. Tailwind directives
 3. Content styles
@@ -310,9 +314,9 @@ TypeScript path aliases for cleaner imports:
 **Usage**:
 
 ```typescript
-import { Container } from '@/components/atoms';
-import { getLastfmData } from '@/lib/music';
-import site from '@/site.json';
+import { Container } from "@/components/atoms";
+import { getLastfmData } from "@/lib/music";
+import site from "@/site.json";
 ```
 
 ## File Naming Conventions
@@ -425,6 +429,7 @@ dist/                       # Production build
 ```
 
 **Optimizations**:
+
 - Minified HTML, CSS, JS
 - Optimized images
 - Hashed filenames for caching
@@ -439,6 +444,7 @@ dist/                       # Production build
 ```
 
 **Best Practices**:
+
 - Never commit `.env`
 - Document all variables in `.env.sample`
 - Use `PUBLIC_` prefix for client-side variables

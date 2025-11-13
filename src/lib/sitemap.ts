@@ -1,11 +1,11 @@
 /**
  * 🗺️ Sitemap Serialization
- * 
+ *
  * @description Customizes sitemap generation with priorities and change frequencies.
  * Assigns SEO-optimized values based on content type and page hierarchy.
- * 
+ *
  * @module lib/sitemap
- * 
+ *
  * @compatible
  * - 🔍 Used by @astrojs/sitemap integration
  * - 🎯 Prioritizes homepage and blog posts

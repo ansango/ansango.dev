@@ -9,11 +9,13 @@ Generar archivos JSON estáticos con estadísticas musicales anuales de Last.fm,
 **Implementación**: Endpoints estáticos de Astro (en lugar de script separado)
 
 **Archivos creados**:
+
 - `src/lib/wrapped.ts` - Utilidades compartidas para cálculo y validación
 - `src/pages/data/wrapped/index.json.ts` - Endpoint que genera el índice
 - `src/pages/data/wrapped/[year].json.ts` - Endpoint dinámico para cada año
 
 **Ventajas**:
+
 - ✅ Se ejecuta automáticamente durante `npm run build`
 - ✅ Usa el cliente TypeScript existente sin duplicación
 - ✅ Integrado con el sistema de build de Astro
@@ -22,6 +24,7 @@ Generar archivos JSON estáticos con estadísticas musicales anuales de Last.fm,
 - ✅ Aprovecha `getStaticPaths()` para generación dinámica
 
 **Funcionamiento**:
+
 - ✅ Obtener fecha de registro del usuario de Last.fm
 - ✅ Calcular scrobbles por año para todos los años desde el registro
 - ✅ Calcular umbral automático (media de scrobbles excluyendo el año actual)
@@ -32,6 +35,7 @@ Generar archivos JSON estáticos con estadísticas musicales anuales de Last.fm,
 - ✅ Guardar umbral usado en el momento de generación
 
 **Archivos generados** (en `dist/data/wrapped/`):
+
 - `index.json` - Índice con años disponibles, umbrales y totales
 - `2023.json` - Wrapped de 2023 (31,679 scrobbles)
 - `2024.json` - Wrapped de 2024 (28,492 scrobbles)
@@ -43,6 +47,7 @@ Generar archivos JSON estáticos con estadísticas musicales anuales de Last.fm,
 **Archivo**: `src/lib/wrapped.ts` extendido con funciones para obtener datos
 
 **Implementado**:
+
 - ✅ Peticiones con rangos de tiempo usando timestamps unix (`from`, `to`)
 - ✅ Usar `user.getWeeklyTrackChart`, `user.getWeeklyArtistChart`, `user.getWeeklyAlbumChart` (soportan `from`/`to`)
 - ✅ Obtener por año:
@@ -57,11 +62,13 @@ Generar archivos JSON estáticos con estadísticas musicales anuales de Last.fm,
   - Cantidad de artistas únicos (usando weekly chart completo)
   - Tags nuevos descubiertos (comparando contra tags acumulados de años anteriores)
 
-**Resultado**: 
+**Resultado**:
+
 - Wrapped de 2023: 50 tracks, 20 artistas con tags, 20 álbumes, 1000 artistas únicos, 111 tags nuevos
 - Wrapped de 2024: 50 tracks, 20 artistas con tags, 20 álbumes, datos completos
 
 **Ejemplo de artista con tags**:
+
 ```json
 {
   "name": "The Blaze",
@@ -93,6 +100,7 @@ Generar archivos JSON estáticos con estadísticas musicales anuales de Last.fm,
 **Procesamiento de datos en el script**
 
 #### 📊 Stats Básicas
+
 - Top 50 canciones con playcount
 - Top 20 artistas con playcount y tags
 - Top 20 álbumes con playcount
@@ -102,6 +110,7 @@ Generar archivos JSON estáticos con estadísticas musicales anuales de Last.fm,
 - Tags nuevos descubiertos
 
 #### 🔥 Patrones de Escucha
+
 - **Top por mes**: Canción/artista/álbum más escuchado cada mes (evolución del año)
 - **Racha más larga**: Días consecutivos con al menos 1 scrobble
 - **Día pico**: Fecha con más scrobbles del año + cantidad
@@ -110,17 +119,20 @@ Generar archivos JSON estáticos con estadísticas musicales anuales de Last.fm,
 - **Promedio diario**: Scrobbles promedio por día del año
 
 #### 🎨 Diversidad
+
 - **Índice de concentración**: % que representan los top 10 artistas del total de scrobbles
 - **One-hit wonders**: Artistas de los que solo escuchaste 1 canción en todo el año
 - **Ratio descubrimiento**: % artistas nuevos vs artistas repetidos del año anterior
 
 #### 🆕 Descubrimientos
+
 - **Primera canción del año**: Primer scrobble de enero (fecha, hora, canción)
 - **Última canción del año**: Último scrobble de diciembre (fecha, hora, canción)
 - **Sleeper hits**: Canciones descubiertas en segundo semestre que acabaron en top 50
 - **Artistas persistentes**: Artistas descubiertos en Q1 que permanecieron en tops todo el año
 
 #### 🎯 Obsesiones
+
 - **Maratón máximo**: Canción con más reproducciones consecutivas en un día
 - **Canción del verano**: Más escuchada en jun-ago
 - **Canción del invierno**: Más escuchada en dic-feb
@@ -130,6 +142,7 @@ Generar archivos JSON estáticos con estadísticas musicales anuales de Last.fm,
 - **Artista de cierre**: Artista más escuchado en diciembre
 
 #### 📈 Comparativas (requiere año anterior)
+
 - **Crecimiento anual**: % diferencia de scrobbles vs año anterior
 - **Tags abandonados**: Tags presentes año anterior, ausentes este año
 - **Tags adoptados**: Tags nuevos este año vs año anterior
@@ -137,6 +150,7 @@ Generar archivos JSON estáticos con estadísticas musicales anuales de Last.fm,
 - **Artistas recuperados**: Artistas que no estaban en top año anterior y ahora sí
 
 #### 🎲 Curiosidades
+
 - **Milestones**: Tracks en posición scrobble #1000, #5000, #10000 del año
 - **Track más raro**: Canción con menos listeners globales en Last.fm (de tu top 50)
 - **Artista más raro**: Artista con menos listeners globales en Last.fm (de tu top 20)
@@ -148,6 +162,7 @@ Generar archivos JSON estáticos con estadísticas musicales anuales de Last.fm,
 
 - Crear estructura de carpetas si no existe
 - Generar `{year}.json` por cada año con todas las stats agrupadas por secciones:
+
   ```json
   {
     "year": 2024,
@@ -215,6 +230,7 @@ Generar archivos JSON estáticos con estadísticas musicales anuales de Last.fm,
   ```
 
 - Generar `index.json` con:
+
   ```json
   {
     "years": [2024, 2023, 2022, ...],
@@ -252,48 +268,46 @@ Generar archivos JSON estáticos con estadísticas musicales anuales de Last.fm,
     - Top canción del año
     - Horas escuchadas
   - Enlace a cada wrapped individual
-  
 - `[year].astro`: Dashboard completo del wrapped por año
   - Leer `public/data/wrapped/{year}.json`
   - Hero con año y stats principales (scrobbles, horas, artistas únicos)
   - Secciones organizadas:
-    
+
     **🎵 Tops del Año**
     - Grid de top 50 canciones (con playcount)
     - Grid de top 20 artistas (con playcount y tags)
     - Grid de top 20 álbumes (con playcount)
-    
+
     **📅 Patrones de Escucha**
     - Gráfico/timeline de evolución mensual
     - Top por mes (carrusel o grid)
     - Stats de racha, día pico, mes activo/inactivo
     - Promedio diario
-    
+
     **🎨 Diversidad Musical**
     - Visualización del índice de concentración
     - Lista de one-hit wonders
     - Ratio de descubrimiento vs artistas conocidos
-    
+
     **✨ Descubrimientos**
     - Primera y última canción del año (cards especiales)
     - Sleeper hits destacados
     - Artistas persistentes del año
-    
+
     **🔥 Obsesiones**
     - Maratón máximo (canción más repetida en un día)
     - Canciones de cada estación
     - Artistas de inicio y cierre del año
-    
+
     **📊 Comparativa** (si existe año anterior)
     - % crecimiento/decrecimiento
     - Tags abandonados vs adoptados
     - Artistas abandonados vs recuperados
-    
+
     **🎲 Curiosidades**
     - Milestones del año
     - Tracks/artistas/álbumes más raros
     - Tags nuevos descubiertos
-    
 - Componentes reutilizables:
   - `TrackCard.astro` - Card de canción con imagen, título, artista, plays
   - `ArtistCard.astro` - Card de artista con imagen, nombre, plays, tags
@@ -307,6 +321,7 @@ Generar archivos JSON estáticos con estadísticas musicales anuales de Last.fm,
 **Archivos a modificar**:
 
 - `src/constants.ts`: Añadir metadata de wrapped
+
   ```typescript
   wrapped: {
     title: "Wrapped",
@@ -317,12 +332,12 @@ Generar archivos JSON estáticos con estadísticas musicales anuales de Last.fm,
   }
   ```
 
-- `src/pages/music.astro`: 
-  - Añadir sección/card destacada de "Ver Wrapped" 
+- `src/pages/music.astro`:
+  - Añadir sección/card destacada de "Ver Wrapped"
   - Enlace al wrapped más reciente disponible
   - Preview de stats del último año
 
-- `src/components/layout/elements/header.astro`: 
+- `src/components/layout/elements/header.astro`:
   - (Opcional) Añadir "Wrapped" a navegación principal
   - O como sub-item bajo "Music"
 

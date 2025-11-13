@@ -1,4 +1,3 @@
-
 # 🔧 Configuration
 
 Learn how to configure and customize your site.
@@ -35,7 +34,7 @@ PUBLIC_GOATCOUNTER_CODE=yoursite
 
 Variables prefixed with `PUBLIC_` are exposed to client-side code:
 
-- **PUBLIC_**: Available in browser (use for API keys that need client access)
+- **PUBLIC\_**: Available in browser (use for API keys that need client access)
 - **No prefix**: Server-only (use for secrets and sensitive data)
 
 **Example**:
@@ -81,10 +80,10 @@ Global site information is centralized in `src/site.json`.
 ### Usage in Code
 
 ```typescript
-import site from '@/site.json';
+import site from "@/site.json";
 
-console.log(site.name);  // "Your Site Name"
-console.log(site.url);   // "https://yoursite.com"
+console.log(site.name); // "Your Site Name"
+console.log(site.url); // "https://yoursite.com"
 ```
 
 ## Collection Metadata
@@ -98,15 +97,15 @@ Collection configuration is in `src/constants.ts`.
 Edit `src/content.config.ts`:
 
 ```typescript
-import { defineCollection, z } from 'astro:content';
-import { glob } from 'astro/loaders';
+import { defineCollection, z } from "astro:content";
+import { glob } from "astro/loaders";
 
 const path = "./src/content";
 
 const newCollection = defineCollection({
-  loader: glob({ 
-    pattern: "**/*.md", 
-    base: `${path}/new-collection` 
+  loader: glob({
+    pattern: "**/*.md",
+    base: `${path}/new-collection`,
   }),
   schema: commonSchema, // or create custom schema
 });
@@ -130,7 +129,7 @@ const contentCollections: Record<CollectionName, Meta> = {
   newCollection: {
     title: "New Collection",
     description: "Description for this collection",
-    entriesPerPage: 10,  // 0 for no pagination
+    entriesPerPage: 10, // 0 for no pagination
     url: "/new-collection",
     published: true,
   },
@@ -179,9 +178,9 @@ const portfolioSchema = z.object({
 });
 
 const portfolio = defineCollection({
-  loader: glob({ 
-    pattern: "**/*.md", 
-    base: `${path}/portfolio` 
+  loader: glob({
+    pattern: "**/*.md",
+    base: `${path}/portfolio`,
   }),
   schema: portfolioSchema,
 });
@@ -199,15 +198,15 @@ Edit `src/constants.ts`:
 const contentCollections: Record<CollectionName, Meta> = {
   blog: {
     // ...
-    entriesPerPage: 10,  // Show 10 posts per page
+    entriesPerPage: 10, // Show 10 posts per page
   },
   projects: {
     // ...
-    entriesPerPage: 6,   // Show 6 projects per page
+    entriesPerPage: 6, // Show 6 projects per page
   },
   about: {
     // ...
-    entriesPerPage: 0,   // No pagination (single page)
+    entriesPerPage: 0, // No pagination (single page)
   },
 };
 ```
@@ -225,15 +224,15 @@ Pagination is handled in `src/lib/collections.ts`:
 ```typescript
 export async function getCollectionEntries(
   collectionName: CollectionName,
-  page = 1
+  page = 1,
 ) {
   const { entriesPerPage } = contentCollections[collectionName];
-  
+
   if (entriesPerPage === 0) {
     // Return all entries
     return allEntries;
   }
-  
+
   // Paginate
   const start = (page - 1) * entriesPerPage;
   const end = start + entriesPerPage;
@@ -298,12 +297,13 @@ Advanced Astro settings are in `astro.config.ts`.
 
 ```typescript
 export default defineConfig({
-  site: 'https://yoursite.com',
+  site: "https://yoursite.com",
   // ...
 });
 ```
 
 **Important**: Update this to your production URL for:
+
 - Correct sitemap URLs
 - Proper canonical links
 - Accurate RSS feed URLs
@@ -317,7 +317,7 @@ export default defineConfig({
     sitemap({
       serialize(item) {
         // Custom sitemap logic
-      }
+      },
     }),
     pagefind(),
     svelte(),
@@ -332,7 +332,7 @@ export default defineConfig({
 export default defineConfig({
   markdown: {
     shikiConfig: {
-      theme: 'github-dark',
+      theme: "github-dark",
       wrap: true,
     },
     rehypePlugins: [
@@ -376,7 +376,7 @@ items: allEntries.map((entry) => ({
   categories: entry.data.tags || [],
   author: `${site.email} (${site.author})`,
   // Add custom fields
-}))
+}));
 ```
 
 ## Sitemap Configuration
@@ -389,22 +389,22 @@ Customize sitemap priorities in `src/lib/sitemap.ts`.
 export function serializeSitemap(item: SitemapItem): SitemapItem {
   const url = new URL(item.url);
   const path = url.pathname;
-  
+
   // Homepage
-  if (path === '/') {
-    return { ...item, priority: 1.0, changefreq: 'daily' };
+  if (path === "/") {
+    return { ...item, priority: 1.0, changefreq: "daily" };
   }
-  
+
   // Blog posts
-  if (path.startsWith('/blog/') && !path.endsWith('/blog/')) {
-    return { ...item, priority: 0.9, changefreq: 'monthly' };
+  if (path.startsWith("/blog/") && !path.endsWith("/blog/")) {
+    return { ...item, priority: 0.9, changefreq: "monthly" };
   }
-  
+
   // Add custom rules
-  if (path.startsWith('/your-collection/')) {
-    return { ...item, priority: 0.8, changefreq: 'weekly' };
+  if (path.startsWith("/your-collection/")) {
+    return { ...item, priority: 0.8, changefreq: "weekly" };
   }
-  
+
   return item;
 }
 ```

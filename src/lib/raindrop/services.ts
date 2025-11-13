@@ -1,11 +1,11 @@
 /**
  * 🌐 Raindrop.io API Services
- * 
+ *
  * @description HTTP client for Raindrop.io REST API v1.
  * Handles authentication, pagination, and data fetching.
- * 
+ *
  * @module lib/raindrop/services
- * 
+ *
  * @compatible
  * - 🔐 Bearer token authentication
  * - 🔢 Automatic pagination handling

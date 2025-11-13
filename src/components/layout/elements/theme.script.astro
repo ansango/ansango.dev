@@ -9,7 +9,7 @@
         ? "dark"
         : "light";
 
-      const userTheme = localStorage['ansango-theme'] ?? systemTheme;
+      const userTheme = localStorage["ansango-theme"] ?? systemTheme;
 
       if (userTheme === "light") {
         localStorage.setItem("ansango-theme", "dark");
@@ -29,7 +29,7 @@
     window
       .matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", (event) => {
-        if (localStorage['ansango-theme'] === "system") {
+        if (localStorage["ansango-theme"] === "system") {
           toggleTheme(event.matches);
           setGiscusTheme();
         }
@@ -56,7 +56,7 @@
   }
 
   function preloadTheme() {
-    const userTheme = localStorage['ansango-theme'];
+    const userTheme = localStorage["ansango-theme"];
     if (userTheme === "light" || userTheme === "dark") {
       toggleTheme(userTheme === "dark");
       setGiscusTheme();

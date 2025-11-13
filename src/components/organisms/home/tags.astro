@@ -1,15 +1,15 @@
 ---
 /**
  * 🏷️ Tags Organism
- * 
+ *
  * @description Tag cloud for homepage navigation.
  * Displays all available tags with links to tag archive pages.
- * 
+ *
  * @usage
  * ```astro
  * <Tags tags={allTags} />
  * ```
- * 
+ *
  * @compatible
  * - 🏷️ Uses Tag component for each tag
  * - 🔗 Links to tag archive pages
@@ -29,7 +29,7 @@ const { tags } = Astro.props;
     <Link href="/tags">Tags</Link>
   </h2>
 
-  <ul class="flex flex-wrap gap-1 mb-0">
+  <ul class="mb-0 flex flex-wrap gap-1">
     {
       tags.map((tag, i) => {
         return (

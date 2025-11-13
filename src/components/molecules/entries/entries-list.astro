@@ -1,15 +1,15 @@
 ---
 /**
  * 📚 EntriesList Component
- * 
+ *
  * @description Compact list view of entries with dates and titles.
  * Supports both internal and external links with appropriate icons.
- * 
+ *
  * @usage
  * ```astro
  * <EntriesList entries={recentPosts} />
  * ```
- * 
+ *
  * @compatible
  * - 📅 Displays formatted dates in YYYY · MM format
  * - 🔗 Uses Link component for navigation
@@ -29,7 +29,7 @@ interface Props {
 const { entries } = Astro.props;
 ---
 
-<ul class="list-none space-y-2 mb-0">
+<ul class="mb-0 list-none space-y-2">
   {
     entries.map(
       ({ collection, id, link, external, data: { date, title, index } }) => {

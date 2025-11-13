@@ -1,4 +1,3 @@
-
 # ✨ Features
 
 This personal website template comes packed with modern features designed for content creators, developers, and indie web enthusiasts.

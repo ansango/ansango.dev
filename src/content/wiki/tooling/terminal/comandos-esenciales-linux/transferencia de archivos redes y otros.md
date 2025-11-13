@@ -4,18 +4,7 @@ description: "Transferencia de archivos y redes en Linux: scp, rsync, wget, curl
 date: 2025-01-29
 mod: 2025-11-13
 published: true
-tags:
-  - commands
-  - curl
-  - linux
-  - network
-  - rsync
-  - scp
-  - shell
-  - ssh
-  - terminal
-  - transfer
-  - wget
+tags: [commands, curl, linux, man, network, rsync, scp, shell, ssh, terminal, transfer, watch, wget]
 serieId: linux-essential-commands
 serieTitle: Comandos esenciales en Linux
 serieOrder: 5

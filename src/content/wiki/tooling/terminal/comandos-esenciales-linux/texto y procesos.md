@@ -4,7 +4,17 @@ description: Editores y manipulación de texto y gestión de procesos en Linux
 date: 2025-01-29
 mod: 2025-11-13
 published: true
-tags: [background, commands, jobs, linux, processes, screen, shell, terminal, tmux]
+tags:
+  - background
+  - commands
+  - jobs
+  - linux
+  - processes
+  - screen
+  - shell
+  - terminal
+  - tmux
+  - nano
 serieId: linux-essential-commands
 serieTitle: Comandos esenciales en Linux
 serieOrder: 4

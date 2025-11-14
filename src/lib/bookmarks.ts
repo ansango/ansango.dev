@@ -1,31 +1,37 @@
 /**
- * 🧰 Raindrop Utility Functions
+ * 🔖 Bookmarks Utility Functions
  *
- * @description Helper functions for working with Raindrop data.
- * Filters collections, fetches bookmarks by collection, and maps data.
+ * @description Helper functions for working with bookmarks data from external service.
+ * Fetches, filters, and transforms bookmark collections and entries.
  *
- * @module lib/raindrop/utils
+ * @module lib/bookmarks
  *
  * @compatible
- * - 🔍 Filters reading vs other collections
+ * - 🗂️ Collection management and filtering
  * - 📅 Date-based sorting
  * - 📊 Latest entries retrieval
- * - 🗂️ Data transformation for entries
+ * - 🔄 Data transformation and mapping
  */
 
 import { fetcher } from "./utils";
 
 /**
- * Represents the cached data structure for a bookmark.
+ * Represents a cached bookmark entry from the external service.
  *
- * @property _id - Unique identifier for the bookmark.
- * @property title - The title of the bookmark.
- * @property created - The creation date of the bookmark in ISO string format.
- * @property excerpt - A short excerpt or summary of the bookmark.
- * @property collectionId - Identifier for the collection to which the bookmark belongs.
- * @property cover - (Optional) URL to the cover image of the bookmark.
- * @property link - The URL link of the bookmark.
- * @property tags - (Optional) Array of tags associated with the bookmark.
+ * @property _id - Unique identifier for the bookmark
+ * @property link - The URL of the bookmarked resource
+ * @property title - The title of the bookmark
+ * @property excerpt - A short excerpt or summary
+ * @property note - Additional notes (any format)
+ * @property type - Type of the bookmark resource
+ * @property cover - URL to the cover image
+ * @property tags - Array of tags associated with the bookmark
+ * @property important - Flag indicating if bookmark is marked as important
+ * @property removed - Flag indicating if bookmark has been removed
+ * @property created - Creation date in ISO string format
+ * @property collectionId - ID of the collection containing this bookmark
+ * @property domain - Domain of the bookmarked URL
+ * @property lastUpdate - Last update timestamp in ISO string format
  */
 export type CachedBookmarkData = {
   _id: number;
@@ -45,13 +51,18 @@ export type CachedBookmarkData = {
 };
 
 /**
- * Represents the cached data for a collection.
+ * Represents a cached collection from the external service.
  *
- * @property _id - The unique identifier of the collection.
- * @property title - The title of the collection.
- * @property created - The creation date of the collection, as an ISO string.
- * @property description - A brief description of the collection.
- * @property count - The number of items in the collection.
+ * @property _id - Unique identifier of the collection
+ * @property title - Title of the collection
+ * @property description - Description of the collection (any format)
+ * @property isPublic - Flag indicating if collection is public
+ * @property count - Number of bookmarks in the collection
+ * @property sort - Sort order value
+ * @property lastAction - Timestamp of last action in ISO string format
+ * @property created - Creation date in ISO string format
+ * @property lastUpdate - Last update timestamp in ISO string format
+ * @property lastSyncedAt - Last sync timestamp in ISO string format
  */
 export type CachedCollectionData = {
   _id: number;
@@ -71,6 +82,18 @@ let cachedBookmarksData: {
   collections: CachedCollectionData[];
 } | null = null;
 
+/**
+ * Fetches all bookmarks and collections from the external service.
+ * Uses in-memory caching to avoid redundant API calls.
+ *
+ * @async
+ * @returns Promise resolving to an object containing bookmarks and collections arrays
+ * @throws Error if the service URL or API key is not configured
+ * @throws Error if the API request fails
+ *
+ * @example
+ * const { bookmarks, collections } = await getAllBookmarksData();
+ */
 export const getAllBookmarksData = async () => {
   if (cachedBookmarksData) {
     return cachedBookmarksData;
@@ -100,19 +123,16 @@ export const getAllBookmarksData = async () => {
 };
 
 /**
- * Fetches Raindrop collections and returns those whose title is not "reading".
- *
- * Calls `getRaindropData()` and filters the returned collections to exclude any
- * collection with a `title` exactly equal to "reading" (case-sensitive).
+ * Fetches all collections excluding the "reading" collection.
+ * Useful for displaying general bookmarks collections separately from reading list.
  *
  * @async
- * @returns {Promise<Collection[]>} Promise resolving to an array of collections excluding the "reading" collection.
- * @throws Propagates any error thrown by `getRaindropData()`.
+ * @returns Promise resolving to array of collections (excluding "reading")
+ * @throws Propagates any error thrown by getAllBookmarksData
+ *
  * @example
  * const collections = await getCollectionsExcludingReading();
- * console.log(collections);
- *
- * @see getRaindropData
+ * console.log(collections); // All collections except "reading"
  */
 export const getCollectionsExcludingReading = async () => {
   const { collections } = await getAllBookmarksData();
@@ -120,19 +140,16 @@ export const getCollectionsExcludingReading = async () => {
 };
 
 /**
- * Retrieve bookmarks belonging to a Raindrop collection identified by its title.
+ * Retrieves all bookmarks belonging to a specific collection by its title.
+ * If the collection is not found, logs a warning and returns an empty array.
  *
- * Fetches the cached Raindrop data (bookmarks and collections), finds the collection
- * whose title exactly matches the provided `collection` string, and returns all
- * bookmarks with a matching `collectionId`. If the collection cannot be found,
- * a warning is logged and an empty array is returned.
- *
- * @param collection - The exact title of the collection to filter by (case-sensitive).
- * @returns A promise that resolves to an array of bookmarks for the specified collection,
- *          or an empty array if the collection is not found.
  * @async
+ * @param collection - The exact title of the collection (case-sensitive)
+ * @returns Promise resolving to array of bookmarks in the specified collection
+ *
  * @example
- * const bookmarks = await getBookmarksByCollection('Read Later');
+ * const bookmarks = await getBookmarksByCollection('Web Development');
+ * // Returns all bookmarks in the "Web Development" collection
  */
 export const getBookmarksByCollection = async (collection: string) => {
   const { bookmarks, collections } = await getAllBookmarksData();
@@ -149,29 +166,16 @@ export const getBookmarksByCollection = async (collection: string) => {
 
 /**
  * Retrieves the latest bookmarks from the "reading" collection.
- *
- * Fetches all bookmarks in the "reading" collection, sorts them by their
- * `created` timestamp in descending order (newest first), and returns up to
- * `limit` items. Each returned bookmark is augmented with a `collection`
- * property set to `"reading"`.
+ * Bookmarks are sorted by creation date (newest first) and limited to specified count.
+ * Each bookmark is augmented with a `collection` property set to "reading".
  *
  * @async
- * @param limit - The maximum number of latest readings to return. Should be a
- *   non-negative integer; if `limit` exceeds available bookmarks, all bookmarks
- *   are returned. Note: a negative value follows Array.prototype.slice
- *   semantics and will exclude trailing items.
- * @returns A Promise that resolves to an array of bookmark objects (original
- *   properties preserved) each extended with `{ collection: "reading" }`.
- * @throws If fetching bookmarks via `getBookmarksByCollection("reading")`
- *   fails, the promise will reject with the underlying error.
- *
- * @remarks
- * - Sorting is performed by parsing the `created` field as a Date.
- * - The function does not mutate the original bookmark objects; new objects
- *   with the added `collection` property are returned.
+ * @param limit - Maximum number of bookmarks to return
+ * @returns Promise resolving to array of latest reading bookmarks
  *
  * @example
  * const latestFive = await getLatestReading(5);
+ * // Returns the 5 most recent bookmarks from "reading" collection
  */
 export const getLatestReading = async (limit: number) => {
   const bookmarks = await getBookmarksByCollection("reading");
@@ -183,31 +187,17 @@ export const getLatestReading = async (limit: number) => {
 };
 
 /**
- * Fetches the most recent reading/bookmark entries and maps them into a normalized shape.
- *
- * Calls getLatestReading(limit) to retrieve the latest bookmarks and transforms each entry
- * into an object containing the original collection and link, a flag indicating the entry
- * is external, and a data object with title, description (mapped from excerpt), and date
- * (mapped from created).
+ * Fetches and transforms the latest reading bookmarks into a normalized format.
+ * Maps bookmark data to a consistent structure suitable for display components.
  *
  * @async
- * @param limit - Maximum number of recent bookmarks to fetch and map.
- * @returns A promise that resolves to an array of mapped bookmark objects:
- *   [
- *     {
- *       collection: string;
- *       link: string;
- *       external: true;
- *       data: {
- *         title: string;
- *         description?: string;
- *         date: string | Date;
- *       };
- *     },
- *     ...
- *   ]
+ * @param limit - Maximum number of bookmarks to fetch and transform
+ * @returns Promise resolving to array of mapped bookmark objects with normalized structure
  *
- * @throws Propagates any errors thrown by getLatestReading.
+ * @example
+ * const entries = await latestReadingMapped(10);
+ * // Returns 10 latest bookmarks with structure:
+ * // { collection, link, external: true, data: { title, description, date } }
  */
 export const latestReadingMapped = async (limit: number) => {
   const latestBookmarks = await getLatestReading(limit);

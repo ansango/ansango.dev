@@ -39,14 +39,14 @@
   const query = useGetCurrentTrack(url, apiKey);
   let track = $derived(query.data);
   let currentTrack = $derived(track?.nowPlaying ? query.data : null);
-  let currentImg = $derived(currentTrack?.image);
+  // let currentImg = $derived(currentTrack?.image);
 </script>
-
+{JSON.stringify(currentTrack, null, 2)}
 {#if currentTrack}
   <p class="mb-0">
-    {#if currentImg}
+    {#if currentTrack.image}
       <img
-        src={currentImg}
+        src={currentTrack.image}
         alt={currentTrack.album}
         class="inline-block size-6 mx-1 rounded object-cover align-middle"
         loading="eager"

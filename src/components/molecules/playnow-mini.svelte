@@ -39,7 +39,6 @@
   const query = useGetCurrentTrack(url, apiKey);
   let track = $derived(query.data);
   let currentTrack = $derived(track?.nowPlaying ? query.data : null);
-  // let currentImg = $derived(currentTrack?.image);
 </script>
 {JSON.stringify(currentTrack, null, 2)}
 {#if currentTrack}

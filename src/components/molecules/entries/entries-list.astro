@@ -32,7 +32,8 @@ const { entries } = Astro.props;
 <ul class="mb-0 list-none space-y-2">
   {
     entries.map(
-      ({ collection, id, link, external, data: { date, title, index } }) => {
+      ({ collection, id, link, external, data }) => {
+        const { date, title, index } = data as typeof data & { index?: boolean };
         const url = external
           ? link
           : `/${collection}` + (index ? "" : `/${id}`);

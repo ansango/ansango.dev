@@ -26,8 +26,8 @@ import {
 import {
   getBookmarksByCollection,
   getCollectionsExcludingReading,
-  getRaindropData,
-} from "@/lib/raindrop";
+  getAllBookmarksData,
+} from "@/lib/bookmarks";
 import { getAllSeries } from "./series";
 
 /**
@@ -228,7 +228,7 @@ export const getBookmarksStaticPaths = async () => {
  */
 
 export const getBookmarksStaticPathsPage = async () => {
-  const { bookmarks, collections } = await getRaindropData();
+  const { bookmarks, collections } = await getAllBookmarksData();
   return collections.flatMap((collection) => {
     const items = bookmarks.filter((b) => b.collectionId === collection._id);
     const totalPages = getPageNumbers(

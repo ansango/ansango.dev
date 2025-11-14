@@ -13,7 +13,91 @@
  * - 🗂️ Data transformation for entries
  */
 
-import { getRaindropData } from "@/lib/raindrop";
+import { fetcher } from "./utils";
+
+/**
+ * Represents the cached data structure for a bookmark.
+ *
+ * @property _id - Unique identifier for the bookmark.
+ * @property title - The title of the bookmark.
+ * @property created - The creation date of the bookmark in ISO string format.
+ * @property excerpt - A short excerpt or summary of the bookmark.
+ * @property collectionId - Identifier for the collection to which the bookmark belongs.
+ * @property cover - (Optional) URL to the cover image of the bookmark.
+ * @property link - The URL link of the bookmark.
+ * @property tags - (Optional) Array of tags associated with the bookmark.
+ */
+export type CachedBookmarkData = {
+  _id: number;
+  link: string;
+  title: string;
+  excerpt: string;
+  note: any;
+  type: string;
+  cover: string;
+  tags: string[];
+  important: boolean;
+  removed: boolean;
+  created: string;
+  collectionId: number;
+  domain: string;
+  lastUpdate: string;
+};
+
+/**
+ * Represents the cached data for a collection.
+ *
+ * @property _id - The unique identifier of the collection.
+ * @property title - The title of the collection.
+ * @property created - The creation date of the collection, as an ISO string.
+ * @property description - A brief description of the collection.
+ * @property count - The number of items in the collection.
+ */
+export type CachedCollectionData = {
+  _id: number;
+  title: string;
+  description: any;
+  isPublic: boolean;
+  count: number;
+  sort: number;
+  lastAction: string;
+  created: string;
+  lastUpdate: string;
+  lastSyncedAt: string;
+};
+
+let cachedBookmarksData: {
+  bookmarks: CachedBookmarkData[];
+  collections: CachedCollectionData[];
+} | null = null;
+
+export const getAllBookmarksData = async () => {
+  if (cachedBookmarksData) {
+    return cachedBookmarksData;
+  }
+
+  const serviceUrl = import.meta.env.SERVICE_URL;
+  const apiKey = import.meta.env.SERVICE_API_KEY;
+  const { bookmarks } = await fetcher<{
+    bookmarks: CachedBookmarkData[];
+  }>(`${serviceUrl}/bookmarks/all`, {
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+    },
+  });
+
+  const { collections } = await fetcher<{
+    collections: CachedCollectionData[];
+  }>(`${serviceUrl}/bookmarks/collections`, {
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+    },
+  });
+
+  cachedBookmarksData = { bookmarks, collections };
+
+  return cachedBookmarksData;
+};
 
 /**
  * Fetches Raindrop collections and returns those whose title is not "reading".
@@ -31,7 +115,7 @@ import { getRaindropData } from "@/lib/raindrop";
  * @see getRaindropData
  */
 export const getCollectionsExcludingReading = async () => {
-  const { collections } = await getRaindropData();
+  const { collections } = await getAllBookmarksData();
   return collections.filter((c) => c.title !== "reading");
 };
 
@@ -51,12 +135,15 @@ export const getCollectionsExcludingReading = async () => {
  * const bookmarks = await getBookmarksByCollection('Read Later');
  */
 export const getBookmarksByCollection = async (collection: string) => {
-  const { bookmarks, collections } = await getRaindropData();
+  const { bookmarks, collections } = await getAllBookmarksData();
+
   const collectionId = collections.find((c) => c.title === collection)?._id;
+
   if (!collectionId) {
     console.warn(`Collection not found: ${collection}`);
     return [];
   }
+
   return bookmarks.filter((b) => b.collectionId === collectionId);
 };
 
@@ -88,10 +175,7 @@ export const getBookmarksByCollection = async (collection: string) => {
  */
 export const getLatestReading = async (limit: number) => {
   const bookmarks = await getBookmarksByCollection("reading");
-  const sortedBookmarks = bookmarks.sort(
-    (a, b) => new Date(b.created).getTime() - new Date(a.created).getTime(),
-  );
-  const latestBookmarks = sortedBookmarks.slice(0, limit);
+  const latestBookmarks = bookmarks.slice(0, limit);
   return latestBookmarks.map((b) => ({
     ...b,
     collection: "reading",

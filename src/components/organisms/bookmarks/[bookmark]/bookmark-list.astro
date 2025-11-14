@@ -2,8 +2,9 @@
 import { Image, Link } from "@/components/atoms";
 import { ExternalLinkIcon } from "@/components/icons";
 import { site } from "@/constants";
+import type { CachedBookmarkData } from "@/lib/bookmarks";
 import { getPagination } from "@/lib/collections";
-import type { CachedBookmarkData } from "@/lib/raindrop";
+
 
 interface Props {
   entries: CachedBookmarkData[];

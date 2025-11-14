@@ -7,7 +7,7 @@ import {
 } from "@/lib/collections";
 import { site } from "@/constants";
 import { LayoutDefault } from "@/components/layout";
-import { latestReadingMapped } from "@/lib/raindrop";
+
 import {
   HomeBookmarks,
   HomeCollections,
@@ -16,6 +16,7 @@ import {
   HomeTags,
   HomePlayNow,
 } from "@/components/organisms/home";
+import { latestReadingMapped } from "@/lib/bookmarks";
 
 const meta = site.pages.home;
 const latestBookmarks = (await latestReadingMapped(

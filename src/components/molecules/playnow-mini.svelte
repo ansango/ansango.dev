@@ -40,7 +40,6 @@
   let track = $derived(query.data);
   let currentTrack = $derived(track?.nowPlaying ? query.data : null);
 </script>
-
 {#if currentTrack}
   <p class="mb-0">
     {#if currentTrack.image}

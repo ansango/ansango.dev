@@ -2,7 +2,7 @@
 title: ¿Qué Es Proxmox?
 description: "Proxmox VE: plataforma de virtualización con KVM y LXC, gestión de clústeres, alta disponibilidad y almacenamiento flexible"
 date: 2025-09-03
-mod: 2025-10-25
+mod: 2025-11-25
 published: true
 tags: [clustering, ha, hypervisor, kvm, lxc, open-source, proxmox, storage, virtualizacion]
 ---

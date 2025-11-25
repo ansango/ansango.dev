@@ -4,11 +4,7 @@ description: Jellyfin en Docker sobre Proxmox con discos separados y acceso desd
 date: 2025-11-25
 mod: 2025-11-25
 published: true
-tags:
-  - docker
-  - homelab
-  - jellyfin
-  - proxmox
+tags: [docker, homelab, jellyfin, proxmox]
 ---
 
 # Jellyfin en Proxmox con Docker

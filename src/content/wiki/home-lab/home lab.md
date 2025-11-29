@@ -53,5 +53,3 @@ Aquí se detallan los servicios que mantengo en mi infraestructura:
     - [[gitea|Gitea]]: Servicio de Git auto-alojado.
 - **Monitoring**:
     - [[monitoring|Stack de Monitoreo]]: Prometheus y Grafana con Node Exporter.
-
-Pepe

@@ -2,13 +2,9 @@
 title: Usando Ajax con Async Await
 description: "Cómo usar AJAX con async/await en JavaScript: migración desde jQuery, manejo de errores y promesas"
 date: 2021-05-02
-mod: 2021-10-25
+mod: 2025-11-11
 published: true
-tags:
-  - async
-  - fetch
-  - javascript
-  - promise
+tags: [async, fetch, javascript, promise]
 ---
 
 # Usando Ajax con Async Await

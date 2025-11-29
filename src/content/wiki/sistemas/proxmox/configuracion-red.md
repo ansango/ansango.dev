@@ -2,7 +2,7 @@
 title: Guía de Configuración de Red en Proxmox VE
 description: "Configuración de red en Proxmox: Linux Bridge, Open vSwitch, bonding, VLANs y escenarios de red"
 date: 2025-09-03
-mod: 2025-10-25
+mod: 2025-11-29
 published: true
 tags: [bonding, bridge, linux-bridge, nat, networking, proxmox, red, routing, vlan, vswitch]
 ---

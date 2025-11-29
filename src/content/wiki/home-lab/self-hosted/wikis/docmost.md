@@ -2,7 +2,7 @@
 title: Docmost
 description: Una plataforma de wiki y documentación colaborativa de código abierto, alternativa a Confluence y Notion.
 date: 2025-09-02
-mod: 2025-10-25
+mod: 2025-11-29
 published: true
 tags: [collaboration, documentation, self-hosted, wiki]
 ---

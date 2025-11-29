@@ -1,13 +1,16 @@
 ---
-title: 01. Operaciones de Archivos y Directorios
+title: Operaciones de Archivos y Directorios
 description: "Comandos Linux: operaciones con archivos y directorios, permisos, compresión y gestión del sistema de archivos"
 date: 2025-01-29
-mod: 2025-10-25
+mod: 2025-11-13
 published: true
 tags: [commands, compression, directories, files, filesystem, linux, permissions, shell, terminal]
+serieId: linux-essential-commands
+serieTitle: Comandos esenciales en Linux
+serieOrder: 1
 ---
 
-# 01. Operaciones de Archivos y Directorios
+# Operaciones de Archivos y Directorios
 
 - `ls`: Lista el contenido de un directorio.
 - `cd`: Cambia de directorio.

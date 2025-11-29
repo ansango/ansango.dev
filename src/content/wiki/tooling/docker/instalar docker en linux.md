@@ -2,7 +2,7 @@
 title: Instalar docker en linux
 description: "Instalar Docker en Linux: guía completa para Ubuntu, Debian, Arch Linux con configuración y solución de problemas"
 date: 2024-12-17
-mod: 2025-10-25
+mod: 2025-11-25
 published: true
 tags: [arch, docker, linux, sysadmin, ubuntu]
 ---

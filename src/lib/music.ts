@@ -13,8 +13,35 @@
  * - 📈 Shows top artists and albums statistics
  */
 
-import type { RecentTracks, TopAlbums, TopArtists } from "lastfm-client-ts";
-import { client } from "./lastfm";
+import { fetcher } from "./utils";
+
+export type Album = {
+  position: number;
+  name: string;
+  artist: string;
+  url: string;
+  playcount: number;
+  image: string | null;
+};
+
+export type Artist = {
+  position: number;
+  name: string;
+  url: string;
+  playcount: number;
+  image: string | null;
+};
+
+export type RecentTrack = {
+  position: number;
+  name: string;
+  artist: string;
+  album: string;
+  timestamp: string | null;
+  url: string;
+  nowPlaying: boolean;
+  image: string | null;
+};
 
 /**
  * Represents cached Last.fm data including recent tracks, top artists, and top albums.
@@ -24,21 +51,10 @@ import { client } from "./lastfm";
  * @property albums - An array of top album objects from Last.fm.
  */
 export type CacheLastfmData = {
-  tracks: RecentTracks["track"];
-  artists: TopArtists["artist"];
-  albums: TopAlbums["album"];
+  tracks: RecentTrack[];
+  artists: Artist[];
+  albums: Album[];
 };
-
-/**
- * Caches the most recently fetched Last.fm data to optimize repeated access and reduce redundant API calls.
- *
- * @remarks
- * This variable holds the cached data in memory for the current session. It is initialized as `null`
- * and should be updated whenever new Last.fm data is retrieved.
- *
- * @see CacheLastfmData
- */
-let cacheLastfmData: CacheLastfmData | null = null;
 
 /**
  * Fetches and caches Last.fm data for the user "ansango".
@@ -51,41 +67,38 @@ let cacheLastfmData: CacheLastfmData | null = null;
  *   An object containing arrays of recent tracks, top artists, and top albums.
  */
 export const getLastfmData = async () => {
-  if (cacheLastfmData) {
-    console.info("Returning cached Last.fm data");
-    return cacheLastfmData;
-  }
+  const serviceUrl = import.meta.env.SERVICE_URL;
+  const apiKey = import.meta.env.SERVICE_API_KEY;
 
-  const { recenttracks } = await client.user.getRecentTracks({
-    user: "ansango",
-    limit: 11,
-  });
-  const {
-    topartists: { artist: artists },
-  } = await client.user.getTopArtists({
-    user: "ansango",
-    limit: 10,
-    period: "7day",
-  });
-  const {
-    topalbums: { album: albums },
-  } = await client.user.getTopAlbums({
-    user: "ansango",
-    limit: 12,
-    period: "1month",
+  const { tracks } = await fetcher<{
+    tracks: RecentTrack[];
+  }>(`${serviceUrl}/music/ansango/tracks/recent?limit=50`, {
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+    },
   });
 
-  const tracks = recenttracks.track
-    .filter((track) => !track["@attr"]?.nowplaying)
-    .slice(0, 10);
+  const { artists } = await fetcher<{
+    artists: Artist[];
+  }>(`${serviceUrl}/music/ansango/artists/weekly?limit=10`, {
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+    },
+  });
 
-  cacheLastfmData = {
-    tracks,
+  const { albums } = await fetcher<{
+    albums: Album[];
+  }>(`${serviceUrl}/music/ansango/albums/monthly?limit=12`, {
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+    },
+  });
+
+  return {
+    tracks: tracks.filter((track) => !track.nowPlaying).slice(0, 10),
     artists,
     albums,
   };
-
-  return cacheLastfmData;
 };
 
 export type Tracks = Awaited<ReturnType<typeof getLastfmData>>["tracks"];

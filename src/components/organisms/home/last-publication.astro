@@ -1,15 +1,15 @@
 ---
 /**
  * 🆕 LastPublication Organism
- * 
+ *
  * @description Highlights the most recent published entry.
  * Shows entry preview with title, date, and description.
- * 
+ *
  * @usage
  * ```astro
  * <LastPublication entry={latestEntry} isIndex={false} />
  * ```
- * 
+ *
  * @compatible
  * - 📝 Uses Entry component for preview
  * - 🔗 Link component for navigation
@@ -19,12 +19,11 @@ import { Link } from "@/components/atoms";
 import { Entry } from "@/components/molecules";
 import type { Entry as EntryType } from "@/lib/collections";
 interface Props {
-  entry: EntryType
+  entry: EntryType;
   isIndex: boolean;
 }
 
 const { entry, isIndex } = Astro.props;
-
 ---
 
 <section class="group">

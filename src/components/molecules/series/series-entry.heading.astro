@@ -1,0 +1,125 @@
+---
+/**
+ * 📚 Series Entry Heading Component
+ *
+ * @description Header for series entries with title, metadata, tags, series badge, and outdated warning.
+ * Displays publication/modification date, reading time, description, series information, and tag list.
+ *
+ * @usage
+ * ```astro
+ * <SeriesEntryHeading
+ *   title="My Series Post"
+ *   date={new Date()}
+ *   readingTime={5}
+ *   tags={['docker', 'devops']}
+ *   collection="blog"
+ *   seriesMetadata={{ order: 1, total: 5 }}
+ * />
+ * ```
+ *
+ * @compatible
+ * - 🏷️ Uses Tag component for tag links
+ * - 📚 Shows SeriesBadge for part indicator
+ * - ℹ️ Shows InfoIcon for outdated content (>1 year)
+ * - 📅 Formatted dates with mod indicator
+ * - 📝 Used in series entry detail pages
+ */
+import { getFormatDate } from "@/lib/utils";
+import { Tag, SeriesBadge } from "@/components/atoms";
+import { InfoIcon } from "@/components/icons";
+import type { CollectionName } from "@/content.config";
+import type { serieInfo } from "@/lib/series";
+import SeriesWarning from "./series-warning.astro";
+
+interface Props {
+  title: string;
+  date?: Date;
+  mod?: Date;
+  description?: string;
+  tags?: string[];
+  readingTime: number;
+  collection: CollectionName;
+  serieInfo: {
+    title: string;
+    order: number;
+    total: number;
+    missingParts?: serieInfo["missingParts"];
+  };
+}
+
+const { title, date, mod, description, tags, readingTime, serieInfo } =
+  Astro.props;
+const { missingParts } = serieInfo;
+const parsedDate = new Date(mod ?? date ?? "");
+const now = new Date();
+const oneYear = 1000 * 60 * 60 * 24 * 365;
+const isOutdated = parsedDate && now.getTime() - parsedDate.getTime() > oneYear;
+const isTLDR = readingTime > 8;
+const isComplete =
+  missingParts && missingParts.ranges ? missingParts.ranges.length === 0 : true;
+---
+
+<div class="border-divider mb-4 border-b-[1px]">
+  {
+    date && (
+      <time datetime={getFormatDate(date, "es-ES")} class="text-muted text-sm">
+        {mod && "actualizado el "} {getFormatDate(mod ?? date, "es-ES")}
+      </time>
+    )
+  }
+
+  {
+    readingTime > 0 && (
+      <span>
+        &nbsp;·&nbsp;
+        <span class="text-muted text-sm">{readingTime} min de lectura</span>
+      </span>
+    )
+  }
+
+  <h1 class="my-2">
+    {title}
+  </h1>
+  <ul class="flex flex-wrap gap-1">
+    {
+      tags?.map((tag, i) => {
+        return (
+          <li class="flex list-none">
+            <Tag href={`/tags/${tag}`}>{tag.replace(/-/g, " ")}</Tag>
+            {i !== tags.length - 1 && <span class="text-muted">,</span>}
+          </li>
+        );
+      })
+    }
+  </ul>
+  {
+    isTLDR && (
+      <p class="info flex items-center gap-2">
+        <InfoIcon /> TL;DR.
+      </p>
+    )
+  }
+  <p class="text-muted">
+    {description}
+  </p>
+
+  {
+    isOutdated && (
+      <p class="warning flex items-center gap-2">
+        <InfoIcon />
+        Este contenido tiene más de un año y puede estar desactualizado.
+      </p>
+    )
+  }
+
+  <SeriesBadge
+    title={serieInfo.title}
+    order={serieInfo.order}
+    total={serieInfo.total}
+  />
+  {
+    !isComplete && missingParts && (
+      <SeriesWarning ranges={missingParts.ranges} />
+    )
+  }
+</div>

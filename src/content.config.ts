@@ -20,14 +20,18 @@ const metaSchema = seoSchema.extend({
   published: z.boolean().default(false).optional(),
 });
 
-const commonSchema = seoSchema
-  .extend({
-    tags: z.array(z.string()).optional(),
-    date: z.date().optional(),
-    mod: z.date().optional(),
-    index: z.boolean().default(false).optional(),
-  })
-  .merge(metaSchema.pick({ published: true }));
+const commonSchema = z.object({
+  title: z.string(),
+  description: z.string().optional(),
+  date: z.coerce.date().optional(),
+  mod: z.coerce.date().optional(),
+  published: z.boolean().default(false),
+  tags: z.array(z.string()).optional(),
+  // Series fields (flat for Obsidian compatibility)
+  serieId: z.string().optional(),
+  serieTitle: z.string().optional(),
+  serieOrder: z.number().optional(),
+});
 
 /**
  * Collections

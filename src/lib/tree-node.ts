@@ -1,11 +1,11 @@
 /**
  * 🌳 Tree Structure Builder
- * 
+ *
  * @description Builds hierarchical tree structures from flat entry lists.
  * Creates folder/file navigation trees for wiki and nested content.
- * 
+ *
  * @module lib/tree-node
- * 
+ *
  * @compatible
  * - 📁 Used by WikiTree component
  * - 📄 Converts flat lists to nested structures
@@ -39,6 +39,7 @@ export type NodeItem = {
  * It filters the entries by collection, maps them into a path/title shape,
  * then constructs a nested folder/file hierarchy. The resulting top-level
  * array is sorted to show folders before files and alphabetically within type.
+ * Series entries are sorted by serieOrder within the same folder.
  *
  * @param {Entries} entries Array of entries to build the tree from.
  * @param {CollectionName} collectionName Collection to filter by.
@@ -48,12 +49,17 @@ export const getTreeNode = (
   entries: Entries,
   collectionName: CollectionName,
 ) => {
+  // Keep reference to original entries for series data
+  const entryDataMap = new Map<string, any>();
+  
   const mappedEntries = entries
     .filter(({ collection }) => collection === collectionName)
     .map((entry) => {
       const { collection, id, data } = entry;
       const { title } = data;
-      return { path: `/${collection}/${id}`, title, collection, id };
+      const path = `/${collection}/${id}`;
+      entryDataMap.set(path, data);
+      return { path, title, collection, id, data };
     })
     .sort((a, b) => a.title.localeCompare(b.title));
 
@@ -82,12 +88,53 @@ export const getTreeNode = (
     });
   });
 
-  return structure.sort((a, b) => {
-    if (a.type === b.type) {
+  // Sort with series awareness
+  const sortWithSeries = (nodes: NodeItem[]): NodeItem[] => {
+    return nodes.sort((a, b) => {
+      // Folders before files
+      if (a.type !== b.type) {
+        return a.type === "folder" ? -1 : 1;
+      }
+      
+      // Both are files - check if they're part of the same series
+      if (a.type === "file" && b.type === "file") {
+        const aData = entryDataMap.get(a.path);
+        const bData = entryDataMap.get(b.path);
+        
+        const aSerieId = aData?.serieId;
+        const bSerieId = bData?.serieId;
+        
+        // If both are in the same series, sort by serieOrder
+        if (aSerieId && bSerieId && aSerieId === bSerieId) {
+          const aOrder = aData?.serieOrder || 0;
+          const bOrder = bData?.serieOrder || 0;
+          return aOrder - bOrder;
+        }
+        
+        // If only one is a series, series entries come first
+        if (aSerieId && !bSerieId) return -1;
+        if (!aSerieId && bSerieId) return 1;
+        
+        // If both are series but different series, or neither is series
+        // sort alphabetically
+        return a.name.localeCompare(b.name);
+      }
+      
+      // Both are folders - alphabetical
       return a.name.localeCompare(b.name);
-    }
-    return a.type === "folder" ? -1 : 1;
-  });
+    });
+  };
+
+  // Apply recursive sorting
+  const sortTreeRecursive = (nodes: NodeItem[]): NodeItem[] => {
+    const sorted = sortWithSeries(nodes);
+    return sorted.map(node => ({
+      ...node,
+      children: node.children ? sortTreeRecursive(node.children) : undefined,
+    }));
+  };
+
+  return sortTreeRecursive(structure);
 };
 
 /**

@@ -9,3 +9,7 @@ public/count.js
 # Cache
 .DS_Store
 *.log
+
+.obsidian/
+public/
+src/content/

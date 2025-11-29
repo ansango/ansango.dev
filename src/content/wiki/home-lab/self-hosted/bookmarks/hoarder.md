@@ -74,7 +74,7 @@ volumes:
 
 Crea un archivo `.env` y define las siguientes variables. Es **crítico** usar valores aleatorios y seguros.
 
-```env
+```
 KARAKEEP_VERSION=release
 NEXTAUTH_SECRET=super_random_string
 MEILI_MASTER_KEY=another_random_string

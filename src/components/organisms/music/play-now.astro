@@ -1,10 +1,12 @@
 ---
 import { NoListenIcon, PlayIcon } from "@/components/icons";
 import PlayNowComponent from "@/components/molecules/playnow.svelte";
+const serviceUrl = import.meta.env.SERVICE_URL;
+const apiKey = import.meta.env.SERVICE_API_KEY;
 ---
 
 <section class="space-y-4">
-  <PlayNowComponent client:load>
+  <PlayNowComponent client:load url={serviceUrl} apiKey={apiKey}>
     <svelte:fragment slot="play">
       Escuchando ahora <PlayIcon className="inline-flex size-4" />
     </svelte:fragment>

@@ -1,4 +1,3 @@
-
 # 🏗️ Architecture
 
 Understanding the architecture of this template will help you customize and extend it effectively.

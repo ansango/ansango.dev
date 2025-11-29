@@ -1,0 +1,40 @@
+---
+import { SeriesBadge } from "@/components/atoms";
+import { BookOpenIcon, CheckIcon, WarningIcon } from "@/components/icons";
+import { SeriesWarning } from "@/components/molecules";
+import type { serieInfo } from "@/lib/series";
+
+interface Props {
+  title: string;
+  entriesCount?: number;
+  total?: number;
+  missingParts: serieInfo["missingParts"];
+  isComplete?: boolean;
+}
+const { title, entriesCount, total, isComplete } = Astro.props;
+---
+
+<div class="border-divider border-b-[1px]">
+  <h1>{title}</h1>
+
+  <div class="mb-4 flex flex-wrap items-center gap-4">
+    <span class="flex items-center gap-1">
+      <BookOpenIcon />
+      {entriesCount} de {total}
+      {total === 1 ? "parte" : "partes"}
+    </span>
+    {
+      isComplete ? (
+        <span class="text-info flex items-center gap-1">
+          <CheckIcon />
+          Serie completa
+        </span>
+      ) : (
+        <span class="text-warning flex items-center gap-1">
+          <WarningIcon />
+          Serie incompleta
+        </span>
+      )
+    }
+  </div>
+</div>

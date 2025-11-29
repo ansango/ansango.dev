@@ -6,7 +6,7 @@ import {
   ReadingPagination,
 } from "@/components/organisms/reading";
 import { site } from "@/constants";
-import { getBookmarksByCollection } from "@/lib/raindrop";
+import { getBookmarksByCollection } from "@/lib/bookmarks";
 
 const entries = await getBookmarksByCollection("reading");
 const meta = site.pages.reading;

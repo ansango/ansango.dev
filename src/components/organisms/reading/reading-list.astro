@@ -2,8 +2,9 @@
 import { Image, Link } from "@/components/atoms";
 import { ExternalLinkIcon } from "@/components/icons";
 import { site } from "@/constants";
-import { getPagination, type Entries } from "@/lib/collections";
-import type { CachedBookmarkData } from "@/lib/raindrop";
+import type { CachedBookmarkData } from "@/lib/bookmarks";
+import { getPagination } from "@/lib/collections";
+
 import { getFormatDate } from "@/lib/utils";
 
 interface Props {
@@ -29,12 +30,8 @@ const { paginatedEntries } = getPagination<CachedBookmarkData>({
     <ul class="space-y-6 pt-4">
       {paginatedEntries?.map((item) => (
         <li class="list-none">
-          <Link
-            href={item.link}
-            blank={true}
-            className="group flex gap-2 sm:gap-4"
-          >
-            <div class="border-divider mt-8 size-full max-h-8 max-w-8 flex-shrink-0 overflow-hidden rounded-full border-[1.5px] sm:mt-6 sm:max-h-12 sm:max-w-12">
+          <Link href={item.link} blank className="group flex gap-2 sm:gap-4">
+            <div class="border-divider mt-8 size-8 flex-shrink-0 overflow-hidden rounded-full border-[1.5px] sm:mt-6 sm:size-12">
               <Image src={item.cover} alt={item.title} />
             </div>
             <div class="space-y-0.5">

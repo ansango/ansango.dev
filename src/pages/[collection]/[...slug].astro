@@ -6,6 +6,7 @@ import { getCollectionStaticPathsSlug } from "@/lib/astro";
 import {
   CollectionIndexTemplate,
   CollectionEntryTemplate,
+  SeriesEntryTemplate,
 } from "@/components/templates";
 
 export { getCollectionStaticPathsSlug as getStaticPaths };
@@ -24,11 +25,17 @@ const isIndex = false;
 if (!entry && (!entries || isNaN(page) || page < 1)) {
   return Astro.redirect("/");
 }
+
+const isSeries = entry?.data?.serieId;
 ---
 
 {
   entry ? (
-    <CollectionEntryTemplate {...entry} />
+    isSeries ? (
+      <SeriesEntryTemplate {...entry} />
+    ) : (
+      <CollectionEntryTemplate {...entry} />
+    )
   ) : (
     <CollectionIndexTemplate {collection} {entries} {page} {isIndex} />
   )

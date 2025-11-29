@@ -1,4 +1,3 @@
-
 # 🚢 Deployment
 
 Deploy your site to production with confidence.
@@ -15,6 +14,7 @@ This site can be deployed to any static hosting provider that supports:
 ## Cloudflare Pages
 
 **Best for**: Global CDN, edge network, great performance
+
 #### Setup
 
 1. **Connect Repository**:
@@ -50,7 +50,7 @@ Set these in your hosting provider's dashboard:
 
 #### Raindrop.io
 
-```env
+```
 RAINDROP_ACCESS_TOKEN=your_token_here
 ```
 
@@ -58,7 +58,7 @@ RAINDROP_ACCESS_TOKEN=your_token_here
 
 #### Last.fm
 
-```env
+```
 PUBLIC_LASTFM_API_KEY=your_api_key_here
 PUBLIC_LASTFM_APPNAME=ansango.dev
 PUBLIC_LASTFM_API_BASE_URL=https://ws.audioscrobbler.com/2.0
@@ -69,7 +69,7 @@ LASTFM_SHARED_SECRET=your_secret_here
 
 #### GoatCounter Analytics (Optional)
 
-```env
+```
 PUBLIC_GOATCOUNTER_CODE=yoursite
 ```
 
@@ -77,7 +77,7 @@ PUBLIC_GOATCOUNTER_CODE=yoursite
 
 #### Cloudflare Pages (For GitHub Actions)
 
-```env
+```
 CLOUDFLARE_API_TOKEN=your_token
 CLOUDFLARE_ACCOUNT_ID=your_account_id
 ```
@@ -180,7 +180,6 @@ Create `public/_headers`:
   Cache-Control: public, max-age=604800
 ```
 
-
 ## Redirects
 
 Configure URL redirects if needed.
@@ -201,6 +200,7 @@ In `public/_redirects`:
 See [Obsidian & Deployment](12-obsidian-deployment.md) for full GitHub Actions workflow.
 
 **Benefits**:
+
 - Content conversion with obsidian-export
 - Scheduled rebuilds for dynamic content
 - Full control over build process
@@ -209,8 +209,10 @@ See [Obsidian & Deployment](12-obsidian-deployment.md) for full GitHub Actions w
 ### Platform Auto-Deploy
 
 **Cloudflare Pages**:
+
 - Disable if using GitHub Actions
 - Enable for direct Git deployments
+
 ### Build Status
 
 - **GitHub Actions**: Check Actions tab
@@ -227,12 +229,14 @@ See [Obsidian & Deployment](12-obsidian-deployment.md) for full GitHub Actions w
 ### Build Fails
 
 **Check**:
+
 - Build logs for specific errors
 - Environment variables are set
 - Dependencies install correctly
 - Node version is compatible
 
 **Common fixes**:
+
 - Clear cache and rebuild
 - Update dependencies
 - Check for typos in config
@@ -241,6 +245,7 @@ See [Obsidian & Deployment](12-obsidian-deployment.md) for full GitHub Actions w
 ### Site Not Loading
 
 **Check**:
+
 - Deployment completed successfully
 - DNS configured correctly (for custom domains)
 - CDN propagation finished (can take minutes)
@@ -249,6 +254,7 @@ See [Obsidian & Deployment](12-obsidian-deployment.md) for full GitHub Actions w
 ### Missing Content
 
 **Check**:
+
 - Content has `published: true`
 - Build logs show content being processed
 - No errors in content frontmatter
@@ -257,6 +263,7 @@ See [Obsidian & Deployment](12-obsidian-deployment.md) for full GitHub Actions w
 ### Slow Performance
 
 **Check**:
+
 - Image optimization working
 - Unused JS/CSS purged
 - CDN caching configured
@@ -265,10 +272,12 @@ See [Obsidian & Deployment](12-obsidian-deployment.md) for full GitHub Actions w
 ### Integration Failures
 
 **Check**:
+
 - Environment variables set correctly
 - API keys valid and not expired
 - API rate limits not exceeded
 - Network access not blocked
+
 ## Related Documentation
 
 - [Obsidian & Deployment](12-obsidian-deployment.md)

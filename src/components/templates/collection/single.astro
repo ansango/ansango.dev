@@ -1,15 +1,15 @@
 ---
 /**
  * 📄 SingleEntry Template
- * 
+ *
  * @description Simple single-page entry template.
  * Used for standalone pages like About, Uses, Now, etc.
- * 
+ *
  * @usage
  * ```astro
  * <SingleEntry collection="about" entryId="index" />
  * ```
- * 
+ *
  * @compatible
  * - 🎯 Uses LayoutDefault wrapper
  * - 📅 Shows publication/modification date
@@ -20,7 +20,6 @@ import type { CollectionName } from "@/content.config";
 import { getEntry, render } from "astro:content";
 import { getFormatDate } from "@/lib/utils";
 import { LayoutDefault } from "@/components/layout";
-
 
 interface Props {
   collection: CollectionName;

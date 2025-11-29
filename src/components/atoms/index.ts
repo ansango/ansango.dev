@@ -6,3 +6,4 @@ export { default as Container } from "./container.astro";
 export { default as Divider } from "./divider.astro";
 export { default as Image } from "./image.astro";
 export { default as Placeholder } from "./image.placeholder.astro";
+export { default as SeriesBadge } from "./series-badge.astro";

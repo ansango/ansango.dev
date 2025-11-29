@@ -1,15 +1,15 @@
 ---
 /**
  * 📝 EntryDefault Template
- * 
+ *
  * @description Default template for individual entry pages.
  * Full entry view with heading, content, tags, and share options.
- * 
+ *
  * @usage
  * ```astro
  * <EntryDefault entry={blogEntry} />
  * ```
- * 
+ *
  * @compatible
  * - 📌 EntryHeading for metadata display
  * - 📤 Share component for RSS/copy
@@ -23,13 +23,20 @@ import { getEntry, render } from "astro:content";
 
 import { LayoutDefault } from "@/components/layout";
 import { getReadingTime } from "@/lib/utils";
-import { Comments, EntryHeading, Share } from "@/components/molecules";
+import {
+  Comments,
+  EntryHeading,
+  EntryNavigation,
+  Share,
+} from "@/components/molecules";
 import { getBreadcrumbs } from "@/lib/breadcrumbs";
 import { site } from "@/constants";
+import { getAllCollections } from "@/lib/collections";
+import { getEntryNavigation } from "@/lib/entry-navigation";
 
 const { collection, id } = Astro.props as Entry;
 
-const entry = await getEntry(collection, id);
+const entry = (await getEntry(collection, id)) as Entry | undefined;
 
 if (!entry) {
   throw new Error(`Entry not found: ${collection}/${id}`);
@@ -68,11 +75,16 @@ const layoutProps = {
 // Only show share buttons for blog, wiki, and projects
 const showShare = ["blog", "wiki", "projects"].includes(collection);
 const shareUrl = `${site.url}${Astro.url.pathname}`;
+
+// Get navigation for prev/next entries
+const allEntries = await getAllCollections();
+const navigation = getEntryNavigation(entry, allEntries);
 ---
 
 <LayoutDefault {...layoutProps} type="article">
   <EntryHeading {...headingProps} />
   <Content />
+  <EntryNavigation navigation={navigation} />
   <Comments />
   {showShare && <Share url={shareUrl} />}
 </LayoutDefault>

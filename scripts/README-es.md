@@ -62,6 +62,7 @@ Toda la configuración de headers está centralizada en:
 **`config/headers.config.js`**
 
 Define aquí:
+
 - Scripts inline a hashear
 - Dominios whitelistados (CSP)
 - Políticas de cache
@@ -87,7 +88,7 @@ chmod +x scripts/mi-nuevo-script.js
 #!/usr/bin/env node
 
 // Tu código aquí
-console.log('Hola desde mi script!');
+console.log("Hola desde mi script!");
 ```
 
 ### 3. Añadir comando en package.json
@@ -103,6 +104,7 @@ console.log('Hola desde mi script!');
 ### 4. Documentar aquí
 
 Añade una sección en este README explicando:
+
 - Qué hace el script
 - Cómo usarlo
 - Cuándo usarlo

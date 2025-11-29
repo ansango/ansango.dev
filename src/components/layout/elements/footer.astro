@@ -1,15 +1,15 @@
 ---
 /**
  * 👣 Footer Element
- * 
+ *
  * @description Site footer with navigation links, social links, and theme toggle.
  * Organized in 4-column grid (personal, content, explore, social sections).
- * 
+ *
  * @usage
  * ```astro
  * <Footer />
  * ```
- * 
+ *
  * @compatible
  * - 🔗 Uses Link component for all navigation
  * - 🌗 Includes Theme toggle button
@@ -17,7 +17,7 @@
  * - 📦 Wrapped in Container component
  * - 📱 Responsive grid layout
  */
-import { Container, Link, } from "@/components/atoms";
+import { Container, Link } from "@/components/atoms";
 import { site } from "@/constants";
 import { getPublishedEntries } from "@/lib/utils";
 import Theme from "./theme.astro";
@@ -103,10 +103,9 @@ import { ExternalLinkIcon } from "@/components/icons";
       <p class="text-muted mb-0 text-sm">
         &copy; {new Date().getFullYear()}
         {site.author}. Construido con
-        <Link className="inline-flex items-center" href="https://astro.build/">Astro</Link> y <a
-          class="inline-flex items-center"
-          href="https://svelte.dev/"
-        >
+        <Link className="inline-flex items-center" href="https://astro.build/"
+          >Astro</Link
+        > y <a class="inline-flex items-center" href="https://svelte.dev/">
           Svelte
         </a>.
       </p>

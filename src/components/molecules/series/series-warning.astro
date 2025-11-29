@@ -1,0 +1,26 @@
+---
+import { WarningIcon } from "@/components/icons";
+
+/**
+ * ⚠️ Series Warning Component
+ *
+ * @description Displays a warning when a series has missing parts.
+ * Shows the missing parts as ranges (e.g., "2-4, 7") for better readability.
+ *
+ * @module components/molecules/series-warning
+ *
+ * @props
+ * - ranges: Array of missing part ranges as strings (e.g., ["2-4", "7"])
+ */
+
+interface Props {
+  ranges: string[];
+}
+
+const { ranges: missingRanges = [] } = Astro.props;
+---
+
+<p class="warning">
+  <WarningIcon className="mr-1 mb-0.5 inline-flex size-4" />
+  Faltan partes de esta serie: <strong>{missingRanges.join(", ")}. </strong>
+</p>

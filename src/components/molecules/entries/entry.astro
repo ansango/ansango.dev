@@ -1,15 +1,15 @@
 ---
 /**
  * 📝 Entry Component
- * 
+ *
  * @description Card component displaying entry metadata preview.
  * Shows title, date, reading time, description, and call-to-action.
- * 
+ *
  * @usage
  * ```astro
  * <Entry entry={blogEntry} />
  * ```
- * 
+ *
  * @compatible
  * - 📄 Used in collection lists and archives
  * - 🔗 Typically wrapped with Link component
@@ -40,4 +40,4 @@ const time = date && getFormatDate(date);
   {timeReading > 1 && <span>{timeReading} min de lectura</span>}
 </p>
 <p class="text-muted line-clamp-2">{description}</p>
-<span class="text-muted block text-sm"> Leer más → </span>
+<span class="text-muted block text-sm group-hover:text-link"> Leer más → </span>

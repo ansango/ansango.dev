@@ -1,4 +1,4 @@
 {
-  "render": "markdown",
+  "render": "html",
   "replaceOnRender": true
 }

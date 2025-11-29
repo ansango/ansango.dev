@@ -1,24 +1,24 @@
 ---
 import { LayoutDefault } from "@/components/layout";
-
+import { getLastfmData } from "@/lib/music";
+import {
+  MusicLiteHero,
+  MusicLiteNowPlaying,
+  MusicLiteRecentTracks,
+  MusicLiteTopArtists,
+  MusicLiteTopAlbums,
+} from "@/components/organisms/music";
 import { site } from "@/constants";
+
+const { artists, albums, tracks } = await getLastfmData();
 
 const meta = site.pages.music;
 ---
 
 <LayoutDefault {...meta} type="main">
-  <div class="border-divider border-b-[1px]">
-    <h1>{site.pages.music.title}</h1>
-    <p>
-      {site.pages.music.description}
-    </p>
-  </div>
-
-  <section class="space-y-4"></section>
-
-  <section class="space-y-4"></section>
-
-  <section></section>
-
-  <section></section>
+  <MusicLiteHero />
+  <MusicLiteNowPlaying />
+  <MusicLiteRecentTracks {tracks} />
+  <MusicLiteTopArtists {artists} />
+  <MusicLiteTopAlbums albums={albums} />
 </LayoutDefault>

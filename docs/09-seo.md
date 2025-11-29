@@ -1,4 +1,3 @@
-
 # 🎯 SEO Optimization
 
 The site is fully optimized for search engines and social sharing with comprehensive SEO features.
@@ -168,16 +167,16 @@ Advanced XML sitemap at `/sitemap.xml` with intelligent prioritization.
 
 ### Priority Settings
 
-| Page Type | Priority | Change Frequency |
-|-----------|----------|------------------|
-| Homepage | 1.0 | Daily |
-| Blog posts | 0.9 | Monthly |
-| Wiki entries | 0.8 | Monthly |
-| Projects | 0.8 | Monthly |
-| Collection indexes | 0.7 | Weekly |
-| Static pages (about, uses, now) | 0.6 | Monthly |
-| Paginated pages | 0.5 | Weekly |
-| Other pages | 0.5 | Weekly |
+| Page Type                       | Priority | Change Frequency |
+| ------------------------------- | -------- | ---------------- |
+| Homepage                        | 1.0      | Daily            |
+| Blog posts                      | 0.9      | Monthly          |
+| Wiki entries                    | 0.8      | Monthly          |
+| Projects                        | 0.8      | Monthly          |
+| Collection indexes              | 0.7      | Weekly           |
+| Static pages (about, uses, now) | 0.6      | Monthly          |
+| Paginated pages                 | 0.5      | Weekly           |
+| Other pages                     | 0.5      | Weekly           |
 
 ### Implementation
 
@@ -187,19 +186,19 @@ Located in `src/lib/sitemap.ts`:
 export function serializeSitemap(item: SitemapItem): SitemapItem {
   const url = new URL(item.url);
   const path = url.pathname;
-  
+
   // Homepage
-  if (path === '/') {
-    return { ...item, priority: 1.0, changefreq: 'daily' };
+  if (path === "/") {
+    return { ...item, priority: 1.0, changefreq: "daily" };
   }
-  
+
   // Blog posts
-  if (path.startsWith('/blog/') && !path.endsWith('/blog/')) {
-    return { ...item, priority: 0.9, changefreq: 'monthly' };
+  if (path.startsWith("/blog/") && !path.endsWith("/blog/")) {
+    return { ...item, priority: 0.9, changefreq: "monthly" };
   }
-  
+
   // Add more rules...
-  
+
   return item;
 }
 ```
@@ -213,7 +212,7 @@ Sitemap is automatically generated during build using `@astrojs/sitemap` integra
 ```typescript
 sitemap({
   serialize: serializeSitemap,
-})
+});
 ```
 
 ## SEO Best Practices
@@ -230,7 +229,7 @@ Each page has a unique, descriptive title:
 **Example**:
 
 ```typescript
-const title = entry 
+const title = entry
   ? `${entry.data.title} | ${site.name}`
   : `${collection.title} | ${site.name}`;
 ```
@@ -339,6 +338,7 @@ Test your social cards before sharing:
 ## Performance & SEO
 
 Performance impacts SEO rankings (Core Web Vitals).
+
 ## SEO Checklist
 
 ### Before Launch

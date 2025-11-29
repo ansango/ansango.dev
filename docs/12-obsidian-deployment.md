@@ -1,4 +1,3 @@
-
 # 📋 Obsidian Integration & Deployment
 
 This site is designed to be managed as an Obsidian vault with automated deployment to Cloudflare Pages.
@@ -75,13 +74,13 @@ Automated deployment via GitHub Actions when content changes.
 
 ```yaml
 on:
-  workflow_dispatch:           # Manual trigger
+  workflow_dispatch: # Manual trigger
   push:
     branches: [main]
     paths:
-      - "src/content/**"      # Auto-deploy on content changes
+      - "src/content/**" # Auto-deploy on content changes
   schedule:
-    - cron: "0 9 */2 * *"     # Every 2 days at 9 AM UTC
+    - cron: "0 9 */2 * *" # Every 2 days at 9 AM UTC
 ```
 
 #### Why Scheduled Rebuilds?
@@ -125,14 +124,14 @@ Configure in: `Settings → Secrets and variables → Actions`
 
 ### Required Secrets
 
-```env
+```
 CLOUDFLARE_API_TOKEN=your_cloudflare_api_token
 CLOUDFLARE_ACCOUNT_ID=your_cloudflare_account_id
 ```
 
 ### Optional Secrets (for integrations)
 
-```env
+```
 RAINDROP_ACCESS_TOKEN=your_raindrop_token
 PUBLIC_LASTFM_API_KEY=your_lastfm_key
 LASTFM_SHARED_SECRET=your_lastfm_secret
@@ -184,9 +183,11 @@ public/assets/         # Images referenced in content
 
 ```markdown
 # Obsidian
+
 [[note-title]]
 
 # Converted
+
 [note-title](./note-title.md)
 ```
 
@@ -196,9 +197,11 @@ Preserves relative paths for Astro processing:
 
 ```markdown
 # Obsidian
+
 ![[image.png]]
 
 # Converted
+
 ![image](../../assets/images/image.webp)
 ```
 
@@ -404,6 +407,7 @@ bun run preview
 This project uses one repository for content + code.
 
 **Benefits**:
+
 - Simpler setup
 - Single source of truth
 - Easier deployment
@@ -459,7 +463,7 @@ If migrating from separate repos:
 ✅ **Automated Formatting**: Linter handles frontmatter  
 ✅ **Image Optimization**: Auto-convert to WebP  
 ✅ **Fast Builds**: Caching reduces build time  
-✅ **Scheduled Rebuilds**: Dynamic content stays fresh  
+✅ **Scheduled Rebuilds**: Dynamic content stays fresh
 
 ## Related Documentation
 

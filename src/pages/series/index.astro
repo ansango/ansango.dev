@@ -1,0 +1,24 @@
+---
+/**
+ * 📚 Series Index Page
+ *
+ * @description Lists all content series with metadata.
+ * Shows series title, part count, and completion status.
+ *
+ * @route /series
+ */
+import { LayoutDefault } from "@/components/layout";
+import { SeriesHero, SeriesList } from "@/components/organisms/series";
+import { site } from "@/constants";
+import { getAllCollections } from "@/lib/collections";
+import { getAllSeries } from "@/lib/series";
+
+const meta = site.pages.series;
+const allEntries = await getAllCollections();
+const allSeries = getAllSeries(allEntries);
+---
+
+<LayoutDefault {...meta}>
+  <SeriesHero seriesCount={allSeries.length} />
+  <SeriesList series={allSeries} />
+</LayoutDefault>

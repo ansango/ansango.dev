@@ -7,6 +7,7 @@
 ## 🚀 Performance & Optimización
 
 ### Cache & Build Optimization
+
 - [x] Configurar Cache-Control headers óptimos en Cloudflare Pages
 - [x] Implementar service worker para offline support y PWA
 - [x] Auto-rebuild schedule con GitHub Actions (cada 6-12h para música/bookmarks)
@@ -15,21 +16,23 @@
 - [x] Implementar stale-while-revalidate strategy para assets
 
 ### Image Optimization
+
 - [x] Generar automáticamente formatos WebP/AVIF
 - [x] Añadir blur placeholders para lazy loading
 - [x] Integrar `sharp` para mejor compresión en build
 - [x] Optimizar tamaños de imagen responsive
 
 ### Bundle Size
+
 - [x] Instalar y configurar `rollup-plugin-visualizer`
 - [x] Analizar y optimizar tamaño de bundles
 - [x] Code splitting más agresivo
 - [x] Tree-shaking de dependencias no usadas
 
-
 ## 🧪 Testing & Quality
 
 ### Unit Tests
+
 - [ ] Configurar Vitest + Testing Library
 - [ ] Tests para `utils.ts` (slugify, formatDate, etc.)
 - [ ] Tests para `collections.ts` helpers
@@ -37,43 +40,48 @@
 - [ ] Coverage mínimo del 80%
 
 ### Component Tests
+
 - [ ] Tests para componentes Svelte (PlayNow, PlayNowMini)
 - [ ] Tests para componentes Astro críticos
 - [ ] Visual regression tests
 
 ### Integration Tests
+
 - [ ] Tests de integración con Last.fm API
 - [ ] Tests de integración con Raindrop API
 - [ ] Mock de APIs externas
 - [ ] Tests de caché y rate limiting
 
 ### E2E Tests
+
 - [ ] Configurar Playwright
 - [ ] Tests de navegación principal
 - [ ] Tests de búsqueda (Pagefind)
 - [ ] Tests de dark/light mode
 - [ ] Tests de formularios y acciones
 
-
 ## 🔒 Seguridad & Best Practices
 
 ### Content Security Policy
+
 - [x] Implementar CSP headers
 - [x] Configurar hashes SHA-256 para scripts inline
 - [x] Whitelist de dominios externos
 - [x] Reportar violaciones de CSP
 
 ### Rate Limiting
-- [ ] Rate limiter para Last.fm API
+
+- [x] Rate limiter para Last.fm API
 - [ ] Rate limiter para Raindrop API
 - [ ] Backoff exponencial en errores
 - [ ] Queue system para requests
 
 ### Security Headers
-- [ ] X-Frame-Options
-- [ ] X-Content-Type-Options
-- [ ] Referrer-Policy
-- [ ] Permissions-Policy
+
+- [x] X-Frame-Options
+- [x] X-Content-Type-Options
+- [x] Referrer-Policy
+- [x] Permissions-Policy
 
 ---
 
@@ -82,6 +90,7 @@
 ### 🌟 Features de Alto Impacto
 
 #### Sistema de Comentarios
+
 - [x] Integrar Giscus (GitHub Discussions)
 - [x] Configurar categorías de discusión
 - [x] Modales para comentarios
@@ -89,6 +98,7 @@
 - ~~**Alternativa:** Implementar Webmentions~~
 
 #### Search Mejorado
+
 - [ ] Filtros por fecha en Pagefind
 - [ ] Filtros por tags
 - [ ] Filtros por colección
@@ -97,6 +107,7 @@
 - [ ] Historial de búsquedas
 
 #### Analytics Dashboard
+
 - [ ] Página `/stats` pública
 - [ ] Integración con GoatCounter API
 - [ ] Top posts más visitados
@@ -106,6 +117,7 @@
 - [ ] Mis contribuciones al sitio (posts, bookmarks, música)
 
 #### Estadísticas de Contenido
+
 - [ ] Dashboard interno `/admin/stats`
 - [ ] Total de palabras escritas
 - [ ] Posts por mes/año (gráfico)
@@ -114,9 +126,11 @@
 - [ ] Gráfico de crecimiento de contenido
 
 #### Music Stats Dashboard
+
 **Página completa de estadísticas musicales en `/music/stats`**
 
 **🪩 1. Encabezado Dinámico (Hero Section)**
+
 - [ ] Título: "🎧 Música"
 - [ ] Subtítulo editorial: "Mi banda sonora digital: lo que estoy escuchando, descubriendo y repitiendo"
 - [ ] Mini reproductor Now Playing (API Last.fm tiempo real)
@@ -127,6 +141,7 @@
 - [ ] Efecto soundwave animado en hero
 
 **📈 2. Estadísticas Generales (Overview Cuantitativo)**
+
 - [ ] **Total de scrobbles:** histórico o del mes/semana
   - Visual: número grande + icono 🎧
 - [ ] **Tiempo total de escucha:** aproximado (ej: 3000 scrobbles ≈ 10 días)
@@ -142,6 +157,7 @@
 - [ ] Visual: números grandes + micro-gráficos + emojis contextuales
 
 **🧠 3. Comportamiento Musical (Insights de Escucha)**
+
 - [ ] **Géneros más escuchados:** inferidos a partir de tags del artista/álbum
   - Visual: nube de etiquetas o gráfico circular/donut
 - [ ] **Tendencia temporal:** comparar artistas o géneros a lo largo de los meses
@@ -158,6 +174,7 @@
 - [ ] Layout de insights cards con texto narrativo y emojis
 
 **💿 4. Álbumes y Canciones Destacadas (Editorial)**
+
 - [ ] **Canción más reproducida:** total o del mes
   - Visual: carátula + texto destacado prominente
 - [ ] **Álbum más reproducido:** del mes/año con blurb auto-generado
@@ -174,6 +191,7 @@
 - [ ] Links a Last.fm/Spotify para cada álbum/canción
 
 **🔥 5. Curiosidades & Highlights (Sección Divertida)**
+
 - [ ] **"Artista que desapareció y volvió":** escuchado hace mucho y vuelve a sonar
   - Visual: tarjeta "comeback del mes" 🔙
 - [ ] **"Top descubrimiento random":** canción escuchada solo una vez pero diferente
@@ -190,6 +208,7 @@
 - [ ] Tarjetas de curiosidades con colores vibrantes y diseño lúdico
 
 **🎧 6. Historial Reciente (Recently Played)**
+
 - [ ] Últimas 10-20 canciones escuchadas
 - [ ] Mostrar: carátula, artista, título, hora/dispositivo
 - [ ] Scroll horizontal o tabla compacta con covers
@@ -198,6 +217,7 @@
 - [ ] Actualización en tiempo real (opcional, con polling)
 
 **🪄 7. Editorial / Resumen del Mes (Narrativo)**
+
 - [ ] Bloque de texto narrativo tipo bitácora musical
 - [ ] Ejemplo: "Este mes he vuelto a obsesionarme con la producción nostálgica de los 2000..."
 - [ ] Puede ser auto-generado con IA o escrito manualmente
@@ -206,12 +226,14 @@
 - [ ] Incluir fecha de actualización del resumen
 
 **💫 8. Pie Musical (Footer de Sección)**
+
 - [ ] Fecha última actualización: "Datos actualizados el DD de MMM"
 - [ ] Enlaces a: Last.fm / Spotify / MusicBrainz
 - [ ] Frase de cierre: "Cada scrobble cuenta una historia" o similar
 - [ ] Créditos a APIs utilizadas
 
 **🔧 Infraestructura Técnica**
+
 - [ ] Script `/src/scripts/updateLastfmData.js` para cache pre-build
 - [ ] Guardar datos en `/src/content/music.json` (opcional)
 - [ ] Prerenderizar info estática con `Astro.fetchContent` o server load
@@ -221,6 +243,7 @@
 - [ ] TypeScript types para todos los datos de música
 
 **🎨 Mejoras Visuales y UX**
+
 - [ ] Animaciones smooth entre secciones (scroll fluido)
 - [ ] Skeleton loaders mientras cargan stats
 - [ ] Transiciones entre estados (cargando → datos)
@@ -231,6 +254,7 @@
 - [ ] Tooltips explicativos en métricas complejas
 
 #### Newsletter/RSS Features
+
 - [ ] RSS por tag individual
 - [ ] RSS por colección
 - [ ] Full-text RSS (opcional)
@@ -238,6 +262,7 @@
 - [ ] Integración con Buttondown/ConvertKit
 
 #### Related Posts
+
 - [ ] Algoritmo de similitud basado en tags
 - [ ] Mostrar 3-5 posts relacionados
 - [ ] Cache de relaciones
@@ -245,6 +270,7 @@
 - [ ] Widget en sidebar o footer de artículos
 
 #### Recomendador de Artículos (Content Recommender)
+
 - [ ] Sistema de recomendaciones basado en tags comunes
 - [ ] Algoritmo por similaridad de contenido (TF-IDF)
 - [ ] Recomendaciones por categoría/colección
@@ -257,6 +283,7 @@
 - [ ] Límite configurable (3-6 artículos sugeridos)
 
 #### Reading Progress Bar
+
 - [ ] Barra de progreso en top de página
 - [ ] Animación smooth
 - [ ] Responsive design
@@ -264,20 +291,22 @@
 - [ ] Indicador de tiempo restante
 
 #### Navegación Entre Entradas (Entry Navigation)
-- [ ] Botones prev/next al final de cada entrada
-- [ ] Navegación entre entradas de blog (cronológico)
-- [ ] Navegación entre proyectos (alfabético o por fecha)
-- [ ] Navegación en wiki (según estructura de árbol)
-- [ ] Mostrar título de entrada anterior/siguiente
-- [ ] Atajos de teclado (← →) para navegar
-- [ ] Responsive design para móviles
-- [ ] Transiciones suaves entre páginas
 
+- [x] Botones prev/next al final de cada entrada
+- [x] Navegación entre entradas de blog (cronológico)
+- [x] Navegación entre proyectos (alfabético o por fecha)
+- [x] Navegación en wiki (según estructura de árbol)
+- [x] Mostrar título de entrada anterior/siguiente
+- [x] Atajos de teclado (← →) para navegar
+- [x] Responsive design para móviles
+- [x] Transiciones suaves entre páginas
 
 #### Dark/Light Mode Avanzado
+
 - [x] Transiciones suaves entre modos
 
 #### Wiki Graph Visualization
+
 - [ ] Network graph con D3.js o Cytoscape
 - [ ] Visualización de conexiones entre páginas
 - [ ] Nodos clickeables para navegación
@@ -290,6 +319,7 @@
 ## 🔧 Developer Experience
 
 ### Pre-commit Hooks
+
 - [ ] Instalar Husky
 - [ ] Configurar lint-staged
 - [ ] Pre-commit: format + lint
@@ -298,6 +328,7 @@
 - [ ] Pre-push: build check
 
 ### Better Scripts
+
 - [ ] `npm run test` - Vitest
 - [ ] `npm run test:ui` - Vitest UI
 - [ ] `npm run test:coverage` - Coverage report
@@ -307,6 +338,7 @@
 - [ ] `npm run clean` - Clean build artifacts
 
 ### TypeScript Strict Mode
+
 - [ ] Habilitar `strict: true`
 - [ ] `noUncheckedIndexedAccess: true`
 - [ ] `noImplicitReturns: true`
@@ -314,6 +346,7 @@
 - [ ] Resolver todos los errores de tipo
 
 ### Development Tools
+
 - [ ] Configurar ESLint con reglas estrictas
 - [ ] Prettier config más específica
 - [ ] EditorConfig para consistencia
@@ -325,13 +358,15 @@
 ## 📚 Content Features
 
 ### Series/Multi-part Posts
-- [ ] Esquema para series en frontmatter
-- [ ] Navegación entre partes de serie
-- [ ] Índice de serie completa
-- [ ] Auto-linking de posts relacionados
-- [ ] Badge visual de "Serie"
+
+- [x] Esquema para series en frontmatter
+- [x] Navegación entre partes de serie
+- [x] Índice de serie completa
+- [x] Auto-linking de posts relacionados
+- [x] Badge visual de "Serie"
 
 ### Table of Contents
+
 - [ ] Auto-generar TOC desde headings
 - [ ] TOC sticky en sidebar
 - [ ] Highlight de sección actual
@@ -343,12 +378,14 @@
 ## 🎨 UI/UX Improvements
 
 ### Skeleton Loaders
+
 - [ ] Skeleton para PlayNow mientras carga
 - [ ] Skeleton para bookmarks
 - [ ] Skeleton para listas de posts
 - [ ] Animaciones smooth
 
 ### Toasts/Notifications
+
 - [ ] Integrar `svelte-sonner` o similar
 - [ ] Toast para "URL copiada"
 - [ ] Toast para "Guardado"
@@ -356,6 +393,7 @@
 - [ ] Toast customizable
 
 ### Command Palette (⌘K)
+
 - [ ] Integrar `cmdk-sv` o `ninja-keys`
 - [ ] Quick search de contenido
 - [ ] Navegación rápida
@@ -363,12 +401,14 @@
 - [ ] Acciones rápidas (cambiar tema, etc.)
 
 ### Print Styles
+
 - [ ] CSS optimizado para impresión
 - [ ] Ocultar navegación en print
 - [ ] QR code para URL en footer
 - [ ] Table of contents en primera página
 
 ### Accessibility Improvements
+
 - [ ] Audit completo de ARIA labels
 - [ ] Keyboard navigation mejorada
 - [ ] Focus visible en todos los elementos
@@ -376,6 +416,7 @@
 - [ ] Contrast ratio AAA
 
 ### Micro-interactions
+
 - [ ] Animaciones hover sutiles
 - [ ] Loading states mejorados
 - [ ] Transiciones de página
@@ -386,6 +427,7 @@
 ## 🔄 Automation & CI/CD
 
 ### Lighthouse CI
+
 - [ ] Integrar Lighthouse CI
 - [ ] Performance budgets
 - [ ] Fallar CI si performance baja
@@ -393,12 +435,14 @@
 - [ ] Tracking de métricas en el tiempo
 
 ### Dependency Management
+
 - [ ] Configurar Renovate o Dependabot
 - [ ] Auto-merge de patches seguros
 - [ ] Grouped updates
 - [ ] Security updates prioritarias
 
 ### Automated Releases
+
 - [ ] Semantic versioning
 - [ ] Changelog automático
 - [ ] Release notes
@@ -409,6 +453,7 @@
 ## 📊 Monitoring & Analytics
 
 ### Error Tracking
+
 - [ ] Integrar Sentry
 - [ ] Source maps en producción
 - [ ] Error boundaries
@@ -416,6 +461,7 @@
 - [ ] Alertas de errores críticos
 
 ### Performance Monitoring
+
 - [ ] Web Vitals tracking
 - [ ] Custom metrics
 - [ ] Real User Monitoring (RUM)
@@ -423,12 +469,14 @@
 - [ ] Alertas de degradación
 
 ### Uptime Monitoring
+
 - [ ] UptimeRobot o Better Uptime
 - [ ] Status page pública
 - [ ] Notificaciones de downtime
 - [ ] Incident management
 
 ### Custom Analytics
+
 - [ ] Track eventos específicos
 - [ ] Conversion funnels
 - [ ] A/B testing capability
@@ -475,4 +523,4 @@ Si quieres contribuir a alguna de estas features:
 
 ---
 
-**Última actualización:** 2 de noviembre, 2025
+**Última actualización:** 13 de noviembre, 2025

@@ -1,4 +1,3 @@
-
 # 🤝 Contributing
 
 Thank you for your interest in improving this personal website template!
@@ -162,6 +161,7 @@ When adding features:
 - Code samples with syntax highlighting
 - Screenshots for UI changes
 - Links to related documentation
+
 ## Getting Help
 
 Need help contributing?

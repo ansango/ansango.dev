@@ -1,4 +1,3 @@
-
 # 🚀 Installation & Getting Started
 
 Get your personal website up and running in minutes.
@@ -45,7 +44,7 @@ cp .env.sample .env
 
 Edit `.env` and add your API keys (optional but recommended):
 
-```env
+```
 # Raindrop.io (for bookmarks and reading)
 RAINDROP_ACCESS_TOKEN=your_raindrop_access_token_here
 
@@ -73,14 +72,14 @@ Visit `http://localhost:4321` to see your site in action! 🎉
 
 All commands are run from the root of the project, from a terminal:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Install dependencies                              |
-| `npm run dev`             | Start local dev server at `localhost:4321`        |
-| `npm run build`           | Build your production site to `./dist/`           |
-| `npm run preview`         | Preview your build locally, before deploying      |
-| `npm run astro`           | Run Astro CLI commands directly                   |
-| `npm run format`          | Format code with Prettier (Astro + Tailwind)      |
+| Command           | Action                                       |
+| :---------------- | :------------------------------------------- |
+| `npm install`     | Install dependencies                         |
+| `npm run dev`     | Start local dev server at `localhost:4321`   |
+| `npm run build`   | Build your production site to `./dist/`      |
+| `npm run preview` | Preview your build locally, before deploying |
+| `npm run astro`   | Run Astro CLI commands directly              |
+| `npm run format`  | Format code with Prettier (Astro + Tailwind) |
 
 ## Development Checklist
 

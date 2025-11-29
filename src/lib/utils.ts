@@ -1,11 +1,11 @@
 /**
  * 🧰 General Utility Functions
- * 
+ *
  * @description Collection of helper functions for common operations.
  * Includes string manipulation, date formatting, pagination, and HTTP utilities.
- * 
+ *
  * @module lib/utils
- * 
+ *
  * @compatible
  * - 🔗 Slugification for URLs and tags
  * - 📅 Date formatting with locale support
@@ -125,5 +125,3 @@ export const fetcher = async <T>(
   if (!response.ok) throw new Error(`Error: ${response.statusText}`);
   return response.json() as Promise<T>;
 };
-
-

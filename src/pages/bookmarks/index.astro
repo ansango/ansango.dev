@@ -1,11 +1,12 @@
 ---
 import { LayoutDefault } from "@/components/layout";
-import { getCollectionsExcludingReading } from "@/lib/raindrop";
+
 import {
   BookmarkCollectionHero,
   BookmarkCollectionList,
 } from "@/components/organisms/bookmarks";
 import { site } from "@/constants";
+import { getCollectionsExcludingReading } from "@/lib/bookmarks";
 
 const collections = await getCollectionsExcludingReading();
 const totalCollectionsCount = collections?.length;

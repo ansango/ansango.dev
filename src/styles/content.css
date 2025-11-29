@@ -69,7 +69,12 @@
   }
 
   code {
-    @apply bg-astro-code border-code-border rounded border p-0.5 px-1.5 font-mono text-sm;
+    @apply bg-astro-code border-code-border rounded border font-mono text-sm;
+  }
+  p{
+    code {
+      @apply px-1 py-0.5;
+    }
   }
 
   .astro-code,
@@ -96,6 +101,7 @@
   p.info {
     @apply text-info border-l-4 pl-4 text-sm;
   }
+
 
   details[open] > summary > svg.chevron-right {
     @apply rotate-90;

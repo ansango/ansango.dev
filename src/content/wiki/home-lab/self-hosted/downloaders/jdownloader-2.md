@@ -2,7 +2,7 @@
 title: JDownloader 2 (Docker)
 description: Un gestor de descargas de código abierto que se ejecuta en un contenedor Docker con interfaz web.
 date: 2025-09-02
-mod: 2025-10-25
+mod: 2025-11-24
 published: true
 tags: [docker, downloader, self-hosted]
 ---

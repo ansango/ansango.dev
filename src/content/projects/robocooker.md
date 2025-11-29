@@ -54,7 +54,7 @@ La plataforma permite a los usuarios crear, compartir y descubrir recetas adapta
 
 3. Configura las variables de entorno en `.env.local`:
 
-   ```env
+   ```
    MONGODB_URI=tu_uri_mongodb
    CLOUDINARY_CLOUD_NAME=tu_cloud_name
    CLOUDINARY_API_KEY=tu_api_key

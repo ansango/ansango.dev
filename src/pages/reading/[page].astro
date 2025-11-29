@@ -2,12 +2,13 @@
 import { site } from "@/constants";
 import { getReadingStaticPathsPage as getStaticPaths } from "@/lib/astro";
 import { LayoutDefault } from "@/components/layout";
-import { getBookmarksByCollection } from "@/lib/raindrop";
+
 import {
   ReadingHero,
   ReadingList,
   ReadingPagination,
 } from "@/components/organisms/reading";
+import { getBookmarksByCollection } from "@/lib/bookmarks";
 
 export { getStaticPaths };
 

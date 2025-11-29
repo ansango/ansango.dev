@@ -1,15 +1,15 @@
 ---
 /**
  * 🎵 PlayNow Organism (Home)
- * 
+ *
  * @description Homepage section showing currently playing music.
  * Minimal inline display linking to full music page.
- * 
+ *
  * @usage
  * ```astro
  * <PlayNow />
  * ```
- * 
+ *
  * @compatible
  * - 🎶 Uses PlayNowMini Svelte component
  * - ▶️ Includes PlayIcon and NoListenIcon
@@ -19,11 +19,14 @@
 import { Link } from "@/components/atoms";
 import PlayNowMini from "@/components/molecules/playnow-mini.svelte";
 import { NoListenIcon, PlaceholderIcon, PlayIcon } from "@/components/icons";
+
+const serviceUrl = import.meta.env.SERVICE_URL;
+const apiKey = import.meta.env.SERVICE_API_KEY;
 ---
 
 <section class="pb-0">
-  <Link href="/music-lite">
-    <PlayNowMini client:visible>
+  <Link href="/music">
+    <PlayNowMini client:visible url={serviceUrl} apiKey={apiKey}>
       <svelte:fragment slot="play">
         <PlayIcon className="inline-flex size-4" />
       </svelte:fragment>

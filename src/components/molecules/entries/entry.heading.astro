@@ -22,10 +22,9 @@
  * - 📅 Formatted dates with mod indicator
  * - 📝 Used in entry detail pages
  */
-import type { Entry } from "@/lib/collections";
 import { getFormatDate } from "@/lib/utils";
 import { Tag } from "@/components/atoms";
-import { InfoIcon } from "@/components/icons";
+import { InfoIcon, WarningIcon } from "@/components/icons";
 import type { CollectionName } from "@/content.config";
 
 interface Props {
@@ -92,7 +91,7 @@ const isTLDR = readingTime > 8;
   {
     isOutdated && (
       <p class="warning flex items-center gap-2">
-        <InfoIcon />
+        <WarningIcon />
         Este contenido tiene más de un año y puede estar desactualizado.
       </p>
     )

@@ -1,0 +1,175 @@
+---
+/**
+ * 🧭 Entry Navigation Component
+ *
+ * @description Prev/next navigation for individual blog, project, and wiki entries.
+ * Supports keyboard shortcuts (← →) with Astro View Transitions.
+ *
+ * @usage
+ * ```astro
+ * <EntryNavigation navigation={navigation} />
+ * ```
+ *
+ * @compatible
+ * - ⌨️ Keyboard navigation with arrow keys
+ * - ♿ Accessible with ARIA labels and focus indicators
+ * - 📱 Responsive design (icon-only on mobile)
+ * - 🎨 Smooth View Transitions
+ */
+import { Link } from "@/components/atoms";
+import { ChevronIcon } from "@/components/icons";
+import type { EntryNavigation as NavigationType } from "@/lib/entry-navigation";
+
+interface Props {
+  navigation: NavigationType;
+  className?: string;
+}
+
+const { navigation, className = "" } = Astro.props;
+const { prev, next } = navigation;
+---
+
+<nav
+  aria-label="Entry navigation"
+  class={`border-divider grid grid-cols-2 gap-4 border-t-[1px] py-4 ${className}`}
+  data-prev-url={prev?.path || ""}
+  data-next-url={next?.path || ""}
+>
+  <!-- Previous Entry -->
+  <div class="flex-1">
+    {
+      prev ? (
+        <Link
+          href={prev.path}
+          className="group flex items-center gap-1 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 -ml-1"
+          ariaLabel={`Previous: ${prev.title}`}
+          prefetch
+        >
+          <ChevronIcon className="size-4 rotate-180 shrink-0 transition-transform group-hover:-translate-x-0.5" />
+          <div class="flex min-w-0 flex-col">
+            <span class="text-muted text-xs">Anterior</span>
+            <span class="truncate font-medium">{prev.title}</span>
+          </div>
+        </Link>
+      ) : (
+        <span
+          class="text-muted -ml-1 flex cursor-not-allowed items-center gap-1 text-sm opacity-50"
+          aria-disabled="true"
+        >
+          <ChevronIcon className="size-4 rotate-180 shrink-0" />
+          <span class="text-xs">Sin entrada anterior</span>
+        </span>
+      )
+    }
+  </div>
+
+  <!-- Next Entry -->
+  <div class="flex-1 text-right">
+    {
+      next ? (
+        <Link
+          href={next.path}
+          className="group flex items-center justify-end gap-1 text-sm transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 -mr-1"
+          ariaLabel={`Next: ${next.title}`}
+          prefetch
+        >
+          <div class="flex min-w-0 flex-col">
+            <span class="text-muted text-xs">Siguiente</span>
+            <span class="truncate font-medium">{next.title}</span>
+          </div>
+          <ChevronIcon className="size-4 shrink-0 transition-transform group-hover:translate-x-0.5" />
+        </Link>
+      ) : (
+        <span
+          class="text-muted -mr-1 flex cursor-not-allowed items-center justify-end gap-1 text-sm opacity-50"
+          aria-disabled="true"
+        >
+          <span class="text-xs">Sin entrada siguiente</span>
+          <ChevronIcon className="size-4 shrink-0" />
+        </span>
+      )
+    }
+  </div>
+</nav>
+
+<!-- Screen reader announcements -->
+<div
+  id="entry-nav-announce"
+  class="sr-only"
+  aria-live="polite"
+  aria-atomic="true"
+>
+</div>
+
+<script>
+  function setupEntryNavigation() {
+    const nav = document.querySelector('[aria-label="Entry navigation"]');
+    if (!nav) return;
+
+    const prevUrl = nav.getAttribute("data-prev-url");
+    const nextUrl = nav.getAttribute("data-next-url");
+    const announcer = document.getElementById("entry-nav-announce");
+
+    async function navigateWithTransition(
+      url: string,
+      direction: "prev" | "next",
+    ) {
+      if (!url) return;
+
+      // Announce to screen readers
+      if (announcer) {
+        const directionText = direction === "prev" ? "anterior" : "siguiente";
+        announcer.textContent = `Navegando a entrada ${directionText}`;
+      }
+
+      // Use View Transitions if available
+      if (
+        "startViewTransition" in document &&
+        typeof (document as any).startViewTransition === "function"
+      ) {
+        try {
+          const { navigate } = await import("astro:transitions/client");
+          navigate(url);
+        } catch (error) {
+          // Fallback to regular navigation
+          window.location.href = url;
+        }
+      } else {
+        window.location.href = url;
+      }
+    }
+
+    function handleKeydown(e: KeyboardEvent) {
+      // Ignore if user is typing in an input field
+      const target = e.target as HTMLElement;
+      if (
+        target instanceof HTMLInputElement ||
+        target instanceof HTMLTextAreaElement ||
+        target.isContentEditable
+      ) {
+        return;
+      }
+
+      if (e.key === "ArrowLeft" && prevUrl) {
+        e.preventDefault();
+        navigateWithTransition(prevUrl, "prev");
+      } else if (e.key === "ArrowRight" && nextUrl) {
+        e.preventDefault();
+        navigateWithTransition(nextUrl, "next");
+      }
+    }
+
+    window.addEventListener("keydown", handleKeydown);
+
+    // Cleanup function
+    return () => {
+      window.removeEventListener("keydown", handleKeydown);
+    };
+  }
+
+  // Initialize on page load
+  setupEntryNavigation();
+
+  // Re-initialize after View Transitions
+  document.addEventListener("astro:page-load", setupEntryNavigation);
+</script>

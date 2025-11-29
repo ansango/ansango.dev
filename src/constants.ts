@@ -50,6 +50,15 @@ const bookmarks: Meta = {
   published: true,
 };
 
+const series: Meta = {
+  title: "Series",
+  description:
+    "Contenido organizado en series de múltiples partes para un aprendizaje estructurado.",
+  entriesPerPage: 0,
+  url: "/series",
+  published: true,
+};
+
 const wiki: Meta = {
   title: "Wiki",
   description:
@@ -128,6 +137,7 @@ const pages = {
   reading,
   bookmarks,
   music,
+  series,
   ...contentCollections,
 };
 
@@ -150,6 +160,7 @@ const explore: TreeNode = {
   tags,
   wiki,
   archive,
+  series,
   feed: {
     title: "Feed",
     description:

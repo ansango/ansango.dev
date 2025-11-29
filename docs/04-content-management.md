@@ -1,4 +1,3 @@
-
 # 📝 Content Management
 
 Learn how to create and manage content for your site.
@@ -46,13 +45,13 @@ Control content visibility with the `published` field:
 
 ```markdown
 ---
-published: false  # Draft - won't appear on site
+published: false # Draft - won't appear on site
 ---
 ```
 
 ```markdown
 ---
-published: true   # Published - visible to everyone
+published: true # Published - visible to everyone
 ---
 ```
 
@@ -143,7 +142,7 @@ All tags are automatically:
 
 ### Code Blocks
 
-Use triple backticks with language identifier: 
+Use triple backticks with language identifier:
 
 ```javascript
 const greeting = "Hello, world!";

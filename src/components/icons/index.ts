@@ -16,3 +16,5 @@ export { default as ListenIcon } from "./listen.icon.astro";
 export { default as RssIcon } from "./rss.icon.astro";
 export { default as CopyIcon } from "./copy.icon.astro";
 export { default as CopiedIcon } from "./copied.icon.astro";
+export { default as WarningIcon } from "./warning.icon.astro";
+export { default as BookOpenIcon } from "./book-open.icon.astro";

@@ -1,0 +1,37 @@
+---
+/**
+ * 📖 Series Detail Component
+ *
+ * @description Displays all parts of a specific series with metadata.
+ * Shows series title, completion status, and list of all parts with links.
+ *
+ * @module components/organisms/series-detail
+ *
+ * @props
+ * - serieInfo: Series information with all entries and metadata
+ */
+
+import type { serieInfo } from "@/lib/series";
+import { Link } from "@/components/atoms";
+import Hero from "./hero.astro";
+import { getFormatDate } from "@/lib/utils";
+import SerieEntriesList from "./serie-entries-list.astro";
+interface Props {
+  serieInfo: serieInfo;
+}
+
+const { serieInfo } = Astro.props;
+const { title, total, entries, missingParts } = serieInfo;
+const isComplete =
+  missingParts && missingParts.ranges ? missingParts.ranges.length === 0 : true;
+---
+
+<Hero
+  title={title}
+  entriesCount={entries.length}
+  total={total}
+  missingParts={missingParts}
+  isComplete={isComplete}
+/>
+
+<SerieEntriesList serieInfo={serieInfo} />

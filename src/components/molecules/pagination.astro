@@ -1,10 +1,10 @@
 ---
 /**
  * 📄 Pagination Component
- * 
+ *
  * @description Navigation component for paginated content lists.
  * Displays current page, total pages, and prev/next navigation links.
- * 
+ *
  * @usage
  * ```astro
  * <Pagination
@@ -14,13 +14,14 @@
  *   nextUrl="/blog/3/"
  * />
  * ```
- * 
+ *
  * @compatible
  * - 🔗 Uses Link component for navigation
  * - 📝 Used in collection and archive pages
  * - ♿ Accessible with ARIA labels
  */
 import { Link } from "@/components/atoms";
+import { ChevronIcon } from "../icons";
 
 export interface Props {
   currentPage: number;
@@ -50,10 +51,14 @@ const nextDisabled = currentPage >= totalPages;
       <Link
         disabled={prevDisabled}
         href={prevUrl}
-        className={`mr-4 ${prevDisabled ? "text-muted opacity-60" : ""}`}
+        className={`group focus-visible:ring-accent -ml-1 flex items-center gap-1 transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none ${prevDisabled ? "text-muted opacity-60" : ""}`}
         ariaLabel="Previous"
+        prefetch
       >
-        ← Ant
+        <ChevronIcon
+          className={`size-4 shrink-0 rotate-180 transition-transform ${!prevDisabled ? "group-hover:-translate-x-0.5" : ""}`}
+        />{" "}
+        Ant
       </Link>
       <span>
         {currentPage} / {totalPages}
@@ -61,10 +66,14 @@ const nextDisabled = currentPage >= totalPages;
       <Link
         disabled={nextDisabled}
         href={nextUrl}
-        className={`ml-4 ${nextDisabled ? "text-muted opacity-60" : ""}`}
+        className={`group focus-visible:ring-accent -mr-1 flex items-center gap-1 transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none ${nextDisabled ? "text-muted opacity-60" : ""}`}
         ariaLabel="Next"
+        prefetch
       >
-        Sig →
+        Sig{" "}
+        <ChevronIcon
+          className={`size-4 shrink-0 transition-transform ${!nextDisabled ? "group-hover:translate-x-0.5" : ""}`}
+        />
       </Link>
     </nav>
   )

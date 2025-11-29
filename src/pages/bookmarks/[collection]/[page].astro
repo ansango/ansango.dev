@@ -2,12 +2,13 @@
 import { site } from "@/constants";
 import { getBookmarksStaticPathsPage } from "@/lib/astro";
 import { LayoutDefault } from "@/components/layout";
-import { getBookmarksByCollection } from "@/lib/raindrop";
+import { getBookmarksByCollection } from "@/lib/bookmarks";
 import {
   BookmarkHero,
   BookmarkList,
   BookmarkPagination,
 } from "@/components/organisms/bookmarks/[bookmark]";
+
 
 export { getBookmarksStaticPathsPage as getStaticPaths };
 

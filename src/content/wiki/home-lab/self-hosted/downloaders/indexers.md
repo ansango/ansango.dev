@@ -93,7 +93,7 @@ services:
 
 Es necesario crear un archivo `.env` en el mismo directorio que el `docker-compose.yml` para definir las variables globales.
 
-```env
+```
 # Ruta base para los volúmenes de datos.
 # CUIDADO! mantener la barra del final al cambiar la ruta.
 ARRPATH=/media/

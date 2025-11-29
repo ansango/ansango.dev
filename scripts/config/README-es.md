@@ -19,7 +19,7 @@ npm run build
 
 ```
 ansango.dev/
-├── 
+├──
 ├── scripts/
 │   ├── config/
 │   │   └── headers.config.js       # ⚙️ Configuración central (EDITAR AQUÍ)
@@ -40,15 +40,18 @@ Edita `config/headers.config.js`:
 export default {
   csp: {
     inlineScripts: [
-      { file: 'src/components/theme.script.astro', description: 'Theme toggle' },
+      {
+        file: "src/components/theme.script.astro",
+        description: "Theme toggle",
+      },
     ],
     directives: {
-      'script-src': ["'self'", 'https://giscus.app'],
+      "script-src": ["'self'", "https://giscus.app"],
     },
   },
   cache: {
-    html: { maxAge: 0, directive: 'public, max-age=0, must-revalidate' },
-    immutable: { maxAge: 31536000, patterns: ['/*.js', '/*.css'] },
+    html: { maxAge: 0, directive: "public, max-age=0, must-revalidate" },
+    immutable: { maxAge: 31536000, patterns: ["/*.js", "/*.css"] },
   },
 };
 ```
@@ -60,6 +63,7 @@ npm run generate:headers
 ```
 
 El script:
+
 - ✅ Extrae scripts inline automáticamente
 - ✅ Calcula hashes SHA-256
 - ✅ Genera CSP completo
@@ -83,10 +87,10 @@ npm run build
 inlineScripts: [
   // ... existentes
   {
-    file: 'src/components/mi-script.astro',
-    description: 'Mi nuevo script',
+    file: "src/components/mi-script.astro",
+    description: "Mi nuevo script",
   },
-]
+];
 ```
 
 ### Permitir Dominio Externo

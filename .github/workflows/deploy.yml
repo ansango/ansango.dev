@@ -21,19 +21,19 @@ jobs:
   LAUNCH-DEPLOYMENT:
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    
+
     steps:
-     # ==========================================
+      # ==========================================
       # CHECKOUT REPOSITORY
       # ==========================================
-      
+
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
-      
+
       # ==========================================
       # PREPARE CONTENT FOR CONVERSION
       # ==========================================
-          
+
       - name: 📝 Prepare content and assets for export
         run: |
           mkdir -p obsidian_input
@@ -42,29 +42,29 @@ jobs:
             mkdir -p obsidian_input/assets
             cp -r ${{ env.ASSETS_DIR }}/* obsidian_input/assets/
           fi
-      
+
       # ==========================================
       # OBSIDIAN TO MARKDOWN CONVERSION
       # ==========================================
-          
+
       - name: 💾 Cache obsidian-export binary
         uses: actions/cache@v4
         id: obsidian-cache
         with:
           path: obsidian-export_Linux-x86_64.bin
           key: obsidian-export-v22.11.0
-          
+
       - name: 📥 Download obsidian-export
         if: steps.obsidian-cache.outputs.cache-hit != 'true'
         run: |
           wget https://github.com/zoni/obsidian-export/releases/download/v22.11.0/obsidian-export_Linux-x86_64.bin
           chmod +x obsidian-export_Linux-x86_64.bin
-          
+
       - name: 🔄 Convert Obsidian to Markdown
         run: |
           mkdir -p obsidian_output
           ./obsidian-export_Linux-x86_64.bin ./obsidian_input ./obsidian_output
-          
+
       - name: 📦 Replace content with converted files
         run: |
           rm -rf ${{ env.CONTENT_DIR }}
@@ -74,16 +74,16 @@ jobs:
             cp -r obsidian_output/assets ./src/
           fi
           rm -rf obsidian_input obsidian_output
-      
+
       # ==========================================
       # BUILD SITE
       # ==========================================
-          
+
       - name: 🥟 Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
-          bun-version: 'latest'
-          
+          bun-version: "latest"
+
       - name: 💾 Cache Bun dependencies
         uses: actions/cache@v4
         with:
@@ -91,35 +91,33 @@ jobs:
           key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
           restore-keys: |
             ${{ runner.os }}-bun-
-            
+
       - name: 🔨 Build site
         env:
           # API credentials
           RAINDROP_ACCESS_TOKEN: ${{ secrets.RAINDROP_ACCESS_TOKEN }}
-          LASTFM_SHARED_SECRET: ${{ secrets.LASTFM_SHARED_SECRET }}
-          
+          SERVICE_URL: ${{ secrets.SERVICE_URL }}
+          SERVICE_API_KEY: ${{ secrets.SERVICE_API_KEY }}
+
           # Public environment variables
-          PUBLIC_LASTFM_API_KEY: ${{ secrets.PUBLIC_LASTFM_API_KEY }}
-          PUBLIC_LASTFM_APPNAME: ansango.dev
-          PUBLIC_LASTFM_API_BASE_URL: https://ws.audioscrobbler.com/2.0
           PUBLIC_GOATCOUNTER_CODE: ${{ secrets.PUBLIC_GOATCOUNTER_CODE }}
         run: bun install && bun run build
-      
+
       # ==========================================
       # DEPLOY TO CLOUDFLARE PAGES
       # ==========================================
-        
+
       - name: 🚀 Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy dist --project-name=ansango-dev --commit-dirty=true
-      
+
       # ==========================================
       # NOTIFICATIONS
       # ==========================================
-          
+
       - name: 📊 Build summary (success)
         if: success()
         run: |
@@ -129,7 +127,7 @@ jobs:
           echo "**Branch:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
           echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
           echo "**Deployed at:** $(date -u +'%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
-          
+
       - name: 💬 Build summary (failure)
         if: failure()
         run: |

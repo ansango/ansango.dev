@@ -1,0 +1,40 @@
+---
+/**
+ * 📖 Series Detail Page
+ *
+ * @description Shows all parts of a specific series with navigation.
+ * Includes completion status and links to each part.
+ *
+ * @route /series/[serieId]
+ */
+import { LayoutDefault } from "@/components/layout";
+import {
+  SerieDetailHero,
+  SerieEntriesList,
+} from "@/components/organisms/series/[id]";
+
+import { getSeriesStaticPaths as getStaticPaths } from "@/lib/astro";
+export { getStaticPaths };
+
+const { serieInfo } = Astro.props;
+const { missingParts } = serieInfo;
+const isComplete =
+  missingParts && missingParts.ranges ? missingParts.ranges.length === 0 : true;
+
+const layoutProps = {
+  title: serieInfo.title,
+  description: `Serie completa de ${serieInfo.total} ${serieInfo.total === 1 ? "parte" : "partes"}: ${serieInfo.title}`,
+};
+---
+
+<LayoutDefault {...layoutProps}>
+  <SerieDetailHero
+    title={serieInfo.title}
+    entriesCount={serieInfo.entries.length}
+    total={serieInfo.total}
+    missingParts={serieInfo.missingParts}
+    isComplete={isComplete}
+  />
+
+  <SerieEntriesList serieInfo={serieInfo} />
+</LayoutDefault>

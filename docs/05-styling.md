@@ -1,4 +1,3 @@
-
 # 🎨 Styling System
 
 Learn about the styling architecture and customization options.
@@ -92,13 +91,10 @@ Import and wrap your content:
 
 ```astro
 ---
-import DefaultLayout from '@/layout/default.astro';
+import DefaultLayout from "@/layout/default.astro";
 ---
 
-<DefaultLayout
-  title="Page Title"
-  description="Page description"
->
+<DefaultLayout title="Page Title" description="Page description">
   <h1>Your Content</h1>
 </DefaultLayout>
 ```
@@ -188,10 +184,10 @@ Page-level templates:
 The site uses **Inter Variable** from `@fontsource-variable/inter`:
 
 ```css
-@import '@fontsource-variable/inter';
+@import "@fontsource-variable/inter";
 
 :root {
-  --font-family-base: 'Inter Variable', system-ui, sans-serif;
+  --font-family-base: "Inter Variable", system-ui, sans-serif;
 }
 ```
 
@@ -211,12 +207,24 @@ Inter Variable supports all weights (100-900). Use Tailwind utilities:
 Heading styles are defined in `src/styles/headings.css`:
 
 ```css
-h1 { /* ... */ }
-h2 { /* ... */ }
-h3 { /* ... */ }
-h4 { /* ... */ }
-h5 { /* ... */ }
-h6 { /* ... */ }
+h1 {
+  /* ... */
+}
+h2 {
+  /* ... */
+}
+h3 {
+  /* ... */
+}
+h4 {
+  /* ... */
+}
+h5 {
+  /* ... */
+}
+h6 {
+  /* ... */
+}
 ```
 
 ## Responsive Design
@@ -236,9 +244,7 @@ Tailwind's default breakpoints:
 Always start with mobile styles, then enhance for larger screens:
 
 ```html
-<div class="text-sm md:text-base lg:text-lg">
-  Responsive text size
-</div>
+<div class="text-sm md:text-base lg:text-lg">Responsive text size</div>
 ```
 
 ## Customization Guide
@@ -269,12 +275,12 @@ Replace Inter with your font:
 
 ```css
 @font-face {
-  font-family: 'Your Font';
-  src: url('/fonts/your-font.woff2') format('woff2');
+  font-family: "Your Font";
+  src: url("/fonts/your-font.woff2") format("woff2");
 }
 
 :root {
-  --font-family-base: 'Your Font', sans-serif;
+  --font-family-base: "Your Font", sans-serif;
 }
 ```
 

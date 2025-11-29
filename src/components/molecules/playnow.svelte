@@ -1,32 +1,41 @@
 <script lang="ts">
-/**
- * 🎵 PlayNow Component
- * 
- * @description Displays currently playing or recently played track from Last.fm.
- * Shows album cover, track name, artist, and album with real-time updates.
- * 
- * @usage
- * ```astro
- * <PlayNow>
- *   {#snippet play()}<PlayIcon />{/snippet}
- *   {#snippet noplay()}<NoListenIcon />{/snippet}
- * </PlayNow>
- * ```
- * 
- * @compatible
- * - 🔊 Integrates with Last.fm API via TanStack Query
- * - ▶️ Uses PlayIcon for active state
- * - 🖼️ Shows album artwork with fallback
- */
-  import {  useGetCurrentTrack } from "@/lib/queries";
+  /**
+   * 🎵 PlayNow Component
+   *
+   * @description Displays currently playing or recently played track from Last.fm.
+   * Shows album cover, track name, artist, and album with real-time updates.
+   *
+   * @usage
+   * ```astro
+   * <PlayNow>
+   *   {#snippet play()}<PlayIcon />{/snippet}
+   *   {#snippet noplay()}<NoListenIcon />{/snippet}
+   * </PlayNow>
+   * ```
+   *
+   * @compatible
+   * - 🔊 Integrates with Last.fm API via TanStack Query
+   * - ▶️ Uses PlayIcon for active state
+   * - 🖼️ Shows album artwork with fallback
+   */
+  import { useGetCurrentTrack } from "@/lib/queries";
+  import type { Snippet } from "svelte";
 
-  let { play, noplay } = $props();
-  const query = useGetCurrentTrack();
+  let {
+    play,
+    noplay,
+    url,
+    apiKey,
+  }: {
+    play?: Snippet;
+    noplay?: Snippet;
+    url: string;
+    apiKey: string;
+  } = $props();
+  const query = useGetCurrentTrack(url, apiKey);
   let track = $derived(query.data);
-  let currentTrack = $derived(track?.["@attr"]?.nowplaying ? track : null);
-  let imageUrl = $derived(
-    currentTrack?.image.find((img) => img.size === "large")?.["#text"],
-  );
+  let currentTrack = $derived(track?.nowPlaying ? track : null);
+  let imageUrl = $derived(currentTrack?.image);
   let previousTrack = $derived(
     !currentTrack && track && !query.isLoading ? track : null,
   );
@@ -36,7 +45,8 @@
   {#if currentTrack}
     {@render play?.()}
   {:else if query.isLoading}
-    <span class="h-4 min-w-2xs rounded bg-muted/10 animate-pulse inline-block"></span>
+    <span class="h-4 min-w-2xs rounded bg-muted/10 animate-pulse inline-block"
+    ></span>
   {:else}
     {@render noplay?.()}
   {/if}
@@ -62,12 +72,8 @@
         </div>
       {:else}
         <img
-          src={imageUrl
-            ? imageUrl
-            : track?.image.find((img) => img.size === "large")?.["#text"]}
-          alt={currentTrack
-            ? currentTrack.album["#text"]
-            : track?.album["#text"]}
+          src={imageUrl ? imageUrl : track?.image}
+          alt={currentTrack ? currentTrack.album : track?.album}
           class="size-20 rounded object-cover"
           loading="eager"
           width={80}
@@ -87,14 +93,10 @@
           {currentTrack ? currentTrack.name : previousTrack?.name}
         </p>
         <p class="text-muted text-sm">
-          {currentTrack
-            ? currentTrack.artist["#text"]
-            : previousTrack?.artist["#text"]}
+          {currentTrack ? currentTrack.artist : previousTrack?.artist}
         </p>
         <p class="text-muted text-xs">
-          {currentTrack
-            ? currentTrack.album["#text"]
-            : previousTrack?.album["#text"]}
+          {currentTrack ? currentTrack.album : previousTrack?.album}
         </p>
       {/if}
     </div>

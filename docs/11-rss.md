@@ -1,4 +1,3 @@
-
 # 📡 RSS Feed
 
 Automatic RSS feed generation with comprehensive metadata for all your published content.
@@ -76,10 +75,10 @@ RSS feed is generated in `src/pages/rss.xml.ts`.
 ### Code Structure
 
 ```typescript
-import rss from '@astrojs/rss';
-import type { APIContext } from 'astro';
-import { getAllCollectionsByCategory } from '@/lib/collections';
-import site from '@/site.json';
+import rss from "@astrojs/rss";
+import type { APIContext } from "astro";
+import { getAllCollectionsByCategory } from "@/lib/collections";
+import site from "@/site.json";
 
 export async function GET(context: APIContext) {
   // Fetch all published content
@@ -88,8 +87,8 @@ export async function GET(context: APIContext) {
   });
 
   // Sort by date (newest first)
-  const sortedEntries = allEntries.sort((a, b) => 
-    b.data.date.getTime() - a.data.date.getTime()
+  const sortedEntries = allEntries.sort(
+    (a, b) => b.data.date.getTime() - a.data.date.getTime(),
   );
 
   return rss({
@@ -100,7 +99,7 @@ export async function GET(context: APIContext) {
     managingEditor: `${site.email} (${site.author})`,
     webMaster: `${site.email} (${site.author})`,
     xmlns: {
-      atom: 'http://www.w3.org/2005/Atom',
+      atom: "http://www.w3.org/2005/Atom",
     },
     customData: `
       <image>
@@ -153,16 +152,14 @@ Include only specific collections:
 // Only blog posts
 const blogEntries = await getAllCollectionsByCategory({
   published: true,
-  category: 'blog',
+  category: "blog",
 });
 ```
 
 Or exclude certain collections:
 
 ```typescript
-const entries = allEntries.filter(
-  entry => !entry.slug.startsWith('/wiki')
-);
+const entries = allEntries.filter((entry) => !entry.slug.startsWith("/wiki"));
 ```
 
 ### Custom Item Fields
@@ -180,7 +177,7 @@ items: sortedEntries.map((entry) => ({
     <excerpt>${entry.data.excerpt}</excerpt>
     <image>${entry.data.image}</image>
   `,
-}))
+}));
 ```
 
 ### Full Content vs Summaries
@@ -190,18 +187,18 @@ items: sortedEntries.map((entry) => ({
 **Full content**: Include entire post content:
 
 ```typescript
-import { getEntry } from 'astro:content';
+import { getEntry } from "astro:content";
 
 items: await Promise.all(
   sortedEntries.map(async (entry) => {
     const content = await entry.render();
     return {
       title: entry.data.title,
-      content: content.compiledContent(),  // Full HTML
+      content: content.compiledContent(), // Full HTML
       // ...
     };
-  })
-)
+  }),
+);
 ```
 
 ## Feed Image
@@ -231,12 +228,14 @@ RSS 2.0 supports per-item images via `enclosure`:
 items: sortedEntries.map((entry) => ({
   title: entry.data.title,
   // ...
-  enclosure: entry.data.image ? {
-    url: `${site.url}${entry.data.image}`,
-    type: 'image/jpeg',
-    length: 0,  // Optional: file size in bytes
-  } : undefined,
-}))
+  enclosure: entry.data.image
+    ? {
+        url: `${site.url}${entry.data.image}`,
+        type: "image/jpeg",
+        length: 0, // Optional: file size in bytes
+      }
+    : undefined,
+}));
 ```
 
 ## Related Documentation

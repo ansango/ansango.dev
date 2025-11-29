@@ -1,11 +1,11 @@
 /**
  * 🗂️ Astro Static Path Generators
- * 
+ *
  * @description Collection of functions to generate static paths for Astro SSG.
  * Handles routing for collections, archives, tags, bookmarks, and pagination.
- * 
+ *
  * @module lib/astro
- * 
+ *
  * @compatible
  * - 📄 Used in [...slug].astro and [page].astro routes
  * - 🔢 Handles pagination for all content types
@@ -26,8 +26,9 @@ import {
 import {
   getBookmarksByCollection,
   getCollectionsExcludingReading,
-  getRaindropData,
-} from "@/lib/raindrop";
+  getAllBookmarksData,
+} from "@/lib/bookmarks";
+import { getAllSeries } from "./series";
 
 /**
  * Generates an array of static path objects for each collection name.
@@ -60,7 +61,7 @@ export const getCollectionStaticPathsSlug = async () => {
   const pagesPaths = await getAllNumberPaths();
   const contentResult = content
     .map((entry) => {
-      if (entry.data.index) {
+      if ("index" in entry.data && entry.data.index) {
         return null;
       }
       return {
@@ -227,7 +228,7 @@ export const getBookmarksStaticPaths = async () => {
  */
 
 export const getBookmarksStaticPathsPage = async () => {
-  const { bookmarks, collections } = await getRaindropData();
+  const { bookmarks, collections } = await getAllBookmarksData();
   return collections.flatMap((collection) => {
     const items = bookmarks.filter((b) => b.collectionId === collection._id);
     const totalPages = getPageNumbers(
@@ -243,4 +244,14 @@ export const getBookmarksStaticPathsPage = async () => {
       };
     });
   });
+};
+
+export const getSeriesStaticPaths = async () => {
+  const allEntries = await getAllCollections();
+  const allSeries = getAllSeries(allEntries);
+
+  return allSeries.map((series) => ({
+    params: { serieId: series.id },
+    props: { serieInfo: series },
+  }));
 };

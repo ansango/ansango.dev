@@ -1,3 +1,14 @@
+---
+title: Guia para configurar OPNSense y AdGuard
+description: como configurar OPNSense y AdGuard en proxmox
+date: 2025-12-05
+mod: 2025-12-05
+published: true
+tags: [proxmox, homelab, networking, self-hosted, sysadmin, opnsense, adguard]
+---
+
+# Guia para configurar OPNSense y AdGuard
+
 **GUÍA DEFINITIVA, paso a paso**, para montar:
 
 * **OPNsense en Proxmox**
@@ -6,7 +17,7 @@
 * **Que el router Lowi NO estorbe**
 * **Que todos los dispositivos usen AdGuard sin configurarlos uno a uno**
 
-# 🟥 **PARTE 1 — Crear la red interna en Proxmox (LAN)**
+## 🟥 **PARTE 1 — Crear la red interna en Proxmox (LAN)**
 
 OPNsense necesita una red separada del router Lowi para actuar como router real.
 Por eso crearemos un **bridge interno** llamado `vmbr1`.
@@ -39,7 +50,7 @@ Configurar así:
 
 ---
 
-# 🟥 **PARTE 2 — Crear e instalar OPNsense en Proxmox**
+## 🟥 **PARTE 2 — Crear e instalar OPNsense en Proxmox**
 
 Necesitas la ISO de OPNsense (descargada previamente).
 
@@ -95,7 +106,7 @@ Finalizar.
 
 ---
 
-# 🟥 **PARTE 3 — Configuración inicial desde la consola**
+## 🟥 **PARTE 3 — Configuración inicial desde la consola**
 
 Arranca la VM.
 Espera a que OPNsense cargue.
@@ -141,7 +152,7 @@ Perfecto.
 
 ---
 
-# 🟥 **PARTE 4 — Acceso a la interfaz web de OPNsense**
+## 🟥 **PARTE 4 — Acceso a la interfaz web de OPNsense**
 
 En un PC, desde la red LAN interna (o desde consola Proxmox → opción 8 para habilitar GUI temporal), abre:
 
@@ -160,7 +171,7 @@ Pass: opnsense
 
 ---
 
-# 🟥 **PARTE 5 — Configurar DHCP en OPNsense**
+## 🟥 **PARTE 5 — Configurar DHCP en OPNsense**
 
 En menú:
 
@@ -193,7 +204,7 @@ Guardar.
 
 ---
 
-# 🟥 **PARTE 6 — Crear el contenedor AdGuard Home**
+## 🟥 **PARTE 6 — Crear el contenedor AdGuard Home**
 
 ## **Paso 6.1 — Crear LXC en Proxmox**
 
@@ -255,7 +266,7 @@ Configura:
 
 ---
 
-# 🟥 **PARTE 7 — Integrar DNS: OPNsense → AdGuard**
+## 🟥 **PARTE 7 — Integrar DNS: OPNsense → AdGuard**
 
 En OPNsense:
 
@@ -275,7 +286,7 @@ Guardar.
 
 ---
 
-# 🟥 **PARTE 8 — NAT DNS Redirection (Forzar DNS para todos los dispositivos)**
+## 🟥 **PARTE 8 — NAT DNS Redirection (Forzar DNS para todos los dispositivos)**
 
 Así evitas que:
 
@@ -309,7 +320,7 @@ Todo el tráfico DNS de tu red se fuerza a pasar por AdGuard, sin excepción.
 
 ---
 
-# 🟥 **PARTE 9 — Integrar la red física**
+## 🟥 **PARTE 9 — Integrar la red física**
 
 ## **Qué hacer físicamente**
 
@@ -337,7 +348,7 @@ Tu LAN real debe conectarse a la LAN del OPNsense.
 
 ---
 
-# 🟢 **RESULTADO FINAL**
+## 🟢 **RESULTADO FINAL**
 
 Toda tu red pasa por:
 

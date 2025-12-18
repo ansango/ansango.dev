@@ -118,6 +118,14 @@ const contentCollections: Record<CollectionName, Meta> = {
     url: "/blogroll",
     published: true,
   },
+  cameraroll: {
+    title: "Camera Roll",
+    description:
+      "Una colección de fotografías tomadas con mis cámaras, tanto digital como analógicas.",
+    entriesPerPage: 15,
+    url: "/cameraroll",
+    published: false,
+  },
   uses: {
     title: "Uses",
     description:
@@ -141,7 +149,16 @@ const pages = {
   ...contentCollections,
 };
 
-const social: TreeNode = {
+const sharing: TreeNode = {
+  feed: {
+    title: "Feed",
+    description:
+      "Suscríbete al RSS feed para recibir nuevos artículos en tu lector favorito.",
+    entriesPerPage: 0,
+    url: "/rss.xml",
+    blank: true,
+    published: true,
+  },
   github: {
     title: "GitHub",
     url: `https://github.com/${metasite.github}`,
@@ -151,22 +168,6 @@ const social: TreeNode = {
   linkedin: {
     title: "LinkedIn",
     url: `https://www.linkedin.com/in/${metasite.linkedin}/`,
-    blank: true,
-    published: true,
-  },
-};
-
-const explore: TreeNode = {
-  tags,
-  wiki,
-  archive,
-  series,
-  feed: {
-    title: "Feed",
-    description:
-      "Suscríbete al RSS feed para recibir nuevos artículos en tu lector favorito.",
-    entriesPerPage: 0,
-    url: "/rss.xml",
     blank: true,
     published: true,
   },
@@ -183,12 +184,18 @@ const tree: Tree = {
   content: {
     blog: contentCollections.blog,
     projects: contentCollections.projects,
+    cameraroll: contentCollections.cameraroll,
     blogroll: contentCollections.blogroll,
-    bookmarks,
     reading,
   },
-  explore,
-  social,
+  explore: {
+    bookmarks,
+    wiki,
+    series,
+    archive,
+    tags,
+  },
+  sharing,
 };
 
 export const site = {

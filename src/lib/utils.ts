@@ -51,7 +51,8 @@ export const capitalize = (s: string) => s && s[0].toUpperCase() + s.slice(1);
  * @param {string} html The HTML content to analyze.
  * @returns {number} Estimated reading time in minutes (rounded).
  */
-export const getReadingTime = (html: string): number => {
+export const getReadingTime = (html?: string): number => {
+  if (!html) return 0;
   const text = html.replace(/<[^>]+>/g, "");
   const wordCount = text.trim().split(/\s+/).length;
   const speedReadingWordsPerMinute = 200;

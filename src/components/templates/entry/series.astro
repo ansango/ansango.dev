@@ -31,7 +31,7 @@ import { getEntryNavigation } from "@/lib/entry-navigation";
 
 const { collection, id } = Astro.props as Entry;
 
-const entry = (await getEntry(collection, id)) as Entry | undefined;
+const entry = (await getEntry(collection, id));
 
 if (!entry) {
   throw new Error(`Entry not found: ${collection}/${id}`);

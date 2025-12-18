@@ -28,17 +28,17 @@ import { site } from "@/constants";
  *
  * @property {string} id - Unique entry identifier.
  * @property {InferEntrySchema<CollectionName>} data - Frontmatter data inferred from the collection schema.
- * @property {string} body - Raw content body (markdown) as string.
+ * @property {string} [body] - Optional raw content body (markdown) as string.
  * @property {string} [filePath] - Optional file path for the source file.
- * @property {RenderedContent} rendered - The rendered content produced by Astro.
+ * @property {RenderedContent} [rendered] - Optional rendered content produced by Astro.
  * @property {CollectionName} collection - The collection name this entry belongs to.
  */
 export type Entry = {
   id: string;
   data: InferEntrySchema<CollectionName>;
-  body: string;
+  body?: string;
   filePath?: string;
-  rendered: RenderedContent;
+  rendered?: RenderedContent;
   collection: CollectionName;
 };
 
@@ -67,6 +67,7 @@ export const getAllPromiseCollections = async () => {
  */
 export const getAllCollections = async () => {
   const collections = await getAllPromiseCollections();
+
   return collections
     .filter(({ data: { published } }) => published)
     .map((entry) => {
@@ -113,7 +114,6 @@ export const getAllCollectionsByCategory = async (): Promise<
     .forEach((key) => {
       sortedContentByCategory[key] = contentByCategory[key];
     });
-
   return sortedContentByCategory as Record<CollectionName, Entries>;
 };
 

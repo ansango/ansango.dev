@@ -36,7 +36,7 @@ import { getEntryNavigation } from "@/lib/entry-navigation";
 
 const { collection, id } = Astro.props as Entry;
 
-const entry = (await getEntry(collection, id)) as Entry | undefined;
+const entry = await getEntry(collection, id);
 
 if (!entry) {
   throw new Error(`Entry not found: ${collection}/${id}`);
@@ -72,13 +72,20 @@ const layoutProps = {
   breadcrumbs,
 };
 
-// Only show share buttons for blog, wiki, and projects
-const showShare = ["blog", "wiki", "projects"].includes(collection);
+// Only show share buttons for blog, wiki, projects, and cameraroll
+const showShare = ["blog", "wiki", "projects", "cameraroll"].includes(
+  collection,
+);
 const shareUrl = `${site.url}${Astro.url.pathname}`;
 
 // Get navigation for prev/next entries
+const filteredCollections = ["blog", "wiki", "projects", "cameraroll"];
 const allEntries = await getAllCollections();
-const navigation = getEntryNavigation(entry, allEntries);
+const navigation = getEntryNavigation(
+  entry,
+  allEntries,
+  filteredCollections.includes(collection) ? collection : undefined,
+);
 ---
 
 <LayoutDefault {...layoutProps} type="article">

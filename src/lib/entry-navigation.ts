@@ -12,6 +12,7 @@
  * - 🔄 Works seamlessly with all entry types
  */
 
+import type { CollectionName } from "@/content.config";
 import type { Entry, Entries } from "@/lib/collections";
 
 /**
@@ -44,6 +45,7 @@ export type EntryNavigation = {
 export function getEntryNavigation(
   currentEntry: Entry,
   allEntries: Entries,
+  filterCollection?: CollectionName,
 ): EntryNavigation {
   // Filter entries with dates and exclude single-page entries (index: true)
   const orderedEntries = allEntries
@@ -54,8 +56,11 @@ export function getEntryNavigation(
       return dateB - dateA; // Newest first
     });
 
+  const filteredEntries = filterCollection
+    ? orderedEntries.filter((e) => e.collection === filterCollection)
+    : orderedEntries;
   // Find current entry index
-  const currentIndex = orderedEntries.findIndex(
+  const currentIndex = filteredEntries.findIndex(
     (e) => e.id === currentEntry.id && e.collection === currentEntry.collection,
   );
 
@@ -65,10 +70,10 @@ export function getEntryNavigation(
   }
 
   // Get prev (older entry)
-  const prevEntry = orderedEntries[currentIndex + 1] || null;
+  const prevEntry = filteredEntries[currentIndex + 1] || null;
 
   // Get next (newer entry)
-  const nextEntry = orderedEntries[currentIndex - 1] || null;
+  const nextEntry = filteredEntries[currentIndex - 1] || null;
 
   return {
     prev: prevEntry

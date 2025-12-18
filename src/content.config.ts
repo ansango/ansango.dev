@@ -128,6 +128,26 @@ const wiki = defineCollection({
   schema: wikiSchema,
 });
 
+/**
+ * Camera Roll Collection
+ */
+
+const camerarollSchema = commonSchema.merge(
+  z.object({
+    takenAt: z.coerce.date().optional(),
+    mediumType: z.enum(["film", "digital", "both"]),
+    camera: z.enum(["Canon 350D", "Canon 6D", "Canon 50E", "Canon 33"]),
+    film: z.string().optional(),
+    locations: z.array(z.string()).optional(),
+    thumbnails: z.array(z.string()).optional(),
+  }),
+);
+
+const cameraroll = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: `${path}/cameraroll` }),
+  schema: camerarollSchema,
+});
+
 export const collections = {
   blog,
   now,
@@ -136,6 +156,7 @@ export const collections = {
   blogroll,
   uses,
   wiki,
+  cameraroll,
 };
 
 export const collectionNames = Object.keys(collections);
@@ -148,5 +169,6 @@ export type Entry = z.infer<
   | typeof blogRollSchema
   | typeof usesSchema
   | typeof wikiSchema
+  | typeof camerarollSchema
 >;
 export type Meta = z.infer<typeof metaSchema>;

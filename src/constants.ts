@@ -118,14 +118,6 @@ const contentCollections: Record<CollectionName, Meta> = {
     url: "/blogroll",
     published: true,
   },
-  cameraroll: {
-    title: "Camera Roll",
-    description:
-      "Una colección de fotografías tomadas con mis cámaras, tanto digital como analógicas.",
-    entriesPerPage: 15,
-    url: "/cameraroll",
-    published: false,
-  },
   uses: {
     title: "Uses",
     description:
@@ -184,12 +176,12 @@ const tree: Tree = {
   content: {
     blog: contentCollections.blog,
     projects: contentCollections.projects,
-    cameraroll: contentCollections.cameraroll,
     blogroll: contentCollections.blogroll,
     reading,
+    bookmarks,
   },
   explore: {
-    bookmarks,
+    
     wiki,
     series,
     archive,

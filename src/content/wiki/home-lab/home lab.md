@@ -2,7 +2,7 @@
 title: Home Lab
 description: Documentación sobre mi Home Lab y los servicios auto-alojados.
 date: 2025-09-02
-mod: 2025-11-29
+mod: 2025-12-18
 published: true
 tags: [docker, homelab, networking, self-hosted, sysadmin]
 ---

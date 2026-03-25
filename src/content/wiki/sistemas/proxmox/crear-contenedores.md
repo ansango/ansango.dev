@@ -2,7 +2,7 @@
 title: Cómo crear un Contenedor LXC en Proxmox
 description: "Crear contenedores LXC en Proxmox: plantillas, comandos pct, configuración de red y gestión de contenedores"
 date: 2025-09-03
-mod: 2025-10-25
+mod: 2026-03-25
 published: true
 tags: [cli, contenedores, linux, lxc, pct, plantillas, proxmox, terminal, virtualization]
 ---

@@ -2,9 +2,9 @@
 title: Cómo crear un Dataset en TrueNAS
 description: "Crear dataset en TrueNAS: interfaz web, línea de comandos, tipos de compartir y configuración de permisos"
 date: 2025-09-03
-mod: 2025-10-25
+mod: 2026-03-25
 published: true
-tags: [truenas, dataset, filesystem, smb, nfs, multiprotocol, apps, cli, storage, permissions]
+tags: [apps, cli, dataset, filesystem, multiprotocol, nfs, permissions, smb, storage, truenas]
 ---
 
 # Cómo crear un Dataset en TrueNAS

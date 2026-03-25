@@ -2,7 +2,7 @@
 title: Debian Network Quick Cheat Sheet
 description: Chuleta para el diagnóstico y solución de problemas de red
 date: 2025-11-11
-mod: 2025-11-11
+mod: 2026-03-25
 published: true
 tags: [cheatsheet, debian, linux, network, proxmox]
 ---
@@ -124,7 +124,6 @@ nc -zv <IP_SERVIDOR> 8006
 - Debe mostrar `UP` y `LOWER_UP`
 - `ping` y `nc` deben funcionar
 - Abrir navegador: `https://<IP_SERVIDOR>:8006`
-    
 
 ---
 

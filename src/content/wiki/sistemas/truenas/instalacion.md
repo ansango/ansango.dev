@@ -2,9 +2,9 @@
 title: Cómo instalar TrueNAS
 description: "Instalar TrueNAS: requisitos del sistema, descarga ISO, creación USB de arranque y proceso de instalación"
 date: 2025-09-03
-mod: 2025-10-25
+mod: 2026-03-25
 published: true
-tags: [truenas, instalacion, iso, usb, boot, requisitos, hardware, core, scale, freebsd, linux]
+tags: [boot, core, freebsd, hardware, instalacion, iso, linux, requisitos, scale, truenas, usb]
 ---
 
 # Cómo instalar TrueNAS

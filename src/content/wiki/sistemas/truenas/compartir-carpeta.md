@@ -2,9 +2,9 @@
 title: Cómo compartir una carpeta en TrueNAS
 description: "Compartir carpetas en TrueNAS: SMB para Windows, NFS para Linux/macOS, usuarios, permisos ACL y configuración de servicios"
 date: 2025-09-03
-mod: 2025-10-25
+mod: 2026-03-25
 published: true
-tags: [truenas, sharing, smb, nfs, windows, linux, macos, acl, permissions, users, groups]
+tags: [acl, groups, linux, macos, nfs, permissions, sharing, smb, truenas, users, windows]
 ---
 
 # Cómo compartir una carpeta en TrueNAS

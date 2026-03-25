@@ -1,94 +1,18 @@
 ---
 title: Jellyfin en Proxmox con Docker
-description: Jellyfin en Docker sobre Proxmox con discos separados y acceso desde Linux + GPU Intel N100
+description: Jellyfin en Docker sobre Proxmox + GPU Intel N100
 date: 2025-11-25
-mod: 2025-11-25
+mod: 2026-03-25
 published: true
 tags: [docker, homelab, jellyfin, proxmox]
 ---
 
 # Jellyfin en Proxmox con Docker
 
-## 1️⃣ Preparación del servidor Proxmox
-
-- Servidor con **Intel N100**
-- Proxmox instalado en **nvme0n1**
-- Discos adicionales: `sda` y `sdb`
-
-### Ver discos
-
-```bash
-lsblk -f
-```
-
----
-
-## 2️⃣ Formateo de discos
-
-```bash
-# Limpiar discos
-wipefs -a /dev/sda
-sgdisk --zap-all /dev/sda
-wipefs -a /dev/sdb
-sgdisk --zap-all /dev/sdb
-
-# Crear tabla GPT y partición
-parted /dev/sda mklabel gpt
-parted /dev/sda mkpart primary ext4 0% 100%
-mkfs.ext4 /dev/sda1
-
-parted /dev/sdb mklabel gpt
-parted /dev/sdb mkpart primary ext4 0% 100%
-mkfs.ext4 /dev/sdb1
-```
-
-- Crear puntos de montaje y montar manualmente:
-
-```bash
-mkdir -p /mnt/disk1 /mnt/disk2
-mount /dev/sda1 /mnt/disk1
-mount /dev/sdb1 /mnt/disk2
-```
-
-- Añadir a fstab para montaje automático:
-
-```
-/dev/sda1 /mnt/disk1 ext4 defaults 0 0
-/dev/sdb1 /mnt/disk2 ext4 defaults 0 0
-```
-
-- Recargar fstab:
-
-```bash
-systemctl daemon-reload
-mount -a
-```
-
----
-
-## 3️⃣ Configuración del contenedor LXC
+## Configuración del contenedor LXC
 
 - Contenedor Ubuntu/Debian
 - Activar **nesting, keyctl, fuse**:
-
-```bash
-pct set <ID> -features nesting=1,keyctl=1,fuse=1
-```
-
-### Montar discos en el contenedor
-
-```bash
-nano /etc/pve/lxc/<ID>.conf
-```
-
-Añadir:
-
-```
-mp0: /mnt/disk1,mp=/media
-mp1: /mnt/disk2,mp=/media2
-```
-
----
 
 ### Configuración de la GPU Intel N100
 
@@ -119,42 +43,6 @@ card0  renderD128
 ```
 
 Esto permite a Jellyfin usar **QuickSync / VAAPI** para transcodificación.
-
----
-
-## 4️⃣ Instalación de Docker y Docker Compose en LXC
-
-```bash
-for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
-```
-
-```bash
-# Add Docker's official GPG key:
-sudo apt-get update
-sudo apt-get install ca-certificates curl
-sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
-sudo chmod a+r /etc/apt/keyrings/docker.asc
-
-# Add the repository to Apt sources:
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
-  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update
-```
-
-```bash
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-```
-
-```bash
-sudo systemctl status docker
-```
-
-```bash
-sudo systemctl start docker
-```
 
 ---
 
@@ -193,31 +81,3 @@ docker-compose up -d
 ```
 
 Acceso: `http://IP_DEL_CONTENEDOR:8096`
-
----
-
-## 6️⃣ Acceso a los discos desde Linux personal (SSHFS)
-
-```bash
-sudo apt install sshfs -y
-mkdir -p ~/disk1 ~/disk2
-sshfs usuario@192.168.0.22:/mnt/disk1 ~/disk1
-sshfs usuario@192.168.0.22:/mnt/disk2 ~/disk2
-```
-
-- Desmontar:
-
-```bash
-fusermount -u ~/disk1
-fusermount -u ~/disk2
-```
-
----
-
-## 7️⃣ Consideraciones finales
-
-- `/media` → Disco 1 (por ejemplo, Películas)
-- `/media2` → Disco 2 (por ejemplo, Series)
-- GPU Intel N100 permite **transcodificación eficiente**
-- Discos independientes: seguro si eliminas contenedor
-- SSHFS garantiza acceso seguro desde Linux personal

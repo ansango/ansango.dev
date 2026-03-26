@@ -4,41 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "46a5ee71590062a8",
+        "id": "7b94c4ef16a55531",
         "type": "tabs",
         "children": [
           {
-            "id": "50e02409267d3fea",
+            "id": "c354f92c7f85604b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/wiki/sistemas/debian/formatear discos.md",
+                "file": "src/content/wiki/home-lab/configurar nginx con certificados y cloudflare.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "formatear discos"
-            }
-          }
-        ]
-      },
-      {
-        "id": "2c6117371b7fe92b",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "18bd7c6b53770894",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "src/content/wiki/home-lab/jellyfin en proxmox con docker.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "jellyfin en proxmox con docker"
+              "title": "configurar nginx con certificados y cloudflare"
             }
           }
         ]
@@ -98,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 428.5
+    "width": 369.5
   },
   "right": {
     "id": "3185a5eb3dce3daa",
@@ -162,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "src/content/wiki/sistemas/debian/formatear discos.md",
+                "file": "src/content/wiki/home-lab/configurar nginx con certificados y cloudflare.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of formatear discos"
+              "title": "Outline of configurar nginx con certificados y cloudflare"
             }
           },
           {
@@ -186,7 +166,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 304.5
+    "width": 304.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -203,10 +184,22 @@
       "obsidian-metadata-links:Undo Metadata links": false
     }
   },
-  "active": "50e02409267d3fea",
+  "active": "c354f92c7f85604b",
   "lastOpenFiles": [
-    "src/content/wiki/home-lab/jellyfin en proxmox con docker.md",
+    "src/content/wiki/home-lab/configurar vpn wireguard en proxmox.md",
+    "src/content/wiki/home-lab/configurar nginx con certificados y cloudflare.md",
+    "public/assets/b4c10d1b435c99b66a90f66347503268_MD5.webp",
+    "Pasted image 20260326195444.png",
+    "public/assets/f01ad42158b84b96a7cd9923aeb344c7_MD5.webp",
+    "Pasted image 20260326195039.png",
+    "Pasted image 20260326193740.png",
+    "public/assets/5f4c1cce40f8b49af10dda9e3675ad6c_MD5.webp",
+    "Pasted image 20260326193239.png",
+    "public/assets/b8072d4815b53bc9f293926dcdbbc246_MD5.webp",
+    "Pasted image 20260326192957.png",
+    "public/assets/4b6e63801f503aa97a66247bc3aa63cb_MD5.webp",
     "src/content/wiki/sistemas/debian/formatear discos.md",
+    "src/content/wiki/home-lab/jellyfin en proxmox con docker.md",
     "src/content/wiki/sistemas/proxmox/proxmox.md",
     "src/content/wiki/sistemas/proxmox/proxmox lxc networking.md",
     "src/content/wiki/sistemas/proxmox/crear-contenedores.md",
@@ -237,19 +230,6 @@
     "src/components/templates/entry/series.astro",
     "src/components/organisms/series/[id]/series-detail.astro",
     "src/components/organisms/series/[id]/serie-entries-list.astro",
-    "src/components/organisms/series/[id]/index.ts",
-    "src/content/wiki/home-lab/self-hosted/wikis/docmost.md",
-    "src/content/wiki/sistemas/proxmox/configuracion-red.md",
-    "src/content/wiki/development/javascript/usando ajax con async await.md",
-    "dist/og-default.jpg",
-    "dist/mstile-150x150.png",
-    "dist/favicon-32x32.png",
-    "dist/favicon-16x16.png",
-    "dist/avatar.jpeg",
-    "dist/assets/fb61978e31261d5652410a0bd6f17950_MD5.jpeg",
-    "dist/assets/db0fb99d7fb8533799ea05b00895ccbc_MD5.webp",
-    "dist/assets/cadf2e1061bac5f9d411e86d652d5722_MD5.jpeg",
-    "dist/assets/b6443e6f224752aaa3ac468ae891bf6b_MD5.jpg",
-    "dist/assets/b549a3ff32be771a21148ac6b2ae51aa_MD5.jpeg"
+    "src/components/organisms/series/[id]/index.ts"
   ]
 }

@@ -3,8 +3,13 @@ title: Configuración de Nginx Proxy Manager con Cloudflare (Certificados Wildca
 description: Configura de forma sencilla subdominios con certificados con Nginx Proxy Manager y Cloudflare
 date: 2026-03-26
 mod: 2026-03-26
-published: false
-tags: [tag]
+published: true
+tags:
+  - cloudflare
+  - nginx
+  - proxmox
+  - tunnel
+  - wireguard
 ---
 
 # Configuración de Nginx Proxy Manager con Cloudflare (Certificados Wildcard)

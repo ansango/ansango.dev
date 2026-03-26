@@ -45,7 +45,7 @@ Para que el VPN sea estable y el router de tu operador sepa a dónde enviar el t
 3. Cambia de **IPv4/DHCP** a **Static**.
 4. Asigna una IP (ej: `192.168.1.60/24`) y la puerta de enlace (Gateway) de tu router (ej: `192.168.0.1`).
 
-![[7141dbeddcef54015345b8e7f2d56ef8_MD5.webp]]
+![[95f990f80db17cdb57a555e893c609bd_MD5.webp]]
 
 ## Apertura de Puertos en el Router (Port Forwarding)
 
@@ -57,7 +57,7 @@ Para conectar desde fuera de tu casa, debes abrir el puerto de WireGuard.
 
 En mi caso se vería así en el router de Lowi
 
-![[029c6ab9be655f4a748aa3ded4bf2756_MD5.webp]]
+![[0f78cf0e35eb5acfcbab98601fd2947b_MD5.webp]]
 
 ## 6. Creación de Clientes (Peers)
 
@@ -65,16 +65,16 @@ En lugar de editar cada cliente a mano, configuraremos el Dashboard para que use
 
 1. En el menú lateral, ve a **Settings** y selecciona la pestaña **Peers Settings**.
 2. Busca el campo **Peer Remote Endpoint**.
-3. **Introduce aquí tu IP Pública** (ej: `1.111.111.111`) o tu dominio de **DuckDNS/DDNS**.
+3. **Introduce aquí tu IP Pública** `curl ifconfig.me`: (ej: `1.111.111.111`) o tu dominio de **DuckDNS/DDNS**.
     - *Nota:* Como indica el aviso en naranja de tu captura, este cambio es global y se aplicará a todos los códigos QR y archivos de configuración que generes a partir de ahora.
 4. Asegúrate de que los otros valores sean correctos:
     - **DNS:** `1.1.1.1` (o el de tu preferencia).
     - **Endpoint Allowed IPs:** `0.0.0.0/0` (si quieres que **todo** el tráfico del cliente pase por la VPN).
 5. Ahora ve a la sección **Clients**, crea un nuevo Peer y verás que el archivo de configuración ya viene listo para conectar desde el exterior sin tocar nada más.
 
-![[b8072d4815b53bc9f293926dcdbbc246_MD5.webp]]
+![[2dcbb9a0704bd116a47138f1d4ebfd16_MD5.webp]]
 
-![[5f4c1cce40f8b49af10dda9e3675ad6c_MD5.webp]]
+![[85a0d4d1b01b6713e740513a20c67b29_MD5.webp]]
 
 ## 7. Verificación y Diagnóstico
 

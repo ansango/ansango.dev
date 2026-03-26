@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/wiki/home-lab/configurar nginx con certificados y cloudflare.md",
+                "file": "src/content/wiki/home-lab/configurar vpn wireguard en proxmox.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "configurar nginx con certificados y cloudflare"
+              "title": "configurar vpn wireguard en proxmox"
             }
           }
         ]
@@ -186,18 +186,19 @@
   },
   "active": "c354f92c7f85604b",
   "lastOpenFiles": [
-    "src/content/wiki/home-lab/configurar vpn wireguard en proxmox.md",
+    "public/assets/85a0d4d1b01b6713e740513a20c67b29_MD5.webp",
+    "Pasted image 20260326201051.png",
+    "public/assets/2dcbb9a0704bd116a47138f1d4ebfd16_MD5.webp",
+    "Pasted image 20260326200731.png",
+    "public/assets/0f78cf0e35eb5acfcbab98601fd2947b_MD5.webp",
+    "Pasted image 20260326200633.png",
+    "public/assets/95f990f80db17cdb57a555e893c609bd_MD5.webp",
+    "Pasted image 20260326200507.png",
     "src/content/wiki/home-lab/configurar nginx con certificados y cloudflare.md",
+    "src/content/wiki/home-lab/configurar vpn wireguard en proxmox.md",
     "public/assets/b4c10d1b435c99b66a90f66347503268_MD5.webp",
     "Pasted image 20260326195444.png",
     "public/assets/f01ad42158b84b96a7cd9923aeb344c7_MD5.webp",
-    "Pasted image 20260326195039.png",
-    "Pasted image 20260326193740.png",
-    "public/assets/5f4c1cce40f8b49af10dda9e3675ad6c_MD5.webp",
-    "Pasted image 20260326193239.png",
-    "public/assets/b8072d4815b53bc9f293926dcdbbc246_MD5.webp",
-    "Pasted image 20260326192957.png",
-    "public/assets/4b6e63801f503aa97a66247bc3aa63cb_MD5.webp",
     "src/content/wiki/sistemas/debian/formatear discos.md",
     "src/content/wiki/home-lab/jellyfin en proxmox con docker.md",
     "src/content/wiki/sistemas/proxmox/proxmox.md",

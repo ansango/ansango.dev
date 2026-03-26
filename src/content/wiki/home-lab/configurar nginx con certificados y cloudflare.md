@@ -4,12 +4,7 @@ description: Configura de forma sencilla subdominios con certificados con Nginx 
 date: 2026-03-26
 mod: 2026-03-26
 published: true
-tags:
-  - cloudflare
-  - nginx
-  - proxmox
-  - tunnel
-  - wireguard
+tags: [cloudflare, nginx, proxmox, tunnel, wireguard]
 ---
 
 # Configuración de Nginx Proxy Manager con Cloudflare (Certificados Wildcard)

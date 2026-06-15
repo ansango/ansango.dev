@@ -2,7 +2,7 @@
 title: WireGuard en Proxmox (LXC + Dashboard)
 description: Configura WireGuard en Proxmox y accede a tus servicios fuera de casa con un único tunel
 date: 2026-03-26
-mod: 2026-03-26
+mod: 2026-06-15
 published: true
 tags: [cloudflare, network, networking, proxmox, tailscale, tunnel, vpn, wireguard]
 ---
